@@ -1,0 +1,25 @@
+# 编辑器与系统文件
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时与日志
+*.tmp
+*.log
+*.bak
+
+# Python 缓存（ui-ux-pro-max 的脚本会生成）
+__pycache__/
+*.pyc
+
+# graphify 的生成物（如果某个 skill 目录里跑过 graphify）
+graphify-out/
+
+# 安装器产生的备份
+*.backup-*/
+
+# PowerShell 5.1 在 USERPROFILE 被改写时的模块分析残留
+Microsoft/Windows/PowerShell/
