@@ -4,7 +4,7 @@
 
 ## 为什么存在
 
-这台机器上的 skill 分散在三个目录，而且已经出现**同名 skill 内容不一致**：
+这台机器上的 skill 原本分散在三个目录，而且已经出现**同名 skill 内容不一致**：
 
 | 目录 | 数量 | 性质 |
 |---|---|---|
@@ -19,15 +19,24 @@
 本仓库的做法：**只做 `.agents` / `.codex` 的权威来源，不碰 `.dsh`**。`.dsh\skills` 交给它自己的同步机制，
 往那里建联接会被下次同步覆盖。
 
+> **2026-09-20 记录**：本仓库建立当天，整个 `%USERPROFILE%\.dsh` 目录（含 `skills\`、`skills-management\market\`
+> 市场克隆、`skills-market-sync.json`）从磁盘上消失，不在回收站中，原因未查明（DSH Desktop 的进程当时在运行）。
+> 这意味着表中第三行那条血脉已不复存在。原属 `.dsh\skills` 的中文版 skill 若本仓库没有收录，
+> 现已无法从本机取得。
+
 ## 目录结构
 
 ```
-skills/<name>/          27 个技能，每个是一个真目录
+skills/<name>/          27 个技能，每个是一个真目录（install.ps1 接管）
 shared/                 被 skill 正文引用为「唯一权威来源」的共享文件
+archive/                保全但不激活：5 个孤本 skill + 2 个休眠的 Cursor 规则
 manifest.json           每个技能的原始归属（origin）与默认安装目标（defaultTargets）
 install.ps1             安装/卸载器，用目录联接把仓库挂到各 agent 的技能目录
 ATTRIBUTION.md          第三方来源与署名
 ```
+
+`skills/` 是**激活集**，`archive/` 是**存档集**，区别在于 `install.ps1` 只接管前者。
+两者的详细区分见 `archive/README.md`。
 
 ## 收录判据
 
@@ -54,6 +63,22 @@ ATTRIBUTION.md          第三方来源与署名
 | `.dsh\skills` 全部 18 个 | 市场自动同步的第三方中文译本，重同步即可复原；建联接会被同步覆盖 |
 | `toolkit-map` | 已经是独立公开仓库 `haxsd/toolkit-map`，纳进来会变成两处管理。恢复方式见下 |
 | `canvas-design` 的字体等二进制资产 | 未排除，但占了 5.4 MB / 9.8 MB。若想让仓库瘦身，这是首选裁剪对象 |
+
+**存档集（额外 5 个 + 2 个规则）**
+
+2026-09-20 清理手工备份目录 `%USERPROFILE%\tools\skill-backup-20260918\` 时，发现其中 5 个 skill
+与 2 个 Cursor 规则（`.mdc`）在别处**没有第二份**，抢救进 `archive/`：
+
+| 对象 | 情况 |
+|---|---|
+| `ask-questions-if-underspecified` | 出自 Trail of Bits 技能集（带该组织标识） |
+| `banner-design`、`slides` | `author: claudekit`，MIT；`banner-design` 依赖 `frontend-design`、`ai-artist`、`ai-multimodal`，仓库里不全 |
+| `best-of-n-solving`、`dispatching-parallel-agents` | superpowers 一系；你后来写的 `parallel-agents` 已覆盖同一场景，故存档而不启用 |
+| `deepseek-speed.mdc` | 全局提速规则（前缀缓存、精简上下文），当前未安装在任何位置 |
+| `graphify.mdc` | 项目级模板，告知 agent 项目在 `graphify-out/` 有知识图谱 |
+
+判定"没有第二份"的方法：逐个在 `.agents\skills`、`.codex\skills`、本仓库、以及当时的 `.dsh\skills`
+四处查同名目录。抢救后逐文件比对文件清单与字节数，确认与原备份一致。
 
 ## 安装
 
