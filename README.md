@@ -148,8 +148,11 @@ cd $env:USERPROFILE\Projects\agent-skills
 | 路径 | 关联 skill | 怎么恢复 |
 |---|---|---|
 | `%USERPROFILE%\tools\reverse-skill` | `reverse-skill`（本仓库内只是 4.9 KB 的路由入口） | `git clone https://github.com/zhaoxuya520/reverse-skill.git`；技能包本体 49 个模块 / 89 个 `SKILL.md` |
-| `%USERPROFILE%\tools\node22` | `reverse-skill` 的 JS 工具链 | 技能包要求 Node 22.12+，系统 `node` 是 16.x |
 | `%USERPROFILE%\Projects\toolkit-map` | `toolkit-map` | `git clone https://github.com/haxsd/toolkit-map.git`；或直接 `git clone` 到 `.agents\skills\toolkit-map` |
+
+Node 运行时**不再是仓库外依赖**：技能包要求 22.12+，而 PATH 上的 `node` 由 mise 提供 v22.23.2，直接满足。
+（此前那个独立的 `%USERPROFILE%\tools\node22` 已于 2026-09-20 清理——它与 mise 的 22.23.2 版本相同、
+`node_modules` 内容相同，且无任何配置声明依赖它。）
 
 ## 正文里的绝对路径
 
