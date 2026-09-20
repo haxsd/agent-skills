@@ -67,7 +67,7 @@ C:\Users\Administrator\tools\reverse-skill
 powershell -NoProfile -ExecutionPolicy Bypass -File "<SKILL_ROOT>\skills\scripts\bootstrap-reverse.ps1" -List
 ```
 
-注意 `node` 为 16.x，而技能包要求 22.12+ 才能跑 JS 工具链与 MCP；`C:\Users\Administrator\tools\node22` 目录里似乎另有一套 Node，必要时改用它。另外本机 `java` 是 1.8，新版 jadx 需要 JDK 11+。
+注意 `node` 现在由 mise 提供 v22.23.2（`node --version` 即可确认），满足技能包要求的 22.12+，JS 工具链与 MCP 直接可用——不要再去找 `tools\node22`，那份独立安装已于 2026-09-20 清理。PATH 上另排着两份更旧的 Node（mise 的 20.20.2、`D:\nodejs` 的 16.20.2），需要确定版本时用绝对路径或 `mise exec --`。另外本机 `java` 是 1.8，新版 jadx 需要 JDK 11+。
 
 ## 安全与合规
 
