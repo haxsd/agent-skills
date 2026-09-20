@@ -10,7 +10,7 @@
 |---|---|---|
 | `%USERPROFILE%\.agents\skills` | 25 | Cursor 实际加载；本地改造过的版本 |
 | `%USERPROFILE%\.codex\skills` | 3 | Codex 侧入口 |
-| `%USERPROFILE%\.dsh\skills` | 18 | 从第三方市场同步而来，**不归本仓库管** |
+| `%USERPROFILE%\.dsh\skills` | 18 | DSH Desktop（网页版数据根）从第三方市场同步而来，**不归本仓库管**；该目录已于 2026-09-20 迁至 `%APPDATA%\dsh-desktop\harness\skills`，见下方记录 |
 
 `.agents\skills` 与 `.dsh\skills` 有 11 个同名 skill，且**全部文件内容不同**。这不是"新版本覆盖旧版本"，
 而是两条血脉：前者是英文上游系 + 本地改造，后者是市场的中文翻译系（来源 `gitcode.com/weibaohui/ntd-resource.git`，
@@ -20,9 +20,31 @@
 往那里建联接会被下次同步覆盖。
 
 > **2026-09-20 记录**：本仓库建立当天，整个 `%USERPROFILE%\.dsh` 目录（含 `skills\`、`skills-management\market\`
-> 市场克隆、`skills-market-sync.json`）从磁盘上消失，不在回收站中，原因未查明（DSH Desktop 的进程当时在运行）。
-> 这意味着表中第三行那条血脉已不复存在。原属 `.dsh\skills` 的中文版 skill 若本仓库没有收录，
-> 现已无法从本机取得。
+> 市场克隆、`skills-market-sync.json`）从磁盘上消失，不在回收站中。查明如下：
+>
+> - `~\.dsh` 是 DSH Desktop（DeepSeek 客户端）**网页版**的数据根 —— 见 `main\index.js:17158`
+>   `defaultWebHome() { return join(homedir(), ".dsh") }`。桌面版的数据根是
+>   `%APPDATA%\dsh-desktop\harness`。
+> - 桌面版自带一个"把网页版数据导入桌面版"的流程，其决策记录 `harness\.web-import-decision.json`
+>   写的是 `{"decision":"skipped","source":"C:\\Users\\Administrator\\.dsh","at":"2026-09-20T06:24:46Z"}`，
+>   即**那次导入被跳过**，不是它搬的。
+> - 客户端插件市场的日志 `harness\profiles\web\.dsh-market\log.ndjson` 显示，14:33–15:02 期间
+>   正在连续安装插件，其中 14:52:31 更新了 `dshmarket -> dshmarket@1.50.0`。`.dsh` 的消失
+>   （14:41 尚在、14:57 已无）正落在这个窗口内。
+> - 多个已装 UI 插件把 `homedir()/.dsh` 作为 home 回退路径（`dsh-client-ui-skill-explorer:853`、
+>   `dsh-client-ui-market:76`、`dsh-client-ui-plugin-manager:473`、`dsh-client-ui-preset-center:75`、
+>   `dsh-client-ui-git-graph:621`），其中 `preset-center` 的 `moveDirectory()` 会在校验复制结果一致后
+>   删除源目录。**无法指认具体是哪一行执行的删除**，但可确定删除来自客户端的技能/插件管理这一层。
+> - **内容没有丢失**：18 个中文 skill 原样存在于 `%APPDATA%\dsh-desktop\harness\skills\`，逐个
+>   `SKILL.md` 字节数与迁移前一致；`settings.yaml`、`.credentials.yaml`、`sessions`、`storages`、
+>   `attachments` 也都在。
+> - 未随迁的：`skills-management`（`gitcode.com/weibaohui/ntd-resource.git` 的 47 个集合克隆）、
+>   `skills-market-sync.json`、`session-index.db`、`undo-snapshots`、`xray`、`cordis.patch.yml`、
+>   `npm-deepseek-ai-scope.txt`。它们不在客户端导入流程的清单里（见 `main\index.js:17141` 的
+>   `HOME_FILES` / `HOME_DIRECTORIES`）。市场克隆可重新 clone 复原。
+>
+> 这条记录的用途：DSH Desktop 的数据根**不稳定**（今天刚整体迁走一次），任何放在 `~\.dsh` 下的东西
+> 都不该被当作长期存储。
 
 ## 目录结构
 
