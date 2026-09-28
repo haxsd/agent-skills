@@ -53,6 +53,7 @@ skills/<name>/          27 个技能，每个是一个真目录（install.ps1 �
 shared/                 被 skill 正文引用为「唯一权威来源」的共享文件
 archive/                保全但不激活：5 个孤本 skill + 2 个休眠的 Cursor 规则
 manifest.json           每个技能的原始归属（origin）与默认安装目标（defaultTargets）
+external.json           外部技能：自己独立成库的（如 toolkit-map），只挂联接不复制内容
 install.ps1             安装/卸载器，用目录联接把仓库挂到各 agent 的技能目录
 ATTRIBUTION.md          第三方来源与署名
 ```
@@ -108,15 +109,32 @@ ATTRIBUTION.md          第三方来源与署名
 # 先看会做什么，不落盘
 .\install.ps1 -DryRun
 
-# 按 manifest 各就各位（24 个 -> .agents\skills，3 个 -> .codex\skills）
+# 按 manifest 各就各位：
+#   通用技能（24 个）-> .agents\skills / .cursor\skills / .devin\skills / .claude\skills
+#   Codex 专属（3 个）-> .codex\skills
+#   external.json 里的（toolkit-map）-> 同上四个通用平台
 .\install.ps1
 
 # 灰度：只装指定的
 .\install.ps1 -Only systematic-debugging,writing-plans
 
-# 全部塞进某一个目录
-.\install.ps1 -Target agents
+# 只装某一个平台
+.\install.ps1 -Target cursor
 ```
+
+### 为什么是这四个平台
+
+| 目录 | 谁读它 | 依据 |
+| --- | --- | --- |
+| `~\.agents\skills` | **Cursor 与 Devin 都读**（公共交集） | Cursor 文档列为 user-level；Devin 的 `sessions.desktop.main.js` 里明确判断 `/.agents/skills/` |
+| `~\.cursor\skills` | Cursor | Cursor 文档的 user-level 技能目录 |
+| `~\.devin\skills` | Devin | Devin 代码里的 `/.devin/skills/` |
+| `~\.claude\skills` | Claude；Cursor 与 Devin 也把它当兼容目录读 | Devin 代码里同一行判断含 `/.claude/skills/`（受开关控制） |
+| `~\.codex\skills` | Codex | Codex 用户级技能目录 |
+
+manifest 里的 `agents` 是「通用技能」的意思，安装器会把它展开到上表的前四个平台；
+`codex` 保持专属。**目标归属只在这两处声明**（`manifest.json` 的 `defaultTargets` 与 `external.json`），
+别处不要再写一份。
 
 安装器是幂等的，并且**覆盖真实目录前会先备份**到 `<目录>.backup-<时间戳>\`，不会静默删除现有内容。
 
