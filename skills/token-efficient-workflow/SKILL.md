@@ -1,6 +1,7 @@
 ---
 name: token-efficient-workflow
 description: Token 效率工作流（Codex 侧入口）。适用于搜索、读取、编辑、调试、总结、运行命令、检查仓库、处理日志、使用项目参考、更新文件、生成最终回复等任务，避免不必要的上下文、大文件读取、超大终端输出、全仓扫描、冗长计划和过度解释。
+targets: [codex-skills]
 ---
 
 # Token 效率工作流（Codex 侧）

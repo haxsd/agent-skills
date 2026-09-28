@@ -10,9 +10,17 @@
   - 覆盖真实目录前先备份，绝不静默删除用户的现有内容。
 
 .PARAMETER Target
-  agents = %USERPROFILE%\.agents\skills
+  agents = %USERPROFILE%\.agents\skills   （Cursor 与 Devin 都读这个目录，是公共交集）
+  cursor = %USERPROFILE%\.cursor\skills
+  devin  = %USERPROFILE%\.devin\skills
+  claude = %USERPROFILE%\.claude\skills
   codex  = %USERPROFILE%\.codex\skills
   all    = 按 manifest.json 里的 defaultTargets 各就各位（默认）
+
+  说明：manifest 里标为 `agents` 的是「通用技能」，会展开到上面四个平台
+  （agents / cursor / devin / claude 内容同一份）；标为 `codex` 的只进 Codex。
+  另外 external.json 里登记的是「自己独立成库」的技能（例如 toolkit-map），
+  同样只挂联接、不复制内容。
 
 .PARAMETER Only
   只处理指定名字的 skill，便于灰度。
@@ -32,7 +40,7 @@
 #>
 [CmdletBinding()]
 param(
-  [ValidateSet('agents', 'codex', 'all')]
+  [ValidateSet('agents', 'cursor', 'devin', 'claude', 'codex', 'all')]
   [string]$Target = 'all',
 
   [string[]]$Only,
@@ -55,8 +63,18 @@ if (-not (Test-Path $ManifestPath)) { throw "找不到 manifest.json：$Manifest
 
 $TargetDirs = [ordered]@{
   agents = Join-Path $env:USERPROFILE '.agents\skills'
+  cursor = Join-Path $env:USERPROFILE '.cursor\skills'
+  devin  = Join-Path $env:USERPROFILE '.devin\skills'
+  claude = Join-Path $env:USERPROFILE '.claude\skills'
   codex  = Join-Path $env:USERPROFILE '.codex\skills'
 }
+
+# manifest 里标为 agents 的「通用技能」展开到这里列的每个平台：
+#   .agents  —— Cursor 与 Devin 的公共交集（两边的代码都读它）
+#   .cursor  —— Cursor 的用户级技能目录
+#   .devin   —— Devin 的用户级技能目录（见其 sessions.desktop.main.js）
+#   .claude  —— Claude 的用户级目录，Cursor / Devin 也把 .claude/skills 当兼容目录读
+$UniversalTargets = @('agents', 'cursor', 'devin', 'claude')
 
 # ~/tools/shared 被 skill 正文当作权威来源引用，同样用联接接管。
 $SharedDst = Join-Path $env:USERPROFILE 'tools\shared'
@@ -134,9 +152,14 @@ foreach ($dirName in ($TargetDirs.Keys)) {
   foreach ($name in $names) {
     $entry = if ($SkillMap.ContainsKey($name)) { $SkillMap[$name] } else { $null }
     $defaults = if ($entry) { @($entry.defaultTargets) } else { @('agents') }
+    # 'agents' = 通用技能组 → 展开成四个平台；'codex' = Codex 专属，不展开。
+    $effective = @()
+    foreach ($d in $defaults) {
+      if ($d -eq 'agents') { $effective += $UniversalTargets } else { $effective += $d }
+    }
 
     # -Target all 时按 manifest 各就各位；显式指定 -Target 时以命令行为准。
-    if ($Target -eq 'all' -and ($defaults -notcontains $dirName)) { continue }
+    if ($Target -eq 'all' -and ($effective -notcontains $dirName)) { continue }
 
     $src = Join-Path $SkillsRoot $name
     $dst = Join-Path $root $name
@@ -176,8 +199,60 @@ foreach ($dirName in ($TargetDirs.Keys)) {
   Write-Host ""
 }
 
+# ---------- 3. 外部技能 ----------
+# external.json 里登记的是「自己独立成库」的技能（例如 toolkit-map 有自己的仓库和发布节奏）。
+# 做法仍然是挂联接、不复制内容——README 里记过内容分叉的教训。
+$ExternalPath = Join-Path $RepoRoot 'external.json'
+if (Test-Path $ExternalPath) {
+  $externals = @(Get-Content $ExternalPath -Raw | ConvertFrom-Json) | Where-Object { $_.name -and $_.path }
+  if ($externals.Count) {
+    Write-Host "[external]"
+    foreach ($ext in $externals) {
+      if (-not (Test-Path $ext.path)) { Write-Host "  ! $($ext.name)：源不存在 $($ext.path)"; $summary.missing++; continue }
+      $extTargets = if ($ext.targets) { @($ext.targets) } else { $UniversalTargets }
+      foreach ($dirName in $extTargets) {
+        if (-not $TargetDirs.Contains($dirName)) { continue }
+        if ($Target -ne 'all' -and $Target -ne $dirName) { continue }
+        $src     = $ext.path
+        $dst     = Join-Path $TargetDirs[$dirName] $ext.name
+        $already = (Test-IsReparsePoint $dst) -and ((Get-LinkTarget $dst) -eq $src)
+
+        if ($Uninstall) {
+          if ($already) {
+            if ($DryRun) { Write-Host "  [dry-run] 删除联接 $($ext.name)（$dirName）" }
+            else { (Get-Item -LiteralPath $dst -Force).Delete(); Write-Host "  已删除联接 $($ext.name)（$dirName）" }
+            $summary.linked++
+          }
+          continue
+        }
+        if ($already) { Write-Host "  = $($ext.name)（$dirName 已就位）"; $summary.skipped++; continue }
+
+        if ((Test-Path $dst) -and -not (Test-IsReparsePoint $dst)) {
+          $bkRoot = "$($TargetDirs[$dirName]).backup-$stamp"
+          if ($DryRun) { Write-Host "  [dry-run] 备份 $($ext.name)（$dirName）-> $bkRoot\" }
+          else {
+            New-Item -ItemType Directory -Path $bkRoot -Force | Out-Null
+            Move-Item -LiteralPath $dst -Destination (Join-Path $bkRoot $ext.name)
+            Write-Host "  ~ $($ext.name)（$dirName）已备份到 $bkRoot\"
+          }
+          $summary.backedUp++
+        }
+        elseif (Test-Path $dst) {
+          if ($DryRun) { Write-Host "  [dry-run] 替换旧联接 $($ext.name)（$dirName）" }
+          else { (Get-Item -LiteralPath $dst -Force).Delete() }
+        }
+
+        New-DirJunction -Path $dst -Destination $src
+        if (-not $DryRun) { Write-Host "  + $($ext.name)（$dirName）" }
+        $summary.linked++
+      }
+    }
+    Write-Host ""
+  }
+}
+
 Write-Host "----"
-Write-Host ("联接/删除 {0}  |  已就位 {1}  |  备份 {2}" -f $summary.linked, $summary.skipped, $summary.backedUp)
+Write-Host ("联接/删除 {0}  |  已就位 {1}  |  备份 {2}  |  源缺失 {3}" -f $summary.linked, $summary.skipped, $summary.backedUp, $summary.missing)
 if ($summary.backedUp -gt 0 -and -not $DryRun) {
   Write-Host "备份目录以 .backup-$stamp 结尾，确认无碍后可自行删除。"
 }

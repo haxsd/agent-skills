@@ -1,6 +1,7 @@
 ---
 name: deepseek-subagent-orchestration
 description: Use when a high-capability Codex primary should conserve quota by delegating bounded exploration, log analysis, tests, reviews, research, or scoped implementation to DeepSeek Flash, including when native spawning reports "Unknown model deepseek-flash".
+targets: [codex-skills]
 ---
 
 # DeepSeek Subagent Orchestration
