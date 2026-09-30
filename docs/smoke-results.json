@@ -1,0 +1,77 @@
+{
+  "reviewedAt": "2026-09-30",
+  "pythonVersion": "3.12.14",
+  "nodeVersion": "v16.20.2",
+  "scope": "Offline smoke checks only; all generated project files are temporary. No external API or agent behavioral benchmark.",
+  "results": [
+    {
+      "name": "Python syntax",
+      "status": "pass",
+      "evidence": {
+        "pythonFilesParsed": 35,
+        "scope": "syntax only; imports and external APIs not exercised"
+      }
+    },
+    {
+      "name": "UI/UX data contracts",
+      "status": "pass",
+      "evidence": "OK: validated 12 domain files, 22 stack files, and ui-reasoning.csv"
+    },
+    {
+      "name": "UI/UX focused search",
+      "status": "pass",
+      "evidence": {
+        "domain": "ux",
+        "resultCount": 3,
+        "scope": "non-empty focused query; not an independent relevance benchmark"
+      }
+    },
+    {
+      "name": "Logo offline search",
+      "status": "pass",
+      "evidence": {
+        "domain": "style",
+        "resultCount": 3
+      }
+    },
+    {
+      "name": "CIP offline search",
+      "status": "pass",
+      "evidence": {
+        "domain": "deliverable",
+        "resultCount": 3
+      }
+    },
+    {
+      "name": "Slides offline search",
+      "status": "pass",
+      "evidence": {
+        "domain": "strategy",
+        "resultCount": 3
+      }
+    },
+    {
+      "name": "Brand template sync",
+      "status": "pass",
+      "evidence": "Starter template synced with expected primary/secondary/accent colors"
+    },
+    {
+      "name": "Token CSS generation",
+      "status": "pass",
+      "evidence": {
+        "cssBytes": 3698,
+        "scope": "bundled starter; not cycles/missing aliases"
+      }
+    },
+    {
+      "name": "Token validator regression",
+      "status": "pass",
+      "evidence": "Mixed hardcoded/token line rejected; token-only line accepted"
+    },
+    {
+      "name": "Tailwind config generation",
+      "status": "pass",
+      "evidence": "JS config generated with requested brand color and passes Node syntax check; no Tailwind build performed"
+    }
+  ]
+}

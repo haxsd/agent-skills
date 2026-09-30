@@ -1,0 +1,963 @@
+{
+  "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
+  "reviewedAt": "2026-09-30",
+  "counts": {
+    "active": 27,
+    "archived": 5,
+    "external": 1
+  },
+  "scope": "Static consistency; paths marked hint may be generated project assets. Not full YAML validation or behavioral certification.",
+  "skills": [
+    {
+      "name": "requirement-understanding",
+      "state": "active",
+      "path": "skills/requirement-understanding/SKILL.md",
+      "lines": 65,
+      "entryBytesLF": 2952,
+      "entrySha256LF": "5e272eb8bb9829e2dc76ee32bab99aebab780ad7fcb8859b64cbc8bcb0a0693a",
+      "files": 1,
+      "bytes": 2952,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/requirement-understanding/SKILL.md",
+          "line": 16,
+          "text": "在写任何代码或执行任何命令之前"
+        },
+        {
+          "path": "skills/requirement-understanding/SKILL.md",
+          "line": 35,
+          "text": "ask-questions-if-underspecified"
+        }
+      ]
+    },
+    {
+      "name": "brainstorming",
+      "state": "active",
+      "path": "skills/brainstorming/SKILL.md",
+      "lines": 250,
+      "entryBytesLF": 15456,
+      "entrySha256LF": "74edf03ea6d24ef53db48677b93558d14a979bdf052ca3f57ecdca0c66791608",
+      "files": 8,
+      "bytes": 80159,
+      "scriptFiles": 5,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/brainstorming/SKILL.md",
+          "line": 14,
+          "text": "<HARD-GATE>"
+        },
+        {
+          "path": "skills/brainstorming/SKILL.md",
+          "line": 52,
+          "text": "Nothing downgrades mid-task"
+        }
+      ]
+    },
+    {
+      "name": "writing-plans",
+      "state": "active",
+      "path": "skills/writing-plans/SKILL.md",
+      "lines": 171,
+      "entryBytesLF": 7053,
+      "entrySha256LF": "48508f44bbfd7d24b029fbf3a314f3cd14c9615599059366e922f47b8dc08cf2",
+      "files": 2,
+      "bytes": 8766,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/writing-plans/SKILL.md",
+          "line": 133,
+          "text": "Every step must contain the actual content"
+        },
+        {
+          "path": "skills/writing-plans/SKILL.md",
+          "line": 92,
+          "text": "**Interfaces:**"
+        }
+      ]
+    },
+    {
+      "name": "executing-plans",
+      "state": "active",
+      "path": "skills/executing-plans/SKILL.md",
+      "lines": 64,
+      "entryBytesLF": 2305,
+      "entrySha256LF": "c4c3d8b628c51114cd165fb8246fe02744cd8be180032328391252e653028d9b",
+      "files": 1,
+      "bytes": 2305,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/executing-plans/SKILL.md",
+          "line": 14,
+          "text": "If subagents are available"
+        },
+        {
+          "path": "skills/executing-plans/SKILL.md",
+          "line": 43,
+          "text": "Hit a blocker"
+        }
+      ]
+    },
+    {
+      "name": "subagent-driven-development",
+      "state": "active",
+      "path": "skills/subagent-driven-development/SKILL.md",
+      "lines": 568,
+      "entryBytesLF": 32339,
+      "entrySha256LF": "8dd1b8e698edec3700c6d89517dbe96febd3bacd3f6ea21c1a3569c62ea104b5",
+      "files": 7,
+      "bytes": 56664,
+      "scriptFiles": 3,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/subagent-driven-development/SKILL.md",
+          "line": 373,
+          "text": "Five rounds maximum per task"
+        },
+        {
+          "path": "skills/subagent-driven-development/scripts/sdd-workspace",
+          "line": 31,
+          "text": "slug=$(basename"
+        },
+        {
+          "path": "skills/subagent-driven-development/SKILL.md",
+          "line": 90,
+          "text": "delete this plan's workspace"
+        }
+      ]
+    },
+    {
+      "name": "parallel-agents",
+      "state": "active",
+      "path": "skills/parallel-agents/SKILL.md",
+      "lines": 139,
+      "entryBytesLF": 5740,
+      "entrySha256LF": "4b41213d2c49056cd24020fd1910a055c5ded61d10644ea40a7b69db29e4c92c",
+      "files": 1,
+      "bytes": 5740,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/parallel-agents/SKILL.md",
+          "line": 3,
+          "text": "best-of-n-runner"
+        },
+        {
+          "path": "skills/parallel-agents/SKILL.md",
+          "line": 15,
+          "text": "所有派发必须写在同一条消息里"
+        }
+      ]
+    },
+    {
+      "name": "deepseek-subagent-orchestration",
+      "state": "active",
+      "path": "skills/deepseek-subagent-orchestration/SKILL.md",
+      "lines": 67,
+      "entryBytesLF": 3716,
+      "entrySha256LF": "10d4552c7414e32f5dc7e07a1df7f24707fcdabbf4be411c44bd78e5d704f53c",
+      "files": 3,
+      "bytes": 6432,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/deepseek-subagent-orchestration/references/codex-cli-fallback.md",
+          "line": 15,
+          "text": "C:/Users/Administrator/.codex/deepseek-models.json"
+        },
+        {
+          "path": "skills/deepseek-subagent-orchestration/SKILL.md",
+          "line": 28,
+          "text": "Delegate aggressively"
+        }
+      ]
+    },
+    {
+      "name": "env-doctor",
+      "state": "active",
+      "path": "skills/env-doctor/SKILL.md",
+      "lines": 99,
+      "entryBytesLF": 6031,
+      "entrySha256LF": "83b94e8d8e902183b94b8f695ce800530e3dcd73e69568021db3acedcb54acc1",
+      "files": 3,
+      "bytes": 15975,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/env-doctor/SKILL.md",
+          "line": 50,
+          "text": "Parse only key names"
+        },
+        {
+          "path": "skills/env-doctor/references/safety-fixtures.md",
+          "line": 5,
+          "text": "Unrelated Process Owns Port"
+        }
+      ]
+    },
+    {
+      "name": "systematic-debugging",
+      "state": "active",
+      "path": "skills/systematic-debugging/SKILL.md",
+      "lines": 283,
+      "entryBytesLF": 9465,
+      "entrySha256LF": "808fc5717aa88ad65efff312b11c186294d3e6ee301afb584e2f86599b137787",
+      "files": 11,
+      "bytes": 40772,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/systematic-debugging/SKILL.md",
+          "line": 95,
+          "text": "env | grep IDENTITY"
+        },
+        {
+          "path": "skills/systematic-debugging/SKILL.md",
+          "line": 275,
+          "text": "95%"
+        }
+      ]
+    },
+    {
+      "name": "test-driven-development",
+      "state": "active",
+      "path": "skills/test-driven-development/SKILL.md",
+      "lines": 320,
+      "entryBytesLF": 9015,
+      "entrySha256LF": "bf1b8216e523851a411e91d429a7c1c2a173e79d88957bc78e348218d50edd54",
+      "files": 2,
+      "bytes": 17283,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/test-driven-development/SKILL.md",
+          "line": 37,
+          "text": "Write code before the test? Delete it."
+        },
+        {
+          "path": "skills/test-driven-development/SKILL.md",
+          "line": 287,
+          "text": "Every new function/method has a test"
+        }
+      ]
+    },
+    {
+      "name": "verification-before-completion",
+      "state": "active",
+      "path": "skills/verification-before-completion/SKILL.md",
+      "lines": 120,
+      "entryBytesLF": 3646,
+      "entrySha256LF": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
+      "files": 1,
+      "bytes": 3646,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/verification-before-completion/SKILL.md",
+          "line": 20,
+          "text": "in this message"
+        },
+        {
+          "path": "skills/verification-before-completion/SKILL.md",
+          "line": 114,
+          "text": "Delegating to agents"
+        }
+      ]
+    },
+    {
+      "name": "requesting-code-review",
+      "state": "active",
+      "path": "skills/requesting-code-review/SKILL.md",
+      "lines": 95,
+      "entryBytesLF": 2956,
+      "entrySha256LF": "d71cc01ba56d2325cf8af5f7c11837819b63ecd57de0bfdb812f7f3ff7751df8",
+      "files": 2,
+      "bytes": 8625,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/requesting-code-review/SKILL.md",
+          "line": 28,
+          "text": "BASE_SHA=$(git rev-parse HEAD~1)"
+        },
+        {
+          "path": "skills/requesting-code-review/code-reviewer.md",
+          "line": 33,
+          "text": "Read-Only Review"
+        }
+      ]
+    },
+    {
+      "name": "receiving-code-review",
+      "state": "active",
+      "path": "skills/receiving-code-review/SKILL.md",
+      "lines": 205,
+      "entryBytesLF": 6203,
+      "entrySha256LF": "091df1629510af1b92fc4abd6f96732ebedb4cb2c0f3457e8f2740b0504a2438",
+      "files": 1,
+      "bytes": 6203,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/receiving-code-review/SKILL.md",
+          "line": 44,
+          "text": "STOP - do not implement anything yet"
+        },
+        {
+          "path": "skills/receiving-code-review/SKILL.md",
+          "line": 143,
+          "text": "ANY gratitude expression"
+        }
+      ]
+    },
+    {
+      "name": "using-git-worktrees",
+      "state": "active",
+      "path": "skills/using-git-worktrees/SKILL.md",
+      "lines": 167,
+      "entryBytesLF": 6813,
+      "entrySha256LF": "8cfb86f121269e8f7f12361e6795c4f6738828340e28964c9229d365666c9edd",
+      "files": 1,
+      "bytes": 6813,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/using-git-worktrees/SKILL.md",
+          "line": 26,
+          "text": "Submodule guard"
+        },
+        {
+          "path": "skills/using-git-worktrees/SKILL.md",
+          "line": 108,
+          "text": "npm install"
+        }
+      ]
+    },
+    {
+      "name": "finishing-a-development-branch",
+      "state": "active",
+      "path": "skills/finishing-a-development-branch/SKILL.md",
+      "lines": 225,
+      "entryBytesLF": 7781,
+      "entrySha256LF": "8db5a922b242dd4e1bf824cb91c13b3e8d8e8a86d6ceaf7f0774eb9cce909d65",
+      "files": 1,
+      "bytes": 7781,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/finishing-a-development-branch/SKILL.md",
+          "line": 169,
+          "text": "Superpowers"
+        },
+        {
+          "path": "skills/finishing-a-development-branch/SKILL.md",
+          "line": 78,
+          "text": "Present the menu exactly"
+        }
+      ]
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "state": "active",
+      "path": "skills/ui-ux-pro-max/SKILL.md",
+      "lines": 425,
+      "entryBytesLF": 28066,
+      "entrySha256LF": "d84c0978165903371b1ec0ede09a4033066d48696123c2ada62adec31aa212e4",
+      "files": 68,
+      "bytes": 3539346,
+      "scriptFiles": 5,
+      "testFiles": 10,
+      "evidence": [
+        {
+          "path": "skills/ui-ux-pro-max/SKILL.md",
+          "line": 292,
+          "text": "Quick Reference §6"
+        },
+        {
+          "path": "skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py",
+          "line": 16,
+          "text": "refresh-google-fonts.py"
+        },
+        {
+          "path": "skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py",
+          "line": 10,
+          "text": "scripts/evaluate-relevance.py"
+        }
+      ]
+    },
+    {
+      "name": "brand",
+      "state": "active",
+      "path": "skills/brand/SKILL.md",
+      "lines": 97,
+      "entryBytesLF": 2939,
+      "entrySha256LF": "6a450ee1a83a403d47cec2ede9030feb60a67a81fc425d2406e975339313bd44",
+      "files": 18,
+      "bytes": 88892,
+      "scriptFiles": 4,
+      "testFiles": 1,
+      "evidence": [
+        {
+          "path": "skills/brand/SKILL.md",
+          "line": 47,
+          "text": "sync-brand-to-tokens.cjs"
+        },
+        {
+          "path": "skills/brand/scripts/tests/test_sync_brand_to_tokens.py",
+          "line": 27,
+          "text": "test_sync_parses_bundled_starter_template"
+        }
+      ]
+    },
+    {
+      "name": "design-system",
+      "state": "active",
+      "path": "skills/design-system/SKILL.md",
+      "lines": 244,
+      "entryBytesLF": 6875,
+      "entrySha256LF": "655468bb723a6bc9d17fcb09a6a005e10e313d63b879f4d74fb2abdc3041ae3f",
+      "files": 27,
+      "bytes": 179018,
+      "scriptFiles": 9,
+      "testFiles": 1,
+      "evidence": [
+        {
+          "path": "skills/design-system/SKILL.md",
+          "line": 184,
+          "text": "Center align content"
+        },
+        {
+          "path": "skills/design-system/scripts/generate-tokens.cjs",
+          "line": 64,
+          "text": "return resolveReference(result.$value, tokens)"
+        }
+      ]
+    },
+    {
+      "name": "ui-styling",
+      "state": "active",
+      "path": "skills/ui-styling/SKILL.md",
+      "lines": 324,
+      "entryBytesLF": 10045,
+      "entrySha256LF": "f8b6c3832d2af51f67b3932e3c4a79bcd8a8596cc61ce1547a686fc951e5c62d",
+      "files": 16,
+      "bytes": 170925,
+      "scriptFiles": 3,
+      "testFiles": 2,
+      "evidence": [
+        {
+          "path": "skills/ui-styling/SKILL.md",
+          "line": 29,
+          "text": "Generating visual designs, posters"
+        },
+        {
+          "path": "skills/ui-styling/scripts/tailwind_config_gen.py",
+          "line": 52,
+          "text": "\"darkMode\": [\"class\"]"
+        }
+      ]
+    },
+    {
+      "name": "design",
+      "state": "active",
+      "path": "skills/design/SKILL.md",
+      "lines": 313,
+      "entryBytesLF": 12322,
+      "entrySha256LF": "413f4ab913d07f7fd92acbadc25d71aad63443be0c40d11234944aea688603b6",
+      "files": 35,
+      "bytes": 241945,
+      "scriptFiles": 8,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/design/SKILL.md",
+          "line": 60,
+          "text": "ALWAYS** generate output logo images with white background"
+        },
+        {
+          "path": "skills/design/SKILL.md",
+          "line": 228,
+          "text": "randomly invoke"
+        }
+      ]
+    },
+    {
+      "name": "canvas-design",
+      "state": "active",
+      "path": "skills/canvas-design/SKILL.md",
+      "lines": 130,
+      "entryBytesLF": 11939,
+      "entrySha256LF": "a1f288079624402f30682753c1d43920b6664785698d21d3e7aa197450a6448b",
+      "files": 83,
+      "bytes": 5554003,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/canvas-design/SKILL.md",
+          "line": 122,
+          "text": "The user ALREADY said"
+        },
+        {
+          "path": "skills/canvas-design/SKILL.md",
+          "line": 23,
+          "text": "it should not constrain creative freedom"
+        }
+      ]
+    },
+    {
+      "name": "graphify",
+      "state": "active",
+      "path": "skills/graphify/SKILL.md",
+      "lines": 711,
+      "entryBytesLF": 41342,
+      "entrySha256LF": "54ba463f598f11347f25238afb8f164e3ba81d074ccce9bc2b489844a3dfaa54",
+      "files": 10,
+      "bytes": 82125,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/graphify/SKILL.md",
+          "line": 3,
+          "text": "Use for any question"
+        },
+        {
+          "path": "skills/graphify/SKILL.md",
+          "line": 94,
+          "text": "--break-system-packages"
+        },
+        {
+          "path": "skills/graphify/SKILL.md",
+          "line": 268,
+          "text": "close_agent(handle)"
+        }
+      ]
+    },
+    {
+      "name": "reverse-skill",
+      "state": "active",
+      "path": "skills/reverse-skill/SKILL.md",
+      "lines": 82,
+      "entryBytesLF": 5161,
+      "entrySha256LF": "c3da60d67641663836f29cb2209bbe463081f023c576615a91635d05c98b869c",
+      "files": 1,
+      "bytes": 5161,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/reverse-skill/SKILL.md",
+          "line": 15,
+          "text": "C:\\Users\\Administrator\\tools\\reverse-skill"
+        },
+        {
+          "path": "skills/reverse-skill/SKILL.md",
+          "line": 57,
+          "text": "本机工具链现状"
+        }
+      ]
+    },
+    {
+      "name": "writing-skills",
+      "state": "active",
+      "path": "skills/writing-skills/SKILL.md",
+      "lines": 679,
+      "entryBytesLF": 26360,
+      "entrySha256LF": "d34db5c8aed6a4e0440132bd0613aace70a693ec7819d5637ad77481d8e10d1b",
+      "files": 7,
+      "bytes": 107377,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/writing-skills/SKILL.md",
+          "line": 97,
+          "text": "Max 1024 characters total"
+        },
+        {
+          "path": "skills/writing-skills/SKILL.md",
+          "line": 581,
+          "text": "5+ reps per variant"
+        }
+      ]
+    },
+    {
+      "name": "using-superpowers",
+      "state": "active",
+      "path": "skills/using-superpowers/SKILL.md",
+      "lines": 63,
+      "entryBytesLF": 3108,
+      "entrySha256LF": "30f2ab78e20ddc27ee7158ae8d4a2abe161c360981c7cc3548070913142d3dc3",
+      "files": 6,
+      "bytes": 17169,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/using-superpowers/SKILL.md",
+          "line": 11,
+          "text": "1% chance"
+        },
+        {
+          "path": "skills/using-superpowers/references/codex-tools.md",
+          "line": 21,
+          "text": "Full-history forks accept"
+        }
+      ]
+    },
+    {
+      "name": "token-efficient-workflow",
+      "state": "active",
+      "path": "skills/token-efficient-workflow/SKILL.md",
+      "lines": 43,
+      "entryBytesLF": 2211,
+      "entrySha256LF": "e0e35b1af9d68b3c9eb8ae7efe49267b6522b2ffb6f116c658ca5a1653bff24f",
+      "files": 2,
+      "bytes": 2435,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/token-efficient-workflow/SKILL.md",
+          "line": 9,
+          "text": "C:\\Users\\Administrator\\tools\\shared"
+        },
+        {
+          "path": "skills/token-efficient-workflow/SKILL.md",
+          "line": 24,
+          "text": "codex-helpers"
+        }
+      ]
+    },
+    {
+      "name": "suggesting-cursor-rules",
+      "state": "active",
+      "path": "skills/suggesting-cursor-rules/SKILL.md",
+      "lines": 83,
+      "entryBytesLF": 2176,
+      "entrySha256LF": "34c91dc9edf0a75127d2a6dbadba0cec18a3ff3d53a02db1bf4bccea9502ecdc",
+      "files": 1,
+      "bytes": 2176,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/suggesting-cursor-rules/SKILL.md",
+          "line": 7,
+          "text": "# Suggesting Codex Rules"
+        },
+        {
+          "path": "skills/suggesting-cursor-rules/SKILL.md",
+          "line": 31,
+          "text": ".cursor/rules/<name>.mdc"
+        }
+      ]
+    },
+    {
+      "name": "ask-questions-if-underspecified",
+      "state": "archived",
+      "path": "archive/skills/ask-questions-if-underspecified/SKILL.md",
+      "lines": 85,
+      "entryBytesLF": 3987,
+      "entrySha256LF": "fef9189249c46d08d5172f7010e0d83ae8dc104cc3d07714a909dd12f9e92e79",
+      "files": 3,
+      "bytes": 7200,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "archive/skills/ask-questions-if-underspecified/SKILL.md",
+          "line": 12,
+          "text": "## When NOT to Use"
+        },
+        {
+          "path": "archive/skills/ask-questions-if-underspecified/SKILL.md",
+          "line": 55,
+          "text": "Ask for confirmation"
+        }
+      ]
+    },
+    {
+      "name": "best-of-n-solving",
+      "state": "archived",
+      "path": "archive/skills/best-of-n-solving/SKILL.md",
+      "lines": 52,
+      "entryBytesLF": 2807,
+      "entrySha256LF": "30739452477d867971ab627fcbea868146766a2a284dbbdd8c44f2084aaed92b",
+      "files": 1,
+      "bytes": 2807,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "archive/skills/best-of-n-solving/SKILL.md",
+          "line": 12,
+          "text": "Cursor's `best-of-n-runner`"
+        }
+      ]
+    },
+    {
+      "name": "dispatching-parallel-agents",
+      "state": "archived",
+      "path": "archive/skills/dispatching-parallel-agents/SKILL.md",
+      "lines": 167,
+      "entryBytesLF": 6078,
+      "entrySha256LF": "1968923066f3b707eb01d1992cdf4c42284c3855f70253b9cd5000ff45fca13c",
+      "files": 1,
+      "bytes": 6078,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "archive/skills/dispatching-parallel-agents/SKILL.md",
+          "line": 14,
+          "text": "Dispatch one agent per independent problem domain"
+        }
+      ]
+    },
+    {
+      "name": "slides",
+      "state": "archived",
+      "path": "archive/skills/slides/SKILL.md",
+      "lines": 40,
+      "entryBytesLF": 1137,
+      "entrySha256LF": "2b90bdaf63f231919a01f4962f374ecd84af101a7e7545f8d9c68e049025accb",
+      "files": 6,
+      "bytes": 19304,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "archive/skills/slides/SKILL.md",
+          "line": 12,
+          "text": "Strategic HTML presentation design"
+        }
+      ]
+    },
+    {
+      "name": "banner-design",
+      "state": "archived",
+      "path": "archive/skills/banner-design/SKILL.md",
+      "lines": 196,
+      "entryBytesLF": 8326,
+      "entrySha256LF": "913d9c4b2a3b405d638d50131e0dd3fe2787c839423d79287b7858ac29255acc",
+      "files": 2,
+      "bytes": 13319,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "archive/skills/banner-design/SKILL.md",
+          "line": 194,
+          "text": "Never expose env vars, file paths"
+        },
+        {
+          "path": "archive/skills/banner-design/SKILL.md",
+          "line": 3,
+          "text": "frontend-design"
+        }
+      ]
+    },
+    {
+      "name": "toolkit-map",
+      "state": "external",
+      "evidence": [
+        {
+          "path": "external.json",
+          "line": 4,
+          "text": "Administrator"
+        }
+      ]
+    }
+  ],
+  "exactDuplicateTextGroupsLF": [
+    [
+      "archive/skills/banner-design/references/banner-sizes-and-styles.md",
+      "skills/design/references/banner-sizes-and-styles.md"
+    ],
+    [
+      "archive/skills/slides/references/copywriting-formulas.md",
+      "skills/design/references/slides-copywriting-formulas.md"
+    ],
+    [
+      "archive/skills/slides/references/create.md",
+      "skills/design/references/slides-create.md"
+    ],
+    [
+      "archive/skills/slides/references/html-template.md",
+      "skills/design/references/slides-html-template.md"
+    ],
+    [
+      "archive/skills/slides/references/layout-patterns.md",
+      "skills/design/references/slides-layout-patterns.md"
+    ],
+    [
+      "archive/skills/slides/references/slide-strategies.md",
+      "skills/design/references/slides-strategies.md"
+    ]
+  ],
+  "findings": [
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "archive/skills/banner-design/SKILL.md",
+      "message": "references/nano-banana-pro-examples.md"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "archive/skills/banner-design/SKILL.md",
+      "message": "scripts/search.py"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "skills/brand/SKILL.md",
+      "message": "assets/design-tokens.css"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "skills/brand/SKILL.md",
+      "message": "assets/design-tokens.js"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "skills/design-system/SKILL.md",
+      "message": "assets/css/slide-animations.css"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "skills/design-system/SKILL.md",
+      "message": "assets/design-tokens.css"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "skills/design-system/SKILL.md",
+      "message": "assets/design-tokens.js"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "skills/design-system/SKILL.md",
+      "message": "assets/designs/slides/claudekit-pitch-251223.html"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "skills/token-efficient-workflow/SKILL.md",
+      "message": "references/INDEX.md"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "brainstorming: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "canvas-design: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "deepseek-subagent-orchestration: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "env-doctor: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "graphify: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "parallel-agents: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "requirement-understanding: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "reverse-skill: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "subagent-driven-development: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "suggesting-cursor-rules: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "token-efficient-workflow: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "writing-skills: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "large-entrypoint",
+      "path": "skills/graphify/SKILL.md",
+      "message": "711 lines; use progressive disclosure"
+    },
+    {
+      "level": "warning",
+      "code": "large-entrypoint",
+      "path": "skills/subagent-driven-development/SKILL.md",
+      "message": "568 lines; use progressive disclosure"
+    },
+    {
+      "level": "warning",
+      "code": "large-entrypoint",
+      "path": "skills/writing-skills/SKILL.md",
+      "message": "679 lines; use progressive disclosure"
+    }
+  ]
+}
