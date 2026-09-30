@@ -689,7 +689,7 @@
       "entryBytesLF": 3987,
       "entrySha256LF": "fef9189249c46d08d5172f7010e0d83ae8dc104cc3d07714a909dd12f9e92e79",
       "files": 3,
-      "bytes": 7200,
+      "bytes": 7199,
       "scriptFiles": 0,
       "testFiles": 0,
       "evidence": [
@@ -877,7 +877,7 @@
       "entryBytesLF": 4306,
       "entrySha256LF": "9448cacb65c6237a7c22dc59602667177ecae405524079ae9ff92240590b995a",
       "files": 11,
-      "bytes": 60270,
+      "bytes": 60269,
       "scriptFiles": 0,
       "testFiles": 0,
       "evidence": [
@@ -1004,12 +1004,6 @@
       "code": "manifest-cache-drift",
       "path": "manifest.json",
       "message": "parallel-agents: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "property-based-testing: bytes"
     },
     {
       "level": "warning",

@@ -13,6 +13,15 @@ SPEC.loader.exec_module(audit)
 
 
 class AuditTests(unittest.TestCase):
+    def test_xml_and_svg_metrics_ignore_checkout_line_endings(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            for suffix in (".xml", ".svg"):
+                path = root / ("example" + suffix)
+                expected = b"<root>\n  <item/>\n</root>\n"
+                path.write_bytes(expected.replace(b"\n", b"\r\n"))
+                self.assertEqual(audit.canonical_bytes(path), expected)
+
     def fixture(self, root):
         (root / "skills" / "example").mkdir(parents=True)
         (root / "archive" / "skills").mkdir(parents=True)

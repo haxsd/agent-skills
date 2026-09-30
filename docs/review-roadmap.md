@@ -85,7 +85,7 @@ LF 规范化字节哈希确认 **6 组**完全相同的跨技能文本：归档 
 
 - README 改为导航；原历史与换机记录完整保存到 repository-history.md。
 - catalog.json 对 37 个条目八类整理（原有 33 项 + 精选新增 4 项）；派生目录和逐项审查都有证据路径与行号。
-- audit 脚本和 5 个标准库测试检查覆盖、证据、入口长度、历史缓存差异与文本重复，不执行技能。
+- audit 脚本和 6 个标准库测试检查覆盖、证据、入口长度、历史缓存差异与文本重复，不执行技能；XML/SVG 与其他文本一样采用 LF 规范化字节统计，避免 Windows 干净克隆导致派生报告漂移。
 - smoke 脚本在临时项目运行 10 个离线检查；无外部 API 调用。
 - .gitattributes 固定 UI/UX 数据 LF；4 个文件恢复 LF 后**全部匹配原有 SHA-256**，未改摘要或 verifiedAt，没有伪造刷新日期。
 - token-efficient-workflow UI 字段放入 interface，缩短描述并明确 `$token-efficient-workflow`。
@@ -96,7 +96,7 @@ LF 规范化字节哈希确认 **6 组**完全相同的跨技能文本：归档 
 
 | 检查 | 结果 | 覆盖与限制 |
 |---|---|---|
-| 仓库 audit 自有测试 | 5/5 通过 | 遗漏技能、证据失效、项目产物不误报硬错误、CRLF/LF 重复识别 |
+| 仓库 audit 自有测试 | 6/6 通过 | 遗漏技能、证据失效、项目产物不误报硬错误、CRLF/LF 重复识别、XML/SVG 跨平台统计 |
 | 离线 smoke | 10/10 通过 | 42 个库内 Python 语法、数据校验、四类检索、品牌同步、token 生成/混合行回归、Tailwind JS 输出语法 |
 | UI/UX 数据校验初始 | 4 项哈希失配 | raw hash 不符，全部 LF 后匹配原摘要 |
 | UI/UX 数据校验修复后 | 通过 | 12 个 domain、22 个 stack 与 reasoning；不证明线上源刷新 |

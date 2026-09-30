@@ -79,7 +79,7 @@
       "failed": 0
     },
     "repositoryAuditTests": {
-      "passed": 5,
+      "passed": 6,
       "failed": 0
     },
     "skillCreatorQuickValidate": "not completed: bundled Python has no PyYAML; no dependencies installed"

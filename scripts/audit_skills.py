@@ -28,7 +28,7 @@ ACTIONS = {
     "retain-external": "保持外部",
 }
 TEXT_SUFFIXES = {".md", ".py", ".cjs", ".js", ".csv", ".json", ".html", ".sh"}
-NORMALIZED_SUFFIXES = TEXT_SUFFIXES | {".yaml", ".yml", ".txt", ".dot", ".ts"}
+NORMALIZED_SUFFIXES = TEXT_SUFFIXES | {".yaml", ".yml", ".txt", ".dot", ".ts", ".svg", ".xml"}
 
 
 def canonical_bytes(path):
