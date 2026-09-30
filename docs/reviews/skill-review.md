@@ -6,7 +6,7 @@
 toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完的内容。合并判断基于职责、输入输出和实质内容，不以同名或文字相似率定论。
 
 **评分尺度**：高＝有非显然方法、可复用工具/数据或可验证操作约束；中＝有帮助但偏通用、依赖环境或流程偏重；低＝缺少独立产出、被现有入口覆盖或主要重复宿主规则。
-**证据边界**：静态问题可由链接定位；运行结论仅覆盖 [整改路线里的实测记录](review-roadmap.md)。没有做真实用户任务的全量 A/B，价值评级属于专业判断。
+**证据边界**：静态问题可由链接定位；运行结论仅覆盖 [整改路线里的实测记录](roadmap.md)。没有做真实用户任务的全量 A/B，价值评级属于专业判断。
 
 ## 01. requirement-understanding
 
@@ -38,8 +38,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/requirement-understanding/SKILL.md:16](../skills/requirement-understanding/SKILL.md#L16)：`在写任何代码或执行任何命令之前`
-- [skills/requirement-understanding/SKILL.md:35](../skills/requirement-understanding/SKILL.md#L35)：`ask-questions-if-underspecified`
+- [skills/requirement-understanding/SKILL.md:16](../../skills/requirement-understanding/SKILL.md#L16)：`在写任何代码或执行任何命令之前`
+- [skills/requirement-understanding/SKILL.md:35](../../skills/requirement-understanding/SKILL.md#L35)：`ask-questions-if-underspecified`
 
 ## 02. brainstorming
 
@@ -72,8 +72,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/brainstorming/SKILL.md:14](../skills/brainstorming/SKILL.md#L14)：`<HARD-GATE>`
-- [skills/brainstorming/SKILL.md:52](../skills/brainstorming/SKILL.md#L52)：`Nothing downgrades mid-task`
+- [skills/brainstorming/SKILL.md:14](../../skills/brainstorming/SKILL.md#L14)：`<HARD-GATE>`
+- [skills/brainstorming/SKILL.md:52](../../skills/brainstorming/SKILL.md#L52)：`Nothing downgrades mid-task`
 
 ## 03. writing-plans
 
@@ -103,8 +103,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/writing-plans/SKILL.md:133](../skills/writing-plans/SKILL.md#L133)：`Every step must contain the actual content`
-- [skills/writing-plans/SKILL.md:92](../skills/writing-plans/SKILL.md#L92)：`**Interfaces:**`
+- [skills/writing-plans/SKILL.md:133](../../skills/writing-plans/SKILL.md#L133)：`Every step must contain the actual content`
+- [skills/writing-plans/SKILL.md:92](../../skills/writing-plans/SKILL.md#L92)：`**Interfaces:**`
 
 ## 04. executing-plans
 
@@ -136,8 +136,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/executing-plans/SKILL.md:14](../skills/executing-plans/SKILL.md#L14)：`If subagents are available`
-- [skills/executing-plans/SKILL.md:43](../skills/executing-plans/SKILL.md#L43)：`Hit a blocker`
+- [skills/executing-plans/SKILL.md:14](../../skills/executing-plans/SKILL.md#L14)：`If subagents are available`
+- [skills/executing-plans/SKILL.md:43](../../skills/executing-plans/SKILL.md#L43)：`Hit a blocker`
 
 ## 05. subagent-driven-development
 
@@ -172,9 +172,9 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/subagent-driven-development/SKILL.md:373](../skills/subagent-driven-development/SKILL.md#L373)：`Five rounds maximum per task`
-- [skills/subagent-driven-development/scripts/sdd-workspace:31](../skills/subagent-driven-development/scripts/sdd-workspace#L31)：`slug=$(basename`
-- [skills/subagent-driven-development/SKILL.md:90](../skills/subagent-driven-development/SKILL.md#L90)：`delete this plan's workspace`
+- [skills/subagent-driven-development/SKILL.md:373](../../skills/subagent-driven-development/SKILL.md#L373)：`Five rounds maximum per task`
+- [skills/subagent-driven-development/scripts/sdd-workspace:31](../../skills/subagent-driven-development/scripts/sdd-workspace#L31)：`slug=$(basename`
+- [skills/subagent-driven-development/SKILL.md:90](../../skills/subagent-driven-development/SKILL.md#L90)：`delete this plan's workspace`
 
 ## 06. parallel-agents
 
@@ -206,8 +206,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/parallel-agents/SKILL.md:3](../skills/parallel-agents/SKILL.md#L3)：`best-of-n-runner`
-- [skills/parallel-agents/SKILL.md:15](../skills/parallel-agents/SKILL.md#L15)：`所有派发必须写在同一条消息里`
+- [skills/parallel-agents/SKILL.md:3](../../skills/parallel-agents/SKILL.md#L3)：`best-of-n-runner`
+- [skills/parallel-agents/SKILL.md:15](../../skills/parallel-agents/SKILL.md#L15)：`所有派发必须写在同一条消息里`
 
 ## 07. deepseek-subagent-orchestration
 
@@ -236,10 +236,10 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/deepseek-subagent-orchestration/SKILL.md:8](../skills/deepseek-subagent-orchestration/SKILL.md#L8)：`Keep the current conversation's model, provider, and reasoning settings unchanged.`
-- [skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py:274](../skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py#L274)：`Batch stopped after authentication failure`
-- [skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py:211](../skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py#L211)：`Possible credential in job context`
-- [docs/deepseek-validation.json:14](../docs/deepseek-validation.json#L14)：`total_tokens`
+- [skills/deepseek-subagent-orchestration/SKILL.md:8](../../skills/deepseek-subagent-orchestration/SKILL.md#L8)：`Keep the current conversation's model, provider, and reasoning settings unchanged.`
+- [skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py:274](../../skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py#L274)：`Batch stopped after authentication failure`
+- [skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py:211](../../skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py#L211)：`Possible credential in job context`
+- [docs/validation/deepseek-validation.json:14](../../docs/validation/deepseek-validation.json#L14)：`total_tokens`
 
 ## 08. env-doctor
 
@@ -270,8 +270,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/env-doctor/SKILL.md:50](../skills/env-doctor/SKILL.md#L50)：`Parse only key names`
-- [skills/env-doctor/references/safety-fixtures.md:5](../skills/env-doctor/references/safety-fixtures.md#L5)：`Unrelated Process Owns Port`
+- [skills/env-doctor/SKILL.md:50](../../skills/env-doctor/SKILL.md#L50)：`Parse only key names`
+- [skills/env-doctor/references/safety-fixtures.md:5](../../skills/env-doctor/references/safety-fixtures.md#L5)：`Unrelated Process Owns Port`
 
 ## 09. systematic-debugging
 
@@ -302,8 +302,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/systematic-debugging/SKILL.md:95](../skills/systematic-debugging/SKILL.md#L95)：`env | grep IDENTITY`
-- [skills/systematic-debugging/SKILL.md:275](../skills/systematic-debugging/SKILL.md#L275)：`95%`
+- [skills/systematic-debugging/SKILL.md:95](../../skills/systematic-debugging/SKILL.md#L95)：`env | grep IDENTITY`
+- [skills/systematic-debugging/SKILL.md:275](../../skills/systematic-debugging/SKILL.md#L275)：`95%`
 
 ## 10. test-driven-development
 
@@ -333,8 +333,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/test-driven-development/SKILL.md:37](../skills/test-driven-development/SKILL.md#L37)：`Write code before the test? Delete it.`
-- [skills/test-driven-development/SKILL.md:287](../skills/test-driven-development/SKILL.md#L287)：`Every new function/method has a test`
+- [skills/test-driven-development/SKILL.md:37](../../skills/test-driven-development/SKILL.md#L37)：`Write code before the test? Delete it.`
+- [skills/test-driven-development/SKILL.md:287](../../skills/test-driven-development/SKILL.md#L287)：`Every new function/method has a test`
 
 ## 11. verification-before-completion
 
@@ -366,8 +366,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/verification-before-completion/SKILL.md:20](../skills/verification-before-completion/SKILL.md#L20)：`in this message`
-- [skills/verification-before-completion/SKILL.md:114](../skills/verification-before-completion/SKILL.md#L114)：`Delegating to agents`
+- [skills/verification-before-completion/SKILL.md:20](../../skills/verification-before-completion/SKILL.md#L20)：`in this message`
+- [skills/verification-before-completion/SKILL.md:114](../../skills/verification-before-completion/SKILL.md#L114)：`Delegating to agents`
 
 ## 12. requesting-code-review
 
@@ -399,8 +399,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/requesting-code-review/SKILL.md:28](../skills/requesting-code-review/SKILL.md#L28)：`BASE_SHA=$(git rev-parse HEAD~1)`
-- [skills/requesting-code-review/code-reviewer.md:33](../skills/requesting-code-review/code-reviewer.md#L33)：`Read-Only Review`
+- [skills/requesting-code-review/SKILL.md:28](../../skills/requesting-code-review/SKILL.md#L28)：`BASE_SHA=$(git rev-parse HEAD~1)`
+- [skills/requesting-code-review/code-reviewer.md:33](../../skills/requesting-code-review/code-reviewer.md#L33)：`Read-Only Review`
 
 ## 13. receiving-code-review
 
@@ -432,8 +432,8 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **来源定位**
 
-- [skills/receiving-code-review/SKILL.md:44](../skills/receiving-code-review/SKILL.md#L44)：`STOP - do not implement anything yet`
-- [skills/receiving-code-review/SKILL.md:143](../skills/receiving-code-review/SKILL.md#L143)：`ANY gratitude expression`
+- [skills/receiving-code-review/SKILL.md:44](../../skills/receiving-code-review/SKILL.md#L44)：`STOP - do not implement anything yet`
+- [skills/receiving-code-review/SKILL.md:143](../../skills/receiving-code-review/SKILL.md#L143)：`ANY gratitude expression`
 
 ## 14. using-git-worktrees
 
@@ -463,8 +463,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 保留
 
 **来源定位**
 
-- [skills/using-git-worktrees/SKILL.md:26](../skills/using-git-worktrees/SKILL.md#L26)：`Submodule guard`
-- [skills/using-git-worktrees/SKILL.md:108](../skills/using-git-worktrees/SKILL.md#L108)：`npm install`
+- [skills/using-git-worktrees/SKILL.md:26](../../skills/using-git-worktrees/SKILL.md#L26)：`Submodule guard`
+- [skills/using-git-worktrees/SKILL.md:108](../../skills/using-git-worktrees/SKILL.md#L108)：`npm install`
 
 ## 15. finishing-a-development-branch
 
@@ -497,8 +497,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/finishing-a-development-branch/SKILL.md:169](../skills/finishing-a-development-branch/SKILL.md#L169)：`Superpowers`
-- [skills/finishing-a-development-branch/SKILL.md:78](../skills/finishing-a-development-branch/SKILL.md#L78)：`Present the menu exactly`
+- [skills/finishing-a-development-branch/SKILL.md:169](../../skills/finishing-a-development-branch/SKILL.md#L169)：`Superpowers`
+- [skills/finishing-a-development-branch/SKILL.md:78](../../skills/finishing-a-development-branch/SKILL.md#L78)：`Present the menu exactly`
 
 ## 16. ui-ux-pro-max
 
@@ -531,9 +531,9 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/ui-ux-pro-max/SKILL.md:292](../skills/ui-ux-pro-max/SKILL.md#L292)：`Quick Reference §6`
-- [skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py:16](../skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py#L16)：`refresh-google-fonts.py`
-- [skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py:10](../skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py#L10)：`scripts/evaluate-relevance.py`
+- [skills/ui-ux-pro-max/SKILL.md:292](../../skills/ui-ux-pro-max/SKILL.md#L292)：`Quick Reference §6`
+- [skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py:16](../../skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py#L16)：`refresh-google-fonts.py`
+- [skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py:10](../../skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py#L10)：`scripts/evaluate-relevance.py`
 
 ## 17. brand
 
@@ -563,8 +563,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/brand/SKILL.md:47](../skills/brand/SKILL.md#L47)：`sync-brand-to-tokens.cjs`
-- [skills/brand/scripts/tests/test_sync_brand_to_tokens.py:27](../skills/brand/scripts/tests/test_sync_brand_to_tokens.py#L27)：`test_sync_parses_bundled_starter_template`
+- [skills/brand/SKILL.md:47](../../skills/brand/SKILL.md#L47)：`sync-brand-to-tokens.cjs`
+- [skills/brand/scripts/tests/test_sync_brand_to_tokens.py:27](../../skills/brand/scripts/tests/test_sync_brand_to_tokens.py#L27)：`test_sync_parses_bundled_starter_template`
 
 ## 18. design-system
 
@@ -597,8 +597,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/design-system/SKILL.md:184](../skills/design-system/SKILL.md#L184)：`Center align content`
-- [skills/design-system/scripts/generate-tokens.cjs:64](../skills/design-system/scripts/generate-tokens.cjs#L64)：`return resolveReference(result.$value, tokens)`
+- [skills/design-system/SKILL.md:184](../../skills/design-system/SKILL.md#L184)：`Center align content`
+- [skills/design-system/scripts/generate-tokens.cjs:64](../../skills/design-system/scripts/generate-tokens.cjs#L64)：`return resolveReference(result.$value, tokens)`
 
 ## 19. ui-styling
 
@@ -630,8 +630,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/ui-styling/SKILL.md:29](../skills/ui-styling/SKILL.md#L29)：`Generating visual designs, posters`
-- [skills/ui-styling/scripts/tailwind_config_gen.py:52](../skills/ui-styling/scripts/tailwind_config_gen.py#L52)：`"darkMode": ["class"]`
+- [skills/ui-styling/SKILL.md:29](../../skills/ui-styling/SKILL.md#L29)：`Generating visual designs, posters`
+- [skills/ui-styling/scripts/tailwind_config_gen.py:52](../../skills/ui-styling/scripts/tailwind_config_gen.py#L52)：`"darkMode": ["class"]`
 
 ## 20. design
 
@@ -667,8 +667,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/design/SKILL.md:60](../skills/design/SKILL.md#L60)：`ALWAYS** generate output logo images with white background`
-- [skills/design/SKILL.md:228](../skills/design/SKILL.md#L228)：`randomly invoke`
+- [skills/design/SKILL.md:60](../../skills/design/SKILL.md#L60)：`ALWAYS** generate output logo images with white background`
+- [skills/design/SKILL.md:228](../../skills/design/SKILL.md#L228)：`randomly invoke`
 
 ## 21. canvas-design
 
@@ -702,8 +702,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/canvas-design/SKILL.md:122](../skills/canvas-design/SKILL.md#L122)：`The user ALREADY said`
-- [skills/canvas-design/SKILL.md:23](../skills/canvas-design/SKILL.md#L23)：`it should not constrain creative freedom`
+- [skills/canvas-design/SKILL.md:122](../../skills/canvas-design/SKILL.md#L122)：`The user ALREADY said`
+- [skills/canvas-design/SKILL.md:23](../../skills/canvas-design/SKILL.md#L23)：`it should not constrain creative freedom`
 
 ## 22. graphify
 
@@ -737,9 +737,9 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/graphify/SKILL.md:3](../skills/graphify/SKILL.md#L3)：`Use for any question`
-- [skills/graphify/SKILL.md:94](../skills/graphify/SKILL.md#L94)：`--break-system-packages`
-- [skills/graphify/SKILL.md:268](../skills/graphify/SKILL.md#L268)：`close_agent(handle)`
+- [skills/graphify/SKILL.md:3](../../skills/graphify/SKILL.md#L3)：`Use for any question`
+- [skills/graphify/SKILL.md:94](../../skills/graphify/SKILL.md#L94)：`--break-system-packages`
+- [skills/graphify/SKILL.md:268](../../skills/graphify/SKILL.md#L268)：`close_agent(handle)`
 
 ## 23. reverse-skill
 
@@ -769,8 +769,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/reverse-skill/SKILL.md:15](../skills/reverse-skill/SKILL.md#L15)：`C:\Users\Administrator\tools\reverse-skill`
-- [skills/reverse-skill/SKILL.md:57](../skills/reverse-skill/SKILL.md#L57)：`本机工具链现状`
+- [skills/reverse-skill/SKILL.md:15](../../skills/reverse-skill/SKILL.md#L15)：`C:\Users\Administrator\tools\reverse-skill`
+- [skills/reverse-skill/SKILL.md:57](../../skills/reverse-skill/SKILL.md#L57)：`本机工具链现状`
 
 ## 24. writing-skills
 
@@ -802,8 +802,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/writing-skills/SKILL.md:97](../skills/writing-skills/SKILL.md#L97)：`Max 1024 characters total`
-- [skills/writing-skills/SKILL.md:581](../skills/writing-skills/SKILL.md#L581)：`5+ reps per variant`
+- [skills/writing-skills/SKILL.md:97](../../skills/writing-skills/SKILL.md#L97)：`Max 1024 characters total`
+- [skills/writing-skills/SKILL.md:581](../../skills/writing-skills/SKILL.md#L581)：`5+ reps per variant`
 
 ## 25. using-superpowers
 
@@ -835,8 +835,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/using-superpowers/SKILL.md:11](../skills/using-superpowers/SKILL.md#L11)：`1% chance`
-- [skills/using-superpowers/references/codex-tools.md:21](../skills/using-superpowers/references/codex-tools.md#L21)：`Full-history forks accept`
+- [skills/using-superpowers/SKILL.md:11](../../skills/using-superpowers/SKILL.md#L11)：`1% chance`
+- [skills/using-superpowers/references/codex-tools.md:21](../../skills/using-superpowers/references/codex-tools.md#L21)：`Full-history forks accept`
 
 ## 26. token-efficient-workflow
 
@@ -868,8 +868,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/token-efficient-workflow/SKILL.md:9](../skills/token-efficient-workflow/SKILL.md#L9)：`C:\Users\Administrator\tools\shared`
-- [skills/token-efficient-workflow/SKILL.md:24](../skills/token-efficient-workflow/SKILL.md#L24)：`codex-helpers`
+- [skills/token-efficient-workflow/SKILL.md:9](../../skills/token-efficient-workflow/SKILL.md#L9)：`C:\Users\Administrator\tools\shared`
+- [skills/token-efficient-workflow/SKILL.md:24](../../skills/token-efficient-workflow/SKILL.md#L24)：`codex-helpers`
 
 ## 27. suggesting-cursor-rules
 
@@ -899,8 +899,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/suggesting-cursor-rules/SKILL.md:7](../skills/suggesting-cursor-rules/SKILL.md#L7)：`# Suggesting Codex Rules`
-- [skills/suggesting-cursor-rules/SKILL.md:31](../skills/suggesting-cursor-rules/SKILL.md#L31)：`.cursor/rules/<name>.mdc`
+- [skills/suggesting-cursor-rules/SKILL.md:7](../../skills/suggesting-cursor-rules/SKILL.md#L7)：`# Suggesting Codex Rules`
+- [skills/suggesting-cursor-rules/SKILL.md:31](../../skills/suggesting-cursor-rules/SKILL.md#L31)：`.cursor/rules/<name>.mdc`
 
 ## 28. ask-questions-if-underspecified
 
@@ -931,8 +931,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [archive/skills/ask-questions-if-underspecified/SKILL.md:12](../archive/skills/ask-questions-if-underspecified/SKILL.md#L12)：`## When NOT to Use`
-- [archive/skills/ask-questions-if-underspecified/SKILL.md:55](../archive/skills/ask-questions-if-underspecified/SKILL.md#L55)：`Ask for confirmation`
+- [archive/skills/ask-questions-if-underspecified/SKILL.md:12](../../archive/skills/ask-questions-if-underspecified/SKILL.md#L12)：`## When NOT to Use`
+- [archive/skills/ask-questions-if-underspecified/SKILL.md:55](../../archive/skills/ask-questions-if-underspecified/SKILL.md#L55)：`Ask for confirmation`
 
 ## 29. best-of-n-solving
 
@@ -961,7 +961,7 @@ parallel-agents 已覆盖多方案模式，维持历史归档。
 
 **来源定位**
 
-- [archive/skills/best-of-n-solving/SKILL.md:12](../archive/skills/best-of-n-solving/SKILL.md#L12)：`Cursor's `best-of-n-runner``
+- [archive/skills/best-of-n-solving/SKILL.md:12](../../archive/skills/best-of-n-solving/SKILL.md#L12)：`Cursor's `best-of-n-runner``
 
 ## 30. dispatching-parallel-agents
 
@@ -990,7 +990,7 @@ parallel-agents 已覆盖独立任务模式，无需恢复启用。
 
 **来源定位**
 
-- [archive/skills/dispatching-parallel-agents/SKILL.md:14](../archive/skills/dispatching-parallel-agents/SKILL.md#L14)：`Dispatch one agent per independent problem domain`
+- [archive/skills/dispatching-parallel-agents/SKILL.md:14](../../archive/skills/dispatching-parallel-agents/SKILL.md#L14)：`Dispatch one agent per independent problem domain`
 
 ## 31. slides
 
@@ -1019,7 +1019,7 @@ parallel-agents 已覆盖独立任务模式，无需恢复启用。
 
 **来源定位**
 
-- [archive/skills/slides/SKILL.md:12](../archive/skills/slides/SKILL.md#L12)：`Strategic HTML presentation design`
+- [archive/skills/slides/SKILL.md:12](../../archive/skills/slides/SKILL.md#L12)：`Strategic HTML presentation design`
 
 ## 32. banner-design
 
@@ -1051,8 +1051,8 @@ parallel-agents 已覆盖独立任务模式，无需恢复启用。
 
 **来源定位**
 
-- [archive/skills/banner-design/SKILL.md:194](../archive/skills/banner-design/SKILL.md#L194)：`Never expose env vars, file paths`
-- [archive/skills/banner-design/SKILL.md:3](../archive/skills/banner-design/SKILL.md#L3)：`frontend-design`
+- [archive/skills/banner-design/SKILL.md:194](../../archive/skills/banner-design/SKILL.md#L194)：`Never expose env vars, file paths`
+- [archive/skills/banner-design/SKILL.md:3](../../archive/skills/banner-design/SKILL.md#L3)：`frontend-design`
 
 ## 33. toolkit-map
 
@@ -1064,14 +1064,12 @@ parallel-agents 已覆盖独立任务模式，无需恢复启用。
 
 **问题与限制**
 
-- external.json 指向 Administrator/Projects/toolkit-map，与当前用户账户不符。
-- 本轮 find python 首选 WindowsApps 商店别名，而已发现的有效 Python 不在 PATH，证明首选可用性规则需上游修复。
-- 本仓库不包含外部实现；未逐文件审查外部技能脚本。
+- 外部源需按实际机器配置；当前用户的 Projects/toolkit-map 不保证存在，安装器不下载它。
+- 本轮只验证接入和当前工具查询，不代表已全面审计外部实现。
 
 **优化方案**
 
-- 接入支持相对用户根/显式配置，并记录 source URL 与已验证 revision。
-- 把 WindowsApps 别名验证问题反馈独立仓库，选择器排除已确认的不可执行占位。
+- external.json 的 path 可用环境变量或仓库相对路径；明确独立维护的源目录。
 
 **升级后的验收场景（尚未全量执行）**
 
@@ -1080,7 +1078,7 @@ parallel-agents 已覆盖独立任务模式，无需恢复启用。
 
 **来源定位**
 
-- [external.json:4](../external.json#L4)：`Administrator`
+- [external.json:4](../../external.json#L4)：`%USERPROFILE%`
 
 ## 34. webapp-testing
 
@@ -1106,8 +1104,8 @@ parallel-agents 已覆盖独立任务模式，无需恢复启用。
 
 **来源定位**
 
-- [skills/webapp-testing/SKILL.md:2](../skills/webapp-testing/SKILL.md#L2)：`name: webapp-testing`
-- [skills/webapp-testing/UPSTREAM.json:4](../skills/webapp-testing/UPSTREAM.json#L4)：`8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4`
+- [skills/webapp-testing/SKILL.md:2](../../skills/webapp-testing/SKILL.md#L2)：`name: webapp-testing`
+- [skills/webapp-testing/UPSTREAM.json:4](../../skills/webapp-testing/UPSTREAM.json#L4)：`8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4`
 
 ## 35. mcp-builder
 
@@ -1133,8 +1131,8 @@ parallel-agents 已覆盖独立任务模式，无需恢复启用。
 
 **来源定位**
 
-- [skills/mcp-builder/SKILL.md:2](../skills/mcp-builder/SKILL.md#L2)：`name: mcp-builder`
-- [skills/mcp-builder/UPSTREAM.json:4](../skills/mcp-builder/UPSTREAM.json#L4)：`8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4`
+- [skills/mcp-builder/SKILL.md:2](../../skills/mcp-builder/SKILL.md#L2)：`name: mcp-builder`
+- [skills/mcp-builder/UPSTREAM.json:4](../../skills/mcp-builder/UPSTREAM.json#L4)：`8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4`
 
 ## 36. supabase-postgres-best-practices
 
@@ -1160,8 +1158,8 @@ Postgres 查询、索引、连接池、锁、schema 与 RLS 的具体规则和 S
 
 **来源定位**
 
-- [skills/supabase-postgres-best-practices/SKILL.md:2](../skills/supabase-postgres-best-practices/SKILL.md#L2)：`name: supabase-postgres-best-practices`
-- [skills/supabase-postgres-best-practices/UPSTREAM.json:4](../skills/supabase-postgres-best-practices/UPSTREAM.json#L4)：`544bfc56c89afe2b87b20017a59b2c6e9502a1fb`
+- [skills/supabase-postgres-best-practices/SKILL.md:2](../../skills/supabase-postgres-best-practices/SKILL.md#L2)：`name: supabase-postgres-best-practices`
+- [skills/supabase-postgres-best-practices/UPSTREAM.json:4](../../skills/supabase-postgres-best-practices/UPSTREAM.json#L4)：`544bfc56c89afe2b87b20017a59b2c6e9502a1fb`
 
 ## 37. property-based-testing
 
@@ -1187,16 +1185,16 @@ Postgres 查询、索引、连接池、锁、schema 与 RLS 的具体规则和 S
 
 **来源定位**
 
-- [skills/property-based-testing/SKILL.md:2](../skills/property-based-testing/SKILL.md#L2)：`name: property-based-testing`
-- [skills/property-based-testing/UPSTREAM.json:4](../skills/property-based-testing/UPSTREAM.json#L4)：`82fe8226252622fa807643bdca1710901198553a`
+- [skills/property-based-testing/SKILL.md:2](../../skills/property-based-testing/SKILL.md#L2)：`name: property-based-testing`
+- [skills/property-based-testing/UPSTREAM.json:4](../../skills/property-based-testing/UPSTREAM.json#L4)：`82fe8226252622fa807643bdca1710901198553a`
 
 ## 完全重复的文本资源
 
 下表按 LF 规范化后 SHA-256 分组，只收录跨 skill 的相同文本，排除测试 fixtures。完全相同只证明这些资源可统一来源，不证明两个技能整体等价。
 
-- [archive/skills/banner-design/references/banner-sizes-and-styles.md](../archive/skills/banner-design/references/banner-sizes-and-styles.md)；[skills/design/references/banner-sizes-and-styles.md](../skills/design/references/banner-sizes-and-styles.md)
-- [archive/skills/slides/references/copywriting-formulas.md](../archive/skills/slides/references/copywriting-formulas.md)；[skills/design/references/slides-copywriting-formulas.md](../skills/design/references/slides-copywriting-formulas.md)
-- [archive/skills/slides/references/create.md](../archive/skills/slides/references/create.md)；[skills/design/references/slides-create.md](../skills/design/references/slides-create.md)
-- [archive/skills/slides/references/html-template.md](../archive/skills/slides/references/html-template.md)；[skills/design/references/slides-html-template.md](../skills/design/references/slides-html-template.md)
-- [archive/skills/slides/references/layout-patterns.md](../archive/skills/slides/references/layout-patterns.md)；[skills/design/references/slides-layout-patterns.md](../skills/design/references/slides-layout-patterns.md)
-- [archive/skills/slides/references/slide-strategies.md](../archive/skills/slides/references/slide-strategies.md)；[skills/design/references/slides-strategies.md](../skills/design/references/slides-strategies.md)
+- [archive/skills/banner-design/references/banner-sizes-and-styles.md](../../archive/skills/banner-design/references/banner-sizes-and-styles.md)；[skills/design/references/banner-sizes-and-styles.md](../../skills/design/references/banner-sizes-and-styles.md)
+- [archive/skills/slides/references/copywriting-formulas.md](../../archive/skills/slides/references/copywriting-formulas.md)；[skills/design/references/slides-copywriting-formulas.md](../../skills/design/references/slides-copywriting-formulas.md)
+- [archive/skills/slides/references/create.md](../../archive/skills/slides/references/create.md)；[skills/design/references/slides-create.md](../../skills/design/references/slides-create.md)
+- [archive/skills/slides/references/html-template.md](../../archive/skills/slides/references/html-template.md)；[skills/design/references/slides-html-template.md](../../skills/design/references/slides-html-template.md)
+- [archive/skills/slides/references/layout-patterns.md](../../archive/skills/slides/references/layout-patterns.md)；[skills/design/references/slides-layout-patterns.md](../../skills/design/references/slides-layout-patterns.md)
+- [archive/skills/slides/references/slide-strategies.md](../../archive/skills/slides/references/slide-strategies.md)；[skills/design/references/slides-strategies.md](../../skills/design/references/slides-strategies.md)

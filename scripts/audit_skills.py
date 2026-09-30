@@ -186,7 +186,7 @@ def inspect(root, catalog):
             cached = manifest_map[name]
             for field, actual in (("files", len(files)), ("bytes", total_bytes),
                                   ("description", description)):
-                if cached.get(field) != actual:
+                if field in cached and cached[field] != actual:
                     add("warning", "manifest-cache-drift", "manifest.json", f"{name}: {field}")
         for file in files:
             relative = file.relative_to(root).as_posix()
@@ -227,7 +227,7 @@ def render_catalog(catalog, audit):
            "分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。",
            "价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。", "",
            "安装目标仍只由 `manifest.json` / `external.json` 决定；不要从本目录生成第二套目标配置。", "",
-           "详见 [逐项审查](skill-review.md)、[整改路线](review-roadmap.md)、[机器检查结果](audit-findings.json)。", ""]
+           "详见 [逐项审查](reviews/skill-review.md)、[整改路线](reviews/roadmap.md)、[机器检查结果](validation/audit-findings.json)。", ""]
     for category in catalog["categories"]:
         out.extend([f"## {category['title']}", "",
                     "| Skill | 当前状态 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |",
@@ -242,7 +242,7 @@ def render_catalog(catalog, audit):
     out.extend(["## 如何维护", "", "1. 新增/移走技能时更新 `catalog.json` 与安装 manifest。",
                 "2. 每项补真实用途、问题、改进、可观察验收场景和可定位的来源证据。",
                 "3. 运行 `python scripts/audit_skills.py --write` 更新派生文档，再运行 `--check` 校验一致性。",
-                "4. 安装只用现有 `install.ps1`；本轮仅执行 DryRun，没有接管本机技能目录。", ""])
+                "4. 安装参考 [安装指南](guides/installation.md)；验证范围见 [检查指南](guides/maintenance.md)。", ""])
     return "\n".join(out)
 
 
@@ -254,7 +254,7 @@ def render_review(catalog, audit):
            f"{counts['active']} 个启用和 {counts['archived']} 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。",
            "toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完的内容。合并判断基于职责、输入输出和实质内容，不以同名或文字相似率定论。", "",
            "**评分尺度**：高＝有非显然方法、可复用工具/数据或可验证操作约束；中＝有帮助但偏通用、依赖环境或流程偏重；低＝缺少独立产出、被现有入口覆盖或主要重复宿主规则。",
-           "**证据边界**：静态问题可由链接定位；运行结论仅覆盖 [整改路线里的实测记录](review-roadmap.md)。没有做真实用户任务的全量 A/B，价值评级属于专业判断。", ""]
+           "**证据边界**：静态问题可由链接定位；运行结论仅覆盖 [整改路线里的实测记录](roadmap.md)。没有做真实用户任务的全量 A/B，价值评级属于专业判断。", ""]
     for i, entry in enumerate(catalog["skills"], 1):
         metric = metrics[entry["name"]]
         out.extend([f"## {i:02d}. {entry['name']}", "",
@@ -269,13 +269,13 @@ def render_review(catalog, audit):
         out.extend(["**升级后的验收场景（尚未全量执行）**", "", *[f"- {case}" for case in entry["scenarios"]], "",
                     "**来源定位**", ""])
         for evidence in metric["evidence"]:
-            out.append(f"- [{evidence['path']}:{evidence['line']}](../{evidence['path']}#L{evidence['line']})：`{evidence['text']}`")
+            out.append(f"- [{evidence['path']}:{evidence['line']}](../../{evidence['path']}#L{evidence['line']})：`{evidence['text']}`")
         out.append("")
     out.extend(["## 完全重复的文本资源", "",
                 "下表按 LF 规范化后 SHA-256 分组，只收录跨 skill 的相同文本，排除测试 fixtures。完全相同只证明这些资源可统一来源，不证明两个技能整体等价。", ""])
     if audit["exactDuplicateTextGroupsLF"]:
         for group in audit["exactDuplicateTextGroupsLF"]:
-            out.append("- " + "；".join(f"[{path}](../{path})" for path in group))
+            out.append("- " + "；".join(f"[{path}](../../{path})" for path in group))
     else:
         out.append("未发现符合该范围的完全重复资源；职责重叠仍见逐项审查。")
     out.append("")
@@ -285,8 +285,8 @@ def render_review(catalog, audit):
 def outputs(catalog, audit):
     return {
         "docs/catalog.md": render_catalog(catalog, audit),
-        "docs/skill-review.md": render_review(catalog, audit),
-        "docs/audit-findings.json": json.dumps(audit, ensure_ascii=False, indent=2) + "\n",
+        "docs/reviews/skill-review.md": render_review(catalog, audit),
+        "docs/validation/audit-findings.json": json.dumps(audit, ensure_ascii=False, indent=2) + "\n",
     }
 
 

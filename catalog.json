@@ -306,7 +306,7 @@
           "text": "Possible credential in job context"
         },
         {
-          "repoFile": "docs/deepseek-validation.json",
+          "repoFile": "docs/validation/deepseek-validation.json",
           "text": "total_tokens"
         }
       ]
@@ -1236,13 +1236,11 @@
       "summary": "继续独立维护，只修本仓库的接入路径与依赖记录。",
       "uniqueValue": "本机工具多副本来源、绝对路径、shim 与安装分离，对这台 Windows 机器有实际用途；不复制进本仓库可避免双处维护。",
       "issues": [
-        "external.json 指向 Administrator/Projects/toolkit-map，与当前用户账户不符。",
-        "本轮 find python 首选 WindowsApps 商店别名，而已发现的有效 Python 不在 PATH，证明首选可用性规则需上游修复。",
-        "本仓库不包含外部实现；未逐文件审查外部技能脚本。"
+        "外部源需按实际机器配置；当前用户的 Projects/toolkit-map 不保证存在，安装器不下载它。",
+        "本轮只验证接入和当前工具查询，不代表已全面审计外部实现。"
       ],
       "improvements": [
-        "接入支持相对用户根/显式配置，并记录 source URL 与已验证 revision。",
-        "把 WindowsApps 别名验证问题反馈独立仓库，选择器排除已确认的不可执行占位。"
+        "external.json 的 path 可用环境变量或仓库相对路径；明确独立维护的源目录。"
       ],
       "mergeWith": [],
       "scenarios": [
@@ -1252,7 +1250,7 @@
       "evidence": [
         {
           "repoFile": "external.json",
-          "text": "Administrator"
+          "text": "%USERPROFILE%"
         }
       ]
     },

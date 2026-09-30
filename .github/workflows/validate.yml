@@ -1,0 +1,53 @@
+name: Validate repository
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        id: python
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Check catalog, documentation, tests and data
+        shell: pwsh
+        run: |
+          $python = '${{ steps.python.outputs.python-path }}'
+          $env:TEST_POWERSHELL = (Get-Process -Id $PID).Path
+          $commands = @(
+            @('scripts/audit_skills.py', '--check'),
+            @('scripts/check_docs.py'),
+            @('-m', 'unittest', 'discover', '-s', 'tests', '-q'),
+            @('skills/ui-ux-pro-max/scripts/validate_data.py')
+          )
+          foreach ($command in $commands) {
+            & $python @command
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          $node = (Get-Command node -CommandType Application).Source
+          & $python scripts/smoke_skills.py --node $node
+          exit $LASTEXITCODE

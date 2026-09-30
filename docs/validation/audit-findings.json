@@ -185,7 +185,7 @@
           "text": "Possible credential in job context"
         },
         {
-          "path": "docs/deepseek-validation.json",
+          "path": "docs/validation/deepseek-validation.json",
           "line": 14,
           "text": "total_tokens"
         }
@@ -793,7 +793,7 @@
         {
           "path": "external.json",
           "line": 4,
-          "text": "Administrator"
+          "text": "%USERPROFILE%"
         }
       ]
     },
@@ -974,72 +974,6 @@
       "code": "unresolved-path-in-entrypoint",
       "path": "skills/token-efficient-workflow/SKILL.md",
       "message": "references/INDEX.md"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "brainstorming: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "canvas-design: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "env-doctor: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "graphify: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "parallel-agents: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "requirement-understanding: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "reverse-skill: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "subagent-driven-development: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "suggesting-cursor-rules: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "token-efficient-workflow: bytes"
-    },
-    {
-      "level": "warning",
-      "code": "manifest-cache-drift",
-      "path": "manifest.json",
-      "message": "writing-skills: bytes"
     },
     {
       "level": "warning",

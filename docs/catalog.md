@@ -9,7 +9,7 @@
 
 安装目标仍只由 `manifest.json` / `external.json` 决定；不要从本目录生成第二套目标配置。
 
-详见 [逐项审查](skill-review.md)、[整改路线](review-roadmap.md)、[机器检查结果](audit-findings.json)。
+详见 [逐项审查](reviews/skill-review.md)、[整改路线](reviews/roadmap.md)、[机器检查结果](validation/audit-findings.json)。
 
 ## 需求与规划
 
@@ -93,4 +93,4 @@
 1. 新增/移走技能时更新 `catalog.json` 与安装 manifest。
 2. 每项补真实用途、问题、改进、可观察验收场景和可定位的来源证据。
 3. 运行 `python scripts/audit_skills.py --write` 更新派生文档，再运行 `--check` 校验一致性。
-4. 安装只用现有 `install.ps1`；本轮仅执行 DryRun，没有接管本机技能目录。
+4. 安装参考 [安装指南](guides/installation.md)；验证范围见 [检查指南](guides/maintenance.md)。

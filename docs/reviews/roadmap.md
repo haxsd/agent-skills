@@ -68,7 +68,7 @@ LF 规范化字节哈希确认 **6 组**完全相同的跨技能文本：归档 
 ## P2：维护与度量
 
 - 来源记录 primary upstream、license、revision、本地改造原因与复核日期。ATTRIBUTION 的市场集合对应关系不能直接当原作者或已核实版本。
-- manifest files/bytes 属历史缓存，与现行规范化统计有差异，也可能含换行口径不同；安装器不读取。未来移除无用缓存或自动生成，安装目标保持单一来源。
+- 已从 manifest 移除历史 files/bytes/description 缓存，只保留安装元数据；实时描述与规范化统计由 audit 生成。
 - env-doctor 根据真实锁文件、端口与容器/PnP 环境判断；ui-styling 按 Tailwind 配置模式分流；canvas-design 去掉虚构用户反馈，验收必需文本、尺寸与字形。
 - suggesting-cursor-rules 统一平台命名与落点；token 共用规则考虑放在宿主规则，减少重复加载。
 - 扩展完整 YAML 校验、依赖预检、模板 round trip、误触发任务集和能力探测。当前 audit 明确不以 regex 伪装完整 YAML 验证。
@@ -77,9 +77,9 @@ LF 规范化字节哈希确认 **6 组**完全相同的跨技能文本：归档 
 
 ## 安装器与仓库治理
 
-保持安装器不变。DryRun 暴露：`-Only` 只过滤库内 skill，不过滤 external；指定两个 skill 仍处理 shared。external 源缺失只打印提示，退出码仍为 0，安装成功不能只看退出码。
+原 DryRun 暴露的定向安装问题已修复：`-Only` 同时过滤库内与 external，只为 token-efficient-workflow 处理 shared；外部源支持环境变量与相对路径，不再绑定 Administrator 账户。外部源缺失仍会报告并跳过，退出码不等于所有可选依赖齐全。
 
-静态审查另发现：shared 目标若已是异源联接，shared 分支没有像 skill 分支一样先替换，可能发生创建冲突。未对真实目录试验。后续在临时 USERPROFILE 下测试幂等、过滤、路径、异源联接、源缺失与卸载，不对本机已装技能做试验。
+shared 异源联接现可替换；外部源等于目标时保留目录。6 个 Windows 回归场景在临时 USERPROFILE 下验证幂等、过滤、未知名称/DryRun、真实内容备份与卸载、异源联接、源目标相同。未对本机已装技能做安装/卸载试验。
 
 ## 本轮改动
 
@@ -90,13 +90,15 @@ LF 规范化字节哈希确认 **6 组**完全相同的跨技能文本：归档 
 - .gitattributes 固定 UI/UX 数据 LF；4 个文件恢复 LF 后**全部匹配原有 SHA-256**，未改摘要或 verifiedAt，没有伪造刷新日期。
 - token-efficient-workflow UI 字段放入 interface，缩短描述并明确 `$token-efficient-workflow`。
 - DeepSeek skill 改为标准库直接 API 助手：只读上下文、并发小任务、输入/输出预算、凭据保护、真实用量与明确失败状态。已在本机安装，并按用户要求在 Codex 全局 AGENTS.md 写入适用 skill、工具地图和 DeepSeek 调用规则。
-- 合入另一位 agent 已提交的 4 个精选入口，当前 31 个启用、5 个归档、1 个外部登记。没有实施合并/归档建议，也没有合并默认分支；并行工作停止后完成统一收尾。
+- 合入另一位 agent 已提交的 4 个精选入口，当前 31 个启用、5 个归档、1 个外部登记。合并/归档建议尚未实施；用户随后授权将整理结果合入主分支。
+- 整理 docs 为 guides/reviews/validation/sources/history，重写首页和归档导航，加入本地链接检查与 Ubuntu/Windows CI，稳定技能路径保持不变。
 
 ## 实测记录与边界
 
 | 检查 | 结果 | 覆盖与限制 |
 |---|---|---|
 | 仓库 audit 自有测试 | 6/6 通过 | 遗漏技能、证据失效、项目产物不误报硬错误、CRLF/LF 重复识别、XML/SVG 跨平台统计 |
+| Windows 安装器测试 | 6/6 通过 | 临时配置与目录联接，不修改本机安装；其他平台跳过 |
 | 离线 smoke | 10/10 通过 | 42 个库内 Python 语法、数据校验、四类检索、品牌同步、token 生成/混合行回归、Tailwind JS 输出语法 |
 | UI/UX 数据校验初始 | 4 项哈希失配 | raw hash 不符，全部 LF 后匹配原摘要 |
 | UI/UX 数据校验修复后 | 通过 | 12 个 domain、22 个 stack 与 reasoning；不证明线上源刷新 |
@@ -111,7 +113,7 @@ LF 规范化字节哈希确认 **6 组**完全相同的跨技能文本：归档 
 
 smoke 使用 Python 3.12.14、Node 16.20.2。Node 16 只用于本轮本地脚本，不是对现代 UI 工具链版本要求的建议。机器路径来自运行时与 toolkit-map；后者误把商店别名列为有效 Python 首选，本轮使用已登记的真实 Python 候选。
 
-结果见 [smoke-results.json](smoke-results.json)、[audit-findings.json](audit-findings.json)、[deepseek-validation.json](deepseek-validation.json)。warning/hint 对历史缓存、入口长度和引用线索提供人工检查提示，不作为新错误或完整行为证明。
+结果见 [smoke-results.json](../validation/smoke-results.json)、[audit-findings.json](../validation/audit-findings.json)、[deepseek-validation.json](../validation/deepseek-validation.json)。warning/hint 对历史缓存、入口长度和引用线索提供人工检查提示，不作为新错误或完整行为证明。
 
 ## 依据
 
