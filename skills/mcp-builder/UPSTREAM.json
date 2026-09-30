@@ -1,0 +1,12 @@
+{
+  "name": "mcp-builder",
+  "repository": "https://github.com/anthropics/skills",
+  "commit": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+  "path": "skills/mcp-builder",
+  "license": "Apache-2.0",
+  "retrievedAt": "2026-09-30",
+  "modifications": [
+    "Document host tool mapping, skill-relative paths and optional paid evaluation dependencies."
+  ],
+  "validation": "Content review, resource completeness and Python syntax only; no paid API or database/browser task executed."
+}

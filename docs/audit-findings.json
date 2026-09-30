@@ -2,7 +2,7 @@
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
   "reviewedAt": "2026-09-30",
   "counts": {
-    "active": 27,
+    "active": 31,
     "archived": 5,
     "external": 1
   },
@@ -786,6 +786,102 @@
           "text": "Administrator"
         }
       ]
+    },
+    {
+      "name": "webapp-testing",
+      "state": "active",
+      "path": "skills/webapp-testing/SKILL.md",
+      "lines": 98,
+      "entryBytesLF": 4541,
+      "entrySha256LF": "efe3080ae7ad5c9a921e3cc0f59f7bc76478287404f8ed03b2ae0232a50d13ad",
+      "files": 7,
+      "bytes": 23599,
+      "scriptFiles": 1,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/webapp-testing/SKILL.md",
+          "line": 2,
+          "text": "name: webapp-testing"
+        },
+        {
+          "path": "skills/webapp-testing/UPSTREAM.json",
+          "line": 4,
+          "text": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+        }
+      ]
+    },
+    {
+      "name": "mcp-builder",
+      "state": "active",
+      "path": "skills/mcp-builder/SKILL.md",
+      "lines": 240,
+      "entryBytesLF": 9540,
+      "entrySha256LF": "c30551532d2861692504e61de7d6f09c373d7deb064f5702ee118626ccbd66aa",
+      "files": 11,
+      "bytes": 122689,
+      "scriptFiles": 4,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/mcp-builder/SKILL.md",
+          "line": 2,
+          "text": "name: mcp-builder"
+        },
+        {
+          "path": "skills/mcp-builder/UPSTREAM.json",
+          "line": 4,
+          "text": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+        }
+      ]
+    },
+    {
+      "name": "supabase-postgres-best-practices",
+      "state": "active",
+      "path": "skills/supabase-postgres-best-practices/SKILL.md",
+      "lines": 100,
+      "entryBytesLF": 5201,
+      "entrySha256LF": "ffcd08344343f5b7c06b29af61670e2ff9554d1a8f992eef2a67022d090c614e",
+      "files": 38,
+      "bytes": 65548,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/supabase-postgres-best-practices/SKILL.md",
+          "line": 2,
+          "text": "name: supabase-postgres-best-practices"
+        },
+        {
+          "path": "skills/supabase-postgres-best-practices/UPSTREAM.json",
+          "line": 4,
+          "text": "544bfc56c89afe2b87b20017a59b2c6e9502a1fb"
+        }
+      ]
+    },
+    {
+      "name": "property-based-testing",
+      "state": "active",
+      "path": "skills/property-based-testing/SKILL.md",
+      "lines": 68,
+      "entryBytesLF": 4306,
+      "entrySha256LF": "9448cacb65c6237a7c22dc59602667177ecae405524079ae9ff92240590b995a",
+      "files": 11,
+      "bytes": 60270,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/property-based-testing/SKILL.md",
+          "line": 2,
+          "text": "name: property-based-testing"
+        },
+        {
+          "path": "skills/property-based-testing/UPSTREAM.json",
+          "line": 4,
+          "text": "82fe8226252622fa807643bdca1710901198553a"
+        }
+      ]
     }
   ],
   "exactDuplicateTextGroupsLF": [
@@ -904,6 +1000,12 @@
       "code": "manifest-cache-drift",
       "path": "manifest.json",
       "message": "parallel-agents: bytes"
+    },
+    {
+      "level": "warning",
+      "code": "manifest-cache-drift",
+      "path": "manifest.json",
+      "message": "property-based-testing: bytes"
     },
     {
       "level": "warning",

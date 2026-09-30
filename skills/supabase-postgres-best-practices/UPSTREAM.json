@@ -1,0 +1,12 @@
+{
+  "name": "supabase-postgres-best-practices",
+  "repository": "https://github.com/supabase/agent-skills",
+  "commit": "544bfc56c89afe2b87b20017a59b2c6e9502a1fb",
+  "path": "skills/supabase-postgres-best-practices",
+  "license": "MIT",
+  "retrievedAt": "2026-09-30",
+  "modifications": [
+    "Add discoverable links to all concrete rule files; upstream content retained."
+  ],
+  "validation": "Content review, resource completeness and Python syntax only; no paid API or database/browser task executed."
+}

@@ -2,7 +2,7 @@
 
 审查日期：2026-09-30。基线提交：`d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07`。
 
-27 个启用和 5 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。
+31 个启用和 5 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。
 toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完的内容。合并判断基于职责、输入输出和实质内容，不以同名或文字相似率定论。
 
 **评分尺度**：高＝有非显然方法、可复用工具/数据或可验证操作约束；中＝有帮助但偏通用、依赖环境或流程偏重；低＝缺少独立产出、被现有入口覆盖或主要重复宿主规则。
@@ -1081,6 +1081,114 @@ parallel-agents 已覆盖独立任务模式，无需恢复启用。
 **来源定位**
 
 - [external.json:4](../external.json#L4)：`Administrator`
+
+## 34. webapp-testing
+
+质量、调试与审查 · 启用 · 价值：高 · 条件可用 · P2 · 保留
+
+浏览器验证本地 Web 功能，提供 DOM 检查、截图、日志示例与服务器辅助脚本。
+
+**真正的增益**：与 TDD 的测试方法分工不同：这里提供浏览器操作和实际界面证据。
+
+**体量**：入口 98 行 / 4,541 字节（LF）；整个目录 7 个文件 / 23,599 规范化字节；生产 scripts 文件 1，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+- Python Playwright 和浏览器运行时；服务器辅助脚本的进程清理未在 Windows 验证。
+
+**优化方案**
+
+- 按目标项目验证验收场景；更新时对照 UPSTREAM.json 的固定提交与本地修改。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 登录页面使用 role/label 定位器验证错误提示，保存截图和控制台错误。
+
+**来源定位**
+
+- [skills/webapp-testing/SKILL.md:2](../skills/webapp-testing/SKILL.md#L2)：`name: webapp-testing`
+- [skills/webapp-testing/UPSTREAM.json:4](../skills/webapp-testing/UPSTREAM.json#L4)：`8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4`
+
+## 35. mcp-builder
+
+实现与代理编排 · 启用 · 价值：高 · 条件可用 · P2 · 保留
+
+开发 Python/TypeScript MCP 服务，覆盖 schema、分页、传输、错误与评估。
+
+**真正的增益**：不同于 writing-skills 或代理编排：产物是可连接的 MCP 服务及其工具接口。
+
+**体量**：入口 240 行 / 9,540 字节（LF）；整个目录 11 个文件 / 122,689 规范化字节；生产 scripts 文件 4，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+- SDK 随版本变化；附带评估脚本需要 anthropic/mcp 依赖和付费 API，未执行。
+
+**优化方案**
+
+- 按目标项目验证验收场景；更新时对照 UPSTREAM.json 的固定提交与本地修改。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 最小只读 MCP 工具经 Inspector 验证输入 schema、分页和错误响应。
+
+**来源定位**
+
+- [skills/mcp-builder/SKILL.md:2](../skills/mcp-builder/SKILL.md#L2)：`name: mcp-builder`
+- [skills/mcp-builder/UPSTREAM.json:4](../skills/mcp-builder/UPSTREAM.json#L4)：`8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4`
+
+## 36. supabase-postgres-best-practices
+
+数据库与后端 · 启用 · 价值：高 · 条件可用 · P2 · 保留
+
+Postgres 查询、索引、连接池、锁、schema 与 RLS 的具体规则和 SQL 对照。
+
+**真正的增益**：现有库没有数据库专项规则；这些参考可用于普通 Postgres，Supabase 专属部分按环境选用。
+
+**体量**：入口 100 行 / 5,201 字节（LF）；整个目录 38 个文件 / 65,548 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+- 需要目标数据库版本与执行计划；示例性能数值不能当作本项目测量结果。
+
+**优化方案**
+
+- 按目标项目验证验收场景；更新时对照 UPSTREAM.json 的固定提交与本地修改。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 对慢查询比较 EXPLAIN，并验证索引效果及跨租户 RLS 隔离。
+
+**来源定位**
+
+- [skills/supabase-postgres-best-practices/SKILL.md:2](../skills/supabase-postgres-best-practices/SKILL.md#L2)：`name: supabase-postgres-best-practices`
+- [skills/supabase-postgres-best-practices/UPSTREAM.json:4](../skills/supabase-postgres-best-practices/UPSTREAM.json#L4)：`544bfc56c89afe2b87b20017a59b2c6e9502a1fb`
+
+## 37. property-based-testing
+
+质量、调试与审查 · 启用 · 价值：高 · 条件可用 · P2 · 保留
+
+从输入域和不变量设计属性测试，识别同义反复、空洞断言与最小反例。
+
+**真正的增益**：TDD 规定测试流程，这里补充生成器、缩减、往返/幂等/独立 oracle 的领域方法。
+
+**体量**：入口 68 行 / 4,306 字节（LF）；整个目录 11 个文件 / 60,270 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+- 需项目相应的属性测试库；没有合适代数性质时使用普通样例测试。
+
+**优化方案**
+
+- 按目标项目验证验收场景；更新时对照 UPSTREAM.json 的固定提交与本地修改。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 为序列化器设计往返属性，用生成器找到边界反例并保存回归用例。
+
+**来源定位**
+
+- [skills/property-based-testing/SKILL.md:2](../skills/property-based-testing/SKILL.md#L2)：`name: property-based-testing`
+- [skills/property-based-testing/UPSTREAM.json:4](../skills/property-based-testing/UPSTREAM.json#L4)：`82fe8226252622fa807643bdca1710901198553a`
 
 ## 完全重复的文本资源
 

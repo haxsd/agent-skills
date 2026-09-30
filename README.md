@@ -1,17 +1,19 @@
 # agent-skills
 
-我们收藏与改造的 agent 技能库，也是本机通用与 Codex 技能的维护来源。当前包含 **27 个启用技能、5 个归档技能、1 个外部技能登记**。
+我们收藏与改造的 agent 技能库，也是本机通用与 Codex 技能的维护来源。当前包含 **31 个启用技能、5 个归档技能、1 个外部技能登记**。
+
+本轮精选新增：Web 应用测试、MCP 服务开发、Postgres 最佳实践、属性测试。见 [收录理由、去重与验证边界](docs/curation-2026-09-30.md)；每项附上游固定版本及许可证。
 
 ## 从这里查找
 
-- [按用途分类的目录](docs/catalog.md)：7 个类别，包含价值、就绪程度、建议动作与优先级。
-- [逐个审查与升级建议](docs/skill-review.md)：32 个库内技能 + 1 个外部接入，每项都有来源定位和验收场景。
+- [按用途分类的目录](docs/catalog.md)：8 个类别，包含价值、就绪程度、建议动作与优先级。
+- [逐个审查与升级建议](docs/skill-review.md)：36 个库内技能 + 1 个外部接入，每项都有来源定位和验收场景。
 - [合并方案与整改路线](docs/review-roadmap.md)：重叠职责、保留能力、整改顺序和实测边界。
 - [离线工具验证](docs/smoke-results.json) / [静态检查结果](docs/audit-findings.json)。
 
 分类采用逻辑索引，保持 skills/<name>/ 平铺，兼容安装器与现有引用。合并、归档均为审查建议，当前激活集尚未调整。
 
-## 七类技能
+## 八类技能
 
 | 类别 | 代表技能 |
 |---|---|
@@ -22,6 +24,7 @@
 | 品牌、设计与 UI | ui-ux-pro-max / brand / design-system / ui-styling / design / canvas-design |
 | 知识图谱与安全研究 | graphify / reverse-skill |
 | 技能维护与运行效率 | writing-skills / token-efficient-workflow / suggesting-cursor-rules / 外部 toolkit-map |
+| 数据库与后端 | supabase-postgres-best-practices |
 
 ## 安装
 
@@ -76,6 +79,6 @@ manifest.json        安装目标与原始归属
 external.json        独立维护的外部技能
 ```
 
-多数技能来自第三方并经本地改造，见 [ATTRIBUTION.md](ATTRIBUTION.md)。上游版本和许可尚未逐项核验；价值审查不代表原创或分发许可认证。
+多数技能来自第三方并经本地改造，见 [ATTRIBUTION.md](ATTRIBUTION.md)。本轮 4 个新增项已记录版本与许可；历史内容尚未逐项核验，价值审查不代表原创或整库分发许可认证。
 
 旧目录清理、DSH 迁移、原始统计与换机记录完整保存在 [仓库历史说明](docs/repository-history.md)，日期、账号路径和工具版本属于当时记录。

@@ -221,8 +221,9 @@ def table_link(entry, metric):
 
 def render_catalog(catalog, audit):
     metrics = {row["name"]: row for row in audit["skills"]}
+    counts = Counter(entry["state"] for entry in catalog["skills"])
     out = ["# Skills 分类目录", "", "由 `catalog.json` 和 `scripts/audit_skills.py` 生成。", "",
-           f"审查日期：{catalog['reviewedAt']}。27 个启用 + 5 个归档 + 1 个外部入口。", "",
+           f"审查日期：{catalog['reviewedAt']}。{counts['active']} 个启用 + {counts['archived']} 个归档 + {counts['external']} 个外部入口。", "",
            "分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。",
            "价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。", "",
            "安装目标仍只由 `manifest.json` / `external.json` 决定；不要从本目录生成第二套目标配置。", "",
@@ -247,9 +248,10 @@ def render_catalog(catalog, audit):
 
 def render_review(catalog, audit):
     metrics = {row["name"]: row for row in audit["skills"]}
+    counts = Counter(entry["state"] for entry in catalog["skills"])
     categories = {row["id"]: row["title"] for row in catalog["categories"]}
     out = ["# 逐项价值与升级审查", "", f"审查日期：{catalog['reviewedAt']}。基线提交：`{catalog['baselineCommit']}`。", "",
-           "27 个启用和 5 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。",
+           f"{counts['active']} 个启用和 {counts['archived']} 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。",
            "toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完的内容。合并判断基于职责、输入输出和实质内容，不以同名或文字相似率定论。", "",
            "**评分尺度**：高＝有非显然方法、可复用工具/数据或可验证操作约束；中＝有帮助但偏通用、依赖环境或流程偏重；低＝缺少独立产出、被现有入口覆盖或主要重复宿主规则。",
            "**证据边界**：静态问题可由链接定位；运行结论仅覆盖 [整改路线里的实测记录](review-roadmap.md)。没有做真实用户任务的全量 A/B，价值评级属于专业判断。", ""]

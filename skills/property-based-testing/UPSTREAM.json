@@ -1,0 +1,10 @@
+{
+  "name": "property-based-testing",
+  "repository": "https://github.com/trailofbits/skills",
+  "commit": "82fe8226252622fa807643bdca1710901198553a",
+  "path": "plugins/property-based-testing/skills/property-based-testing",
+  "license": "CC-BY-SA-4.0",
+  "retrievedAt": "2026-09-30",
+  "modifications": [],
+  "validation": "Content review, resource completeness and Python syntax only; no paid API or database/browser task executed."
+}
