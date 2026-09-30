@@ -46,7 +46,7 @@ class InstallerTests(unittest.TestCase):
 
     def run_installer(self, *args, expected=0):
         result = subprocess.run([SHELL, "-NoProfile", "-File", str(self.repo / "install.ps1"), *args],
-                                env=self.environment, text=True, capture_output=True, timeout=30)
+                                env=self.environment, text=True, encoding="utf-8", capture_output=True, timeout=30)
         self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
         return result.stdout
 

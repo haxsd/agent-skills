@@ -10,7 +10,7 @@
 | supabase-postgres-best-practices | [Supabase](https://github.com/supabase/agent-skills) | MIT |
 | property-based-testing | [Trail of Bits](https://github.com/trailofbits/skills) | CC-BY-SA-4.0 |
 
-完整许可证随各技能目录保留；作者、固定 commit、上游路径及本地改动见每项 `UPSTREAM.json` 与 [来源汇总](docs/sources/curation-sources.json)。改动内容继续按对应上游许可分发，不能用这 4 项的许可覆盖历史内容。下文历史许可未核实的说明仍适用于原有技能。
+完整许可证随各技能目录保留；作者、固定 commit、上游路径及本地改动见每项 `UPSTREAM.json` 与 [来源汇总](../sources/curation-sources.json)。改动内容继续按对应上游许可分发，不能用这 4 项的许可覆盖历史内容。下文历史许可未核实的说明仍适用于原有技能。
 
 判断依据是 `.dsh\skills-management\market\skills\`——第三方技能市场 `gitcode.com/weibaohui/ntd-resource.git`
 的本地克隆，含 47 个上游集合。下表区分「能否从这个市场重新取回」，**不等于**「是否本人原创」。
