@@ -1,0 +1,5 @@
+# These catalog hashes bind the exact bytes; Windows checkouts must preserve LF.
+skills/ui-ux-pro-max/data/** text eol=lf
+skills/deepseek-subagent-orchestration/** text eol=lf
+scripts/*.py text eol=lf
+tests/*.py text eol=lf

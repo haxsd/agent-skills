@@ -1,4 +1,4 @@
 interface:
   display_name: "DeepSeek Subagent Orchestration"
-  short_description: "Offload bounded work to DeepSeek Flash"
-  default_prompt: "Keep this Codex model as the primary, delegate most bounded work to DeepSeek Flash, and use the verified CLI fallback if native spawning rejects the model."
+  short_description: "Keep GPT primary; offload small jobs to DeepSeek"
+  default_prompt: "Use $deepseek-subagent-orchestration to keep my current GPT primary and delegate suitable small tasks to my DeepSeek Flash API."

@@ -83,6 +83,20 @@ $Manifest = Get-Content $ManifestPath -Raw | ConvertFrom-Json
 $SkillMap = @{}
 foreach ($entry in $Manifest.skills) { $SkillMap[$entry.name] = $entry }
 
+$names = @(Get-ChildItem -LiteralPath $SkillsRoot -Directory | Select-Object -ExpandProperty Name)
+$ExternalPath = Join-Path $RepoRoot 'external.json'
+$externals = @()
+if (Test-Path -LiteralPath $ExternalPath) {
+  $externals = @(Get-Content -LiteralPath $ExternalPath -Raw | ConvertFrom-Json | Where-Object { $_.name -and $_.path })
+}
+if ($Only) {
+  $known = @($names) + @($externals | Select-Object -ExpandProperty name)
+  $unknown = @($Only | Where-Object { $_ -notin $known })
+  if ($unknown.Count) { throw "未知 skill：$($unknown -join ', ')" }
+  $names = @($names | Where-Object { $_ -in $Only })
+  $externals = @($externals | Where-Object { $_.name -in $Only })
+}
+
 function Test-IsReparsePoint {
   param([string]$Path)
   $item = Get-Item -LiteralPath $Path -Force -ErrorAction SilentlyContinue
@@ -114,7 +128,7 @@ Write-Host "模式:   $(if ($Uninstall) { '卸载' } elseif ($DryRun) { '演练'
 Write-Host ""
 
 # ---------- 1. shared/ ----------
-if ((Test-Path $SharedSrc)) {
+if ((Test-Path $SharedSrc) -and (-not $Only -or 'token-efficient-workflow' -in $Only)) {
   Write-Host "[shared]"
   $sameTarget = (Test-IsReparsePoint $SharedDst) -and ((Get-LinkTarget $SharedDst) -eq $SharedSrc)
 
@@ -132,6 +146,10 @@ if ((Test-Path $SharedSrc)) {
       if ($DryRun) { Write-Host "  [dry-run] 备份 $SharedDst -> $bk" } else { Move-Item -LiteralPath $SharedDst -Destination $bk; Write-Host "  已备份 -> $bk" }
       $summary.backedUp++
     }
+    elseif (Test-IsReparsePoint $SharedDst) {
+      if ($DryRun) { Write-Host "  [dry-run] 替换旧联接 $SharedDst" }
+      else { (Get-Item -LiteralPath $SharedDst -Force).Delete() }
+    }
     New-DirJunction -Path $SharedDst -Destination $SharedSrc
     if (-not $DryRun) { Write-Host "  已联接 $SharedDst -> $SharedSrc" }
     $summary.linked++
@@ -140,10 +158,6 @@ if ((Test-Path $SharedSrc)) {
 }
 
 # ---------- 2. skills ----------
-$names = Get-ChildItem $SkillsRoot -Directory | Select-Object -ExpandProperty Name
-if ($Only) { $names = $names | Where-Object { $_ -in $Only } }
-if (-not $names) { throw "没有匹配的 skill（检查 -Only 的拼写）" }
-
 foreach ($dirName in ($TargetDirs.Keys)) {
   if ($Target -ne 'all' -and $Target -ne $dirName) { continue }
   $root = $TargetDirs[$dirName]
@@ -202,19 +216,25 @@ foreach ($dirName in ($TargetDirs.Keys)) {
 # ---------- 3. 外部技能 ----------
 # external.json 里登记的是「自己独立成库」的技能（例如 toolkit-map 有自己的仓库和发布节奏）。
 # 做法仍然是挂联接、不复制内容——README 里记过内容分叉的教训。
-$ExternalPath = Join-Path $RepoRoot 'external.json'
-if (Test-Path $ExternalPath) {
-  $externals = @(Get-Content $ExternalPath -Raw | ConvertFrom-Json) | Where-Object { $_.name -and $_.path }
+if ($externals.Count) {
   if ($externals.Count) {
     Write-Host "[external]"
     foreach ($ext in $externals) {
-      if (-not (Test-Path $ext.path)) { Write-Host "  ! $($ext.name)：源不存在 $($ext.path)"; $summary.missing++; continue }
-      $extTargets = if ($ext.targets) { @($ext.targets) } else { $UniversalTargets }
+      $externalSource = [Environment]::ExpandEnvironmentVariables($ext.path)
+      if (-not [IO.Path]::IsPathRooted($externalSource)) { $externalSource = Join-Path $RepoRoot $externalSource }
+      $externalSource = [IO.Path]::GetFullPath($externalSource)
+      if (-not (Test-Path -LiteralPath $externalSource)) { Write-Host "  ! $($ext.name)：源不存在 $externalSource"; $summary.missing++; continue }
+      $extTargets = if ($Target -ne 'all') { @($Target) } elseif ($ext.targets) { @($ext.targets) } else { $UniversalTargets }
       foreach ($dirName in $extTargets) {
         if (-not $TargetDirs.Contains($dirName)) { continue }
         if ($Target -ne 'all' -and $Target -ne $dirName) { continue }
-        $src     = $ext.path
+        $src     = $externalSource
         $dst     = Join-Path $TargetDirs[$dirName] $ext.name
+        if ([IO.Path]::GetFullPath($src) -eq [IO.Path]::GetFullPath($dst)) {
+          Write-Host "  = $($ext.name)（源已在目标目录，保留真实目录）"
+          $summary.skipped++
+          continue
+        }
         $already = (Test-IsReparsePoint $dst) -and ((Get-LinkTarget $dst) -eq $src)
 
         if ($Uninstall) {

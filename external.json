@@ -1,8 +1,8 @@
 [
   {
     "name": "toolkit-map",
-    "path": "C:\\Users\\Administrator\\Projects\\toolkit-map",
+    "path": "%USERPROFILE%\\Projects\\toolkit-map",
     "targets": ["agents", "cursor", "devin", "claude"],
-    "note": "本机工具地图。自己独立成库（有自己的发布节奏），所以只挂联接、不复制内容进本仓库。"
+    "note": "独立维护的工具地图。path 支持 %ENV% 和仓库相对路径；按实际源目录配置，只挂联接、不复制内容。"
   }
 ]
