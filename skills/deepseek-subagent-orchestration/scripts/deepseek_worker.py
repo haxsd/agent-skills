@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bounded read-only API assistants; stdlib only, no native Codex model changes."""
+"""DeepSeek API assistants: analysis or scoped execution; no native model changes."""
 from __future__ import annotations
 
 import argparse
@@ -150,6 +150,11 @@ class Client:
             "response_format": {"type": "json_object"}, "stream": False,
             "thinking": {"type": "disabled"}, "max_tokens": max_tokens})
 
+    def tools_chat(self, messages, tools, max_tokens, thinking="disabled"):
+        return self.request("/chat/completions", {
+            "model": MODEL, "messages": messages, "tools": tools,
+            "stream": False, "thinking": {"type": thinking}, "max_tokens": max_tokens})
+
 
 def text_field(job, field, *, required=False):
     text = job.get(field, "")
@@ -252,14 +257,14 @@ def run_job(client: Client, job, max_tokens):
     return record
 
 
-def run_batch(client, jobs, max_tokens, concurrency):
+def run_batch(client, jobs, max_tokens, concurrency, runner=run_job):
     """Bound submission so auth failure stops work that has not already started."""
     results, futures, next_index, stopped = {}, {}, 0, False
     with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as pool:
         while futures or (not stopped and next_index < len(jobs)):
             while not stopped and len(futures) < concurrency and next_index < len(jobs):
                 job = jobs[next_index]
-                futures[pool.submit(run_job, client, job, max_tokens)] = job["id"]
+                futures[pool.submit(runner, client, job, max_tokens)] = job["id"]
                 next_index += 1
             done, _ = concurrent.futures.wait(futures, return_when=concurrent.futures.FIRST_COMPLETED)
             for future in done:
@@ -301,6 +306,17 @@ def main(argv=None):
     run.add_argument("--timeout", type=bounded_int(1, 120), default=60)
     run.add_argument("--max-input-chars", type=bounded_int(1, 48000), default=24000)
     run.add_argument("--max-batch-chars", type=bounded_int(1, 192000), default=96000)
+    execute = subs.add_parser("execute", help="Tool-using jobs in separate copied workspaces")
+    execute.add_argument("--jobs", type=Path, required=True)
+    execute.add_argument("--root", type=Path, required=True)
+    execute.add_argument("--out-dir", type=Path, required=True)
+    execute.add_argument("--concurrency", type=bounded_int(1, 4), default=2)
+    execute.add_argument("--max-tokens", type=bounded_int(256, 16384), default=4096)
+    execute.add_argument("--timeout", type=bounded_int(1, 120), default=60)
+    execute.add_argument("--max-rounds", type=bounded_int(1, 32), default=12)
+    execute.add_argument("--max-total-tokens", type=bounded_int(256, 128000), default=48000)
+    execute.add_argument("--max-input-chars", type=bounded_int(4000, 256000), default=96000)
+    execute.add_argument("--thinking", choices=("disabled", "enabled"), default="disabled")
     args = parser.parse_args(argv)
     try:
         if args.command == "configure":
@@ -336,11 +352,24 @@ def main(argv=None):
                 report["ok"] = result["status"] == "completed" and result["result"]["summary"] == "READY"
             print(json.dumps(report, ensure_ascii=False))
             return 0 if report["ok"] else 1
-        jobs = prepare_jobs(read_json(args.jobs), args.root, key, args.max_input_chars, args.max_batch_chars)
+        runner = run_job
+        if args.command == "execute":
+            import importlib.util
+            from types import SimpleNamespace
+            spec = importlib.util.spec_from_file_location("deepseek_agent_runtime", Path(__file__).with_name("agent_runtime.py"))
+            runtime = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(runtime)
+            worker_context = SimpleNamespace(**globals())
+            jobs = runtime.prepare_jobs(read_json(args.jobs), args.root, key, worker_context)
+            runner = lambda client, job, tokens: runtime.run_job(client, job, tokens, args, worker_context)
+        else:
+            jobs = prepare_jobs(read_json(args.jobs), args.root, key, args.max_input_chars, args.max_batch_chars)
         output = args.out_dir.expanduser().resolve()
         output.mkdir(parents=True, exist_ok=False)
+        if args.command == "execute":
+            runtime.create_workspaces(jobs, output, key, worker_context)
         started = time.monotonic()
-        results = run_batch(client, jobs, args.max_tokens, args.concurrency)
+        results = run_batch(client, jobs, args.max_tokens, args.concurrency, runner)
         compact = []
         for record in results:
             artifact = record["id"] + ".json"

@@ -277,25 +277,25 @@
       "readiness": "runnable",
       "action": "retain",
       "priority": "P2",
-      "summary": "已升级并实测：GPT 主代理保持当前模型，独立小任务通过用户自己的 deepseek-flash API 完成。",
-      "uniqueValue": "标准库 API 批处理避开宿主模型白名单；最少上下文、只读片段、DPAPI 凭据、预算与真实用量形成可验收的供应商适配。",
+      "summary": "已升级并实测：GPT 主代理保持当前模型，DeepSeek 默认承接独立工作块，可在复制目录读写授权文件并执行命名检查。",
+      "uniqueValue": "标准库外部 API 工具循环避开宿主模型白名单；独立文件副本、精确写权限、固定检查 argv、DPAPI 凭据保护与真实操作日志构成可验收的执行助手。",
       "issues": [
-        "助手没有 shell/MCP/文件修改工具；测试与建议落地需要主代理执行。",
-        "连通及并发实测不等于已证明整项任务节省 GPT token 或提高速度；第三方 API 仍独立计费。"
+        "命名检查进程不是 OS 沙箱，只适合已授权的可信项目命令；文件工具边界不能限制检查代码的所有宿主访问。",
+        "多轮长上下文可能触及预算，需要任务级配置；连通和局部执行实测不证明整项任务节省 GPT 额度或加速。"
       ],
       "improvements": [
-        "用真实重复任务比较派发、结果复核与直接执行的总成本和耗时。",
-        "滚动别名升级时复核返回型号；其他机器自行配置凭据，不复制本机加密文件。"
+        "用真实工作块比较派发、验收与直接执行的总成本及耗时。",
+        "滚动别名升级时复核返回型号；复杂任务显式调整预算与 thinking。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "两项独立分析通过自有 API 并发完成，主代理设置不变、源文件不被助手修改。",
-        "含密钥、越界文件或超预算任务在请求前被拒绝；401/403 后停止未启动任务。"
+        "独立实现助手实际读文件、修改实现、添加测试、执行命名检查，主工作区不被文件工具修改。",
+        "越界写入、未知检查、密钥上下文被拒绝；截断或预算耗尽不接受为完整结果。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Keep the current conversation's model, provider, and reasoning settings unchanged."
+          "text": "Keep the current conversation's GPT model, provider, and reasoning settings."
         },
         {
           "file": "scripts/deepseek_worker.py",
@@ -308,6 +308,10 @@
         {
           "repoFile": "docs/validation/deepseek-validation.json",
           "text": "total_tokens"
+        },
+        {
+          "file": "scripts/agent_runtime.py",
+          "text": "A check modified a path outside the owned files; do not integrate"
         }
       ]
     },
