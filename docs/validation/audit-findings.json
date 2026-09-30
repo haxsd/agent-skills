@@ -161,33 +161,38 @@
       "name": "deepseek-subagent-orchestration",
       "state": "active",
       "path": "skills/deepseek-subagent-orchestration/SKILL.md",
-      "lines": 63,
-      "entryBytesLF": 3883,
-      "entrySha256LF": "489fda40d2753c42cee5eeab0c2265edbbc5cb4d2f19a9379a45194b7ef44f70",
-      "files": 4,
-      "bytes": 28016,
-      "scriptFiles": 1,
+      "lines": 88,
+      "entryBytesLF": 5386,
+      "entrySha256LF": "cea68da70f61631cc5e858731b457eed1eba3434a337a294708f6b35c0eca5c6",
+      "files": 5,
+      "bytes": 56867,
+      "scriptFiles": 2,
       "testFiles": 0,
       "evidence": [
         {
           "path": "skills/deepseek-subagent-orchestration/SKILL.md",
           "line": 8,
-          "text": "Keep the current conversation's model, provider, and reasoning settings unchanged."
+          "text": "Keep the current conversation's GPT model, provider, and reasoning settings."
         },
         {
           "path": "skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py",
-          "line": 274,
+          "line": 279,
           "text": "Batch stopped after authentication failure"
         },
         {
           "path": "skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py",
-          "line": 211,
+          "line": 216,
           "text": "Possible credential in job context"
         },
         {
           "path": "docs/validation/deepseek-validation.json",
           "line": 14,
           "text": "total_tokens"
+        },
+        {
+          "path": "skills/deepseek-subagent-orchestration/scripts/agent_runtime.py",
+          "line": 390,
+          "text": "A check modified a path outside the owned files; do not integrate"
         }
       ]
     },

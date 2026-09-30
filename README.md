@@ -26,7 +26,7 @@
 .\install.ps1 -Only deepseek-subagent-orchestration -Target codex -DryRun
 ```
 
-安装通过 Windows junction 指向此仓库；完整安装、卸载和外部源配置见 [安装指南](docs/guides/installation.md)。[DeepSeek API 助手](skills/deepseek-subagent-orchestration/SKILL.md) 保留当前 GPT 主代理，把适合的小任务交给自己的 `deepseek-flash` API；凭据单独配置。
+安装通过 Windows junction 指向此仓库；完整安装、卸载和外部源配置见 [安装指南](docs/guides/installation.md)。[DeepSeek API 助手](skills/deepseek-subagent-orchestration/SKILL.md) 保留当前 GPT 主代理，默认把独立工作块交给自己的 `deepseek-flash` API；支持受限文件工具和命名检查，凭据单独配置。
 
 ## 仓库结构
 
