@@ -8,7 +8,7 @@
       "name": "Python syntax",
       "status": "pass",
       "evidence": {
-        "pythonFilesParsed": 35,
+        "pythonFilesParsed": 42,
         "scope": "syntax only; imports and external APIs not exercised"
       }
     },

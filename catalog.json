@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-09-30",
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
-  "scope": "31 个启用技能、5 个归档技能与 1 个外部登记；新增 4 项经过内容与去重审查，运行验证范围见收录报告。",
+  "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -274,34 +274,40 @@
       "category": "implementation-orchestration",
       "state": "active",
       "value": "medium",
-      "readiness": "external",
-      "action": "upgrade",
-      "priority": "P0",
-      "summary": "有明确的供应商与额度需求时有价值；需先修配置路径与能力探测。",
-      "uniqueValue": "区分宿主模型拒绝和供应商鉴权/额度失败；固定一次失败后的 CLI 降级和紧凑交接契约。",
+      "readiness": "runnable",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "已升级并实测：GPT 主代理保持当前模型，独立小任务通过用户自己的 deepseek-flash API 完成。",
+      "uniqueValue": "标准库 API 批处理避开宿主模型白名单；最少上下文、只读片段、DPAPI 凭据、预算与真实用量形成可验收的供应商适配。",
       "issues": [
-        "fallback 固定引用 Administrator 账户下模型目录，本仓库未包含该配置。",
-        "native explorer / worker / deepseek_worker 角色和 deepseek-flash 别名依赖用户宿主，不是通用可用能力。",
-        "无条件 aggressively delegate 可能把小任务变成调度开销；rtk 是额外依赖。"
+        "助手没有 shell/MCP/文件修改工具；测试与建议落地需要主代理执行。",
+        "连通及并发实测不等于已证明整项任务节省 GPT token 或提高速度；第三方 API 仍独立计费。"
       ],
       "improvements": [
-        "用当前用户或显式环境变量定位配置，不读取或回显密钥。",
-        "先检测允许的模型和角色；路由策略与 parallel-agents 共用，供应商适配独立。",
-        "只在已有委派授权和具体额度目标下调用第三方供应商。"
+        "用真实重复任务比较派发、结果复核与直接执行的总成本和耗时。",
+        "滚动别名升级时复核返回型号；其他机器自行配置凭据，不复制本机加密文件。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "无 DeepSeek 配置时解释依赖，不修改主线程供应商。",
-        "本地模型拒绝只触发一次降级，401/429 不被误判为宿主问题。"
+        "两项独立分析通过自有 API 并发完成，主代理设置不变、源文件不被助手修改。",
+        "含密钥、越界文件或超预算任务在请求前被拒绝；401/403 后停止未启动任务。"
       ],
       "evidence": [
         {
-          "file": "references/codex-cli-fallback.md",
-          "text": "C:/Users/Administrator/.codex/deepseek-models.json"
+          "file": "SKILL.md",
+          "text": "Keep the current conversation's model, provider, and reasoning settings unchanged."
         },
         {
-          "file": "SKILL.md",
-          "text": "Delegate aggressively"
+          "file": "scripts/deepseek_worker.py",
+          "text": "Batch stopped after authentication failure"
+        },
+        {
+          "file": "scripts/deepseek_worker.py",
+          "text": "Possible credential in job context"
+        },
+        {
+          "repoFile": "docs/deepseek-validation.json",
+          "text": "total_tokens"
         }
       ]
     },

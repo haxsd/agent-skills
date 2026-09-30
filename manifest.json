@@ -39,9 +39,9 @@
       "defaultTargets": [
         "codex"
       ],
-      "files": 3,
-      "bytes": 6409,
-      "description": "Use when a high-capability Codex primary should conserve quota by delegating bounded exploration, log analysis, tests, reviews, research, or scoped implementation to DeepSeek Flash, including when native spawning reports \"Unknown model deepseek-flash\"."
+      "files": 4,
+      "bytes": 28016,
+      "description": "Keep the current Codex GPT model as primary and delegate bounded, repetitive analysis or patch proposals to the user's DeepSeek Flash API. Use for quota-conscious task batching, focused reviews, classification, and log summaries when a verified API worker is configured."
     },
     {
       "name": "design",

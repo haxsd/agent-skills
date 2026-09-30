@@ -10,6 +10,7 @@
 - [逐个审查与升级建议](docs/skill-review.md)：36 个库内技能 + 1 个外部接入，每项都有来源定位和验收场景。
 - [合并方案与整改路线](docs/review-roadmap.md)：重叠职责、保留能力、整改顺序和实测边界。
 - [离线工具验证](docs/smoke-results.json) / [静态检查结果](docs/audit-findings.json)。
+- [Codex + DeepSeek API skill](skills/deepseek-subagent-orchestration/SKILL.md) / [真实调用验证](docs/deepseek-validation.json)：主代理保留当前 GPT，小任务走自己的 API。
 
 分类采用逻辑索引，保持 skills/<name>/ 平铺，兼容安装器与现有引用。合并、归档均为审查建议，当前激活集尚未调整。
 
@@ -74,7 +75,7 @@ shared/              共享效率规则
 catalog.json         分类、人工审查与证据
 docs/                分类目录、逐项审查、整改路线与验证记录
 scripts/             仓库级审查与离线验证工具
-tests/               审查工具的标准库测试
+tests/               审查与 API 助手的离线标准库测试
 manifest.json        安装目标与原始归属
 external.json        独立维护的外部技能
 ```

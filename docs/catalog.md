@@ -27,7 +27,7 @@
 | [executing-plans](../skills/executing-plans/SKILL.md) | 启用 | 中 | 规则需改造 | 合并候选 | P1 |
 | [subagent-driven-development](../skills/subagent-driven-development/SKILL.md) | 启用 | 高 | 条件可用 | 合并候选 | P1 |
 | [parallel-agents](../skills/parallel-agents/SKILL.md) | 启用 | 高 | 条件可用 | 升级 | P1 |
-| [deepseek-subagent-orchestration](../skills/deepseek-subagent-orchestration/SKILL.md) | 启用 | 中 | 依赖外部环境 | 升级 | P0 |
+| [deepseek-subagent-orchestration](../skills/deepseek-subagent-orchestration/SKILL.md) | 启用 | 中 | 局部实测可运行 | 保留 | P2 |
 | [best-of-n-solving](../archive/skills/best-of-n-solving/SKILL.md) | 归档 | 低 | 条件可用 | 维持归档 | P2 |
 | [dispatching-parallel-agents](../archive/skills/dispatching-parallel-agents/SKILL.md) | 归档 | 低 | 条件可用 | 维持归档 | P2 |
 | [mcp-builder](../skills/mcp-builder/SKILL.md) | 启用 | 高 | 条件可用 | 保留 | P2 |

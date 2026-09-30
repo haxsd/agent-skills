@@ -1,6 +1,6 @@
 # 审查结论与整改路线
 
-审查日期：2026-09-30；基线：`d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07`。范围为 27 个启用技能与 5 个归档技能；toolkit-map 只审外部登记与本轮接入表现。
+审查日期：2026-09-30；原库基线：`d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07`。原有 27 个启用技能与 5 个归档技能已逐项审查，随后合入 4 项带固定上游版本的精选技能，当前共 31 个启用、5 个归档；toolkit-map 只审外部登记与本轮接入表现。
 
 ## 判断
 
@@ -35,7 +35,7 @@
 | parallel + 归档 best-of-n / dispatching | parallel-agents | 后两者已被 A/B 模式实质覆盖，只补遗漏约束 | 多方案隔离、实际可用角色、预算和成功判据 |
 | design 的 banner/slides + 归档 banner/slides + design-system 的 slide 模块 | design 中单一视觉资产模块 | 模板、尺寸、创建流程与 slide 搜索数据；token 技能只做映射 | 来源署名、截图能力、输出格式区别、实际视觉复核 |
 
-以入口为单位，前四组各减少一个启用入口，再把 using-superpowers 从默认集归档，**27 可收敛为 22 个入口**，能力仍保留。归档模块迁移不计入这个数量；token-efficient-workflow 若转成宿主规则，可再少一个入口。数字是方案结果，不是数量目标。
+以入口为单位，前四组各减少一个启用入口，再把 using-superpowers 从默认集归档，**原 27 可收敛为 22 个入口**；加上 4 个专项新增项，当前 31 可收敛为 26，能力仍保留。归档模块迁移不计入这个数量；token-efficient-workflow 若转成宿主规则，可再少一个入口。数字是方案结果，不是数量目标。
 
 迁移顺序：检查调用者 → 建立/精简权威入口 → 迁移必要参考与署名 → 更新调用者 → 跑契约与真实任务场景 → 更新 manifest/catalog → 旧入口进入 archive。不要直接删除目录，既有安装联接需通过安装器迁移。
 
@@ -48,12 +48,12 @@ LF 规范化字节哈希确认 **6 组**完全相同的跨技能文本：归档 
 ## P0：先恢复可用性
 
 1. **UI/UX 维护链**：test_catalog_refresh 寻找 scripts/refresh-google-fonts.py 与 refresh-icon-catalog.py；test_relevance_evaluator 寻找 scripts/evaluate-relevance.py，三者均未收录。两组测试在模块加载阶段 StopIteration。恢复真实维护脚本并适配目录，或显式拆分维护/运行包；不能通过删除失败测试宣称通过。
-2. **路径解析**：external.json、reverse-skill、token-efficient-workflow 与 DeepSeek fallback 固定旧 Administrator 路径；最后一项在原 README 的“三处绝对路径”统计中遗漏。支持当前用户/显式配置、确认依赖路径与版本。不要换成新的用户名硬编码。
+2. **路径解析**：external.json、reverse-skill、token-efficient-workflow 仍固定旧 Administrator 路径。DeepSeek 的旧 fallback 同样有此问题，现已替换为按当前用户/显式配置定位的 API helper，不再依赖模型目录或 rtk。
 3. **失效引用**：UI/UX Quick Reference §1–§9 不存在；requirement-understanding 指向不默认安装的 ask-questions；design/banner 指向未收录技能。明确可选、必需与替代路径。
 4. **graphify 接口与环境**：将 Bash 临时流程整理成跨平台工具；避免系统 Python 强制安装；按实际代理 schema 执行，不使用旧版 close_agent / handle 约定。记录 graphifyy 包版本和源文件 freshness，图文件存在不证明图有效。
 5. **视觉工具适配**：Gemini、浏览器截图和缺失技能需有实际可用性预检。模型 ID 与平台规格在执行时核验，提供明确失败与替代路径；本轮未调用付费模型，不宣称生成 API 可用。
 
-本轮已修复数据换行哈希失配与 token-efficient-workflow UI 元数据结构。其他 P0 是后续明确工作，没有在分类审查中替换整个技能行为。
+本轮已修复数据换行哈希失配、token-efficient-workflow UI 元数据结构，并按用户追加请求实质升级 DeepSeek 专属 skill。其他 P0 保留为后续工作。
 
 ## P1：控制误触发、冲突与成本
 
@@ -84,30 +84,34 @@ LF 规范化字节哈希确认 **6 组**完全相同的跨技能文本：归档 
 ## 本轮改动
 
 - README 改为导航；原历史与换机记录完整保存到 repository-history.md。
-- catalog.json 对 33 个条目七类整理；派生目录和逐项审查都有证据路径与行号。
+- catalog.json 对 37 个条目八类整理（原有 33 项 + 精选新增 4 项）；派生目录和逐项审查都有证据路径与行号。
 - audit 脚本和 5 个标准库测试检查覆盖、证据、入口长度、历史缓存差异与文本重复，不执行技能。
 - smoke 脚本在临时项目运行 10 个离线检查；无外部 API 调用。
 - .gitattributes 固定 UI/UX 数据 LF；4 个文件恢复 LF 后**全部匹配原有 SHA-256**，未改摘要或 verifiedAt，没有伪造刷新日期。
 - token-efficient-workflow UI 字段放入 interface，缩短描述并明确 `$token-efficient-workflow`。
-- 未移动 skill、修改激活集、接管本机安装联接、调用付费供应商或合并默认分支。
+- DeepSeek skill 改为标准库直接 API 助手：只读上下文、并发小任务、输入/输出预算、凭据保护、真实用量与明确失败状态。已在本机安装，并按用户要求在 Codex 全局 AGENTS.md 写入适用 skill、工具地图和 DeepSeek 调用规则。
+- 合入另一位 agent 已提交的 4 个精选入口，当前 31 个启用、5 个归档、1 个外部登记。没有实施合并/归档建议，也没有合并默认分支；并行工作停止后完成统一收尾。
 
 ## 实测记录与边界
 
 | 检查 | 结果 | 覆盖与限制 |
 |---|---|---|
 | 仓库 audit 自有测试 | 5/5 通过 | 遗漏技能、证据失效、项目产物不误报硬错误、CRLF/LF 重复识别 |
-| 离线 smoke | 10/10 通过 | 35 个库内 Python 语法、数据校验、四类检索、品牌同步、token 生成/混合行回归、Tailwind JS 输出语法 |
+| 离线 smoke | 10/10 通过 | 42 个库内 Python 语法、数据校验、四类检索、品牌同步、token 生成/混合行回归、Tailwind JS 输出语法 |
 | UI/UX 数据校验初始 | 4 项哈希失配 | raw hash 不符，全部 LF 后匹配原摘要 |
 | UI/UX 数据校验修复后 | 通过 | 12 个 domain、22 个 stack 与 reasoning；不证明线上源刷新 |
 | UI/UX unittest 初始 | 132 个结果中 1 failure + 2 errors | 哈希测试失败；两组模块缺维护脚本无法加载 |
 | UI/UX unittest 修复后 | 130 个可加载测试通过，2 个模块加载错误仍在 | 仍为 FAILED(errors=2)，不能称全量通过；无法启动的模块各自可能有多个内部用例 |
 | pytest 系测试 | 未跑完整 suite | 当前 Python 无 pytest，未安装依赖；brand/validator 核心回归由 smoke 重现，ui-styling 全部 pytest 未跑 |
 | 安装器 DryRun | 返回 0，显示 1 个外部源缺失 | 两个指定 skill 到 codex；未真实安装/卸载，退出 0 不证明全环境可安装 |
-| API/图像/真代理任务 | 未运行 | 未核实供应商实时 alias、配额、网络结果，未做付费行为评估 |
+| DeepSeek API 助手 | probe + 2 个并发任务成功 | 返回 deepseek-flash；Windows DPAPI；两任务合计 10080 token、约 6 秒；源码 review 和 skill 场景结果经主代理复核，未做 GPT 成本/速度对照 |
+| DeepSeek 离线测试 | 11/11 通过 | HTTP 契约、精确片段、预算/密钥/路径预检、截断、错误不重试、401/403 停止未启动任务、模型拒绝、并发与 DPAPI |
+| skill-creator quick_validate | 未完成 | 当前 Python 缺少 PyYAML，未为了静态校验安装第三方依赖；入口约束与引用另外核对，不宣称完整 YAML 校验 |
+| 其他 API/图像/图谱任务 | 未运行 | 其他技能的供应商、图像输出与图谱构建仍未实测 |
 
 smoke 使用 Python 3.12.14、Node 16.20.2。Node 16 只用于本轮本地脚本，不是对现代 UI 工具链版本要求的建议。机器路径来自运行时与 toolkit-map；后者误把商店别名列为有效 Python 首选，本轮使用已登记的真实 Python 候选。
 
-结果见 [smoke-results.json](smoke-results.json)、[audit-findings.json](audit-findings.json)。warning/hint 对历史缓存、入口长度和引用线索提供人工检查提示，不作为新错误或完整行为证明。
+结果见 [smoke-results.json](smoke-results.json)、[audit-findings.json](audit-findings.json)、[deepseek-validation.json](deepseek-validation.json)。warning/hint 对历史缓存、入口长度和引用线索提供人工检查提示，不作为新错误或完整行为证明。
 
 ## 依据
 

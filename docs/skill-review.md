@@ -211,35 +211,35 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 ## 07. deepseek-subagent-orchestration
 
-实现与代理编排 · 启用 · 价值：中 · 依赖外部环境 · P0 · 升级
+实现与代理编排 · 启用 · 价值：中 · 局部实测可运行 · P2 · 保留
 
-有明确的供应商与额度需求时有价值；需先修配置路径与能力探测。
+已升级并实测：GPT 主代理保持当前模型，独立小任务通过用户自己的 deepseek-flash API 完成。
 
-**真正的增益**：区分宿主模型拒绝和供应商鉴权/额度失败；固定一次失败后的 CLI 降级和紧凑交接契约。
+**真正的增益**：标准库 API 批处理避开宿主模型白名单；最少上下文、只读片段、DPAPI 凭据、预算与真实用量形成可验收的供应商适配。
 
-**体量**：入口 67 行 / 3,716 字节（LF）；整个目录 3 个文件 / 6,432 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+**体量**：入口 63 行 / 3,883 字节（LF）；整个目录 4 个文件 / 28,016 规范化字节；生产 scripts 文件 1，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
 
 **问题与限制**
 
-- fallback 固定引用 Administrator 账户下模型目录，本仓库未包含该配置。
-- native explorer / worker / deepseek_worker 角色和 deepseek-flash 别名依赖用户宿主，不是通用可用能力。
-- 无条件 aggressively delegate 可能把小任务变成调度开销；rtk 是额外依赖。
+- 助手没有 shell/MCP/文件修改工具；测试与建议落地需要主代理执行。
+- 连通及并发实测不等于已证明整项任务节省 GPT token 或提高速度；第三方 API 仍独立计费。
 
 **优化方案**
 
-- 用当前用户或显式环境变量定位配置，不读取或回显密钥。
-- 先检测允许的模型和角色；路由策略与 parallel-agents 共用，供应商适配独立。
-- 只在已有委派授权和具体额度目标下调用第三方供应商。
+- 用真实重复任务比较派发、结果复核与直接执行的总成本和耗时。
+- 滚动别名升级时复核返回型号；其他机器自行配置凭据，不复制本机加密文件。
 
 **升级后的验收场景（尚未全量执行）**
 
-- 无 DeepSeek 配置时解释依赖，不修改主线程供应商。
-- 本地模型拒绝只触发一次降级，401/429 不被误判为宿主问题。
+- 两项独立分析通过自有 API 并发完成，主代理设置不变、源文件不被助手修改。
+- 含密钥、越界文件或超预算任务在请求前被拒绝；401/403 后停止未启动任务。
 
 **来源定位**
 
-- [skills/deepseek-subagent-orchestration/references/codex-cli-fallback.md:15](../skills/deepseek-subagent-orchestration/references/codex-cli-fallback.md#L15)：`C:/Users/Administrator/.codex/deepseek-models.json`
-- [skills/deepseek-subagent-orchestration/SKILL.md:28](../skills/deepseek-subagent-orchestration/SKILL.md#L28)：`Delegate aggressively`
+- [skills/deepseek-subagent-orchestration/SKILL.md:8](../skills/deepseek-subagent-orchestration/SKILL.md#L8)：`Keep the current conversation's model, provider, and reasoning settings unchanged.`
+- [skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py:274](../skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py#L274)：`Batch stopped after authentication failure`
+- [skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py:211](../skills/deepseek-subagent-orchestration/scripts/deepseek_worker.py#L211)：`Possible credential in job context`
+- [docs/deepseek-validation.json:14](../docs/deepseek-validation.json#L14)：`total_tokens`
 
 ## 08. env-doctor
 
