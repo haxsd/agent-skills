@@ -1,0 +1,13 @@
+{
+  "name": "webapp-testing",
+  "repository": "https://github.com/anthropics/skills",
+  "commit": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+  "path": "skills/webapp-testing",
+  "license": "Apache-2.0",
+  "retrievedAt": "2026-09-30",
+  "modifications": [
+    "Replace universal networkidle/fixed-timeout guidance with observable UI state waits.",
+    "Document relative paths, host browser rules and unverified Windows process-tree cleanup."
+  ],
+  "validation": "Content review, resource completeness and Python syntax only; no paid API or database/browser task executed."
+}

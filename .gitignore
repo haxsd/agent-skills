@@ -23,3 +23,11 @@ graphify-out/
 
 # PowerShell 5.1 在 USERPROFILE 被改写时的模块分析残留
 Microsoft/Windows/PowerShell/
+
+# Local API credentials and job artifacts
+.env
+.env.*
+!.env.example
+*.dpapi
+deepseek-worker.json
+.deepseek-jobs/

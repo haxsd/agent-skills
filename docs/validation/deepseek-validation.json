@@ -1,0 +1,94 @@
+{
+  "checkedAt": "2026-09-30",
+  "provider": "https://api.deepseek.com",
+  "requestedModel": "deepseek-flash",
+  "credentialStorage": "Windows current-user DPAPI outside repository",
+  "primaryModelConfiguration": "unchanged; helper does not access Codex config.toml",
+  "probe": {
+    "status": "completed",
+    "returnedModel": "deepseek-flash",
+    "elapsedSeconds": 0.625,
+    "usage": {
+      "prompt_tokens": 166,
+      "completion_tokens": 21,
+      "total_tokens": 187
+    }
+  },
+  "concurrentBatch": {
+    "status": "completed",
+    "concurrency": 2,
+    "elapsedSeconds": 5.797,
+    "jobs": [
+      {
+        "id": "worker-review",
+        "status": "completed",
+        "requested_model": "deepseek-flash",
+        "input_chars": 20067,
+        "model": "deepseek-flash",
+        "usage": {
+          "prompt_tokens": 5376,
+          "completion_tokens": 1167,
+          "total_tokens": 6543,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 5248
+        },
+        "finish_reason": "stop",
+        "elapsed_seconds": 5.14,
+        "artifact": "worker-review.json"
+      },
+      {
+        "id": "skill-scenario",
+        "status": "completed",
+        "requested_model": "deepseek-flash",
+        "input_chars": 10005,
+        "model": "deepseek-flash",
+        "usage": {
+          "prompt_tokens": 2584,
+          "completion_tokens": 953,
+          "total_tokens": 3537,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 2456
+        },
+        "finish_reason": "stop",
+        "elapsed_seconds": 5.797,
+        "artifact": "skill-scenario.json"
+      }
+    ],
+    "total_tokens": 10080
+  },
+  "primaryReview": [
+    "Independent code review reported no proven defect; its broad confidence is not treated as proof.",
+    "Primary review added strict response-model acceptance and bounded submission after 401/403.",
+    "Scenario exercise kept GPT primary, excluded key material, stopped on 401, and assigned execution to primary.",
+    "Final behavior checked by 11 offline worker tests including these two additions."
+  ],
+  "localSetup": {
+    "skillInstalled": true,
+    "globalRulesWritten": true,
+    "rulesLoadedInCurrentConversation": true
+  },
+  "validation": {
+    "offlineWorkerTests": {
+      "passed": 11,
+      "failed": 0
+    },
+    "repositoryAuditTests": {
+      "passed": 6,
+      "failed": 0
+    },
+    "skillCreatorQuickValidate": "not completed: bundled Python has no PyYAML; no dependencies installed"
+  },
+  "limits": [
+    "The live batch exercised the API route and initial worker implementation; final scheduler/model checks were tested offline.",
+    "No comparative GPT-token, monetary-cost, or task-latency benchmark; savings and acceleration are not guaranteed.",
+    "Workers produce analysis/proposals only; no shell, browser, MCP, or file editing tools.",
+    "Native Codex subagent roles were not configured or used; this is an external API worker.",
+    "The repository contains neither the actual API key nor encrypted credential file."
+  ]
+}
