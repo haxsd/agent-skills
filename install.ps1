@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   agent-skills 安装器：把本仓库的 skill 以「目录联接（junction）」挂进各 agent 的技能目录。
 
@@ -53,6 +53,16 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
+# Windows PowerShell 5.1 默认按 ANSI 代码页写非 ASCII 输出（中文机器上是 GBK），
+# 按 UTF-8 捕获输出的调用方（CI、tests/test_install.py、agent）会解码失败。
+# pwsh 7 默认已是 UTF-8，这里是幂等的显式声明；无控制台句柄时忽略即可。
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch { }
+
+# -File 调用（cmd、CI、agent 起新进程）时 "a,b,c" 会作为单个字符串传进来，
+# 命令行并不做逗号切分；会话内调用才会得到真正的数组。这里把两种都归一成数组，
+# 否则多值 -Only 只在交互式会话里能用。
+$Only = @($Only | ForEach-Object { $_ -split ',' } | Where-Object { $_ })
+
 $RepoRoot     = $PSScriptRoot
 $SkillsRoot   = Join-Path $RepoRoot 'skills'
 $ManifestPath = Join-Path $RepoRoot 'manifest.json'
@@ -79,7 +89,9 @@ $UniversalTargets = @('agents', 'cursor', 'devin', 'claude')
 # ~/tools/shared 被 skill 正文当作权威来源引用，同样用联接接管。
 $SharedDst = Join-Path $env:USERPROFILE 'tools\shared'
 
-$Manifest = Get-Content $ManifestPath -Raw | ConvertFrom-Json
+# -Encoding UTF8 是必需的：Windows PowerShell 5.1 在无 BOM 时按 ANSI 代码页读取，
+# 会把 manifest/external 里的中文解码成乱码，导致 ConvertFrom-Json 直接失败。
+$Manifest = Get-Content $ManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $SkillMap = @{}
 foreach ($entry in $Manifest.skills) { $SkillMap[$entry.name] = $entry }
 
@@ -87,7 +99,13 @@ $names = @(Get-ChildItem -LiteralPath $SkillsRoot -Directory | Select-Object -Ex
 $ExternalPath = Join-Path $RepoRoot 'external.json'
 $externals = @()
 if (Test-Path -LiteralPath $ExternalPath) {
-  $externals = @(Get-Content -LiteralPath $ExternalPath -Raw | ConvertFrom-Json | Where-Object { $_.name -and $_.path })
+  # 不能用管道接 ConvertFrom-Json：Windows PowerShell 5.1 的 ConvertFrom-Json 不展开
+  # JSON 数组，管道里是一个嵌套 Object[]，Where-Object 与 Select-Object -ExpandProperty
+  # 都拿不到 name/path。foreach 在 5.1 与 pwsh 7 上都逐项枚举。
+  $parsedExternals = Get-Content -LiteralPath $ExternalPath -Raw -Encoding UTF8 | ConvertFrom-Json
+  foreach ($entry in $parsedExternals) {
+    if ($entry.name -and $entry.path) { $externals += $entry }
+  }
 }
 if ($Only) {
   $known = @($names) + @($externals | Select-Object -ExpandProperty name)
