@@ -53,3 +53,13 @@ jobs:
           $node = (Get-Command node -CommandType Application | Select-Object -First 1).Source
           & $python scripts/smoke_skills.py --node $node
           exit $LASTEXITCODE
+      # 上面的步骤只覆盖 pwsh 7。没有 pwsh 的 Windows 机器默认用 Windows PowerShell 5.1
+      # 执行 install.ps1，其编码与 ConvertFrom-Json 数组语义都不同，因此单独跑一次安装器回归。
+      - name: Installer regression on Windows PowerShell 5.1
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $python = '${{ steps.python.outputs.python-path }}'
+          $env:TEST_POWERSHELL = (Get-Process -Id $PID).Path
+          & $python -m unittest discover -s tests -p 'test_install.py' -v
+          exit $LASTEXITCODE
