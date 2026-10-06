@@ -1,8 +1,8 @@
 # 逐项价值与升级审查
 
-审查日期：2026-09-30。基线提交：`d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07`。
+审查日期：2026-10-06。基线提交：`d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07`。
 
-31 个启用和 5 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。
+35 个启用和 5 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。
 toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完的内容。合并判断基于职责、输入输出和实质内容，不以同名或文字相似率定论。
 
 **评分尺度**：高＝有非显然方法、可复用工具/数据或可验证操作约束；中＝有帮助但偏通用、依赖环境或流程偏重；低＝缺少独立产出、被现有入口覆盖或主要重复宿主规则。
@@ -1188,6 +1188,108 @@ Postgres 查询、索引、连接池、锁、schema 与 RLS 的具体规则和 S
 
 - [skills/property-based-testing/SKILL.md:2](../../skills/property-based-testing/SKILL.md#L2)：`name: property-based-testing`
 - [skills/property-based-testing/UPSTREAM.json:4](../../skills/property-based-testing/UPSTREAM.json#L4)：`82fe8226252622fa807643bdca1710901198553a`
+
+## 38. development-workflow
+
+实现与代理编排 · 启用 · 价值：中 · 条件可用 · P1 · 保留
+
+统一计划、实施、验证与交付，取代本机多个重复流程入口。
+
+**真正的增益**：统一计划、实施、验证与交付，取代本机多个重复流程入口。
+
+**体量**：入口 29 行 / 2,108 字节（LF）；整个目录 1 个文件 / 2,108 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+
+**优化方案**
+
+- 按实际使用反馈维护，避免扩大自动触发范围。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 检查入口与资源完整性，专项运行能力按实际任务验证。
+
+**来源定位**
+
+- [skills/development-workflow/SKILL.md:2](../../skills/development-workflow/SKILL.md#L2)：`name: development-workflow`
+
+## 39. code-review
+
+质量、调试与审查 · 启用 · 价值：中 · 条件可用 · P1 · 保留
+
+统一发起审查与处理反馈，按实际风险核验。
+
+**真正的增益**：统一发起审查与处理反馈，按实际风险核验。
+
+**体量**：入口 21 行 / 1,298 字节（LF）；整个目录 1 个文件 / 1,298 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+
+**优化方案**
+
+- 按实际使用反馈维护，避免扩大自动触发范围。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 检查入口与资源完整性，专项运行能力按实际任务验证。
+
+**来源定位**
+
+- [skills/code-review/SKILL.md:2](../../skills/code-review/SKILL.md#L2)：`name: code-review`
+
+## 40. deepseek-subagents
+
+实现与代理编排 · 启用 · 价值：高 · 条件可用 · P1 · 保留
+
+Codex CLI 执行型 DeepSeek 子代理，提供清单校验、进程调度与测试。
+
+**真正的增益**：Codex CLI 执行型 DeepSeek 子代理，提供清单校验、进程调度与测试。
+
+**体量**：入口 44 行 / 5,057 字节（LF）；整个目录 5 个文件 / 37,430 规范化字节；生产 scripts 文件 1，Python 测试文件 1。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+- 需要本机 Codex CLI、DeepSeek 凭据和账户配置；仓库不包含凭据。
+
+**优化方案**
+
+- 按实际使用反馈维护，避免扩大自动触发范围。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 检查入口与资源完整性，专项运行能力按实际任务验证。
+
+**来源定位**
+
+- [skills/deepseek-subagents/SKILL.md:2](../../skills/deepseek-subagents/SKILL.md#L2)：`name: deepseek-subagents`
+
+## 41. web-design-guidelines
+
+品牌、设计与 UI · 启用 · 价值：中 · 条件可用 · P1 · 保留
+
+按远程维护的界面规范执行专项设计审查。
+
+**真正的增益**：按远程维护的界面规范执行专项设计审查。
+
+**体量**：入口 39 行 / 1,231 字节（LF）；整个目录 1 个文件 / 1,231 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+- 需要联网取得当前规范，来源许可需单独确认；保持仓库私有。
+
+**优化方案**
+
+- 按实际使用反馈维护，避免扩大自动触发范围。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 检查入口与资源完整性，专项运行能力按实际任务验证。
+
+**来源定位**
+
+- [skills/web-design-guidelines/SKILL.md:2](../../skills/web-design-guidelines/SKILL.md#L2)：`name: web-design-guidelines`
 
 ## 完全重复的文本资源
 

@@ -1,6 +1,6 @@
 # agent-skills
 
-我们的 agent 技能收藏与维护仓库：**31 个启用技能 · 5 个归档技能 · 8 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
+我们的 agent 技能收藏与维护仓库：**35 个启用技能 · 5 个归档技能 · 8 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
 
 [分类目录](docs/catalog.md) · [安装指南](docs/guides/installation.md) · [逐项审查](docs/reviews/skill-review.md) · [整改路线](docs/reviews/roadmap.md) · [全部文档](docs/README.md)
 

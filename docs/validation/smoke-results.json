@@ -1,14 +1,14 @@
 {
   "reviewedAt": "2026-09-30",
-  "pythonVersion": "3.12.14",
-  "nodeVersion": "v16.20.2",
+  "pythonVersion": "3.12.10",
+  "nodeVersion": "v24.19.0",
   "scope": "Offline smoke checks only; all generated project files are temporary. No external API or agent behavioral benchmark.",
   "results": [
     {
       "name": "Python syntax",
       "status": "pass",
       "evidence": {
-        "pythonFilesParsed": 42,
+        "pythonFilesParsed": 45,
         "scope": "syntax only; imports and external APIs not exercised"
       }
     },

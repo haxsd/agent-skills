@@ -13,3 +13,5 @@
 原有技能的市场对应关系、来源判断与历史许可限制完整保存在 [署名历史快照](docs/history/attribution-snapshot-2026-09-30.md)。市场中存在同名条目不代表同一作者或同一版本；原有内容的许可未全部重新核验，仓库保持私有。
 
 安全研究技能只在用户已授权的目标和范围内使用；具体依赖与使用边界见对应 skill。归档目录里的规则和草稿不自动安装。
+
+2026-10-06：新增本机自有 development-workflow、code-review、deepseek-subagents；web-design-guidelines 保留原 Vercel 作者元数据，规范源为 https://github.com/vercel-labs/web-interface-guidelines ，尚未重新核验其分发许可，不改变仓库私有状态。

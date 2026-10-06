@@ -1,8 +1,8 @@
 {
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
-  "reviewedAt": "2026-09-30",
+  "reviewedAt": "2026-10-06",
   "counts": {
-    "active": 31,
+    "active": 35,
     "archived": 5,
     "external": 1
   },
@@ -895,6 +895,82 @@
           "path": "skills/property-based-testing/UPSTREAM.json",
           "line": 4,
           "text": "82fe8226252622fa807643bdca1710901198553a"
+        }
+      ]
+    },
+    {
+      "name": "development-workflow",
+      "state": "active",
+      "path": "skills/development-workflow/SKILL.md",
+      "lines": 29,
+      "entryBytesLF": 2108,
+      "entrySha256LF": "55d8115c87dad9c379c134ab1282d163defb4744cc086272ed5959a8a5e18be1",
+      "files": 1,
+      "bytes": 2108,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/development-workflow/SKILL.md",
+          "line": 2,
+          "text": "name: development-workflow"
+        }
+      ]
+    },
+    {
+      "name": "code-review",
+      "state": "active",
+      "path": "skills/code-review/SKILL.md",
+      "lines": 21,
+      "entryBytesLF": 1298,
+      "entrySha256LF": "7ea0ddcce4c9c516635c664d804b39f05f6da7319a24098dbba9d169bf6459e5",
+      "files": 1,
+      "bytes": 1298,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/code-review/SKILL.md",
+          "line": 2,
+          "text": "name: code-review"
+        }
+      ]
+    },
+    {
+      "name": "deepseek-subagents",
+      "state": "active",
+      "path": "skills/deepseek-subagents/SKILL.md",
+      "lines": 44,
+      "entryBytesLF": 5057,
+      "entrySha256LF": "8b4eb301733ceef025d7ca2715448e5ed188fe3cbc00d342893fbed8d06ef1bc",
+      "files": 5,
+      "bytes": 37430,
+      "scriptFiles": 1,
+      "testFiles": 1,
+      "evidence": [
+        {
+          "path": "skills/deepseek-subagents/SKILL.md",
+          "line": 2,
+          "text": "name: deepseek-subagents"
+        }
+      ]
+    },
+    {
+      "name": "web-design-guidelines",
+      "state": "active",
+      "path": "skills/web-design-guidelines/SKILL.md",
+      "lines": 39,
+      "entryBytesLF": 1231,
+      "entrySha256LF": "f4647ca866a3accf763777f83e7682954f0187cd6bea7eea0399796652414e8f",
+      "files": 1,
+      "bytes": 1231,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/web-design-guidelines/SKILL.md",
+          "line": 2,
+          "text": "name: web-design-guidelines"
         }
       ]
     }
