@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-09-30",
+  "reviewedAt": "2026-10-06",
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
-  "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。",
+  "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -1379,6 +1379,110 @@
         {
           "file": "UPSTREAM.json",
           "text": "82fe8226252622fa807643bdca1710901198553a"
+        }
+      ]
+    },
+    {
+      "name": "development-workflow",
+      "category": "implementation-orchestration",
+      "state": "active",
+      "value": "medium",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "统一计划、实施、验证与交付，取代本机多个重复流程入口。",
+      "uniqueValue": "统一计划、实施、验证与交付，取代本机多个重复流程入口。",
+      "issues": [],
+      "improvements": [
+        "按实际使用反馈维护，避免扩大自动触发范围。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "检查入口与资源完整性，专项运行能力按实际任务验证。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: development-workflow"
+        }
+      ]
+    },
+    {
+      "name": "code-review",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "medium",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "统一发起审查与处理反馈，按实际风险核验。",
+      "uniqueValue": "统一发起审查与处理反馈，按实际风险核验。",
+      "issues": [],
+      "improvements": [
+        "按实际使用反馈维护，避免扩大自动触发范围。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "检查入口与资源完整性，专项运行能力按实际任务验证。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: code-review"
+        }
+      ]
+    },
+    {
+      "name": "deepseek-subagents",
+      "category": "implementation-orchestration",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "Codex CLI 执行型 DeepSeek 子代理，提供清单校验、进程调度与测试。",
+      "uniqueValue": "Codex CLI 执行型 DeepSeek 子代理，提供清单校验、进程调度与测试。",
+      "issues": [
+        "需要本机 Codex CLI、DeepSeek 凭据和账户配置；仓库不包含凭据。"
+      ],
+      "improvements": [
+        "按实际使用反馈维护，避免扩大自动触发范围。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "检查入口与资源完整性，专项运行能力按实际任务验证。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: deepseek-subagents"
+        }
+      ]
+    },
+    {
+      "name": "web-design-guidelines",
+      "category": "design",
+      "state": "active",
+      "value": "medium",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "按远程维护的界面规范执行专项设计审查。",
+      "uniqueValue": "按远程维护的界面规范执行专项设计审查。",
+      "issues": [
+        "需要联网取得当前规范，来源许可需单独确认；保持仓库私有。"
+      ],
+      "improvements": [
+        "按实际使用反馈维护，避免扩大自动触发范围。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "检查入口与资源完整性，专项运行能力按实际任务验证。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: web-design-guidelines"
         }
       ]
     }

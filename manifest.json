@@ -218,6 +218,34 @@
       "defaultTargets": [
         "agents"
       ]
+    },
+    {
+      "name": "development-workflow",
+      "origin": "codex",
+      "defaultTargets": [
+        "codex"
+      ]
+    },
+    {
+      "name": "code-review",
+      "origin": "codex",
+      "defaultTargets": [
+        "codex"
+      ]
+    },
+    {
+      "name": "deepseek-subagents",
+      "origin": "codex",
+      "defaultTargets": [
+        "codex"
+      ]
+    },
+    {
+      "name": "web-design-guidelines",
+      "origin": "codex",
+      "defaultTargets": [
+        "codex"
+      ]
     }
   ]
 }
