@@ -1,0 +1,17 @@
+{
+  "name": "podcast-to-article",
+  "repository": "https://github.com/orange2ai/podcast-to-article",
+  "commit": "efc43919962e8356058057c4b5fd32c57876e6b7",
+  "path": ".",
+  "license": "MIT",
+  "author": "冯雷 (MarsWave)",
+  "retrievedAt": "2026-10-09",
+  "modifications": [
+    "Add Windows stdout/stderr UTF-8 reconfigure in prep_transcript.py and check_style.py.",
+    "Document python and python3 invocation; note Windows often ships python only.",
+    "Add Codex + DeepSeek (ds / deepseek-flash) collaboration notes: draft long sections with ds, main agent verifies against the transcript.",
+    "Omit non-functional marketing cover assets under assets/ to keep the skill package lean.",
+    "Align frontmatter with this repository (license field); classify under writing-content in catalog.json."
+  ],
+  "validation": "Python AST, scripts --help, sample SRT smoke for prep_transcript, check_style on a short fixture; no end-to-end podcast-to-article run claimed."
+}

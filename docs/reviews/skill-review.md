@@ -1,8 +1,8 @@
 # 逐项价值与升级审查
 
-审查日期：2026-10-06。基线提交：`d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07`。
+审查日期：2026-10-09。基线提交：`d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07`。
 
-35 个启用和 5 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。
+37 个启用和 5 个归档 SKILL.md 已逐一通读；关键脚本、参考和现有测试按风险抽查，未穷尽执行所有资源。
 toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完的内容。合并判断基于职责、输入输出和实质内容，不以同名或文字相似率定论。
 
 **评分尺度**：高＝有非显然方法、可复用工具/数据或可验证操作约束；中＝有帮助但偏通用、依赖环境或流程偏重；低＝缺少独立产出、被现有入口覆盖或主要重复宿主规则。
@@ -1290,6 +1290,63 @@ Codex CLI 执行型 DeepSeek 子代理，提供清单校验、进程调度与测
 **来源定位**
 
 - [skills/web-design-guidelines/SKILL.md:2](../../skills/web-design-guidelines/SKILL.md#L2)：`name: web-design-guidelines`
+
+## 42. podcast-to-article
+
+写作与内容 · 启用 · 价值：高 · 条件可用 · P2 · 保留
+
+把播客/访谈逐字稿整理成实录长文，附清稿与 AI 味自检脚本。
+
+**真正的增益**：换轴流程（清稿→要点→主线→原文成文→人名→精简→自检）和可运行的 prep/check 脚本；不是通用写作模板。
+
+**体量**：入口 243 行 / 17,651 字节（LF）；整个目录 7 个文件 / 54,981 规范化字节；生产 scripts 文件 2，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+- 成稿质量依赖主代理按逐字稿核实；脚本只能抓字面 AI 痕迹，不能证明事实正确。
+- 未收录上游 cover assets；英文稿翻译策略仍靠人工把关。
+
+**优化方案**
+
+- 按真实逐字稿抽样验收；更新时对照 UPSTREAM.json 的固定提交与本地修改。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 用户丢来一期 SRT，要求整理成可发的实录长文，并跑 check_style 自检。
+
+**来源定位**
+
+- [skills/podcast-to-article/SKILL.md:2](../../skills/podcast-to-article/SKILL.md#L2)：`name: podcast-to-article`
+- [skills/podcast-to-article/UPSTREAM.json:4](../../skills/podcast-to-article/UPSTREAM.json#L4)：`efc43919962e8356058057c4b5fd32c57876e6b7`
+
+## 43. excalidraw-diagrams
+
+品牌、设计与 UI · 启用 · 价值：高 · 条件可用 · P2 · 保留
+
+用官方 @excalidraw/cli 本地把 .excalidraw JSON 渲成 PNG；教最小元素与中文 fontFamily 5。
+
+**真正的增益**：可版本管理的结构化示意图路径；默认关闭 workspace API，与海报/艺术类 skill 分工明确。
+
+**体量**：入口 123 行 / 5,424 字节（LF）；整个目录 4 个文件 / 10,525 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+
+**问题与限制**
+
+- 需要 Node.js 22+ 与本机浏览器；CLI 不下载浏览器。
+- 复杂图坐标易重叠，需渲染后目视检查 PNG。
+
+**优化方案**
+
+- 保持只文档化本地 render；CLI 大版本升级时核对 UPSTREAM.json 参考 commit。
+
+**升级后的验收场景（尚未全量执行）**
+
+- 画一张两服务加箭头的架构图，中文标签用 fontFamily 5，渲成 PNG。
+
+**来源定位**
+
+- [skills/excalidraw-diagrams/SKILL.md:2](../../skills/excalidraw-diagrams/SKILL.md#L2)：`name: excalidraw-diagrams`
+- [skills/excalidraw-diagrams/UPSTREAM.json:5](../../skills/excalidraw-diagrams/UPSTREAM.json#L5)：`55fe7f494837078781a062c4d3faf29c159ebec5`
+- [skills/excalidraw-diagrams/references/minimal-scene.json:61](../../skills/excalidraw-diagrams/references/minimal-scene.json#L61)：`"fontFamily": 5`
 
 ## 完全重复的文本资源
 

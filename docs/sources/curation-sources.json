@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-09-30",
+  "reviewedAt": "2026-10-09",
   "skills": [
     {
       "name": "webapp-testing",
@@ -47,6 +47,35 @@
       "retrievedAt": "2026-09-30",
       "modifications": [],
       "validation": "Content review, resource completeness and Python syntax only; no paid API or database/browser task executed."
+    },
+    {
+      "name": "podcast-to-article",
+      "repository": "https://github.com/orange2ai/podcast-to-article",
+      "commit": "efc43919962e8356058057c4b5fd32c57876e6b7",
+      "path": ".",
+      "license": "MIT",
+      "retrievedAt": "2026-10-09",
+      "modifications": [
+        "Add Windows stdout/stderr UTF-8 reconfigure in prep_transcript.py and check_style.py.",
+        "Document python and python3 invocation.",
+        "Add Codex + DeepSeek (ds / deepseek-flash) collaboration notes.",
+        "Omit non-functional marketing cover assets under assets/."
+      ],
+      "validation": "Python AST, scripts --help, sample SRT smoke; no end-to-end article run claimed."
+    },
+    {
+      "name": "excalidraw-diagrams",
+      "repository": "https://github.com/excalidraw/cli",
+      "commit": "55fe7f494837078781a062c4d3faf29c159ebec5",
+      "path": "(wrapper skill; CLI not vendored)",
+      "license": "MIT",
+      "retrievedAt": "2026-10-09",
+      "modifications": [
+        "Skill text authored in this repository; documents local render only.",
+        "Teaches minimal element JSON with fontFamily 5 for CJK.",
+        "Workspace API left off by default."
+      ],
+      "validation": "CLI --help; optional local render smoke of references/minimal-scene.json; workspace API not exercised."
     }
   ]
 }

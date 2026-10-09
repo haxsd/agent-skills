@@ -1,0 +1,6 @@
+本 skill（excalidraw-diagrams）文本由 haxsd/agent-skills 维护。
+
+运行时依赖的官方 CLI @excalidraw/cli 为 MIT 许可，版权归 Excalidraw：
+https://github.com/excalidraw/cli
+
+本 skill 不包含 CLI 源码；安装与渲染请直接使用 npm / npx 拉取官方包。

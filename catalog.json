@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-06",
+  "reviewedAt": "2026-10-09",
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
-  "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。",
+  "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -23,6 +23,10 @@
     {
       "id": "design",
       "title": "品牌、设计与 UI"
+    },
+    {
+      "id": "writing-content",
+      "title": "写作与内容"
     },
     {
       "id": "knowledge-security",
@@ -1483,6 +1487,74 @@
         {
           "file": "SKILL.md",
           "text": "name: web-design-guidelines"
+        }
+      ]
+    },
+    {
+      "name": "podcast-to-article",
+      "category": "writing-content",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "把播客/访谈逐字稿整理成实录长文，附清稿与 AI 味自检脚本。",
+      "uniqueValue": "换轴流程（清稿→要点→主线→原文成文→人名→精简→自检）和可运行的 prep/check 脚本；不是通用写作模板。",
+      "issues": [
+        "成稿质量依赖主代理按逐字稿核实；脚本只能抓字面 AI 痕迹，不能证明事实正确。",
+        "未收录上游 cover assets；英文稿翻译策略仍靠人工把关。"
+      ],
+      "improvements": [
+        "按真实逐字稿抽样验收；更新时对照 UPSTREAM.json 的固定提交与本地修改。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "用户丢来一期 SRT，要求整理成可发的实录长文，并跑 check_style 自检。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: podcast-to-article"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "efc43919962e8356058057c4b5fd32c57876e6b7"
+        }
+      ]
+    },
+    {
+      "name": "excalidraw-diagrams",
+      "category": "design",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "用官方 @excalidraw/cli 本地把 .excalidraw JSON 渲成 PNG；教最小元素与中文 fontFamily 5。",
+      "uniqueValue": "可版本管理的结构化示意图路径；默认关闭 workspace API，与海报/艺术类 skill 分工明确。",
+      "issues": [
+        "需要 Node.js 22+ 与本机浏览器；CLI 不下载浏览器。",
+        "复杂图坐标易重叠，需渲染后目视检查 PNG。"
+      ],
+      "improvements": [
+        "保持只文档化本地 render；CLI 大版本升级时核对 UPSTREAM.json 参考 commit。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "画一张两服务加箭头的架构图，中文标签用 fontFamily 5，渲成 PNG。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: excalidraw-diagrams"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "55fe7f494837078781a062c4d3faf29c159ebec5"
+        },
+        {
+          "file": "references/minimal-scene.json",
+          "text": "\"fontFamily\": 5"
         }
       ]
     }

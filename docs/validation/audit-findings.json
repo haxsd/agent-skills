@@ -1,8 +1,8 @@
 {
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
-  "reviewedAt": "2026-10-06",
+  "reviewedAt": "2026-10-09",
   "counts": {
-    "active": 35,
+    "active": 37,
     "archived": 5,
     "external": 1
   },
@@ -973,6 +973,59 @@
           "text": "name: web-design-guidelines"
         }
       ]
+    },
+    {
+      "name": "podcast-to-article",
+      "state": "active",
+      "path": "skills/podcast-to-article/SKILL.md",
+      "lines": 243,
+      "entryBytesLF": 17651,
+      "entrySha256LF": "46eddb7332b51e242833c8d9659e48dc07aaf4770addaf77da6c85cef294a9dd",
+      "files": 7,
+      "bytes": 54981,
+      "scriptFiles": 2,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/podcast-to-article/SKILL.md",
+          "line": 2,
+          "text": "name: podcast-to-article"
+        },
+        {
+          "path": "skills/podcast-to-article/UPSTREAM.json",
+          "line": 4,
+          "text": "efc43919962e8356058057c4b5fd32c57876e6b7"
+        }
+      ]
+    },
+    {
+      "name": "excalidraw-diagrams",
+      "state": "active",
+      "path": "skills/excalidraw-diagrams/SKILL.md",
+      "lines": 123,
+      "entryBytesLF": 5424,
+      "entrySha256LF": "c0693c239aae64958227fed0fa143e22c522fbf72149893940fc2a53be629921",
+      "files": 4,
+      "bytes": 10525,
+      "scriptFiles": 0,
+      "testFiles": 0,
+      "evidence": [
+        {
+          "path": "skills/excalidraw-diagrams/SKILL.md",
+          "line": 2,
+          "text": "name: excalidraw-diagrams"
+        },
+        {
+          "path": "skills/excalidraw-diagrams/UPSTREAM.json",
+          "line": 5,
+          "text": "55fe7f494837078781a062c4d3faf29c159ebec5"
+        },
+        {
+          "path": "skills/excalidraw-diagrams/references/minimal-scene.json",
+          "line": 61,
+          "text": "\"fontFamily\": 5"
+        }
+      ]
     }
   ],
   "exactDuplicateTextGroupsLF": [
@@ -1049,6 +1102,12 @@
       "code": "unresolved-path-in-entrypoint",
       "path": "skills/design-system/SKILL.md",
       "message": "assets/designs/slides/claudekit-pitch-251223.html"
+    },
+    {
+      "level": "hint",
+      "code": "unresolved-path-in-entrypoint",
+      "path": "skills/excalidraw-diagrams/SKILL.md",
+      "message": "references/minimal-scene.js"
     },
     {
       "level": "hint",

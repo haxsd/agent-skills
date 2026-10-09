@@ -8,6 +8,7 @@
 | 查看每个 skill 的价值与问题 | [逐项审查](reviews/skill-review.md) |
 | 决定合并、归档与升级顺序 | [整改路线](reviews/roadmap.md) |
 | 了解四项新收录技能 | [收录说明](reviews/curation-2026-09-30.md) |
+| 2026-10-09 两项新收录 | [收录说明](reviews/curation-2026-10-09.md) |
 | 查固定上游版本和许可证 | [来源清单](sources/curation-sources.json)、[署名说明](../ATTRIBUTION.md) |
 | 看已运行的验证 | [静态检查](validation/audit-findings.json)、[离线工具](validation/smoke-results.json)、[DeepSeek 初次连通](validation/deepseek-validation.json)、[DeepSeek 执行升级](validation/deepseek-execution-validation.json)、[收录验证](validation/curation-validation.json) |
 | 查过去的迁移与清理记录 | [仓库历史](history/repository-history.md)、[归档记录](history/archive-notes-2026-09-18.md)、[署名快照](history/attribution-snapshot-2026-09-30.md) |
