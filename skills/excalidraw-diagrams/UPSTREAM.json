@@ -1,0 +1,16 @@
+{
+  "name": "excalidraw-diagrams",
+  "kind": "wrapper-skill",
+  "repository": "https://github.com/excalidraw/cli",
+  "commit": "55fe7f494837078781a062c4d3faf29c159ebec5",
+  "npm": "@excalidraw/cli",
+  "license": "MIT",
+  "retrievedAt": "2026-10-09",
+  "modifications": [
+    "Skill text authored in this repository; CLI source is not vendored.",
+    "Documents local render path only; Excalidraw+ workspace API left off by default.",
+    "Teaches minimal element JSON with fontFamily 5 for CJK text.",
+    "Collaboration: ds (deepseek-flash) drafts complex JSON; main agent verifies PNG."
+  ],
+  "validation": "CLI --help; optional local render smoke of references/minimal-scene.json with Node 22+ and a local browser; workspace API not exercised."
+}

@@ -1,6 +1,6 @@
 # agent-skills
 
-我们的 agent 技能收藏与维护仓库：**35 个启用技能 · 5 个归档技能 · 8 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
+我们的 agent 技能收藏与维护仓库：**37 个启用技能 · 5 个归档技能 · 9 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
 
 [分类目录](docs/catalog.md) · [安装指南](docs/guides/installation.md) · [逐项审查](docs/reviews/skill-review.md) · [整改路线](docs/reviews/roadmap.md) · [全部文档](docs/README.md)
 
@@ -12,7 +12,8 @@
 | 实现与代理编排 | executing-plans、parallel-agents、deepseek-subagent-orchestration、mcp-builder |
 | 质量、调试与审查 | systematic-debugging、code review、webapp-testing、property-based-testing |
 | Git 隔离与交付 | using-git-worktrees、finishing-a-development-branch |
-| 品牌、设计与 UI | ui-ux-pro-max、brand、design-system、ui-styling、design、canvas-design |
+| 品牌、设计与 UI | ui-ux-pro-max、brand、design-system、ui-styling、design、canvas-design、excalidraw-diagrams |
+| 写作与内容 | podcast-to-article |
 | 知识图谱与安全研究 | graphify、reverse-skill |
 | 技能维护与运行效率 | writing-skills、token-efficient-workflow、toolkit-map（外部） |
 | 数据库与后端 | supabase-postgres-best-practices |
