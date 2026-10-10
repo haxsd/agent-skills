@@ -2,7 +2,7 @@
 
 由 `catalog.json` 和 `scripts/audit_skills.py` 生成。
 
-审查日期：2026-10-06。35 个启用 + 5 个归档 + 1 个外部入口。
+审查日期：2026-10-09。37 个启用 + 5 个归档 + 1 个外部入口。
 
 分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。
 价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。
@@ -68,6 +68,13 @@
 | [slides](../archive/skills/slides/SKILL.md) | 归档 | 中 | 条件可用 | 维持归档 | P1 |
 | [banner-design](../archive/skills/banner-design/SKILL.md) | 归档 | 中 | 收录/引用不完整 | 维持归档 | P1 |
 | [web-design-guidelines](../skills/web-design-guidelines/SKILL.md) | 启用 | 中 | 条件可用 | 保留 | P1 |
+| [excalidraw-diagrams](../skills/excalidraw-diagrams/SKILL.md) | 启用 | 高 | 条件可用 | 保留 | P2 |
+
+## 写作与内容
+
+| Skill | 当前状态 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
+|---|---|---|---|---|---|
+| [podcast-to-article](../skills/podcast-to-article/SKILL.md) | 启用 | 高 | 条件可用 | 保留 | P2 |
 
 ## 知识图谱与安全研究
 

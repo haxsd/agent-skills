@@ -246,6 +246,20 @@
       "defaultTargets": [
         "codex"
       ]
+    },
+    {
+      "name": "podcast-to-article",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "excalidraw-diagrams",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
     }
   ]
 }
