@@ -202,7 +202,7 @@
       "summary": "保留任务契约、恢复账本和审查包，整合到统一计划执行技能。",
       "uniqueValue": "按计划记录状态以防上下文压缩后重做任务；真实 BASE..HEAD 审查包避免多次提交被 HEAD~1 截断；修复复审范围和上限明确。",
       "issues": [
-        "568 行入口、复杂五轮修复机制、无条件逐任务审查，普通实现成本偏高。",
+        "147 行入口（细节已迁 references）、复杂五轮修复机制、无条件逐任务审查，普通实现成本偏高。",
         "要求一直重试到上限才能裁决明显错误的审查结论。",
         "删除工作目录前只收集 Ruling，完整账本和报告未证明已进入 Git 历史，证据可能丢失。",
         "sdd-workspace 仅以计划 basename 标识，同名不同目录的计划会碰撞。",
@@ -222,7 +222,7 @@
       ],
       "evidence": [
         {
-          "file": "SKILL.md",
+          "file": "references/task-loop.md",
           "text": "Five rounds maximum per task"
         },
         {
@@ -878,11 +878,11 @@
           "text": "Use for any question"
         },
         {
-          "file": "SKILL.md",
+          "file": "references/setup-and-detect.md",
           "text": "--break-system-packages"
         },
         {
-          "file": "SKILL.md",
+          "file": "references/extraction-pipeline.md",
           "text": "close_agent(handle)"
         }
       ]
@@ -933,7 +933,7 @@
       "summary": "保留现实场景对照评估，缩短为技能质量指南，避免每次小改都昂贵多代理测试。",
       "uniqueValue": "有/无技能对照、真实压力场景、模板输出与行为遗漏的区别、微测试方法，能帮助证明技能是否改善结果。",
       "issues": [
-        "679 行入口，并要求任意编辑都先出现失败、5+ 次重复，未按改动风险调整成本。",
+        "252 行入口（细节已迁 references），并要求任意编辑都先出现失败、5+ 次重复，未按改动风险调整成本。",
         "description 必须只写 when、frontmatter 总共 1024 字等规定与当前开放规范不一致。",
         "要求反复封堵 rationalization，容易制造越来越多绝对化指令。",
         "文档默认提交和 push 是额外交付动作，不应由技能自行扩大授权。"
@@ -954,7 +954,7 @@
           "text": "Max 1024 characters total"
         },
         {
-          "file": "SKILL.md",
+          "file": "references/testing-and-bulletproofing.md",
           "text": "5+ reps per variant"
         }
       ]
