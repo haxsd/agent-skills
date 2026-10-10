@@ -16,11 +16,11 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 
 **真正的增益**：结合现有代码定位范围、避免向用户询问可自行查明的信息，有实际帮助；内容短，适合作为共用的需求澄清参考。
 
-**体量**：入口 65 行 / 2,952 字节（LF）；整个目录 1 个文件 / 2,952 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+**体量**：入口 68 行 / 3,261 字节（LF）；整个目录 1 个文件 / 3,261 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
 
 **问题与限制**
 
-- 引用 ask-questions-if-underspecified，但它只在 archive 中，默认安装不可发现。
+- 追问技巧已内联；归档技能 ask-questions-if-underspecified 仅作维护参考，默认安装不可发现。
 - 中大型修改固定等待确认，与已有授权下持续执行的工作方式冲突。
 - 在执行任何命令之前要求浏览项目和阅读代码，字面顺序自相矛盾。
 
@@ -39,7 +39,7 @@ toolkit-map 仅评估外部接入，未把独立仓库当成本仓库已审完�
 **来源定位**
 
 - [skills/requirement-understanding/SKILL.md:16](../../skills/requirement-understanding/SKILL.md#L16)：`在写任何代码或执行任何命令之前`
-- [skills/requirement-understanding/SKILL.md:35](../../skills/requirement-understanding/SKILL.md#L35)：`ask-questions-if-underspecified`
+- [skills/requirement-understanding/SKILL.md:35](../../skills/requirement-understanding/SKILL.md#L35)：`追问技巧`
 
 ## 02. brainstorming
 
@@ -509,11 +509,11 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **真正的增益**：标准库 BM25、产品/配色/字体/图标/UX/22 技术栈数据、检索契约、MASTER/page overrides、相关性和数据回归场景。
 
-**体量**：入口 425 行 / 28,066 字节（LF）；整个目录 68 个文件 / 3,539,346 规范化字节；生产 scripts 文件 5，Python 测试文件 10。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+**体量**：入口 427 行 / 28,672 字节（LF）；整个目录 68 个文件 / 3,539,952 规范化字节；生产 scripts 文件 5，Python 测试文件 10。文本统一 LF，二进制原样计数，字节数不等于 token 数。
 
 **问题与限制**
 
-- 正文引用 Quick Reference §1–§9，但当前 SKILL.md 没有该章节。
+- 正文已去掉失效的 Quick Reference § 引用，改为 Common Rules + scripts/search.py；编号 Quick Reference 章节仍未收录。
 - catalog refresh 与 relevance evaluator 测试依赖未收录的 refresh-google-fonts.py、refresh-icon-catalog.py、evaluate-relevance.py。
 - baseline Windows 检出将数据改为 CRLF，4 个字节哈希校验失败；本轮通过 LF 属性修复。
 - 入口长且广，移动端与 web/desktop 规则仍需进一步分流。
@@ -532,7 +532,7 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/ui-ux-pro-max/SKILL.md:292](../../skills/ui-ux-pro-max/SKILL.md#L292)：`Quick Reference §6`
+- [skills/ui-ux-pro-max/SKILL.md:23](../../skills/ui-ux-pro-max/SKILL.md#L23)：`Curation note`
 - [skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py:16](../../skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py#L16)：`refresh-google-fonts.py`
 - [skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py:10](../../skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py#L10)：`scripts/evaluate-relevance.py`
 
@@ -544,13 +544,13 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **真正的增益**：品牌指南模板、语气与 messaging 参考、4 个 Node 工具、模板同步回归测试，超出通用设计建议。
 
-**体量**：入口 97 行 / 2,939 字节（LF）；整个目录 18 个文件 / 88,892 规范化字节；生产 scripts 文件 4，Python 测试文件 1。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+**体量**：入口 106 行 / 3,714 字节（LF）；整个目录 18 个文件 / 89,667 规范化字节；生产 scripts 文件 4，Python 测试文件 1。文本统一 LF，二进制原样计数，字节数不等于 token 数。
 
 **问题与限制**
 
-- 同步工具默认写项目 docs/assets，需先确认用户项目结构，避免强制采用固定目录。
+- 同步工具默认写项目 docs/assets；正文已标明 docs/assets 为项目路径、未随 skill 打包，缺失时 soft-fail。
 - Markdown 表格解析依赖模板结构，对多样真实品牌指南还需覆盖。
-- 项目根目录执行 scripts/... 可能指向不存在的路径，应明确 skill-root 与 project-root。
+- scripts/ 相对 skill 安装根目录；正文已提醒勿从错误 cwd 硬跑。
 
 **优化方案**
 
@@ -564,7 +564,7 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/brand/SKILL.md:47](../../skills/brand/SKILL.md#L47)：`sync-brand-to-tokens.cjs`
+- [skills/brand/SKILL.md:56](../../skills/brand/SKILL.md#L56)：`sync-brand-to-tokens.cjs`
 - [skills/brand/scripts/tests/test_sync_brand_to_tokens.py:27](../../skills/brand/scripts/tests/test_sync_brand_to_tokens.py#L27)：`test_sync_parses_bundled_starter_template`
 
 ## 18. design-system
@@ -575,13 +575,13 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **真正的增益**：primitive→semantic→component 模型、token 生成/校验脚本、starter、组件状态参考，以及 slide 结构化策略数据。
 
-**体量**：入口 244 行 / 6,875 字节（LF）；整个目录 27 个文件 / 179,018 规范化字节；生产 scripts 文件 9，Python 测试文件 1。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+**体量**：入口 250 行 / 7,897 字节（LF）；整个目录 27 个文件 / 180,040 规范化字节；生产 scripts 文件 9，Python 测试文件 1。文本统一 LF，二进制原样计数，字节数不等于 token 数。
 
 **问题与限制**
 
 - token 职责与 slide 制作混在入口，和 design 的 slides 模块重叠。
-- 所有 slides 必须居中、说服转化和 Chart.js，把营销例子变成通用约束。
-- 引用 assets/css/slide-animations.css、示例 pitch HTML 是项目产物，本仓库不提供，未明确作为可选示例。
+- 营销向 slide 约束已弱化为 guidance，不再写成对所有 slides 的硬性 MUST。
+- assets/css/slide-animations.css、示例 pitch HTML 已标明为项目可选产物，本仓库不提供。
 - token 示例禁止原始 hex，而 Chart.js 示例直接硬编码配色，契约不一致。
 
 **优化方案**
@@ -598,7 +598,7 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/design-system/SKILL.md:184](../../skills/design-system/SKILL.md#L184)：`Center align content`
+- [skills/design-system/SKILL.md:187](../../skills/design-system/SKILL.md#L187)：`Center align content`
 - [skills/design-system/scripts/generate-tokens.cjs:64](../../skills/design-system/scripts/generate-tokens.cjs#L64)：`return resolveReference(result.$value, tokens)`
 
 ## 19. ui-styling
@@ -750,12 +750,12 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **真正的增益**：按任务路由到专项方法、案例证据链、授权 scope 和交付自检；无需把大型技能包复制进本仓库。
 
-**体量**：入口 82 行 / 5,161 字节（LF）；整个目录 1 个文件 / 5,161 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+**体量**：入口 135 行 / 8,791 字节（LF）；整个目录 1 个文件 / 8,791 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
 
 **问题与限制**
 
-- 固定 C:\Users\Administrator\tools\reverse-skill，在当前账户无法直接使用。
-- 49 模块/89 入口与工具具备清单是历史快照，不能代表现状。
+- 外部包路径改为 REVERSE_SKILL_ROOT / 常见本地候选解析；未找到时 STOP，不再写死 Administrator 路径。
+- 49 模块/89 入口与工具具备清单仍是历史快照，不能代表现状；正文已标明需动态检查。
 - 依赖的 RULES、路由、建案、bootstrap 和复核均不在本仓库，需外部版本记录。
 
 **优化方案**
@@ -770,8 +770,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/reverse-skill/SKILL.md:15](../../skills/reverse-skill/SKILL.md#L15)：`C:\Users\Administrator\tools\reverse-skill`
-- [skills/reverse-skill/SKILL.md:57](../../skills/reverse-skill/SKILL.md#L57)：`本机工具链现状`
+- [skills/reverse-skill/SKILL.md:18](../../skills/reverse-skill/SKILL.md#L18)：`REVERSE_SKILL_ROOT`
+- [skills/reverse-skill/SKILL.md:32](../../skills/reverse-skill/SKILL.md#L32)：`预检`
 
 ## 24. writing-skills
 
@@ -841,19 +841,19 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 ## 26. token-efficient-workflow
 
-技能维护与运行效率 · 启用 · 价值：中 · 依赖外部环境 · P0 · 升级
+技能维护与运行效率 · 启用 · 价值：中 · 条件可用 · P0 · 升级
 
 通用省上下文规则更适合作为运行规则，平台入口修好路径和 UI 元数据。
 
 **真正的增益**：共享准则单一来源、窄搜索与日志摘要、只更新持续项目变化，适合长期约定。
 
-**体量**：入口 43 行 / 2,211 字节（LF）；整个目录 2 个文件 / 2,435 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
+**体量**：入口 49 行 / 2,737 字节（LF）；整个目录 2 个文件 / 2,961 规范化字节；生产 scripts 文件 0，Python 测试文件 0。文本统一 LF，二进制原样计数，字节数不等于 token 数。
 
 **问题与限制**
 
-- 唯一权威文件固定在 Administrator/tools/shared，当前安装器却按当前 USERPROFILE 联接。
-- codex-helpers 四个脚本未收录；上下文固定模板不适用于任意项目。
-- agents/openai.yaml 将 UI 字段放在顶层，缺少 interface 包装；本轮修复。
+- 权威规则已改为仓库内 shared/token-efficiency-rules.md，不再写死 Administrator/tools/shared。
+- codex-helpers 四个脚本未收录；正文已改为可选并在缺失时回退原生工具。
+- 上下文固定模板不适用于任意项目；正文已改为缺失则跳过。
 - 广泛触发几乎所有任务；shared 的一次整改后冻结规则会阻止未来合理维护。
 
 **优化方案**
@@ -869,8 +869,8 @@ Git 隔离与交付 · 启用 · 价值：高 · 条件可用 · P1 · 升级
 
 **来源定位**
 
-- [skills/token-efficient-workflow/SKILL.md:9](../../skills/token-efficient-workflow/SKILL.md#L9)：`C:\Users\Administrator\tools\shared`
-- [skills/token-efficient-workflow/SKILL.md:24](../../skills/token-efficient-workflow/SKILL.md#L24)：`codex-helpers`
+- [skills/token-efficient-workflow/SKILL.md:9](../../skills/token-efficient-workflow/SKILL.md#L9)：`shared/token-efficiency-rules.md`
+- [skills/token-efficient-workflow/SKILL.md:23](../../skills/token-efficient-workflow/SKILL.md#L23)：`项目辅助脚本（可选）`
 
 ## 27. suggesting-cursor-rules
 

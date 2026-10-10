@@ -39,6 +39,15 @@ node scripts/extract-colors.cjs --palette
 node scripts/extract-colors.cjs <image-path>
 ```
 
+### Path Notes
+
+- `scripts/...` paths are relative to this skill's install root (e.g. `skills/brand/`), **not necessarily the project cwd**. If you invoke these from a project root, point at the skill root (or `cd` there) so the scripts are found.
+- `docs/brand-guidelines.md` and `assets/design-tokens.*` referenced below are **expected in the target project** (or at paths you configure). They are **not bundled** in this skill package.
+
+### Missing Files (soft-fail)
+
+If `docs/brand-guidelines.md` or `assets/design-tokens.*` do not exist in the target project, **say so and stop/ask** for the correct source path or confirmation before proceeding. Do **not** invent tokens or scaffold an entire brand tree unsolicited.
+
 ## Brand Sync Workflow
 
 ```bash
@@ -50,9 +59,9 @@ node scripts/inject-brand-context.cjs --json | head -20
 ```
 
 **Files synced:**
-- `docs/brand-guidelines.md` → Source of truth
-- `assets/design-tokens.json` → Token definitions
-- `assets/design-tokens.css` → CSS variables
+- `docs/brand-guidelines.md` → Source of truth (target project)
+- `assets/design-tokens.json` → Token definitions (target project)
+- `assets/design-tokens.css` → CSS variables (target project)
 
 ## Subcommands
 

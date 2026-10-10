@@ -12,11 +12,11 @@
       "name": "requirement-understanding",
       "state": "active",
       "path": "skills/requirement-understanding/SKILL.md",
-      "lines": 65,
-      "entryBytesLF": 2952,
-      "entrySha256LF": "5e272eb8bb9829e2dc76ee32bab99aebab780ad7fcb8859b64cbc8bcb0a0693a",
+      "lines": 68,
+      "entryBytesLF": 3261,
+      "entrySha256LF": "8c876694e003cf3097b5449f062ed913c8ac2cbb5a04f88abbade0f29bd53cf2",
       "files": 1,
-      "bytes": 2952,
+      "bytes": 3261,
       "scriptFiles": 0,
       "testFiles": 0,
       "evidence": [
@@ -28,7 +28,7 @@
         {
           "path": "skills/requirement-understanding/SKILL.md",
           "line": 35,
-          "text": "ask-questions-if-underspecified"
+          "text": "追问技巧"
         }
       ]
     },
@@ -392,18 +392,18 @@
       "name": "ui-ux-pro-max",
       "state": "active",
       "path": "skills/ui-ux-pro-max/SKILL.md",
-      "lines": 425,
-      "entryBytesLF": 28066,
-      "entrySha256LF": "d84c0978165903371b1ec0ede09a4033066d48696123c2ada62adec31aa212e4",
+      "lines": 427,
+      "entryBytesLF": 28672,
+      "entrySha256LF": "3fbf7e7380fa01c0a5bf6863451cdaebf118bc2ea0cb9709dbb33954c29e8d7b",
       "files": 68,
-      "bytes": 3539346,
+      "bytes": 3539952,
       "scriptFiles": 5,
       "testFiles": 10,
       "evidence": [
         {
           "path": "skills/ui-ux-pro-max/SKILL.md",
-          "line": 292,
-          "text": "Quick Reference §6"
+          "line": 23,
+          "text": "Curation note"
         },
         {
           "path": "skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py",
@@ -421,17 +421,17 @@
       "name": "brand",
       "state": "active",
       "path": "skills/brand/SKILL.md",
-      "lines": 97,
-      "entryBytesLF": 2939,
-      "entrySha256LF": "6a450ee1a83a403d47cec2ede9030feb60a67a81fc425d2406e975339313bd44",
+      "lines": 106,
+      "entryBytesLF": 3714,
+      "entrySha256LF": "d7451d39a05f416b4a225c4bf8cd07769a2da7cd19498c87493645368ce5111f",
       "files": 18,
-      "bytes": 88892,
+      "bytes": 89667,
       "scriptFiles": 4,
       "testFiles": 1,
       "evidence": [
         {
           "path": "skills/brand/SKILL.md",
-          "line": 47,
+          "line": 56,
           "text": "sync-brand-to-tokens.cjs"
         },
         {
@@ -445,17 +445,17 @@
       "name": "design-system",
       "state": "active",
       "path": "skills/design-system/SKILL.md",
-      "lines": 244,
-      "entryBytesLF": 6875,
-      "entrySha256LF": "655468bb723a6bc9d17fcb09a6a005e10e313d63b879f4d74fb2abdc3041ae3f",
+      "lines": 250,
+      "entryBytesLF": 7897,
+      "entrySha256LF": "e68e109cd009e30178a0c065473876efa4faff2e159d019d45fbd249ac730b0d",
       "files": 27,
-      "bytes": 179018,
+      "bytes": 180040,
       "scriptFiles": 9,
       "testFiles": 1,
       "evidence": [
         {
           "path": "skills/design-system/SKILL.md",
-          "line": 184,
+          "line": 187,
           "text": "Center align content"
         },
         {
@@ -570,23 +570,23 @@
       "name": "reverse-skill",
       "state": "active",
       "path": "skills/reverse-skill/SKILL.md",
-      "lines": 82,
-      "entryBytesLF": 5161,
-      "entrySha256LF": "c3da60d67641663836f29cb2209bbe463081f023c576615a91635d05c98b869c",
+      "lines": 135,
+      "entryBytesLF": 8791,
+      "entrySha256LF": "092a3f09aacfe4f67ac121aa5c5cb53aa77f7ddaac91f04cba05bb7855b0762b",
       "files": 1,
-      "bytes": 5161,
+      "bytes": 8791,
       "scriptFiles": 0,
       "testFiles": 0,
       "evidence": [
         {
           "path": "skills/reverse-skill/SKILL.md",
-          "line": 15,
-          "text": "C:\\Users\\Administrator\\tools\\reverse-skill"
+          "line": 18,
+          "text": "REVERSE_SKILL_ROOT"
         },
         {
           "path": "skills/reverse-skill/SKILL.md",
-          "line": 57,
-          "text": "本机工具链现状"
+          "line": 32,
+          "text": "预检"
         }
       ]
     },
@@ -642,23 +642,23 @@
       "name": "token-efficient-workflow",
       "state": "active",
       "path": "skills/token-efficient-workflow/SKILL.md",
-      "lines": 43,
-      "entryBytesLF": 2211,
-      "entrySha256LF": "e0e35b1af9d68b3c9eb8ae7efe49267b6522b2ffb6f116c658ca5a1653bff24f",
+      "lines": 49,
+      "entryBytesLF": 2737,
+      "entrySha256LF": "7f7570dcc5a1b5db62ec4f313720d8c5ddf36d953376db66528d0847b44c4b32",
       "files": 2,
-      "bytes": 2435,
+      "bytes": 2961,
       "scriptFiles": 0,
       "testFiles": 0,
       "evidence": [
         {
           "path": "skills/token-efficient-workflow/SKILL.md",
           "line": 9,
-          "text": "C:\\Users\\Administrator\\tools\\shared"
+          "text": "shared/token-efficiency-rules.md"
         },
         {
           "path": "skills/token-efficient-workflow/SKILL.md",
-          "line": 24,
-          "text": "codex-helpers"
+          "line": 23,
+          "text": "项目辅助脚本（可选）"
         }
       ]
     },

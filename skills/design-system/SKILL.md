@@ -90,6 +90,7 @@ node scripts/validate-tokens.cjs --dir src/
 | `search-slides.py` | BM25 search + contextual recommendations |
 | `slide-token-validator.py` | Validate slide HTML for token compliance |
 | `fetch-background.py` | Fetch images from Pexels/Unsplash |
+| `generate-slide.py` | Generate slide HTML from JSON/demo data (uses project-local token CSS) |
 
 ## Templates
 
@@ -111,12 +112,14 @@ Brand-compliant presentations using design tokens + Chart.js + contextual decisi
 
 ### Source of Truth
 
+> **Note:** The `docs/` and `assets/` paths below are **project-local examples/outputs**, not shipped with this skill package (there is no `skills/design-system/assets/` directory in this repo). Treat them as optional project files: resolve them against the current project, and soft-fail (skip / do not claim existence) when absent.
+
 | File | Purpose |
 |------|---------|
-| `docs/brand-guidelines.md` | Brand identity, voice, colors |
-| `assets/design-tokens.json` | Token definitions (primitive→semantic→component) |
-| `assets/design-tokens.css` | CSS variables (import in slides) |
-| `assets/css/slide-animations.css` | CSS animation library |
+| `docs/brand-guidelines.md` (project-local, optional) | Brand identity, voice, colors |
+| `assets/design-tokens.json` (project-local, optional) | Token definitions (primitive→semantic→component) |
+| `assets/design-tokens.css` (project-local, optional) | CSS variables (import in slides) |
+| `assets/css/slide-animations.css` (project-local, optional) | CSS animation library — skip animation import if missing |
 
 ### Slide Search (BM25)
 
@@ -174,15 +177,17 @@ Premium decks alternate between emotions for engagement:
 
 System calculates pattern breaks at 1/3 and 2/3 positions.
 
-### Slide Requirements
+### Slide Guidance
 
-**ALL slides MUST:**
-1. Import `assets/design-tokens.css` - single source of truth
+For marketing/persuasion decks (the default deck type this skill targets), aim to:
+1. Use project-local `assets/design-tokens.css` as the single source of truth when present
 2. Use CSS variables: `var(--color-primary)`, `var(--slide-bg)`, etc.
-3. Use Chart.js for charts (NOT CSS-only bars)
+3. Prefer Chart.js for charts (NOT CSS-only bars) where a chart adds value
 4. Include navigation (keyboard arrows, click, progress bar)
 5. Center align content
 6. Focus on persuasion/conversion
+
+These are defaults for marketing decks, not universal rules — adjust for technical, educational, or readability-first decks.
 
 ### Chart.js Integration
 
@@ -223,10 +228,11 @@ font-family: 'Space Grotesk';
 
 ### Reference Implementation
 
-Working example with all features:
+A working reference example may exist at the **project-local** path:
 ```
-assets/designs/slides/claudekit-pitch-251223.html
+assets/designs/slides/claudekit-pitch-251223.html   (project-local, optional)
 ```
+This file is **not shipped with this skill**. If it is missing, do not claim it exists — generate a new slide instead.
 
 ### Command
 
@@ -241,4 +247,4 @@ assets/designs/slides/claudekit-pitch-251223.html
 3. Component tokens enable per-component customization
 4. Use HSL format for opacity control
 5. Document every token's purpose
-6. **Slides must import design-tokens.css and use var() exclusively**
+6. **Slides should import project-local `design-tokens.css` and use `var()` when available**

@@ -174,13 +174,13 @@ Node 运行时**不再是仓库外依赖**：技能包要求 22.12+，而 PATH �
 
 ## 正文里的绝对路径
 
-技能正文刻意写绝对路径（这是 `toolkit-map` 的做法：给 agent 确定路径，不让它靠 PATH 猜）。
-三处指向 `C:\Users\Administrator\`：
+历史上有三处写死 `C:\Users\Administrator\`（`reverse-skill`、`token-efficient-workflow`）。
+清理 PR 已改为：
 
-- `skills\reverse-skill\SKILL.md:15`、`:70`
-- `skills\token-efficient-workflow\SKILL.md:8`
+- `token-efficient-workflow` → 仓库内 `shared/token-efficiency-rules.md`
+- `reverse-skill` → `REVERSE_SKILL_ROOT` / 常见本地候选，缺失则 STOP
 
-同账户重建的机器不受影响；换用户名部署时需改这三处。
+换机器部署时请设置 `REVERSE_SKILL_ROOT`（若使用外部逆向技能包），不要再写死用户名路径。
 
 ## 维护约定
 
