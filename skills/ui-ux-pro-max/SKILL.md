@@ -16,9 +16,11 @@ python3 --version || python --version
 
 If Python is not installed, **do not install it yourself**. Stop and ask the user to install Python 3 using their preferred method (e.g. from [python.org](https://www.python.org/downloads/) or their OS package manager), then continue once it is available. Never run package-manager or system-modifying commands (`sudo`, `brew`, `apt`, `winget`, etc.) on the user's machine for this skill.
 
-If the user prefers not to install Python, skip the CLI searches and rely on the Quick Reference sections above.
+If the user prefers not to install Python, skip the CLI searches and instead use the **Common Rules for Professional UI** section and the pre-delivery checklist later in this file. (This curated copy does not include a numbered Quick Reference chapter.)
 
 > **Note:** On Windows, use `python` instead of `python3` to run scripts (e.g., `python scripts/search.py` instead of `python3 scripts/search.py`).
+
+> **Curation note:** Numbered Quick Reference §§ are not present in this curated package; runtime `scripts/search.py` plus `data/*.csv` still work. Maintenance scripts `refresh-google-fonts.py`, `refresh-icon-catalog.py`, and `evaluate-relevance.py` are not shipped here.
 
 ---
 
@@ -31,8 +33,8 @@ Use this skill when the user requests any of the following:
 | **New project / page** | "做一个 landing page"、"Build a dashboard" | Step 1 → Step 2 (design system) |
 | **New component** | "Create a pricing card"、"Fix modal focus" | Step 3 (one focused domain search) |
 | **Choose style / color / font** | "What style fits a fintech app?"、"推荐配色" | Step 2 (design system) |
-| **Review existing UI** | "Review this page for UX issues"、"检查无障碍" | Quick Reference checklist above |
-| **Fix a UI bug** | "Button hover is broken"、"Layout shifts on load" | Quick Reference → relevant section |
+| **Review existing UI** | "Review this page for UX issues"、"检查无障碍" | Common Rules for Professional UI + pre-delivery checklist later in this file |
+| **Fix a UI bug** | "Button hover is broken"、"Layout shifts on load" | Focused `scripts/search.py` domain search, or Common Rules subsection |
 | **Improve / optimize** | "Reduce React list rerenders"、"Fix mobile touch targets" | Step 3 (explicit `react`, `ux`, or `web` domain) |
 | **Implement dark mode** | "Add dark mode support" | Step 3 (domain: style "dark mode") |
 | **Add charts / data viz** | "Add an analytics dashboard chart" | Step 3 (domain: chart) |
@@ -289,19 +291,19 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "fintech crypto" --desi
 | Problem | What to Do |
 |---------|------------|
 | Can't decide on style/color | Verify the category, then retry once with one product and one tone |
-| Dark mode contrast issues | Quick Reference §6: `color-dark-mode` + `color-accessible-pairs` |
-| Animations feel unnatural | Quick Reference §7: `spring-physics` + `easing` + `exit-faster-than-enter` |
-| Form UX is poor | Quick Reference §8: `inline-validation` + `error-clarity` + `focus-management` |
-| Navigation feels confusing | Quick Reference §9: `nav-hierarchy` + `bottom-nav-limit` + `back-behavior` |
-| Layout breaks on small screens | Quick Reference §5: `mobile-first` + `breakpoint-consistency` |
-| Performance / jank | Quick Reference §3: `virtualize-lists` + `main-thread-budget` + `debounce-throttle` |
+| Dark mode contrast issues | `python scripts/search.py "color-dark-mode color-accessible-pairs" --domain style` |
+| Animations feel unnatural | `python scripts/search.py "spring-physics easing exit-faster-than-enter" --domain ux` |
+| Form UX is poor | `python scripts/search.py "inline-validation error-clarity focus-management" --domain ux` |
+| Navigation feels confusing | `python scripts/search.py "nav-hierarchy bottom-nav-limit back-behavior" --domain ux` |
+| Layout breaks on small screens | `python scripts/search.py "mobile-first breakpoint-consistency" --domain ux` |
+| Performance / jank | `python scripts/search.py "virtualize-lists main-thread-budget debounce-throttle" --domain web` |
 
 ### Pre-Delivery Checklist
 
-For web/desktop work, apply the relevant Quick Reference sections and focused searches. The device, Dynamic Type, touch-target, and safe-area checks below apply only to native/mobile app UI.
+For web/desktop work, apply the **Common Rules for Professional UI** and run focused `scripts/search.py` searches. The device, Dynamic Type, touch-target, and safe-area checks below apply only to native/mobile app UI.
 
 - Run focused searches only for concerns present in the interface, for example `"keyboard focus modal" --domain ux`
-- Run through Quick Reference **§1–§3** (CRITICAL + HIGH) as a final review
+- Run through **Common Rules for Professional UI** (CRITICAL + HIGH items) as a final review
 - Test on 375px (small phone) and landscape orientation
 - Verify behavior with **reduced-motion** enabled and **Dynamic Type** at largest size
 - Check dark mode contrast independently (don't assume light mode values work)

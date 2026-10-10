@@ -82,7 +82,7 @@
 |---|---|---|---|---|---|
 | [writing-skills](../skills/writing-skills/SKILL.md) | 启用 | 中 | 规则需改造 | 升级 | P1 |
 | [using-superpowers](../skills/using-superpowers/SKILL.md) | 启用 | 低 | 规则需改造 | 建议归档 | P1 |
-| [token-efficient-workflow](../skills/token-efficient-workflow/SKILL.md) | 启用 | 中 | 依赖外部环境 | 升级 | P0 |
+| [token-efficient-workflow](../skills/token-efficient-workflow/SKILL.md) | 启用 | 中 | 条件可用 | 升级 | P0 |
 | [suggesting-cursor-rules](../skills/suggesting-cursor-rules/SKILL.md) | 启用 | 低 | 规则需改造 | 升级 | P2 |
 | toolkit-map（外部） | 外部 | 高 | 依赖外部环境 | 保持外部 | P0 |
 
