@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-10-09",
+  "reviewedAt": "2026-10-11",
   "skills": [
     {
       "name": "webapp-testing",
@@ -76,6 +76,20 @@
         "Workspace API left off by default."
       ],
       "validation": "CLI --help; optional local render smoke of references/minimal-scene.json; workspace API not exercised."
+    },
+    {
+      "name": "work-humanizer",
+      "repository": "https://github.com/phuryn/work-humanizer",
+      "commit": "0a9065791d021f3dda695f3887cb2ae4c0eacbcf",
+      "path": "skills/work-humanizer",
+      "license": "MIT",
+      "retrievedAt": "2026-10-11",
+      "modifications": [
+        "Slim package: keep only SKILL.md, tells.md, check.py; omit evidence/ and examples/.",
+        "Chinese trigger description and slim-pack note.",
+        "Document python/python3; Windows UTF-8 reconfigure in check.py."
+      ],
+      "validation": "Python AST; stdin smoke on short fixture; no detector/API claims."
     }
   ]
 }

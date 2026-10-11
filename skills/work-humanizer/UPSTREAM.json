@@ -1,0 +1,17 @@
+{
+  "name": "work-humanizer",
+  "repository": "https://github.com/phuryn/work-humanizer",
+  "commit": "0a9065791d021f3dda695f3887cb2ae4c0eacbcf",
+  "path": "skills/work-humanizer",
+  "license": "MIT",
+  "author": "Pawel Huryn",
+  "retrievedAt": "2026-10-11",
+  "modifications": [
+    "Slim package: keep only SKILL.md, tells.md, check.py; omit upstream evidence/ and examples/.",
+    "Chinese trigger description in frontmatter; short Chinese slim-pack note after title.",
+    "Document python and python3 invocation for check.py; Windows often ships python only.",
+    "Add Windows stdout/stderr UTF-8 reconfigure in check.py (stdin already utf-8).",
+    "Align frontmatter license field with this repository; classify under writing-content in catalog.json."
+  ],
+  "validation": "Python AST for check.py; check.py --help or stdin smoke on a short fixture; no detector/API claims."
+}

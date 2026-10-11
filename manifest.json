@@ -260,6 +260,13 @@
       "defaultTargets": [
         "agents"
       ]
+    },
+    {
+      "name": "work-humanizer",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
     }
   ]
 }

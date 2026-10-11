@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-09",
+  "reviewedAt": "2026-10-11",
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
   "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。",
   "categories": [
@@ -1519,6 +1519,42 @@
         {
           "file": "UPSTREAM.json",
           "text": "efc43919962e8356058057c4b5fd32c57876e6b7"
+        }
+      ]
+    },
+    {
+      "name": "work-humanizer",
+      "category": "writing-content",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "面向工作场景的去 AI 腔改写，只调语气句式，事实与承诺强度原样保留。",
+      "uniqueValue": "rewrite + interview 双模式处理 AI 腔与信息缺口；与 podcast-to-article 的播客转长文互不重叠。",
+      "issues": [
+        "机械自检（check.py / tells.md）只能抓字面痕迹，不能证明改写后事实仍正确。",
+        "slim 未收录上游 evidence/；探测器相关结论以 UPSTREAM 出处为准，本仓不做不可检测承诺。"
+      ],
+      "improvements": [
+        "按真实工作邮件/发布说明抽样验收；上游大改时对照固定 commit 与本地修改清单。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "用户丢来一段充满赋能/闭环话术的周报或发布说明，要求去 AI 腔且数字与承诺措辞不变，并跑 check.py。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: work-humanizer"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "0a9065791d021f3dda695f3887cb2ae4c0eacbcf"
+        },
+        {
+          "file": "check.py",
+          "text": "Mechanical sweep for the humanize skill"
         }
       ]
     },

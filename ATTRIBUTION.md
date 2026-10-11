@@ -9,6 +9,7 @@
 | property-based-testing | [Trail of Bits](https://github.com/trailofbits/skills) | CC-BY-SA-4.0 |
 | podcast-to-article | [orange2ai/podcast-to-article](https://github.com/orange2ai/podcast-to-article) | MIT |
 | excalidraw-diagrams（wrapper；CLI 不入库） | [@excalidraw/cli](https://github.com/excalidraw/cli) | CLI 为 MIT；skill 文本由本仓库维护 |
+| work-humanizer（slim：SKILL.md / tells.md / check.py） | [phuryn/work-humanizer](https://github.com/phuryn/work-humanizer) | MIT |
 
 完整许可证随技能目录保留；固定上游 commit、路径、作者及本地改动见各项 `UPSTREAM.json` 和 [来源清单](docs/sources/curation-sources.json)。
 
@@ -18,3 +19,4 @@
 
 2026-10-06：新增本机自有 development-workflow、code-review、deepseek-subagents；web-design-guidelines 保留原 Vercel 作者元数据，规范源为 https://github.com/vercel-labs/web-interface-guidelines ，尚未重新核验其分发许可，不改变仓库私有状态。
 2026-10-09：新增 podcast-to-article（MIT，固定上游 commit）；新增本仓库维护的 excalidraw-diagrams wrapper（依赖官方 MIT CLI，不 vendoring 源码）。
+2026-10-11：新增 work-humanizer（MIT，slim 固定上游 commit；不含 evidence/）。
