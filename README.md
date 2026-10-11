@@ -13,7 +13,7 @@
 | 质量、调试与审查 | systematic-debugging、code review、webapp-testing、property-based-testing |
 | Git 隔离与交付 | using-git-worktrees、finishing-a-development-branch |
 | 品牌、设计与 UI | ui-ux-pro-max、brand、design-system、ui-styling、design、canvas-design、excalidraw-diagrams |
-| 写作与内容 | podcast-to-article |
+| 写作与内容 | podcast-to-article、work-humanizer |
 | 知识图谱与安全研究 | graphify、reverse-skill |
 | 技能维护与运行效率 | writing-skills、token-efficient-workflow、toolkit-map（外部） |
 | 数据库与后端 | supabase-postgres-best-practices |
