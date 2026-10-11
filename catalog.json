@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-10-11",
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
-  "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。",
+  "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -1591,6 +1591,42 @@
         {
           "file": "references/minimal-scene.json",
           "text": "\"fontFamily\": 5"
+        }
+      ]
+    },
+    {
+      "name": "windows-powershell-safe",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "Windows 上 agent 少翻车的瘦 PowerShell 约定：宿主区分、数组传参、`-File`、编码、失败停止规则。",
+      "uniqueValue": "把 pwsh/powershell 宿主、原生传参与 stop rules 收成短入口，并附团队翻车样例；不引入垫片运行时。",
+      "issues": [
+        "references/repros.md 为经验/文档归纳，未在本机 Windows 复跑，不能当 CI 断言。",
+        "ProcessStartInfo.ArgumentList 仅适用于 .NET Core / PS7；5.1 需改用其他传参方式。"
+      ],
+      "improvements": [
+        "有真实 Windows 复跑证据后再把样例升级为已验证；上游 psi 大改时对照固定 commit。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "agent 在 Windows 上要跑带空格路径的 CLI，或在 powershell.exe 与 pwsh 之间选宿主并处理退出码。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: windows-powershell-safe"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "711abaf61e1b8d770d355e05b75e9641afa7b25e"
+        },
+        {
+          "file": "references/repros.md",
+          "text": "未在本机 Windows 复跑"
         }
       ]
     }

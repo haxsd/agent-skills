@@ -1,0 +1,24 @@
+{
+  "name": "windows-powershell-safe",
+  "repository": "https://github.com/Misaka-Mikoto-Tech/agent-skills",
+  "commit": "711abaf61e1b8d770d355e05b75e9641afa7b25e",
+  "path": "skills/powershell-safe-invocation",
+  "license": "MIT",
+  "author": "Misaka Mikoto",
+  "retrievedAt": "2026-10-11",
+  "modifications": [
+    "Slim rename to windows-powershell-safe; Chinese body with English commands kept.",
+    "Drop long reference.md examples; keep decision-critical rules only.",
+    "Add stop rules adapted from agent-shells (failure-retry / adapter Stop Rules) as text only — no npm helpers or scripts vendored.",
+    "Note ProcessStartInfo.ArgumentList is unavailable on Windows PowerShell 5.1 / .NET Framework.",
+    "Add references/repros.md: eight team failure samples (experience/docs, not re-run on Windows here)."
+  ],
+  "alsoBorrowed": [
+    {
+      "repository": "https://github.com/agent-shells/powershell-skills",
+      "commit": "4f389f0982654b57d04646c19084e40ac7bd2a1a",
+      "what": "Stop rules / failure-retry wording only"
+    }
+  ],
+  "validation": "Offline repo audit_skills/check_docs/unittest; samples labeled experience/docs only."
+}

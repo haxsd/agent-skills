@@ -1,6 +1,6 @@
 # agent-skills
 
-我们的 agent 技能收藏与维护仓库：**37 个启用技能 · 5 个归档技能 · 9 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
+我们的 agent 技能收藏与维护仓库：**38 个启用技能 · 5 个归档技能 · 9 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
 
 [分类目录](docs/catalog.md) · [安装指南](docs/guides/installation.md) · [逐项审查](docs/reviews/skill-review.md) · [整改路线](docs/reviews/roadmap.md) · [全部文档](docs/README.md)
 
@@ -10,7 +10,7 @@
 |---|---|
 | 需求与规划 | requirement-understanding、brainstorming、writing-plans |
 | 实现与代理编排 | executing-plans、parallel-agents、deepseek-subagent-orchestration、mcp-builder |
-| 质量、调试与审查 | systematic-debugging、code review、webapp-testing、property-based-testing |
+| 质量、调试与审查 | systematic-debugging、code review、webapp-testing、property-based-testing、windows-powershell-safe |
 | Git 隔离与交付 | using-git-worktrees、finishing-a-development-branch |
 | 品牌、设计与 UI | ui-ux-pro-max、brand、design-system、ui-styling、design、canvas-design、excalidraw-diagrams |
 | 写作与内容 | podcast-to-article、work-humanizer |

@@ -267,6 +267,13 @@
       "defaultTargets": [
         "agents"
       ]
+    },
+    {
+      "name": "windows-powershell-safe",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
     }
   ]
 }
