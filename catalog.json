@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-11",
+  "reviewedAt": "2026-10-13",
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
   "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。",
   "categories": [
@@ -72,7 +72,7 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "在写任何代码或执行任何命令之前"
+          "text": "第 1 步：分流（先说结论，允许用户推翻）"
         },
         {
           "file": "SKILL.md",
@@ -83,12 +83,12 @@
     {
       "name": "brainstorming",
       "category": "requirements-planning",
-      "state": "active",
+      "state": "archived",
       "value": "medium",
       "readiness": "conflicting",
-      "action": "merge",
+      "action": "archive-retain",
       "priority": "P1",
-      "summary": "保留方案比较和复杂度分流，移除所有任务都需重新审批的通用门禁。",
+      "summary": "已并入 requirement-understanding 的复杂度分流；归档保留来源与视觉辅助原型。",
       "uniqueValue": "spike / bounded / architectural 分流、方案权衡、架构规格自检和浏览器视觉辅助，适合复杂产品设计。",
       "issues": [
         "HARD-GATE 对每条路径和每个任务都要求批准，包括明确、可逆的小改动。",
@@ -97,8 +97,8 @@
         "视觉辅助服务器由 Bash 脚本启动，需要额外 Windows 适配。"
       ],
       "improvements": [
-        "主入口只保留任务分流、关键问题和验收条件；架构与视觉辅助细节按需读取。",
-        "确认已有授权；方案比较只在存在真实取舍时进行，取消固定审批和自动提交。"
+        "分流、方案比较与规格自检已迁入 requirement-understanding（references/architecture-design.md、references/spec-reviewer-prompt.md）。",
+        "HARD-GATE 与固定审批已移除；视觉辅助脚本保留归档作参考。"
       ],
       "mergeWith": [
         "requirement-understanding",
@@ -157,12 +157,12 @@
     {
       "name": "executing-plans",
       "category": "implementation-orchestration",
-      "state": "active",
+      "state": "archived",
       "value": "medium",
       "readiness": "conflicting",
-      "action": "merge",
+      "action": "archive-retain",
       "priority": "P1",
-      "summary": "与 subagent-driven-development 合成同一执行入口，分别提供顺序和委派模式。",
+      "summary": "已并入 execute-plan（顺序模式）；归档保留来源。",
       "uniqueValue": "执行前检查计划、逐项验证、遇到真实阻塞重新评估，适合无子代理环境。",
       "issues": [
         "描述说 separate session，正文又在可用时强制转到子代理开发，边界不稳定。",
@@ -170,11 +170,11 @@
         "任何测试失败或指令不清就停止询问，缺少可自行修复的判断。"
       ],
       "improvements": [
-        "统一 execute-plan 入口，按依赖和工具能力选择顺序执行或委派。",
-        "保留状态与证据，用明确的权限、缺失信息和失败停止条件替代泛化停工规则。"
+        "顺序执行能力已迁入 execute-plan 的顺序模式检查清单。",
+        "固定停工规则改为明确的阻塞条件，不再要求隔离工作区以外的固定流程。"
       ],
       "mergeWith": [
-        "subagent-driven-development"
+        "execute-plan"
       ],
       "scenarios": [
         "子代理不可用时按相同验收标准顺序完成计划。",
@@ -192,46 +192,39 @@
       ]
     },
     {
-      "name": "subagent-driven-development",
+      "name": "execute-plan",
       "category": "implementation-orchestration",
       "state": "active",
       "value": "high",
       "readiness": "conditional",
-      "action": "merge",
+      "action": "retain",
       "priority": "P1",
-      "summary": "保留任务契约、恢复账本和审查包，整合到统一计划执行技能。",
-      "uniqueValue": "按计划记录状态以防上下文压缩后重做任务；真实 BASE..HEAD 审查包避免多次提交被 HEAD~1 截断；修复复审范围和上限明确。",
+      "summary": "统一计划执行入口：按依赖与宿主能力选择顺序执行或委派子代理；含任务账本、逐任务审查与收尾交付（并入 executing-plans 与 subagent-driven-development 的能力）。",
+      "uniqueValue": "任务账本防上下文压缩后重做、真实 BASE..HEAD 审查包、修复循环上限与裁决纪律、顺序/委派双模式、工作目录按计划路径哈希隔离。",
       "issues": [
-        "147 行入口（细节已迁 references）、复杂五轮修复机制、无条件逐任务审查，普通实现成本偏高。",
-        "要求一直重试到上限才能裁决明显错误的审查结论。",
-        "删除工作目录前只收集 Ruling，完整账本和报告未证明已进入 Git 历史，证据可能丢失。",
-        "sdd-workspace 仅以计划 basename 标识，同名不同目录的计划会碰撞。",
-        "脚本为 Bash；模型和等待策略强依赖运行时。"
+        "脚本为 Bash，依赖 git-bash 或 WSL；模型与等待策略取决于运行时能力。",
+        "逐任务审查与五轮修复循环对普通实现偏重，需按任务量与风险缩放。"
       ],
       "improvements": [
-        "抽出 references：派发、审查、恢复、修复循环；主入口保持短。",
-        "任务量与风险决定审查频率，证据落盘保留后再清理临时产物。",
-        "工作目录标识包含计划规范路径的哈希；以当前工具 schema 为准。"
+        "审查频率按风险调整；以当前工具 schema 为准，不写死角色与模型名。",
+        "工作目录标识已含计划路径哈希；删除工作区前先把账本与报告落盘。"
       ],
       "mergeWith": [
         "executing-plans"
       ],
       "scenarios": [
+        "没有子代理时，按相同验收标准顺序完成计划。",
         "中断后从首个未完成任务恢复，不重复已提交任务。",
         "两份同名计划不会共享账本；多提交任务被完整审查。"
       ],
       "evidence": [
         {
-          "file": "references/task-loop.md",
-          "text": "Five rounds maximum per task"
-        },
-        {
-          "file": "scripts/sdd-workspace",
-          "text": "slug=$(basename"
+          "file": "SKILL.md",
+          "text": "两种模式，按依赖与宿主能力选择"
         },
         {
           "file": "SKILL.md",
-          "text": "delete this plan's workspace"
+          "text": "Ruling: <决定> — <理由> — <错了的代价>"
         }
       ]
     },
@@ -425,12 +418,12 @@
     {
       "name": "verification-before-completion",
       "category": "quality-debugging",
-      "state": "active",
+      "state": "archived",
       "value": "medium",
       "readiness": "conflicting",
-      "action": "merge",
+      "action": "archive-retain",
       "priority": "P1",
-      "summary": "证据先于完成声明值得保留，精简后放到质量公共参考。",
+      "summary": "已并入 finishing-a-development-branch 的共享验证参考（references/verification.md）。",
       "uniqueValue": "区分测试、lint、构建、需求覆盖和委派声明的证据，不把一种通过外推为全部通过。",
       "issues": [
         "要求在同一条消息中重新运行验证，可能重复同一代码状态的已有效证据。",
@@ -438,8 +431,7 @@
         "没有脚本或领域资料，主要重复宿主已有完成声明规则。"
       ],
       "improvements": [
-        "记录代码状态/提交、验证命令和结果；相关代码变更后才使证据失效。",
-        "作为共享 verification 参考由执行和收尾入口引用，不独立广泛触发。"
+        "证据契约已迁入共享参考：绑定代码状态、代码变更后才失效、不重复全量验证。"
       ],
       "mergeWith": [
         "finishing-a-development-branch"
@@ -462,12 +454,12 @@
     {
       "name": "requesting-code-review",
       "category": "quality-debugging",
-      "state": "active",
+      "state": "archived",
       "value": "medium",
       "readiness": "conditional",
-      "action": "merge",
+      "action": "archive-retain",
       "priority": "P1",
-      "summary": "与 receiving-code-review 统一为 code-review 的审查和反馈两种模式。",
+      "summary": "已并入 code-review 的审查模式；code-reviewer 模板迁入其 references。",
       "uniqueValue": "code-reviewer 模板包含只读审查、需求比对、缺陷严重度与禁止评审者递归派发，值得复用。",
       "issues": [
         "默认 HEAD~1 会截断多提交任务；只看提交区间会遗漏未提交修改。",
@@ -475,11 +467,10 @@
         "固定 general-purpose 角色是宿主约定。"
       ],
       "improvements": [
-        "记录任务起始 BASE，并声明是否包含 staged/unstaged/untracked 工作成果。",
-        "大任务用独立审查，小任务按风险自查；工具不可用时有明确降级。"
+        "只读审查模板已迁入 code-review/references/code-reviewer.md；BASE 记录与降级规则并入入口第 1 条。"
       ],
       "mergeWith": [
-        "receiving-code-review"
+        "code-review"
       ],
       "scenarios": [
         "一个任务包含三次提交和未提交修复时，审查包覆盖所有成果。",
@@ -491,7 +482,7 @@
           "text": "BASE_SHA=$(git rev-parse HEAD~1)"
         },
         {
-          "file": "code-reviewer.md",
+          "repoFile": "skills/code-review/references/code-reviewer.md",
           "text": "Read-Only Review"
         }
       ]
@@ -499,12 +490,12 @@
     {
       "name": "receiving-code-review",
       "category": "quality-debugging",
-      "state": "active",
+      "state": "archived",
       "value": "medium",
       "readiness": "conflicting",
-      "action": "merge",
+      "action": "archive-retain",
       "priority": "P1",
-      "summary": "保留建议核验与有证据的异议，合并到 code-review 的反馈模式。",
+      "summary": "已并入 code-review 的反馈模式。",
       "uniqueValue": "检查建议是否适用于当前平台和架构、区分有效修复与无用功能、回复具体审查线程。",
       "issues": [
         "任意一项不清楚就停止所有修复，即使其他项完全独立。",
@@ -512,11 +503,10 @@
         "把先前某位用户的偏好写成所有人的规则。"
       ],
       "improvements": [
-        "不明项独立澄清，已明确且无依赖的项继续处理。",
-        "报告建议、证据、决定和验证；删去普遍化的语气禁令。"
+        "核验、有理有据的异议、YAGNI 检查与回应规范已并入 code-review 的「处理反馈」。"
       ],
       "mergeWith": [
-        "requesting-code-review"
+        "code-review"
       ],
       "scenarios": [
         "外部审查者建议删除兼容代码时先验证支持目标。",
@@ -598,7 +588,7 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Superpowers"
+          "text": "created this worktree — we own cleanup:"
         },
         {
           "file": "SKILL.md",
@@ -958,12 +948,12 @@
     {
       "name": "using-superpowers",
       "category": "authoring-efficiency",
-      "state": "active",
+      "state": "archived",
       "value": "low",
       "readiness": "conflicting",
-      "action": "archive-proposed",
+      "action": "archive-retain",
       "priority": "P1",
-      "summary": "建议退出默认激活集；保留有用的平台说明为维护参考。",
+      "summary": "已退出默认激活集；平台说明归档作维护参考。",
       "uniqueValue": "跨宿主技能发现与平台适配参考有历史价值；主入口没有独立任务产出。",
       "issues": [
         "starting any conversation 和 1% chance 强制加载技能，扩大误触发与上下文开销。",
@@ -971,8 +961,7 @@
         "平台参考包含与当前 schema 相反的 full-history model override 说明及固定配置建议。"
       ],
       "improvements": [
-        "移到 archive 前检查所有 REQUIRED 引用；把平台说明改成工具能力探测参考。",
-        "自动技能选择依靠精准 description，移除普遍强制调用与额外配置修改要求。"
+        "强制调用与固定配置要求已移除；writing-skills 改为自包含的平台目录说明。"
       ],
       "mergeWith": [
         "writing-skills"
@@ -1030,23 +1019,21 @@
       ]
     },
     {
-      "name": "suggesting-cursor-rules",
+      "name": "suggesting-rules",
       "category": "authoring-efficiency",
       "state": "active",
       "value": "low",
-      "readiness": "conflicting",
-      "action": "upgrade",
+      "readiness": "conditional",
+      "action": "retain",
       "priority": "P2",
-      "summary": "重复偏好沉淀有用，但名称、文案与写入平台不一致。",
-      "uniqueValue": "重复纠正两次以上才提议规则、先查既有规则、一个关注点一条，避免把一次反馈永久化。",
+      "summary": "平台无关的重复偏好沉淀：按宿主选择落点（Cursor 规则或项目指令文件）。",
+      "uniqueValue": "重复纠正两次以上才提议、先查既有规则、一个关注点一条，避免把一次反馈永久化。",
       "issues": [
-        "名字和输出 .cursor/rules 属于 Cursor，标题和 description 却写 Codex。",
-        "默认通用安装到多个平台，实际只有一种规则文件落点。",
-        "用户表达偏好时可能已有直接写规则授权，应避免再次重复询问。"
+        "落点依赖具体宿主约定（.cursor/rules 或 AGENTS.md），执行时按当前工具核实。"
       ],
       "improvements": [
-        "改成平台无关的重复偏好整理，依据当前宿主选择项目指令或规则文件。",
-        "先合并已有规则，保留用户直接授权和作用范围，不把局部风格推广成全局。"
+        "已平台无关化：按当前宿主选择项目指令或规则文件，直接授权时不重复询问。",
+        "更新既有规则而不是新增重复条目；不把局部风格推广成全局。"
       ],
       "mergeWith": [],
       "scenarios": [
@@ -1056,7 +1043,7 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "# Suggesting Codex Rules"
+          "text": "先查已有规则/指令文件"
         },
         {
           "file": "SKILL.md",
@@ -1421,7 +1408,10 @@
       "improvements": [
         "按实际使用反馈维护，避免扩大自动触发范围。"
       ],
-      "mergeWith": [],
+      "mergeWith": [
+        "requesting-code-review",
+        "receiving-code-review"
+      ],
       "scenarios": [
         "检查入口与资源完整性，专项运行能力按实际任务验证。"
       ],

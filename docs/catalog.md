@@ -2,7 +2,7 @@
 
 由 `catalog.json` 和 `scripts/audit_skills.py` 生成。
 
-审查日期：2026-10-11。39 个启用 + 5 个归档 + 1 个外部入口。
+审查日期：2026-10-13。33 个启用 + 11 个归档 + 1 个外部入口。
 
 分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。
 价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。
@@ -16,7 +16,7 @@
 | Skill | 当前状态 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
 |---|---|---|---|---|---|
 | [requirement-understanding](../skills/requirement-understanding/SKILL.md) | 启用 | 中 | 规则需改造 | 合并候选 | P1 |
-| [brainstorming](../skills/brainstorming/SKILL.md) | 启用 | 中 | 规则需改造 | 合并候选 | P1 |
+| [brainstorming](../archive/skills/brainstorming/SKILL.md) | 归档 | 中 | 规则需改造 | 维持归档 | P1 |
 | [writing-plans](../skills/writing-plans/SKILL.md) | 启用 | 中 | 条件可用 | 升级 | P1 |
 | [ask-questions-if-underspecified](../archive/skills/ask-questions-if-underspecified/SKILL.md) | 归档 | 中 | 条件可用 | 维持归档 | P1 |
 
@@ -24,8 +24,8 @@
 
 | Skill | 当前状态 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
 |---|---|---|---|---|---|
-| [executing-plans](../skills/executing-plans/SKILL.md) | 启用 | 中 | 规则需改造 | 合并候选 | P1 |
-| [subagent-driven-development](../skills/subagent-driven-development/SKILL.md) | 启用 | 高 | 条件可用 | 合并候选 | P1 |
+| [executing-plans](../archive/skills/executing-plans/SKILL.md) | 归档 | 中 | 规则需改造 | 维持归档 | P1 |
+| [execute-plan](../skills/execute-plan/SKILL.md) | 启用 | 高 | 条件可用 | 保留 | P1 |
 | [parallel-agents](../skills/parallel-agents/SKILL.md) | 启用 | 高 | 条件可用 | 升级 | P1 |
 | [deepseek-subagent-orchestration](../skills/deepseek-subagent-orchestration/SKILL.md) | 启用 | 中 | 局部实测可运行 | 保留 | P2 |
 | [best-of-n-solving](../archive/skills/best-of-n-solving/SKILL.md) | 归档 | 低 | 条件可用 | 维持归档 | P2 |
@@ -41,9 +41,9 @@
 | [env-doctor](../skills/env-doctor/SKILL.md) | 启用 | 高 | 条件可用 | 保留 | P2 |
 | [systematic-debugging](../skills/systematic-debugging/SKILL.md) | 启用 | 高 | 条件可用 | 升级 | P1 |
 | [test-driven-development](../skills/test-driven-development/SKILL.md) | 启用 | 中 | 规则需改造 | 升级 | P1 |
-| [verification-before-completion](../skills/verification-before-completion/SKILL.md) | 启用 | 中 | 规则需改造 | 合并候选 | P1 |
-| [requesting-code-review](../skills/requesting-code-review/SKILL.md) | 启用 | 中 | 条件可用 | 合并候选 | P1 |
-| [receiving-code-review](../skills/receiving-code-review/SKILL.md) | 启用 | 中 | 规则需改造 | 合并候选 | P1 |
+| [verification-before-completion](../archive/skills/verification-before-completion/SKILL.md) | 归档 | 中 | 规则需改造 | 维持归档 | P1 |
+| [requesting-code-review](../archive/skills/requesting-code-review/SKILL.md) | 归档 | 中 | 条件可用 | 维持归档 | P1 |
+| [receiving-code-review](../archive/skills/receiving-code-review/SKILL.md) | 归档 | 中 | 规则需改造 | 维持归档 | P1 |
 | [webapp-testing](../skills/webapp-testing/SKILL.md) | 启用 | 高 | 条件可用 | 保留 | P2 |
 | [property-based-testing](../skills/property-based-testing/SKILL.md) | 启用 | 高 | 条件可用 | 保留 | P2 |
 | [code-review](../skills/code-review/SKILL.md) | 启用 | 中 | 条件可用 | 保留 | P1 |
@@ -90,9 +90,9 @@
 | Skill | 当前状态 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
 |---|---|---|---|---|---|
 | [writing-skills](../skills/writing-skills/SKILL.md) | 启用 | 中 | 规则需改造 | 升级 | P1 |
-| [using-superpowers](../skills/using-superpowers/SKILL.md) | 启用 | 低 | 规则需改造 | 建议归档 | P1 |
+| [using-superpowers](../archive/skills/using-superpowers/SKILL.md) | 归档 | 低 | 规则需改造 | 维持归档 | P1 |
 | [token-efficient-workflow](../skills/token-efficient-workflow/SKILL.md) | 启用 | 中 | 条件可用 | 升级 | P0 |
-| [suggesting-cursor-rules](../skills/suggesting-cursor-rules/SKILL.md) | 启用 | 低 | 规则需改造 | 升级 | P2 |
+| [suggesting-rules](../skills/suggesting-rules/SKILL.md) | 启用 | 低 | 条件可用 | 保留 | P2 |
 | toolkit-map（外部） | 外部 | 高 | 依赖外部环境 | 保持外部 | P0 |
 
 ## 数据库与后端

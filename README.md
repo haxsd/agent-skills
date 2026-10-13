@@ -1,6 +1,6 @@
 # agent-skills
 
-我们的 agent 技能收藏与维护仓库：**38 个启用技能 · 5 个归档技能 · 9 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
+我们的 agent 技能收藏与维护仓库：**33 个启用技能 · 11 个归档技能 · 9 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
 
 [分类目录](docs/catalog.md) · [安装指南](docs/guides/installation.md) · [全部文档](docs/README.md)
 
@@ -8,8 +8,8 @@
 
 | 类别 | 代表技能 |
 |---|---|
-| 需求与规划 | requirement-understanding、brainstorming、writing-plans |
-| 实现与代理编排 | executing-plans、parallel-agents、deepseek-subagent-orchestration、mcp-builder |
+| 需求与规划 | requirement-understanding、writing-plans |
+| 实现与代理编排 | execute-plan、parallel-agents、deepseek-subagent-orchestration、mcp-builder |
 | 质量、调试与审查 | systematic-debugging、code review、webapp-testing、property-based-testing、windows-powershell-safe |
 | Git 隔离与交付 | using-git-worktrees、finishing-a-development-branch |
 | 品牌、设计与 UI | ui-ux-pro-max、brand、design-system、ui-styling、design、canvas-design、excalidraw-diagrams |
@@ -42,4 +42,4 @@ tests/         离线回归测试
 
 `catalog.json` 保存人工判断，`manifest.json` 管理安装目标，`external.json` 登记独立维护的技能。维护步骤和自动检查范围见 [维护指南](docs/guides/maintenance.md)。
 
-每个 skill 的价值、依赖、重复与升级建议记录在维护者的内部审查里；合并/归档建议尚未自动实施。新收录技能都带固定上游版本和许可证，来源与许可边界见 [署名说明](ATTRIBUTION.md)。
+每个 skill 的价值、依赖、重复与升级建议记录在维护者的内部审查里；入口收敛（合并与归档）分批实施。新收录技能都带固定上游版本和许可证，来源与许可边界见 [署名说明](ATTRIBUTION.md)。

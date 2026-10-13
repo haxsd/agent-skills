@@ -4,7 +4,7 @@
 
 | 目录 | 内容 | 状态 |
 |---|---|---|
-| skills/ | ask-questions、banner、slides、best-of-n、dispatching 五个历史入口 | 保留来源快照；部分能力已被现有入口覆盖 |
+| skills/ | 11 个历史入口：ask-questions、banner、slides、best-of-n、dispatching、brainstorming、executing-plans、requesting-code-review、receiving-code-review、verification-before-completion、using-superpowers | 保留来源快照；相关能力已并入 requirement-understanding、execute-plan、code-review、finishing-a-development-branch |
 | rules/ | DeepSeek 提速与 graphify 的 Cursor 规则模板 | 按项目和宿主能力手动采用 |
 | legacy/ | token 工作流旧版、toolkit-map 安装草稿 | 历史参考 |
 

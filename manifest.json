@@ -3,13 +3,6 @@
   "note": "只记录安装目标与原始归属；描述从 SKILL.md 读取，文件数和字节数由 audit 生成，避免历史缓存漂移。",
   "skills": [
     {
-      "name": "brainstorming",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
       "name": "brand",
       "origin": "agents",
       "defaultTargets": [
@@ -24,7 +17,21 @@
       ]
     },
     {
+      "name": "code-review",
+      "origin": "codex",
+      "defaultTargets": [
+        "codex"
+      ]
+    },
+    {
       "name": "deepseek-subagent-orchestration",
+      "origin": "codex",
+      "defaultTargets": [
+        "codex"
+      ]
+    },
+    {
+      "name": "deepseek-subagents",
       "origin": "codex",
       "defaultTargets": [
         "codex"
@@ -45,6 +52,13 @@
       ]
     },
     {
+      "name": "development-workflow",
+      "origin": "codex",
+      "defaultTargets": [
+        "codex"
+      ]
+    },
+    {
       "name": "env-doctor",
       "origin": "agents",
       "defaultTargets": [
@@ -52,7 +66,14 @@
       ]
     },
     {
-      "name": "executing-plans",
+      "name": "excalidraw-diagrams",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "execute-plan",
       "origin": "agents",
       "defaultTargets": [
         "agents"
@@ -73,6 +94,13 @@
       ]
     },
     {
+      "name": "mcp-builder",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
       "name": "parallel-agents",
       "origin": "agents",
       "defaultTargets": [
@@ -80,14 +108,14 @@
       ]
     },
     {
-      "name": "receiving-code-review",
+      "name": "podcast-to-article",
       "origin": "agents",
       "defaultTargets": [
         "agents"
       ]
     },
     {
-      "name": "requesting-code-review",
+      "name": "property-based-testing",
       "origin": "agents",
       "defaultTargets": [
         "agents"
@@ -108,14 +136,14 @@
       ]
     },
     {
-      "name": "subagent-driven-development",
+      "name": "suggesting-rules",
       "origin": "agents",
       "defaultTargets": [
         "agents"
       ]
     },
     {
-      "name": "suggesting-cursor-rules",
+      "name": "supabase-postgres-best-practices",
       "origin": "agents",
       "defaultTargets": [
         "agents"
@@ -164,14 +192,28 @@
       ]
     },
     {
-      "name": "using-superpowers",
+      "name": "web-design-guidelines",
+      "origin": "codex",
+      "defaultTargets": [
+        "codex"
+      ]
+    },
+    {
+      "name": "webapp-testing",
       "origin": "agents",
       "defaultTargets": [
         "agents"
       ]
     },
     {
-      "name": "verification-before-completion",
+      "name": "windows-powershell-safe",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "work-humanizer",
       "origin": "agents",
       "defaultTargets": [
         "agents"
@@ -186,90 +228,6 @@
     },
     {
       "name": "writing-skills",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
-      "name": "webapp-testing",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
-      "name": "mcp-builder",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
-      "name": "supabase-postgres-best-practices",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
-      "name": "property-based-testing",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
-      "name": "development-workflow",
-      "origin": "codex",
-      "defaultTargets": [
-        "codex"
-      ]
-    },
-    {
-      "name": "code-review",
-      "origin": "codex",
-      "defaultTargets": [
-        "codex"
-      ]
-    },
-    {
-      "name": "deepseek-subagents",
-      "origin": "codex",
-      "defaultTargets": [
-        "codex"
-      ]
-    },
-    {
-      "name": "web-design-guidelines",
-      "origin": "codex",
-      "defaultTargets": [
-        "codex"
-      ]
-    },
-    {
-      "name": "podcast-to-article",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
-      "name": "excalidraw-diagrams",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
-      "name": "work-humanizer",
-      "origin": "agents",
-      "defaultTargets": [
-        "agents"
-      ]
-    },
-    {
-      "name": "windows-powershell-safe",
       "origin": "agents",
       "defaultTargets": [
         "agents"

@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
   agent-skills 安装器：把本仓库的 skill 以「目录联接（junction）」挂进各 agent 的技能目录。
 
@@ -175,7 +175,30 @@ if ((Test-Path $SharedSrc) -and (-not $Only -or 'token-efficient-workflow' -in $
   Write-Host ""
 }
 
-# ---------- 2. skills ----------
+# ---------- 2. 清理孤儿联接 ----------
+# 归档/改名会让旧联接指向本仓库里已不存在的 skills/ 路径。这里只清理这类失效联接：
+# 不碰真实目录，也不碰指向别处的联接。各机器 pull 后跑一次安装即完成迁移。
+Write-Host "[orphans]"
+$orphans = 0
+foreach ($dirName in ($TargetDirs.Keys)) {
+  if ($Target -ne 'all' -and $Target -ne $dirName) { continue }
+  $root = $TargetDirs[$dirName]
+  if (-not (Test-Path -LiteralPath $root)) { continue }
+  foreach ($item in @(Get-ChildItem -LiteralPath $root -Force)) {
+    if (-not [bool]($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint)) { continue }
+    $linkTarget = Get-LinkTarget $item.FullName
+    if (-not $linkTarget) { continue }
+    $norm = [IO.Path]::GetFullPath($linkTarget)
+    if ($norm -notlike "$SkillsRoot\*") { continue }
+    if (Test-Path -LiteralPath $norm) { continue }
+    if ($DryRun) { Write-Host "  [dry-run] 清理孤儿联接 $($item.Name)（源已不存在：$linkTarget）" }
+    else { (Get-Item -LiteralPath $item.FullName -Force).Delete(); Write-Host "  - $($item.Name)（旧联接，源已归档/移走）" }
+    $orphans++
+  }
+}
+if ($orphans -eq 0) { Write-Host "  无孤儿联接" }
+Write-Host ""
+# ---------- 3. skills ----------
 foreach ($dirName in ($TargetDirs.Keys)) {
   if ($Target -ne 'all' -and $Target -ne $dirName) { continue }
   $root = $TargetDirs[$dirName]
@@ -231,7 +254,7 @@ foreach ($dirName in ($TargetDirs.Keys)) {
   Write-Host ""
 }
 
-# ---------- 3. 外部技能 ----------
+# ---------- 4. 外部技能 ----------
 # external.json 里登记的是「自己独立成库」的技能（例如 toolkit-map 有自己的仓库和发布节奏）。
 # 做法仍然是挂联接、不复制内容——README 里记过内容分叉的教训。
 if ($externals.Count) {

@@ -48,7 +48,7 @@ description: 执行书面实施计划：按依赖和工具能力选择顺序执�
 
 删除任何东西之前：收集账本里所有 `Ruling:` 行（预检裁决、park 的发现、裁决结论），按顺序放进最终消息的「我做过的裁决」，每条附上"错了的代价"——那是这些决定唯一到达用户的地方。删除工作区前，先把账本与关键报告落到 git 历史或文件里，别让证据随工作区一起消失。
 
-整支审查干净且修复合入后，删除本计划的工作区；其他计划的目录不要动。用 [finishing-a-development-branch](../finishing-a-development-branch/SKILL.md) 收尾，验证契约见 [references/verification.md](../finishing-a-development-branch/references/verification.md)。
+整支审查干净且修复合入后，删除本计划的工作区；其他计划的目录不要动。用 [finishing-a-development-branch](../finishing-a-development-branch/SKILL.md) 收尾，验证契约见 [verification.md](../finishing-a-development-branch/references/verification.md)。
 
 ## 顺序模式检查清单
 

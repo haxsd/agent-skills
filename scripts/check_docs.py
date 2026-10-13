@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def check(root):
     documents = [root / "README.md", root / "ATTRIBUTION.md", root / "archive/README.md"]
-    documents += sorted(p for p in (root / "docs").rglob("*.md") if "history" not in p.relative_to(root / "docs").parts)
+    documents += sorted(p for p in (root / "docs").rglob("*.md") if not {"history", "reviews", "validation"} & set(p.relative_to(root / "docs").parts))
     errors = []
     for file in documents:
         text = file.read_text(encoding="utf-8-sig")
