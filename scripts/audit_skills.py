@@ -290,6 +290,10 @@ def outputs(catalog, audit):
     }
 
 
+# 这两份报告只写本机（目录已 gitignore），公开仓库不提交，检查模式不要求它们存在。
+GITIGNORED_OUTPUTS = frozenset({"docs/reviews/skill-review.md", "docs/validation/audit-findings.json"})
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
@@ -315,7 +319,13 @@ def main():
         if args.write:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(content, encoding="utf-8", newline="\n")
-        elif args.check and (not path.exists() or path.read_text(encoding="utf-8") != content):
+        elif (
+            args.check
+            # 公开仓库只提交 docs/catalog.md；另两份报告写在已 gitignore 的目录里，
+            # 属于本机/内部产物，检查模式不要求它们存在（本地 --write 仍会生成）。
+            and relative not in GITIGNORED_OUTPUTS
+            and (not path.exists() or path.read_text(encoding="utf-8") != content)
+        ):
             stale.append(relative)
     if stale:
         print("Stale derived files: " + ", ".join(stale))
