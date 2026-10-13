@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   agent-skills 安装器：把本仓库的 skill 以「目录联接（junction）」挂进各 agent 的技能目录。
 
