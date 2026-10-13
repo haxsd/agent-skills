@@ -6,9 +6,9 @@
 
 ```powershell
 # 使用本机已验证的 Python，不依赖可能指向商店占位程序的 PATH。
-$deepseekPython = '%USERPROFILE%\AppData\Local\Programs\Python\Python312\python.exe'
-# 调度器位于当前用户技能目录。迁移时更新两处路径。
-$deepseekRunner = '%USERPROFILE%\.codex\skills\deepseek-subagents\scripts\delegate.py'
+$deepseekPython = "$env:USERPROFILE\AppData\Local\Programs\Python\Python312\python.exe"
+# 调度器位于当前用户技能目录。迁移电脑时按实际位置改这两处。
+$deepseekRunner = "$env:USERPROFILE\.codex\skills\deepseek-subagents\scripts\delegate.py"
 # 检查 CLI、API 鉴权和模型标识；不会生成内容或改主代理配置。
 & $deepseekPython -X utf8 $deepseekRunner doctor
 ```
