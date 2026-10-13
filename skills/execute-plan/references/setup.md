@@ -1,11 +1,11 @@
-# subagent-driven-development reference: setup
+# execute-plan reference: setup
 
 Load before the first task (worktree, ledger, plan read, pre-flight).
 
 ## Setup
 
 Ensure the work happens in an isolated workspace: use
-superpowers:using-git-worktrees to create one or verify the existing one.
+using-git-worktrees to create one or verify the existing one.
 Never start implementation on a main/master branch without your human
 partner's explicit consent.
 

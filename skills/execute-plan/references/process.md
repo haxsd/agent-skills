@@ -1,4 +1,4 @@
-# subagent-driven-development reference: process diagram
+# execute-plan reference: process diagram
 
 Load for the full per-task / final-review flowchart.
 
@@ -31,10 +31,10 @@ digraph process {
 
     "Setup: worktree, ledger check, read plan, pre-flight review" [shape=box];
     "More tasks remain?" [shape=diamond];
-    "Dispatch final code reviewer (../requesting-code-review/code-reviewer.md)" [shape=box];
+    "Dispatch final code reviewer (../code-review/references/code-reviewer.md)" [shape=box];
     "Final findings? ONE fix dispatch, one scoped re-review, adjudicate residuals" [shape=box];
     "Final review clean: delete this plan's workspace" [shape=box];
-    "Use superpowers:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
+    "Use finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
 
     "Setup: worktree, ledger check, read plan, pre-flight review" -> "Dispatch implementer subagent (./implementer-prompt.md)";
     "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer asks questions?";
@@ -60,10 +60,10 @@ digraph process {
     "Park findings in ledger with rulings" -> "Append completion to ledger, mark todo complete";
     "Append completion to ledger, mark todo complete" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
-    "More tasks remain?" -> "Dispatch final code reviewer (../requesting-code-review/code-reviewer.md)" [label="no"];
-    "Dispatch final code reviewer (../requesting-code-review/code-reviewer.md)" -> "Final findings? ONE fix dispatch, one scoped re-review, adjudicate residuals";
+    "More tasks remain?" -> "Dispatch final code reviewer (../code-review/references/code-reviewer.md)" [label="no"];
+    "Dispatch final code reviewer (../code-review/references/code-reviewer.md)" -> "Final findings? ONE fix dispatch, one scoped re-review, adjudicate residuals";
     "Final findings? ONE fix dispatch, one scoped re-review, adjudicate residuals" -> "Final review clean: delete this plan's workspace";
-    "Final review clean: delete this plan's workspace" -> "Use superpowers:finishing-a-development-branch";
+    "Final review clean: delete this plan's workspace" -> "Use finishing-a-development-branch";
 }
 ```
 

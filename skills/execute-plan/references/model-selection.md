@@ -1,4 +1,4 @@
-# subagent-driven-development reference: model selection
+# execute-plan reference: model selection
 
 Load when choosing models for implementer / reviewer / final review.
 

@@ -13,6 +13,8 @@ description: Use when implementation is complete, all tests pass, and you need t
 
 ## Step 1: Verify Tests
 
+Follow the shared evidence contract in [references/verification.md](references/verification.md): evidence before claims, bound to the current code state.
+
 Run the project's full test suite (`npm test` / `cargo test` / `pytest` / `go test ./...`).
 
 **If tests fail**, report the failures and stop — the menu comes after a green suite:

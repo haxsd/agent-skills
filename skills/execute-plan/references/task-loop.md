@@ -1,4 +1,4 @@
-# subagent-driven-development reference: task loop
+# execute-plan reference: task loop
 
 Load for implement → report → review → fix loop → complete details. Prompt templates live beside this skill: `../implementer-prompt.md`, `../task-reviewer-prompt.md`, `../re-review-prompt.md`.
 

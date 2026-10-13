@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Resolve and ensure the working-tree directory SDD uses for one plan's
-# short-lived artifacts: task briefs, implementer reports, review packages,
-# and the progress ledger. Print the plan directory's absolute path.
+# Resolve and ensure the working-tree directory execute-plan uses for one
+# plan's short-lived artifacts: task briefs, implementer reports, review
+# packages, and the progress ledger. Print the plan directory's absolute path.
 #
-# One directory per plan (.superpowers/sdd/<plan-basename>/) so a follow-up
-# plan in the same working tree can never read or overwrite another plan's
-# artifacts. A stale ledger misread as current progress makes controllers
+# One directory per plan (.superpowers/sdd/<plan-basename>-<path-hash>/) so a
+# follow-up plan in the same working tree can never read or overwrite another
+# plan's artifacts, and plans with the same basename in different directories
+# never collide. A stale ledger misread as current progress makes controllers
 # skip whole task sequences — plan-scoping removes that failure structurally.
 #
 # The workspace lives in the working tree (not under .git/) because Claude Code
@@ -32,9 +33,14 @@ slug=$(basename "$plan" .md)
 [ -n "$slug" ] && [ "$slug" != "." ] && [ "$slug" != ".." ] \
   || { echo "cannot derive a workspace name from: $plan" >&2; exit 2; }
 
+# Include a short hash of the plan's canonical path so plans with the same
+# basename in different directories never share a workspace.
+plan_path=$(cd "$(dirname "$plan")" && pwd)/$(basename "$plan")
+path_hash=$(printf '%s' "$plan_path" | git hash-object --stdin | cut -c1-8)
+
 root=$(git rev-parse --show-toplevel)
 base="$root/.superpowers/sdd"
-dir="$base/$slug"
+dir="$base/$slug-$path_hash"
 mkdir -p "$dir"
 printf '*\n' > "$base/.gitignore"
 cd "$dir" && pwd

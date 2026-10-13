@@ -132,8 +132,8 @@ Task(generalPurpose): "修复 tool-approval-race-conditions.test.ts 的失败"
 
 ---
 
-## 与 subagent-driven-development 的分工
+## 与 execute-plan 的分工
 
 - 本技能解决「怎么把并行工作切开并派出去」
-- `subagent-driven-development` 解决「按计划逐任务实现 + 每任务审查」的流程
+- `execute-plan` 解决「按计划逐任务实现 + 每任务审查」的流程
 - 需要真并发的独立任务用本技能；需要逐任务把关的实现流程用后者

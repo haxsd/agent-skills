@@ -1,4 +1,4 @@
-# subagent-driven-development reference: example walkthrough
+# execute-plan reference: example walkthrough
 
 Load for a worked example of the full flow.
 
@@ -8,8 +8,8 @@ Load for a worked example of the full flow.
 You: I'm using Subagent-Driven Development to execute this plan.
 
 [Setup: worktree verified]
-[Read plan file once: docs/superpowers/plans/feature-plan.md]
-[Resolve workspace: scripts/sdd-workspace docs/superpowers/plans/feature-plan.md — no ledger inside, fresh start]
+[Read plan file once: docs/plans/feature-plan.md]
+[Resolve workspace: scripts/sdd-workspace docs/plans/feature-plan.md — no ledger inside, fresh start]
 [Create todos for all tasks]
 
 Task 1: Hook installation script
@@ -18,7 +18,7 @@ Task 1: Hook installation script
 
 Implementer: "Before I begin - should the hook be installed at user or system level?"
 
-You: "User level (~/.config/superpowers/hooks/)"
+You: "User level (~/.config/plan-hooks/)"
 
 Implementer: [Later]
   - Implemented install-hook command
@@ -66,5 +66,5 @@ Final reviewer: All requirements met. Deferred minors triaged: none block merge.
 
 [Delete this plan's workspace — the record now lives in git]
 
-Done! Using superpowers:finishing-a-development-branch.
+Done! Using finishing-a-development-branch.
 ```
