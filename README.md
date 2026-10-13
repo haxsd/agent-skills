@@ -2,7 +2,7 @@
 
 我们的 agent 技能收藏与维护仓库：**38 个启用技能 · 5 个归档技能 · 9 个用途分类**。技能目录保持稳定，分类、价值判断和升级建议通过索引查找。
 
-[分类目录](docs/catalog.md) · [安装指南](docs/guides/installation.md) · [逐项审查](docs/reviews/skill-review.md) · [整改路线](docs/reviews/roadmap.md) · [全部文档](docs/README.md)
+[分类目录](docs/catalog.md) · [安装指南](docs/guides/installation.md) · [全部文档](docs/README.md)
 
 ## 按用途查找
 
@@ -42,4 +42,4 @@ tests/         离线回归测试
 
 `catalog.json` 保存人工判断，`manifest.json` 管理安装目标，`external.json` 登记独立维护的技能。维护步骤和自动检查范围见 [维护指南](docs/guides/maintenance.md)。
 
-每个 skill 的价值、依赖、重复与升级建议都在审查报告中；合并/归档建议尚未自动实施。[四项新增技能](docs/reviews/curation-2026-09-30.md) 带固定上游版本和许可证。历史内容的来源与许可边界见 [署名说明](ATTRIBUTION.md)。
+每个 skill 的价值、依赖、重复与升级建议记录在维护者的内部审查里；合并/归档建议尚未自动实施。新收录技能都带固定上游版本和许可证，来源与许可边界见 [署名说明](ATTRIBUTION.md)。

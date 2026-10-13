@@ -21,6 +21,10 @@ graphify-out/
 # 安装器产生的备份
 *.backup-*/
 
+# 维护者内部报告（scripts/audit_skills.py 生成，不随仓库公开）
+docs/reviews/
+docs/validation/
+
 # PowerShell 5.1 在 USERPROFILE 被改写时的模块分析残留
 Microsoft/Windows/PowerShell/
 

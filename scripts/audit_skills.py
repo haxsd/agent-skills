@@ -227,7 +227,7 @@ def render_catalog(catalog, audit):
            "分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。",
            "价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。", "",
            "安装目标仍只由 `manifest.json` / `external.json` 决定；不要从本目录生成第二套目标配置。", "",
-           "详见 [逐项审查](reviews/skill-review.md)、[整改路线](reviews/roadmap.md)、[机器检查结果](validation/audit-findings.json)。", ""]
+           "逐项审查、整改路线与机器检查结果由维护者在内部保存。", ""]
     for category in catalog["categories"]:
         out.extend([f"## {category['title']}", "",
                     "| Skill | 当前状态 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |",

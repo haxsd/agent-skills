@@ -310,10 +310,6 @@
           "text": "Possible credential in job context"
         },
         {
-          "repoFile": "docs/validation/deepseek-validation.json",
-          "text": "total_tokens"
-        },
-        {
           "file": "scripts/agent_runtime.py",
           "text": "A check modified a path outside the owned files; do not integrate"
         }

@@ -9,7 +9,7 @@
 
 安装目标仍只由 `manifest.json` / `external.json` 决定；不要从本目录生成第二套目标配置。
 
-详见 [逐项审查](reviews/skill-review.md)、[整改路线](reviews/roadmap.md)、[机器检查结果](validation/audit-findings.json)。
+逐项审查、整改路线与机器检查结果由维护者在内部保存。
 
 ## 需求与规划
 
