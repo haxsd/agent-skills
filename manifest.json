@@ -227,6 +227,20 @@
       ]
     },
     {
+      "name": "skill-scanner",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "variant-analysis",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
       "name": "writing-skills",
       "origin": "agents",
       "defaultTargets": [

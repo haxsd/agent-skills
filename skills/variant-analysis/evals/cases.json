@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "skill": "variant-analysis",
+  "cases": [
+    {
+      "id": "cross-api-command-injection",
+      "prompt": "Python 项目已确认种子 subprocess.run(user, shell=True) 存在命令注入。候选 A: subprocess.check_output(other_user, shell=True)，other_user 来源未知；B: os.system(request.args['cmd'])，路由连通性待查；C: subprocess.run(['echo', user], shell=False)，固定 echo 程序；D: subprocess.run('echo fixed', shell=True)；E: subprocess.run(config_command, shell=flag)，配置和 flag 未知。请说明实际排查顺序、A-E 分诊、停止条件和未覆盖范围。当前只有片段，不允许声称已经跑过搜索或复现。",
+      "checks": [
+        "先确认根因与授权版本，并要求精确查询校准种子，片段条件下不编造已命中。",
+        "逐轴扩大到等价API与包装器，不只搜同名函数，同时记录噪声与预算。",
+        "A/E待确认，B待核实可达链；C/D排除本次shell注入前提，但不证明全部安全。",
+        "区分静态判断与运行证据，说明当前片段无法覆盖全仓。"
+      ]
+    },
+    {
+      "id": "missing-seed-in-current-version",
+      "prompt": "已知旧分支有一个缺陷。当前已授权 checkout 上精确搜索零命中，也没拿到原始差异。现在直接把查询全部放宽，给出全仓没有同类问题的结论是否合适？请给出下一步。",
+      "checks": [
+        "先核对分支版本、路径、转义、代码移动或已修复状态。",
+        "缺少校准依据不继续盲目泛化，不把零命中当作无同类问题。",
+        "列出取得旧差异或最小旧例的证据需求，不默认扩大授权。"
+      ]
+    },
+    {
+      "id": "nullable-authorization-holdout",
+      "prompt": "已确认种子：匿名用户 id=None 时，owner_id=None 的对象因 owner_id == user.id 被误授权。其他模块 A 比较 doc.owner_id == viewer.id 且两者都可为 None；B 先确认 viewer.id is not None 再比较 owner；C 记录 owner_id 字段但不做授权；D 通过 permitted(owner,user) 校验，函数实现未知。请给出校准和搜索轴、候选分诊；当前只能静态分析这些片段。",
+      "checks": [
+        "提炼双空值授权根因，不依赖种子的字段和函数名字。",
+        "A是强候选仍核对真实入口，B有明确非空防护，C不是授权操作，D待查函数语义。",
+        "不把安全反例算同族，不声称真实仓库已运行或召回完整。"
+      ]
+    },
+    {
+      "id": "no-known-bug",
+      "prompt": "我没有找到任何具体问题，只想普通审查一下刚写的代码。要直接运行 variant-analysis 吗？",
+      "checks": [
+        "说明缺少已知缺陷校准依据，转向通用代码审查或初始诊断。",
+        "不发明种子或自动启动全仓漏洞扫描。"
+      ]
+    }
+  ]
+}

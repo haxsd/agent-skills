@@ -1,0 +1,16 @@
+{
+  "name": "skill-scanner",
+  "repository": "https://github.com/getsentry/skills",
+  "commit": "d18b7aa8ba878354e5c348310230e652f7690f9c",
+  "path": "skills/skill-scanner",
+  "license": "Apache-2.0",
+  "author": "Sentry / Functional Software, Inc.",
+  "retrievedAt": "2026-10-14",
+  "modifications": [
+    "Chinese workflow rewritten for explicit read-only review, host-neutral tools and toolkit-map invocation.",
+    "Scanner independently reimplemented in Python standard library; upstream scan_skill.py is not vendored or executed.",
+    "Bounded reads, no target execution, no internal symlink/junction traversal, sanitized evidence and explicit coverage gaps.",
+    "Static matches are review leads, not a safe-to-install certification; add offline CLI regression tests."
+  ],
+  "validation": "See tests/test_skill_scanner.py for repeatable offline checks. Local run results are maintained privately; no proof of exhaustive malicious-skill detection is claimed."
+}

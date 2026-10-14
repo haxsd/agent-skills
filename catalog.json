@@ -1615,6 +1615,62 @@
           "text": "未在本机 Windows 复跑"
         }
       ]
+    },
+    {
+      "name": "skill-scanner",
+      "category": "authoring-efficiency",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "引入或改造第三方技能前的只读风险检查，补充提示注入、配置污染、脚本与供应链线索。",
+      "uniqueValue": "本仓标准库扫描器以脱敏 JSON 给出风险线索和覆盖缺口；与 audit 的元数据一致性、产品代码审查分工明确。",
+      "issues": [
+        "模式匹配会有误报和漏报；不执行目标，不分析所有二进制、动态下载或混淆行为，不能当安全认证。",
+        "静态文件检查不是 OS 沙箱；面对可并发修改的恶意目录应先取得不可变隔离副本。"
+      ],
+      "improvements": [
+        "用真实误报与遗漏持续改规则；保留不完整覆盖与人工复核，不输出目标原文或真实秘密。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "恶意目标的脚本和测试不会运行，敏感 canary 不出现在输出中。",
+        "内部链接、不可读文件、超限或不支持格式明确列入覆盖缺口。",
+        "介绍攻击的安全文档作为上下文线索，不直接被判定恶意或安全。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: skill-scanner"},
+        {"file": "UPSTREAM.json", "text": "d18b7aa8ba878354e5c348310230e652f7690f9c"}
+      ]
+    },
+    {
+      "name": "variant-analysis",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "已确认一个缺陷后，校准精确匹配、逐轴泛化并核验其他同根因实例。",
+      "uniqueValue": "明确区分首个根因诊断与全仓同族排查；记录泛化轴、误报、停止条件、未覆盖范围，避免把形似代码当真实缺陷。",
+      "issues": [
+        "方法需要用户授权的代码与已知缺陷证据；文档场景评估不等于所有真实仓库的召回保证。",
+        "CodeQL/Semgrep 属可选外部工具，本包不含其运行时或上游 Claude 自动工作流。"
+      ],
+      "improvements": [
+        "按实际项目维护跨 API、包装器、边界值和安全反例；确认有效后才建立项目 CI 规则。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "已知命令注入扩展到不同命名与不同 API 的同根因候选，安全字面量与无 shell 解析的反例不误报。",
+        "已知缺陷在当前代码版本中无法定位时先核对范围与版本，不继续以失效模式泛化。",
+        "证据不足的候选标待确认，达到搜索预算后如实报告未覆盖范围。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: variant-analysis"},
+        {"file": "UPSTREAM.json", "text": "8e54050ae63c2f62224c35b1616efe71865b4777"}
+      ]
     }
   ]
 }

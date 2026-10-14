@@ -1,0 +1,16 @@
+{
+  "name": "variant-analysis",
+  "repository": "https://github.com/trailofbits/skills",
+  "commit": "8e54050ae63c2f62224c35b1616efe71865b4777",
+  "path": "plugins/variant-analysis/skills/variant-analysis",
+  "license": "CC-BY-SA-4.0",
+  "author": "Trail of Bits",
+  "retrievedAt": "2026-10-14",
+  "modifications": [
+    "Chinese adaptation of exact-match calibration, one-axis-at-a-time generalization and evidence-based triage.",
+    "Rewrite routed references and report contract for host-neutral read-only investigation with explicit search budgets and incomplete coverage.",
+    "Do not ship the Claude plugin Workflow, CodeQL/Semgrep binaries or unused upstream query templates; optional tools require explicit availability checks.",
+    "Add independent behavioral evaluation cases for cross-API candidates, safe counterexamples, uncertain provenance, a missing seed and a non-security logic defect."
+  ],
+  "validation": "Maintainer scenarios are in EVAL.md and evals/cases.json. Scenario-level checks are not a guarantee of recall on real repositories."
+}

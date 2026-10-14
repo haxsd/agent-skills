@@ -443,3 +443,29 @@ UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的
 
 本仓贡献：
 - 中文精简改写，加入安全调用决策顺序、宿主版本边界、失败停止规则和经验参考。
+
+## skill-scanner
+
+[skill-scanner](skills/skill-scanner/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Sentry / Functional Software, Inc.](https://github.com/getsentry/skills)；许可：Apache-2.0；固定版本：`d18b7aa8ba878354e5c348310230e652f7690f9c`。详情：[skills/skill-scanner/UPSTREAM.json](skills/skill-scanner/UPSTREAM.json)。
+
+本仓贡献：
+- 本仓原创重写标准库只读扫描器、结构化脱敏输出、扫描边界与离线回归测试。
+- 基于 Sentry 方法重写中文审查入口，接入 toolkit-map，移除 uv 和特定宿主硬依赖。
+
+原创贡献仅覆盖本仓改写和实现；保留 Sentry 上游署名与 Apache-2.0。静态线索和无命中均不是安全认证。
+
+## variant-analysis
+
+[variant-analysis](skills/variant-analysis/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Trail of Bits](https://github.com/trailofbits/skills)；许可：CC-BY-SA-4.0；固定版本：`8e54050ae63c2f62224c35b1616efe71865b4777`。详情：[skills/variant-analysis/UPSTREAM.json](skills/variant-analysis/UPSTREAM.json)。
+
+本仓贡献：
+- 本仓中文改写已知缺陷校准、逐轴泛化、证据分诊与停止条件，加入跨宿主和缺工具回退。
+- 新增独立正反例评估场景与报告契约，不绑定 Claude 插件工作流或默认安装 CodeQL/Semgrep。
+
+基于 Trail of Bits 的原创改进；文本与改编参考继续按 CC-BY-SA-4.0 署名、标明修改并相同方式共享。

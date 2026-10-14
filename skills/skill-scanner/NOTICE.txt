@@ -1,0 +1,15 @@
+skill-scanner
+
+Based on the skill-security review methodology in Sentry's skills repository:
+https://github.com/getsentry/skills/tree/d18b7aa8ba878354e5c348310230e652f7690f9c/skills/skill-scanner
+
+Copyright 2025 Functional Software, Inc. dba Sentry
+Licensed under the Apache License, Version 2.0; see LICENSE.txt.
+
+Modified by agent-skills contributors, 2026:
+- Rewritten Chinese, host-neutral review workflow.
+- Independently implemented standard-library scanner and offline tests.
+- Added bounded traversal, secret-safe output and explicit coverage limits.
+
+Upstream scan_skill.py is not included. This package is not affiliated with,
+endorsed by, or a security certification from Sentry.

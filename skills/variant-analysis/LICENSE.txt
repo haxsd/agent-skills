@@ -1,0 +1,23 @@
+variant-analysis
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+Original work: Variant Analysis by Trail of Bits
+https://github.com/trailofbits/skills/tree/8e54050ae63c2f62224c35b1616efe71865b4777/plugins/variant-analysis
+
+This adaptation, including SKILL.md, routed references and evaluation cases,
+is licensed under Creative Commons Attribution-ShareAlike 4.0 International.
+The complete, legally binding license text is incorporated by this URI:
+https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+Human-readable summary (not a replacement for the license):
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Modified by agent-skills contributors, 2026: Chinese rewriting, host-neutral
+workflow, scoped searches and explicit uncertainty, independent evaluation
+cases; upstream plugin automation and query packs are not included.
+
+Reuse must retain appropriate attribution, a link to the license and an
+indication of changes. Adaptations must be shared under CC-BY-SA-4.0 or an
+allowed compatible license. No endorsement by Trail of Bits is implied.
+This license applies to this skill, not automatically to unrelated skills
+in the collection. The skill does not grant permission to test a target.

@@ -2,7 +2,7 @@
 
 由 `catalog.json` 和 `scripts/audit_skills.py` 生成。
 
-审查日期：2026-10-13。33 个启用 + 11 个归档 + 1 个外部入口。
+审查日期：2026-10-13。35 个启用 + 11 个归档 + 1 个外部入口。
 
 分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。
 价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。
@@ -50,6 +50,7 @@
 | [property-based-testing](../skills/property-based-testing/SKILL.md) | 启用 | 第三方引入 | 高 | 条件可用 | 保留 | P2 |
 | [code-review](../skills/code-review/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 条件可用 | 保留 | P1 |
 | [windows-powershell-safe](../skills/windows-powershell-safe/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P2 |
+| [variant-analysis](../skills/variant-analysis/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 
 ## Git 隔离与交付
 
@@ -96,6 +97,7 @@
 | [token-efficient-workflow](../skills/token-efficient-workflow/SKILL.md) | 启用 | 本仓原创 | 中 | 条件可用 | 升级 | P0 |
 | [suggesting-rules](../skills/suggesting-rules/SKILL.md) | 启用 | 本仓原创 | 低 | 条件可用 | 保留 | P2 |
 | toolkit-map（外部） | 外部 | 本仓原创 | 高 | 依赖外部环境 | 保持外部 | P0 |
+| [skill-scanner](../skills/skill-scanner/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 
 ## 数据库与后端
 
