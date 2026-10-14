@@ -40,7 +40,7 @@
 
 | Skill | 当前状态 | 创作归属 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
 |---|---|---|---|---|---|---|
-| [env-doctor](../skills/env-doctor/SKILL.md) | 启用 | 待核验 | 高 | 条件可用 | 保留 | P2 |
+| [env-doctor](../skills/env-doctor/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P2 |
 | [systematic-debugging](../skills/systematic-debugging/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 升级 | P1 |
 | [test-driven-development](../skills/test-driven-development/SKILL.md) | 启用 | 第三方引入 | 中 | 规则需改造 | 升级 | P1 |
 | [verification-before-completion](../archive/skills/verification-before-completion/SKILL.md) | 归档 | 第三方引入 | 中 | 规则需改造 | 维持归档 | P1 |
@@ -92,7 +92,7 @@
 
 | Skill | 当前状态 | 创作归属 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
 |---|---|---|---|---|---|---|
-| [writing-skills](../skills/writing-skills/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 规则需改造 | 升级 | P1 |
+| [writing-skills](../skills/writing-skills/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 条件可用 | 保留 | P2 |
 | [using-superpowers](../archive/skills/using-superpowers/SKILL.md) | 归档 | 第三方引入 | 低 | 规则需改造 | 维持归档 | P1 |
 | [token-efficient-workflow](../skills/token-efficient-workflow/SKILL.md) | 启用 | 本仓原创 | 中 | 条件可用 | 升级 | P0 |
 | [suggesting-rules](../skills/suggesting-rules/SKILL.md) | 启用 | 本仓原创 | 低 | 条件可用 | 保留 | P2 |

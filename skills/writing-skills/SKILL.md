@@ -1,255 +1,73 @@
 ---
 name: writing-skills
-description: Use when creating new skills, editing existing skills, or verifying skills work before deployment
+description: 编写、修改和验证 agent 技能，用对照评估改动是否真的改善行为，并处理触发、边界与来源许可。创建或编辑技能规则、优化触发描述、评估一次技能改动、改编外部技能资料时使用；普通文档、README 或项目规则文件写作不触发。Use when creating, editing, verifying, or evaluating agent skills.
+license: Apache-2.0; legacy obra files under MIT (see NOTICE.txt, LICENSES/MIT-obra.txt)
 ---
 
-# Writing Skills
+# 编写技能
 
-## Overview
+写技能是对 agent 行为做有证据的改动，不是写文档。核心循环：**定义要改善的行为 → 用对照量出当前差距 → 最小改动 → 再用同样的方法复测**。
 
-**Writing skills IS Test-Driven Development applied to process documentation.**
+借用 TDD 的"对照—改进—复测"思想（只借思想，不套用其铁律）。验证强度随改动分档：机械/格式修正（链接、错别字、损坏引用）用对应静态检查核对；纯文档整理不强制加载整套开发流程；影响行为的改动才做下面这套预算感知的模型对照。
+职责边界：技能是"可复用的技巧、模式或参考资料"，不是一次经历的故事；放置目录按宿主约定（如 `~/.cursor/skills/`、`~/.agents/skills/`）。
 
-**Personal skills live in your runtime's skills directory** (`~/.claude/skills/` on Claude Code, `~/.cursor/skills/` on Cursor). Codex, Copilot CLI, and Gemini CLI all also recognize `~/.agents/skills/` as a cross-runtime alias.
+## 1. 先定义要改善的真实行为
 
-You write test cases (pressure scenarios with subagents), watch them fail (baseline behavior), write the skill (documentation), watch tests pass (agents comply), and refactor (close loopholes).
+- 把目标写成一条可判定的检查：在什么输入下，输出应/不应出现什么行为。写不出可判定检查，就先观察一次真实输出，而不是先写指导。
+- 记录当前会怎么错、为什么值得改；说不清就先别写。
+- **基线已经达标就不要强造失败**。对照里看不到差距、也没有缺失的能力时，如实报告"无需改动"，不要为发布而发明理由。
+- 没有增量就不扩写。宁可少一条已验证的规则，不要多一页未验证的叮嘱。
 
-**Core principle:** If you didn't watch an agent fail without the skill, you don't know if the skill teaches the right thing.
+## 2. 公平对照
 
-**REQUIRED BACKGROUND:** You MUST understand test-driven-development before using this skill. That skill defines the fundamental RED-GREEN-REFACTOR cycle. This skill adapts TDD to documentation.
+改动前保留旧版快照；评估时用**新会话、同任务、同工具、同预算**分别跑旧版或"无技能"对照与候选版。
+对照是评估的前提；没有公平对照时，只能报告"冒烟观察"，不能宣称行为已经改善。
 
-**Official guidance:** For Anthropic's official skill authoring best practices, see [anthropic-best-practices.md](references/anthropic-best-practices.md). This document provides additional patterns and guidelines that complement the TDD-focused approach in this skill.
+## 3. 触发和执行分开测
 
-## What is a Skill?
+- **触发**：只给任务与技能清单/描述（不预加载正文），看 agent 是否选中本技能；应触发的正例和相邻不该触发的反例都要。
+- **执行**：同样的任务加载技能，逐条检查第 1 步的判定项。
+- 不要把"把技能塞给模型、输出不错"当成触发成功；也不要用关键词出现次数冒充行为评估。
 
-A **skill** is a reference guide for proven techniques, patterns, or tools. Skills help future agents find and apply effective approaches.
+## 4. 按质量、安全、成本比较
 
-**Skills are:** Reusable techniques, patterns, tools, reference guides
+- **质量**：逐条可判定检查的通过/失败，对照与候选分别记录。
+- **安全**：不虚构证据、不做未授权的动作、不把没测的维度写成已验证。
+- **成本**：token、耗时等只有确实拿到才记录；拿不到就写"未知"，不要估算成事实。
+- 篇幅、关键词密度、frontmatter 字数都不是成功标准。
 
-**Skills are NOT:** Narratives about how you solved a problem once
+## 5. 预算有限与留出题
 
-## TDD Mapping for Skills
+- 预算不足就缩小覆盖面并明说缺口，不要伪造完整认证。例：总共只有 6 次模型会话时，可以做 3 组同题"旧 vs 新"成对比较，但只能粗测**执行或触发中的一个**维度，另一个如实标为未覆盖；优先选风险最高的一轴。
+- 冻结一道未参与调优的**留出题**，只用于最终验证：看过它的结果回头改技能，就不能再称它是留出。
+- 没有模型 API / 插件也能做手动评估（人读输出，或在新上下文里跑案例）；不要为评估自动启动付费服务。
 
-| TDD Concept | Skill Creation |
-|-------------|----------------|
-| **Test case** | Pressure scenario with subagent |
-| **Production code** | Skill document (SKILL.md) |
-| **Test fails (RED)** | Agent violates rule without skill (baseline) |
-| **Test passes (GREEN)** | Agent complies with skill present |
-| **Refactor** | Close loopholes while maintaining compliance |
-| **Write test first** | Run baseline scenario BEFORE writing skill |
-| **Watch it fail** | Document exact rationalizations agent uses |
-| **Minimal code** | Write skill addressing those specific violations |
-| **Watch it pass** | Verify agent now complies |
-| **Refactor cycle** | Find new rationalizations → plug → re-verify |
+## 6. 技能的结构与写法
 
-The entire skill creation process follows RED-GREEN-REFACTOR.
+- frontmatter 必填 `name`（小写字母、数字、连字符，≤64 字符）与 `description`（≤1024 字符是描述字段的上限）；以官方当前字段规格为准，不要再引用"frontmatter 总长度上限"这类过时规则。
+- `description` 写清三件事：这个技能**做什么**、**什么时候用**（可触发的症状与场景）、**相邻边界**（什么时候不适用）；第三人称，不要把分步流程搬进来。
+- 渐进披露：SKILL.md 保持精简（目标 <500 行），重参考拆到 `references/`、可复用脚本放 `scripts/`，正文写明"什么时候去读"。
+- 祈使句、一个优秀示例、无叙事；先说清"为什么"，再给规则。
+- 指导形式匹配失败类型：纪律违规用禁令 + 借口对照表；输出形状错用正面模板；漏字段用必填槽位。见 [references/testing-and-bulletproofing.md](references/testing-and-bulletproofing.md)。
 
-## When to Create a Skill
+## 7. 来源与许可
 
-**Create when:**
-- Technique wasn't intuitively obvious to you
-- You'd reference this again across projects
-- Pattern applies broadly (not project-specific)
-- Others would benefit
+对外展示分三类：**原创**、**第三方引入**、**原创改进（基于上游）**。
+改编外部技能时保留上游作者、仓库与提交、许可证原文和修改说明（`LICENSE.txt`、`LICENSES/`、`UPSTREAM.json`、`NOTICE.txt`），按文件标明许可范围，不默默重许可；与根 [ATTRIBUTION.md](../../ATTRIBUTION.md) 和 `docs/sources/skill-provenance.json` 机制配合更新。
 
-**Don't create for:**
-- One-off solutions
-- Standard practices well-documented elsewhere
-- Project-specific conventions (put in your instructions file)
-- Mechanical constraints (if it's enforceable with regex/validation, automate it—save documentation for judgment calls)
+## 8. 发布前
 
-## Skill Types
+每项改动各自带验收证据，互不干扰的改动可以并行实施与验收，合并前逐项核对；仓库级结构检查（如 audit）只证明一致性，不能替代行为评估。
+逐项清单：[references/checklist.md](references/checklist.md)；完整评估方法（对照、预算、留出、报告口径）：[references/evaluation.md](references/evaluation.md)。
+压力场景与防借口化的具体做法：[references/testing-skills-with-subagents.md](references/testing-skills-with-subagents.md)、[references/persuasion-principles.md](references/persuasion-principles.md)；描述命中的调法：[references/sdo.md](references/sdo.md)；流程图与代码示例：[references/flowcharts-and-examples.md](references/flowcharts-and-examples.md)。
 
-### Technique
-Concrete method with steps to follow (condition-based-waiting, root-cause-tracing)
+## 常见错误
 
-### Pattern
-Way of thinking about problems (flatten-with-flags, test-invariants)
-
-### Reference
-API docs, syntax guides, tool documentation (office docs)
-
-## Directory Structure
-
-
-```
-skills/
-  skill-name/
-    SKILL.md              # Main reference (required)
-    supporting-file.*     # Only if needed
-```
-
-**Flat namespace** - all skills in one searchable namespace
-
-**Separate files for:**
-1. **Heavy reference** (100+ lines) - API docs, comprehensive syntax
-2. **Reusable tools** - Scripts, utilities, templates
-
-**Keep inline:**
-- Principles and concepts
-- Code patterns (< 50 lines)
-- Everything else
-
-## SKILL.md Structure
-
-**Frontmatter (YAML):**
-- Two required fields: `name` and `description` (see [agentskills.io/specification](https://agentskills.io/specification) for all supported fields)
-- Max 1024 characters total
-- `name`: Use letters, numbers, and hyphens only (no parentheses, special chars)
-- `description`: Third-person, describes ONLY when to use (NOT what it does)
-  - Start with "Use when..." to focus on triggering conditions
-  - Include specific symptoms, situations, and contexts
-  - **NEVER summarize the skill's process or workflow** (see SDO section for why)
-  - Keep under 500 characters if possible
-
-```markdown
----
-name: Skill-Name-With-Hyphens
-description: Use when [specific triggering conditions and symptoms]
----
-
-# Skill Name
-
-## Overview
-What is this? Core principle in 1-2 sentences.
-
-## When to Use
-[Small inline flowchart IF decision non-obvious]
-
-Bullet list with SYMPTOMS and use cases
-When NOT to use
-
-## Core Pattern (for techniques/patterns)
-Before/after code comparison
-
-## Quick Reference
-Table or bullets for scanning common operations
-
-## Implementation
-Inline code for simple patterns
-Link to file for heavy reference or reusable tools
-
-## Common Mistakes
-What goes wrong + fixes
-
-## Real-World Impact (optional)
-Concrete results
-```
-
-
-
-## Skill Discovery Optimization (SDO)
-
-Optimize description, keywords, naming, token efficiency, and cross-refs so agents find and load the skill. Details: [references/sdo.md](references/sdo.md).
-
-## Flowcharts and Code Examples
-
-Use flowcharts for non-obvious C2 decisions; keep code examples focused. Details: [references/flowcharts-and-examples.md](references/flowcharts-and-examples.md).
-
-## File Organization
-
-### Self-Contained Skill
-```
-defense-in-depth/
-  SKILL.md    # Everything inline
-```
-When: All content fits, no heavy reference needed
-
-### Skill with Reusable Tool
-```
-condition-based-waiting/
-  SKILL.md    # Overview + patterns
-  example.ts  # Working helpers to adapt
-```
-When: Tool is reusable code, not just narrative
-
-### Skill with Heavy Reference
-```
-pptx/
-  SKILL.md       # Overview + workflows
-  pptxgenjs.md   # 600 lines API reference
-  ooxml.md       # 500 lines XML structure
-  scripts/       # Executable tools
-```
-When: Reference material too large for inline
-
-## The Iron Law (Same as TDD)
-
-```
-NO SKILL WITHOUT A FAILING TEST FIRST
-```
-
-This applies to NEW skills AND EDITS to existing skills.
-
-Write skill before testing? Delete it. Start over.
-Edit skill without testing? Same violation.
-
-**No exceptions:**
-- Not for "simple additions"
-- Not for "just adding a section"
-- Not for "documentation updates"
-- Don't keep untested changes as "reference"
-- Don't "adapt" while running tests
-- Delete means delete
-
-**REQUIRED BACKGROUND:** The test-driven-development skill explains why this matters. Same principles apply to documentation.
-
-
-## Testing and Bulletproofing
-
-Test with pressure scenarios (RED baseline → GREEN with skill → REFACTOR loopholes). Details: [references/testing-and-bulletproofing.md](references/testing-and-bulletproofing.md) and [references/testing-skills-with-subagents.md](references/testing-skills-with-subagents.md). Persuasion patterns: [references/persuasion-principles.md](references/persuasion-principles.md).
-
-## Anti-Patterns
-
-### ❌ Narrative Example
-"In session 2025-10-03, we found empty projectDir caused..."
-**Why bad:** Too specific, not reusable
-
-### ❌ Multi-Language Dilution
-example-js.js, example-py.py, example-go.go
-**Why bad:** Mediocre quality, maintenance burden
-
-### ❌ Code in Flowcharts
-```dot
-step1 [label="import fs"];
-step2 [label="read file"];
-```
-**Why bad:** Can't copy-paste, hard to read
-
-### ❌ Generic Labels
-helper1, helper2, step3, pattern4
-**Why bad:** Labels should have semantic meaning
-
-## STOP: Before Moving to Next Skill
-
-**After writing ANY skill, you MUST STOP and complete the deployment process.**
-
-**Do NOT:**
-- Create multiple skills in batch without testing each
-- Move to next skill before current one is verified
-- Skip testing because "batching is more efficient"
-
-**The deployment checklist below is MANDATORY for EACH skill.**
-
-Deploying untested skills = deploying untested code. It's a violation of quality standards.
-
-
-## Skill Creation Checklist (TDD Adapted)
-
-Before considering a skill done, run the full checklist: [references/checklist.md](references/checklist.md).
-
-## Discovery Workflow
-
-How future agents find your skill:
-
-1. **Encounters problem** ("tests are flaky")
-2. **Searches skills** (greps descriptions, browses categories)
-3. **Finds SKILL** (description matches)
-4. **Scans overview** (is this relevant?)
-5. **Reads patterns** (quick reference table)
-6. **Loads example** (only when implementing)
-
-**Optimize for this flow** - put searchable terms early and often.
+- ❌ 先写指导，再补一个"通过"的演示——证据是后补的。
+- ❌ 用关键词命中、文档长度或 frontmatter 字数判断技能好坏。
+- ❌ 一次用例就宣称"触发/品质已验证"，或把未测维度写成已验证。
+- ❌ 看过留出题结果再调优，仍称其为留出。
+- ❌ 搬运外部技能时删掉作者署名与许可证。
 
 <!-- provenance:start -->
 > 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#writing-skills)。

@@ -10,29 +10,23 @@ Load when writing or editing description/keywords/token-efficiency/cross-refs.
 
 **Purpose:** Your agent reads the description to decide which skills to load for a given task. Make it answer: "Should I read this skill right now?"
 
-**Format:** Start with "Use when..." to focus on triggering conditions
+**Format:** 触发条件放前面（英文常写 "Use when ..."，中文直接写场景也可以）；这是写法习惯，不是规范硬要求。
 
-**CRITICAL: Description = When to Use, NOT What the Skill Does**
+**What to include:** 开放规范要求 description 说明技能**做什么**与**何时使用**。面向发现的写法：能力概述一句，加上可触发的症状、场景与相邻边界（什么时候不适用）。第三人称。
 
-The description should ONLY describe triggering conditions. Do NOT summarize the skill's process or workflow in the description.
-
-**Why this matters:** Testing revealed that when a description summarizes the skill's workflow, an agent may follow the description instead of reading the full skill content. A description saying "code review between tasks" caused an agent to do ONE review, even though the skill's flowchart clearly showed TWO reviews (spec compliance then code quality).
-
-When the description was changed to just "Use when executing implementation plans with independent tasks" (no workflow summary), the agent correctly read the flowchart and followed the two-stage review process.
-
-**The trap:** Descriptions that summarize workflow create a shortcut agents will take. The skill body becomes documentation agents skip.
+**Avoid step-by-step process.** 不要把分步流程搬进 description。obra 的历史参考报告过流程化描述让部分 agent 少读正文的个案；本仓未复现该对照，不能据此断言普遍因果。它是值得用触发测试核对的写作假设，不是格式要求。
 
 ```yaml
-# ❌ BAD: Summarizes workflow - agents may follow this instead of reading skill
+# ⚠️ 谨慎：把分步流程搬进描述（有被照抄捷径的倾向）
 description: Use when executing plans - dispatches subagent per task with code review between tasks
 
-# ❌ BAD: Too much process detail
+# ⚠️ 谨慎：流程细节过多
 description: Use for TDD - write test first, watch it fail, write minimal code, refactor
 
-# ✅ GOOD: Just triggering conditions, no workflow summary
+# ✅ GOOD: 能力 + 触发条件，无流程细节
 description: Use when executing implementation plans with independent tasks in the current session
 
-# ✅ GOOD: Triggering conditions only
+# ✅ GOOD: 能力 + 触发条件
 description: Use when implementing any feature or bugfix, before writing implementation code
 ```
 
@@ -42,7 +36,7 @@ description: Use when implementing any feature or bugfix, before writing impleme
 - Keep triggers technology-agnostic unless the skill itself is technology-specific
 - If skill is technology-specific, make that explicit in the trigger
 - Write in third person (injected into system prompt)
-- **NEVER summarize the skill's process or workflow**
+- 能力概述 + 触发条件；不要把分步流程搬进来（见上，经验记录而非硬要求）
 
 ```yaml
 # ❌ BAD: Too abstract, vague, doesn't include when to use
@@ -54,7 +48,7 @@ description: I can help you with async tests when they're flaky
 # ❌ BAD: Mentions technology but skill isn't specific to it
 description: Use when tests use setTimeout/sleep and are flaky
 
-# ✅ GOOD: Starts with "Use when", describes problem, no workflow
+# ✅ GOOD: 触发条件开头，描述问题与能力
 description: Use when tests have race conditions, timing dependencies, or pass/fail inconsistently
 
 # ✅ GOOD: Technology-specific skill with explicit trigger
@@ -83,6 +77,8 @@ Use words an agent would search for:
 - getting-started workflows: <150 words each
 - Frequently-loaded skills: <200 words total
 - Other skills: <500 words (still be concise)
+
+These counts are load-cost references, not quality gates. Whether a skill is any good is decided by behavior comparison on quality/safety/cost (see [evaluation.md](evaluation.md)) — never by word count or keyword density.
 
 **Techniques:**
 

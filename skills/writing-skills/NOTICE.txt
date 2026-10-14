@@ -1,0 +1,41 @@
+writing-skills
+
+本目录按文件区分许可；本文件说明来源与范围。
+
+一、本次重写依据的固定上游（Apache-2.0）
+1) Anthropic, PBC. — skills/skill-creator
+   https://github.com/anthropics/skills/tree/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/skill-creator
+   Copyright 2026 Anthropic, PBC.
+   Licensed under the Apache License, Version 2.0; see LICENSE.txt.
+   仅读取 SKILL.md 与 LICENSE.txt 作方法参考（需求意图、评估循环、对照与留出、
+   描述触发优化）；未搬运其脚本、agents/、eval-viewer 或 assets。
+2) Functional Software, Inc. dba Sentry — skills/skill-writer
+   https://github.com/getsentry/skills/tree/d18b7aa8ba878354e5c348310230e652f7690f9c/skills/skill-writer
+   Copyright 2025 Functional Software, Inc. dba Sentry
+   Licensed under the Apache License, Version 2.0; see LICENSE.txt.
+   仅读取 SKILL.md 与仓库根 LICENSE 作方法参考（来源改编、迭代与留出、
+   描述命中优化）；未搬运其 references/ 包。
+
+二、历史来源（MIT，范围保留）
+Jesse Vincent / obra — https://github.com/obra/superpowers/tree/main/skills/writing-skills
+上游当前 LICENSE 已核验为 MIT（Copyright (c) 2025 Jesse Vincent）；
+MIT 版权与许可全文见 LICENSES/MIT-obra.txt。
+本仓收录版本待核验（历史事实如实保留；不把当前上游 LICENSE 当作原收录提交的证据）。
+未重写的既有文件不因本次新增 Apache-2.0 文件而改变原有许可状态；
+上述 MIT 版权与许可全文继续适用于其原有文本，分发这些文件时随附 LICENSES/MIT-obra.txt。
+记录位置：仓库根 ATTRIBUTION.md 与 docs/sources/skill-provenance.json。
+
+三、本次新增或重写的文件（Apache-2.0）
+SKILL.md、EVAL.md、evals/cases.json、UPSTREAM.json、NOTICE.txt、
+references/evaluation.md、references/checklist.md、references/sdo.md、
+references/testing-and-bulletproofing.md、references/testing-skills-with-subagents.md
+（新文本建立在本仓改写与上述两份 Apache-2.0 上游方法之上；其中源自 obra 的
+原有文本继续适用 LICENSES/MIT-obra.txt 的 MIT 版权与许可义务。）
+
+四、保持原状的既有文件（继续按收录时状态提供，未重许可）
+render-graphs.js、graphviz-conventions.dot、examples/CLAUDE_MD_TESTING.md、
+references/anthropic-best-practices.md、references/flowcharts-and-examples.md、
+references/persuasion-principles.md
+以上文件对应 obra MIT 文本：许可全文见 LICENSES/MIT-obra.txt。
+
+本包与 Anthropic、Sentry、Jesse Vincent / obra 均无隶属或背书关系。

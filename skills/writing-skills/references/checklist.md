@@ -1,45 +1,47 @@
-# writing-skills reference: skill creation checklist
+# writing-skills reference: 发布前清单
 
-Load as a final gate before shipping a skill.
+发布任何新建或修改的技能前逐项过一遍；每项都要有证据，不能"默认满足"。
 
-## Skill Creation Checklist (TDD Adapted)
+## 改动分档（先判断）
+- [ ] 机械/格式修正（链接、错别字、损坏引用）：用对应静态检查核对，不必做模型对照
+- [ ] 纯文档整理：不强制加载整套开发流程
+- [ ] 影响行为的改动：按下面对照—改进—复测流程走
 
-**IMPORTANT: Create a todo for EACH checklist item below.**
+## 目标与证据（RED）
+- [ ] 目标写成了可判定的行为检查（输入 → 应/不应出现的行为）
+- [ ] 用旧版或无技能对照观察过当前差距；对照里没有失败就停（不造失败）
+- [ ] 没有增量时如实报告"无需改动"，不扩写
 
-**RED Phase - Write Failing Test:**
-- [ ] Create pressure scenarios (3+ combined pressures for discipline skills)
-- [ ] Run scenarios WITHOUT skill - document baseline behavior verbatim
-- [ ] Identify patterns in rationalizations/failures
+## 对照与测量（GREEN）
+- [ ] 对照与候选在新会话、同任务、同工具、同预算下运行
+- [ ] 触发与执行分开测：触发用正例 + 相邻反例；执行按判定项逐条查
+- [ ] 按质量、安全、成本记录结果；成本未知写未知
+- [ ] 没有用关键词、篇幅、frontmatter 字数当成功标准
 
-**GREEN Phase - Write Minimal Skill:**
-- [ ] Name uses only letters, numbers, hyphens (no parentheses/special chars)
-- [ ] YAML frontmatter with required `name` and `description` fields (max 1024 chars; see [spec](https://agentskills.io/specification))
-- [ ] Description starts with "Use when..." and includes specific triggers/symptoms
-- [ ] Description written in third person
-- [ ] Keywords throughout for search (errors, symptoms, tools)
-- [ ] Clear overview with core principle
-- [ ] Address specific baseline failures identified in RED
-- [ ] Guidance form matches the failure type (see Match the Form to the Failure)
-- [ ] For behavior-shaping guidance: wording micro-tested against a no-guidance control (5+ reps, every flagged match read manually) — N/A for pure reference skills
-- [ ] Code inline OR link to separate file
-- [ ] One excellent example (not multi-language)
-- [ ] Run scenarios WITH skill - verify agents now comply
+## 封闭漏洞（REFACTOR）
+- [ ] 测出的新借口/漏洞都有明确定义的反例或修订
+- [ ] 复测后仍通过；无法复测的部分写明原因与覆盖缺口
 
-**REFACTOR Phase - Close Loopholes:**
-- [ ] Identify NEW rationalizations from testing
-- [ ] Add explicit counters (if discipline skill)
-- [ ] Build rationalization table from all test iterations
-- [ ] Create red flags list
-- [ ] Re-test until bulletproof
+## 预算与留出
+- [ ] 预算不足时写明覆盖了哪个维度、哪些未覆盖
+- [ ] 留出题在调优前冻结；没有用它的结果回头改技能
 
-**Quality Checks:**
-- [ ] Small flowchart only if decision non-obvious
-- [ ] Quick reference table
-- [ ] Common mistakes section
-- [ ] No narrative storytelling
-- [ ] Supporting files only for tools or heavy reference
+## 结构与写法
+- [ ] `name` 小写字母/数字/连字符，≤64 字符
+- [ ] `description` 写清能力、触发场景与相邻边界（第三人称；≤1024 字符是描述字段上限），不堆分步流程
+- [ ] SKILL.md 精简（目标 <500 行）；重内容拆到 references/ 并标注"何时读"
+- [ ] 一个优秀示例；无叙事故事；祈使句
+- [ ] 指导形式匹配失败类型（纪律/形状/缺字段/条件）
+- [ ] 文件内引用的路径都真实存在
 
-**Deployment:**
-- [ ] Commit skill to git and push to your fork (if configured)
-- [ ] Consider contributing back via PR (if broadly useful)
+## 来源与许可
+- [ ] 来源分类正确：原创 / 第三方引入 / 原创改进
+- [ ] 改编外部材料保留作者、仓库与提交、许可证原文和修改说明
+- [ ] 按文件标明许可范围，没有默默重许可
+- [ ] 根 provenance 记录（ATTRIBUTION.md、docs/sources/skill-provenance.json）同步更新
 
+## 部署
+- [ ] 每项改动各自带验收证据；可并行实施，合并前逐项核对；未验证的改动不发布
+- [ ] 仓库级结构检查（audit/格式）没有被当作行为评估证据
+- [ ] 原始输出与用量留在私有记录位置，不进公开技能包
+- [ ] 提交说明不写内部细节（账号、机器路径、真实用量）

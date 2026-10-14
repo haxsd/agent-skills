@@ -1,0 +1,24 @@
+env-doctor 来源与授权说明
+
+本目录内容说明
+
+- 本目录的 SKILL.md、references/、EVAL.md、evals/cases.json、
+  scripts/env_key_status.py、SOURCE-NOTES.md 与本文件，是本仓 2026 年独立编写的
+  中文内容与实现，按本目录 LICENSE.txt 的 MIT 授权发布（仅覆盖上述内容）。
+- 本轮重写没有复制、没有打包、也没有执行任何第三方技能文件。键状态脚本是
+  标准库独立实现。
+- 本技能没有已核验、可固定的上游仓库与提交，因此不提供 UPSTREAM.json；历史线索
+  与核验状态见 SOURCE-NOTES.md。
+
+历史来源（待核验，如实保留）
+
+- 历史版本 SKILL.md 的 frontmatter 署名：JustHandled Labs，并声明 license: MIT。
+- 该署名的原始仓库地址、收录版本与再分发授权均待核验；本仓保留此线索，不把
+  当前重写当作该来源已核验，也不代它授权。
+- 查证入口（仅线索，未确认对应仓库）：
+  https://github.com/search?q=%22env-doctor%22+%22JustHandled%22&type=code
+
+边界
+
+- 本包与任何历史署名方无隶属、背书或认证关系。
+- 诊断规则只用于只读检查；不授予对任何机器、项目或服务执行修复的权限。

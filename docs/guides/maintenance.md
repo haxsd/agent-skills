@@ -26,16 +26,29 @@
 新增还是升级按触发条件、输入和产出判断：职责独立才建新入口；增强既有任务时优先在原路径新增按需参考。
 例如 skill-scanner（技能引入检查）与 variant-analysis（已知缺陷同族排查）独立启用；技能写作、通用审查和环境诊断的增强留在原有入口。
 
+## 技能行为评估与许可边界
+
+修改行为规则前先定义任务、证据和预算，用旧版或无技能作对照；把触发正确性与实际产出质量分开。
+重大行为改动用独立上下文案例和未参与调优的留出题，引用、路径或格式修正做相应机械检查。
+基线已经满足目标时不强造失败；无法观察 tokens、耗时或真实运行状态时写未知。
+
+各包的 `EVAL.md` 与 `evals/cases.json` 只保存可重复的方法和合成案例；本机结果、对话和审查记录写私有记录仓库。
+只读小工具的 CLI 回归与模型行为评估是两类证据，不能互相代替，也不自动授权付费模型调用或安装工具。
+
+混合来源的许可按文件范围保留：通用入口与独立专项参考分别注明，CC-BY-SA 参考保持同许可，Apache 材料保留完整许可和版权。
+本仓新增版权说明不证明历史未核验来源已获授权；独立重写与历史署名同时记录。
+
 ## 运行仓库检查
 
-用已确认的 Python 与 Node 绝对路径运行：
+用工具地图已经验证的 Python 与 Node 绝对路径运行：
 
 ```powershell
-python scripts/audit_skills.py --write
-python scripts/audit_skills.py --check
-python scripts/check_docs.py
-python -m unittest discover -s tests -q
-python scripts/smoke_skills.py --node '<Node 的绝对路径>'
+$python = '<Python 的已验证绝对路径>'
+& $python scripts/audit_skills.py --write
+& $python scripts/audit_skills.py --check
+& $python scripts/check_docs.py
+& $python -m unittest discover -s tests -q
+& $python scripts/smoke_skills.py --node '<Node 的已验证绝对路径>'
 ```
 
 audit 生成分类目录、逐项审查和静态 JSON；修改人工源后重新生成，避免手改派生文档。check_docs 检查当前入口和文档的本地链接，不检查历史快照、上游技能参考或远程链接。已有超长入口和引用线索会作为提示保留。

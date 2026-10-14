@@ -84,11 +84,16 @@
 
 ## env-doctor
 
-[env-doctor](skills/env-doctor/SKILL.md) · 启用 · **待核验**
+[env-doctor](skills/env-doctor/SKILL.md) · 启用 · **原创改进（基于上游）**
 
-- 来源：[JustHandled Labs（原文件署名）](https://github.com/search?q=%22env-doctor%22+%22JustHandled%22&type=code)；许可：MIT（原文件声明；原始仓库与版本待核验）；收录版本：待核验。
+原创贡献者：agent-skills contributors。
+- 来源：[JustHandled Labs（历史入口署名）](https://github.com/search?q=%22env-doctor%22+%22JustHandled%22&type=code)；许可：MIT（历史文件声明；原始仓库、版本与授权仍待核验）；收录版本：待核验。
 
-原 SKILL.md 保留 JustHandled Labs 作者元数据；历史本地归档不等于本仓原创，原始来源定位仍待核验。
+本仓贡献：
+- 独立重写中文诊断入口、检查清单与安全案例，覆盖 PnP、工作区、容器边界、真实端口和变量来源。
+- 本仓实现只读键状态工具与真实 CLI 回归，新增预算化行为评估；新 MIT 仅覆盖本轮原创文件。
+
+当前正文和工具为本仓独立重写，历史署名及未核验来源事实保留在 skills/env-doctor/NOTICE.txt 与 SOURCE-NOTES.md；本轮原创声明不代替历史来源核验或授权。
 
 ## systematic-debugging
 
@@ -243,10 +248,15 @@
 [writing-skills](skills/writing-skills/SKILL.md) · 启用 · **原创改进（基于上游）**
 
 原创贡献者：agent-skills contributors。
-- 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/writing-skills)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
+- 上游：[Anthropic, PBC.](https://github.com/anthropics/skills)；许可：Apache-2.0；固定版本：`dbd4588f9e1033efb41dad4bef2f7947c8993d44`。详情：[skills/writing-skills/UPSTREAM.json](skills/writing-skills/UPSTREAM.json)。
+- 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/writing-skills)；许可：MIT（历史来源；原收录版本待核验）；收录版本：待核验。
+- 来源：[Functional Software, Inc. dba Sentry](https://github.com/getsentry/skills/tree/d18b7aa8ba878354e5c348310230e652f7690f9c/skills/skill-writer)；许可：Apache-2.0（本轮方法参考）；收录版本：d18b7aa8ba878354e5c348310230e652f7690f9c。
 
 本仓贡献：
-- 整理跨宿主技能发现说明，将较长的测试、流程图与清单参考拆为按需读取资源。
+- 重写为改动风险分级、旧新公平对照、触发与执行分离、冻结留出题及质量/安全/成本评估，取消无条件昂贵评估规则。
+- 新增可重复案例和评估参考；修正旧格式与授权约束，按文件保留 Anthropic/Sentry Apache-2.0 和历史 obra MIT 许可。
+
+固定 Anthropic skill-creator 与 Sentry skill-writer 只作方法参考，未搬运或执行自动模型脚本；未改写旧资源维持历史许可，原始收录版本不冒充当前上游版本。
 
 ## using-superpowers
 
@@ -375,13 +385,17 @@ toolkit-map · 外部 · **本仓原创**
 [code-review](skills/code-review/SKILL.md) · 启用 · **原创改进（基于上游）**
 
 原创贡献者：agent-skills contributors。
+- 上游：[Sentry / Functional Software, Inc.](https://github.com/getsentry/skills)；许可：Apache-2.0；固定版本：`d18b7aa8ba878354e5c348310230e652f7690f9c`。详情：[skills/code-review/UPSTREAM.json](skills/code-review/UPSTREAM.json)。
+  - 另借鉴：[https://github.com/trailofbits/skills](https://github.com/trailofbits/skills)；版本：`8e54050ae63c2f62224c35b1616efe71865b4777`；范围：differential-review 的 CC-BY-SA-4.0 派生文件 references/differential-review.md（中文改写、只读化、按本仓校准裁剪）；署名与相同方式共享要求见 LICENSE.txt。
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/requesting-code-review)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/receiving-code-review)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
+- 来源：[Trail of Bits](https://github.com/trailofbits/skills/tree/8e54050ae63c2f62224c35b1616efe71865b4777/plugins/differential-review/skills/differential-review)；许可：CC-BY-SA-4.0（仅独立差异审查参考）；收录版本：8e54050ae63c2f62224c35b1616efe71865b4777。
 
 本仓贡献：
-- 本仓编写统一审查与反馈入口，整合只读审查模板、范围化验证和具体评论线程回应。
+- 保留只读审查与反馈入口，按差异语义选择差异影响、凭据序列化和 GitHub Actions 专项参考，不把小改动扩大为全仓审计。
+- 补充实际权限、数据流与有效防护证据，分开严重程度、置信度和待确认项，新增正反例评估。
 
-入口为本地编写；当前目录包含上游审查模板，整项按原创改进标注。
+通用入口、历史 obra MIT 模板、Sentry Apache-2.0 参考与 Trail of Bits CC-BY-SA-4.0 参考按文件界定许可；原创改进不把整个目录重授单一许可。
 
 ## deepseek-subagents
 

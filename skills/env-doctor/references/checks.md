@@ -1,250 +1,125 @@
-# Env Doctor Checks
+# env-doctor 检查清单
 
-Use this reference for language-specific diagnosis and framework `.env` validation.
+按需查阅。每条检查写清"看什么、缺什么、不能据此推断什么"。本清单是**线索集**，不是必须全做；
+只执行与本次故障相关的部分，并记录未做的部分。
 
-## Universal Checks
+## 1. 宿主 / 容器 / WSL / monorepo 定位
 
-Run these before changing application code:
+- 运行位置：宿主？WSL 发行版？容器内？远程？同一台机器上三者的进程、端口与环境变量互不相通。
+- monorepo：先确认属于哪个包（`workspaces`、`pnpm-workspace.yaml`、`lerna.json`、`nx.json`、`turbo.json`、
+  各自 `package.json`），再决定在根目录还是子目录检查。子包缺 `node_modules` 可能是被提升到了根目录。
+- 容器内诊断：用 `docker compose exec <svc> ...`（需要授权）；宿主命令看不到容器内的监听端口与环境变量。
+- 不要用宿主的 `Get-NetTCPConnection`/`lsof` 结果去解释容器内应用，也不要把 WSL 内进程当宿主进程。
 
-- Identify project files: `package.json`, `requirements.txt`, `pyproject.toml`, `go.mod`, `Dockerfile`, `docker-compose.yml`.
-- Record runtime versions: `node --version`, `npm --version`, `python --version`, `python3 --version`, `go version`, `docker --version`.
-- Check ports: `3000`, `3001`, `5000`, `8000`, `8080`.
-- Compare `.env.example` key names against `.env` key names without displaying or retaining values.
-- Verify project write access.
-- Identify service dependencies: Postgres, Redis, MySQL.
+## 2. 启动入口
 
-## Node Checklist
+- 找实际入口：`package.json` 的 `scripts.dev`/`start`、`docker-compose.yml`/`compose.yaml` 的 `command`/`entrypoint`、
+  `Makefile` 目标、`Procfile`、`.vscode/launch.json`、`mise.toml` 的 `tasks`、README 的运行说明。
+- 注意脚本可能再委托：`dev` → `vite`/`next dev`/`nodemon`，`start` → `node dist/main.js`；配置里的端口信息以最终
+  消费处为准（如 `vite.config.*` 的 `server.port`、`--port` 参数、`.env` 的 `PORT` 键名）。
+- 用户已给出启动命令时优先沿用，不按框架常识改写。
 
-Detect Node when `package.json` exists.
+## 3. Node 系：声明、锁文件、workspace、PnP
 
-Checks:
+- 声明：`package.json` 的 `packageManager`、`engines.node`、`volta`；根目录 `mise.toml`/`.tool-versions`/`.nvmrc`。
+- 锁文件 → 包管理器：
+  - `package-lock.json` / `npm-shrinkwrap.json` → npm
+  - `pnpm-lock.yaml` → pnpm；`pnpm-workspace.yaml` 说明 workspace 结构
+  - `yarn.lock` → yarn（`.yarnrc.yml` 里 `nodeLinker: pnp` 即 PnP；有 `.pnp.cjs` 同理）
+  - `bun.lockb` / `bun.lock` → bun
+- 冲突处理：`packageManager` 与锁文件不一致时，**不要无依据选一边**。找证据判定：CI 配置（`.github/workflows`、
+  `Jenkinsfile`）、README/贡献指南、仓库历史、实际执行入口（`Makefile`、compose `command`、mise tasks）。证据仍不足时
+  按未知报告，不安装、不生成/改任何锁文件。
+- PnP：没有 `node_modules` 是预期状态；依赖 bug 应看 `.pnp.cjs` 是否存在、是否是 PnP 未被工具识别。
+- workspace：根 `node_modules` 存在即可支撑子包；子包目录没有 `node_modules` 不能报"依赖缺失"。
+- 缺依赖的判断证据：安装报错、`Cannot find module`、锁文件与 `node_modules` 明显脱节。缺目录本身不是证据。
 
-- `node --version`
-- `npm --version`
-- `Test-Path node_modules` on Windows or `[ -d node_modules ]` on macOS/Linux
-- `package.json` scripts, especially `dev`, `start`, `build`, and `test`
-- Lockfile presence: `package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `bun.lockb`
-- Common ports: `3000`, `3001`, `5000`, `8080`
+## 4. Python 系：管理器与环境
 
-Common findings and fixes:
+- 管理器线索：`uv.lock` → uv；`poetry.lock` + `[tool.poetry]` → poetry；`Pipfile.lock` → pipenv；只有
+  `requirements.txt` 时需再确认谁在执行安装。
+- 版本声明：`requires-python`、`.python-version`、`mise.toml`；与工具地图解析到的解释器版本分开记录。
+- `.venv/`、`venv/`、`env/` 都没有时，先确认：解释器是系统 Python？容器内？conda？还是被 PDM/Hatch 放在别处。
+- 依赖缺失的证据：导入报错（`ModuleNotFoundError`）、`pip check`/`uv pip check` 结果；不用目录存在性推断。
 
-- Missing `node_modules/`: suggest `npm install`.
-- Package manager mismatch: use the lockfile to choose `npm install`, `pnpm install`, `yarn install`, or `bun install`.
-- Port `3000` in use: inspect the listener and identify its owner. Do not stop it unless the user confirms that exact process and explicitly approves the stop.
-- Missing `.env`: if `.env.example` exists, suggest copying it and filling required values.
+## 5. 工具地图（toolkit-map）解析
 
-## Python Checklist
+- 调用任何本机工具前：`map.ps1 status -Json` 确认地图可用且不 stale；`map.ps1 find <工具> -Project <工作区> -Json`
+  取 `path`。只有 `ok: true` 且 `verification: verified` 的结果才能直接执行。
+- `find` 的真实状态（schemaVersion 2）与口径：
+  - `ok` + `verification: verified`：可直接采用返回的 `path`。
+  - `version_mismatch`：确认没有满足项目要求的候选（有已核验副本但版本不符）。报告"要求未满足"；不降级、不换版本、不安装。
+  - `no_usable_candidate`：有候选但无通过验证的可用副本。属于**证据缺口**，标未知；不要写成"要求确证未满足"。
+  - `not_found`：本次搜索范围内没有候选。不代表全盘不存在，标未知并继续现场发现。
+  - `requirement_unsupported`：项目声明语法地图不支持（如无法判定的版本范围）。报告限制；用支持的显式 `-Version`
+    或交由管理器执行，不猜一个版本替代。
+  - 验证失败、`verification` 为空或候选 `usable: null`：一律按未知处理，不当作满足也不当作失败。
+- 机器上的其他候选副本 ≠ 项目要求被满足；PATH 解析 ≠ 机器盘点。
+- 地图缺失或跑不起来：按常规做法完成诊断，明确标注发现层缺失并提醒用户安装 toolkit-map。
 
-Detect Python when `requirements.txt`, `pyproject.toml`, `Pipfile`, `setup.py`, `manage.py`, or `app.py` exists.
+## 6. 端口与进程
 
-Checks:
-
-- `python --version`
-- `python3 --version`
-- Virtual environment folders: `.venv/`, `venv/`, `env/`
-- Dependency files: `requirements.txt`, `pyproject.toml`, `Pipfile`, `poetry.lock`, `uv.lock`
-- Framework markers: `manage.py`, `flask`, `django`, `FastAPI`, `app.py`
-- Common ports: `5000`, `8000`, `8080`
-
-Common findings and fixes:
-
-- Missing virtual environment: suggest `python -m venv .venv`.
-- Missing dependencies: suggest `.venv\Scripts\pip install -r requirements.txt` on Windows or `.venv/bin/pip install -r requirements.txt` on macOS/Linux.
-- Wrong Python version: compare runtime output to `requires-python` in `pyproject.toml` when present.
-- Missing database environment variables: flag `DATABASE_URL` when required.
-
-## Go Checklist
-
-Detect Go when `go.mod` exists.
-
-Checks:
-
-- `go version`
-- `go env GOPATH`
-- `go.mod` module and Go version
-- `go.sum` presence
-- Common ports: `3000`, `5000`, `8000`, `8080`
-
-Common findings and fixes:
-
-- Missing modules or stale sums: suggest `go mod tidy` and explain it mutates `go.mod`/`go.sum`.
-- Runtime too old: compare `go version` to the `go` directive in `go.mod`.
-- Service dependency missing: inspect config for `DATABASE_URL`, `REDIS_URL`, or MySQL DSNs.
-
-## Docker Checklist
-
-Detect Docker when `Dockerfile`, `docker-compose.yml`, or `compose.yaml` exists.
-
-Checks:
-
-- `docker --version`
-- `docker compose version`
-- Docker daemon status
-- Compose services for app, database, cache, and exposed ports
-- `.env` used by Compose
-
-Common findings and fixes:
-
-- Docker not running: suggest starting Docker Desktop or the Docker service.
-- Compose services stopped: suggest `docker compose ps`, then `docker compose up -d`.
-- Port conflict: suggest `lsof -i :<port>` and update compose ports only after confirming the conflict.
-- Missing `.env`: suggest creating it from `.env.example` if present.
-
-## Port Conflict Checks
-
-Common ports:
-
-- `3000`: React, Next.js, Vite, Express
-- `3001`: alternate Node dev server
-- `5000`: Flask, Express alternatives
-- `8000`: Django, Python HTTP servers, Go APIs
-- `8080`: Docker, Go, Java-style dev servers
-
-Inspection commands for macOS/Linux:
-
-```bash
-lsof -nP -iTCP:3000 -sTCP:LISTEN
-lsof -nP -iTCP:3001 -sTCP:LISTEN
-lsof -nP -iTCP:5000 -sTCP:LISTEN
-lsof -nP -iTCP:8000 -sTCP:LISTEN
-lsof -nP -iTCP:8080 -sTCP:LISTEN
-ps -p <PID> -o pid=,ppid=,user=,command=
-```
-
-Inspection commands for Windows PowerShell:
+- 证据优先级：应用报错信息 > 实际启动配置 > 框架默认值。不要把 3000/8080 之类常用端口当固定清单逐个体检。
+- 宿主检查：
 
 ```powershell
-Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue | Select-Object LocalAddress,LocalPort,State,OwningProcess
-Get-NetTCPConnection -LocalPort 3001 -ErrorAction SilentlyContinue | Select-Object LocalAddress,LocalPort,State,OwningProcess
-Get-NetTCPConnection -LocalPort 5000 -ErrorAction SilentlyContinue | Select-Object LocalAddress,LocalPort,State,OwningProcess
-Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | Select-Object LocalAddress,LocalPort,State,OwningProcess
-Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue | Select-Object LocalAddress,LocalPort,State,OwningProcess
+Get-NetTCPConnection -LocalPort 18080 -ErrorAction SilentlyContinue |
+  Select-Object LocalAddress,LocalPort,State,OwningProcess
 Get-Process -Id <PID> | Select-Object Id,ProcessName,Path
 ```
 
-Stopping a process is not part of diagnosis. Prefer the application's documented stop command, `Ctrl+C` in the owning terminal, or a targeted service stop. If the user asks for remediation, first confirm the exact PID and executable or service. A normal targeted stop such as `kill <PID>` or `Stop-Process -Id <PID>` still requires explicit approval. Never default to `kill -9`, `Stop-Process -Force`, or a broad process-name kill; force requires a failed normal stop and separate explicit approval.
+（macOS/Linux 用 `lsof -nP -iTCP:18080 -sTCP:LISTEN`，再用 `ps -p <PID> -o pid=,ppid=,user=,comm=`。）
+注意：带完整命令行的 `ps` 输出可能包含密钥参数，只取判断归属所需的最小字段。
 
-## Service Checks
+- 容器：`docker compose ps`（服务与端口映射）优先；`docker port <container>` 也只看端口映射。
+  `18080:8080` 只说明宿主 18080 → 容器 8080 的转发，容器内应用监听什么要看它自己的配置。
+- 停止权限：报出 PID + 进程/服务归属证据后，**明确请求**对该目标的停止授权；`-Force`/`kill -9`/批量杀进程
+  需要用户在普通停止失败后另行授权。容器场景用 `docker compose stop <svc>` 而不是 `docker kill`。
 
-Postgres indicators:
+## 7. 环境变量：来源与键状态
 
-- `DATABASE_URL` starts with `postgres://` or `postgresql://`
-- Packages: `pg`, `postgres`, `psycopg`, `psycopg2`, Prisma
-- Compose service names: `postgres`, `db`
+来源顺序（能观测到什么就写什么）：
 
-Fix commands:
+1. 进程/服务管理器注入（systemd、pm2、Windows 服务、容器 `environment`/`secrets`、k8s）——通常需要授权才能观测。
+2. CI 变量与仓库 secret 配置——报告"由 CI 注入，本地不可见"。
+3. `docker compose` 的 `env_file` 指向的文件——只看键名状态，不读值。
+4. 本地 `.env` 类文件——**AI 不读原文**；用户明确指定的文件交给下面的脚本在程序内读取。
 
-```bash
-docker compose ps
-docker compose up -d postgres
+键状态脚本（标准库、只读、只回键名与状态）：
+
+```powershell
+& '<toolkit-map 给的 python 绝对路径>' '<技能目录>\scripts\env_key_status.py' `
+  --env '<用户明确指定的环境文件>' --example '<example 文件>'
 ```
 
-Redis indicators:
+- 只接受用户明确指定的路径，程序内部读取，stdout 只有键名、状态（present/empty/missing/unknown）与 gap；
+  exit 0=ok，1=refused/incomplete，2=参数错误。
+- **不跟随链接**：路径本身或任一级父目录是符号链接或 Windows reparse point（含 junction）时保守拒绝。
+- 路径检查和打开不是原子操作，不保护并发文件系统替换；这不是 OS 沙箱，应在稳定、授权的文件上使用。
+- 明确缺口：插值、续行、引号内多行、转义序列、引号值后的额外文本（含注释）都不求值，相关键标 unknown 并列 gap；出现缺口后**停止解析后续行**，
+  避免把多行值的内部行误当成键；env 有缺口时 example 中未见到的键标 unknown，而不是确认 missing。
+- 文件级拒绝：超过 1 MiB、非普通文件（目录/FIFO/设备）、无法按 UTF-8/UTF-16 解码或解码后含 NUL 的内容，给静态 gap，不输出异常原文。
+- 该脚本只说明“文件里有什么”，不证明运行时注入；进程环境是否真的有这些键仍是未知，除非另行授权观测。
 
-- `REDIS_URL`
-- Packages: `redis`, `ioredis`, `celery`, `bull`, `bullmq`
-- Compose service names: `redis`, `cache`
+无法观测某个来源时写"未知"，不写"缺失"。`.env.example` 只作线索：其中的键可能带默认值、可能过时；
+未列入的键也可能由部署环境注入。
 
-Fix commands:
+## 8. 服务依赖、权限与文件系统
 
-```bash
-docker compose ps
-docker compose up -d redis
-```
+- 服务依赖线索：`DATABASE_URL`/`REDIS_URL` 等键是否被引用、依赖包（`pg`、`psycopg`、`redis`、`mysql2`）、
+  compose 服务名。先非破坏性检查（端口是否在监听、`docker compose ps`），再决定是否建议启动。
+- 权限：项目目录是否可写（安装/构建需要）；Unix 脚本是否有可执行位（`test -x`）；不未授权 `chmod`。
+- 文件系统：磁盘空间、inode、大小写敏感路径差异（容器 Linux 与宿主 Windows）、挂载是否只读。
+- 网络：代理/证书配置、hosts 解析、VPN 对依赖下载的影响；只观测与本次故障相关的部分。
 
-MySQL indicators:
+## 9. 不要做（反模式）
 
-- `MYSQL_URL`, `MYSQL_HOST`, `DATABASE_URL` with `mysql://`
-- Packages: `mysql`, `mysql2`, `mysqlclient`, `pymysql`
-- Compose service names: `mysql`, `mariadb`
-
-Fix commands:
-
-```bash
-docker compose ps
-docker compose up -d mysql
-```
-
-## .env Validation Rules
-
-Compare `.env.example` keys to `.env` keys. Treat variables with empty values as missing unless the example clearly documents them as optional.
-
-Secret-safety rules:
-
-- Treat all text after the first `=` as sensitive, even for apparently harmless or fake values.
-- Extract only normalized key names and an empty/present state. Discard values immediately.
-- Never print raw `.env` lines or include values in evidence, findings, summaries, logs, or suggested commands.
-- Never use `cat .env`, `Get-Content .env`, or unredacted `grep` output.
-- If a tool unexpectedly returns a value, redact it and do not repeat it.
-- Refer to a missing or empty item only by key name, for example: `DATABASE_URL: missing`.
-
-Always flag these as high priority when required by `.env.example` and absent from `.env`:
-
-- `DATABASE_URL`
-- `REDIS_URL`
-- `SECRET_KEY`
-- `JWT_SECRET`
-- `SESSION_SECRET`
-- `API_KEY`
-
-## Express .env Rules
-
-Likely required:
-
-- `PORT`
-- `DATABASE_URL`
-- `SESSION_SECRET` or `JWT_SECRET`
-- `REDIS_URL` when sessions, queues, or cache are present
-
-Check package markers:
-
-- `express`
-- `pg`, `mongoose`, `prisma`, `sequelize`
-- `express-session`, `jsonwebtoken`
-
-## Django .env Rules
-
-Likely required:
-
-- `SECRET_KEY`
-- `DATABASE_URL`
-- `DJANGO_SETTINGS_MODULE`
-- `ALLOWED_HOSTS`
-- `DEBUG`
-
-Check markers:
-
-- `manage.py`
-- `django`
-- `settings.py`
-- `DATABASES` config
-
-## Gin .env Rules
-
-Likely required:
-
-- `PORT`
-- `DATABASE_URL`
-- `GIN_MODE`
-- `JWT_SECRET` when auth middleware exists
-
-Check markers:
-
-- `github.com/gin-gonic/gin` in `go.mod`
-- `gin.Default()`
-- `gin.New()`
-
-## Flask .env Rules
-
-Likely required:
-
-- `FLASK_APP`
-- `FLASK_ENV` or `FLASK_DEBUG`
-- `SECRET_KEY`
-- `DATABASE_URL`
-
-Check markers:
-
-- `flask` in `requirements.txt` or `pyproject.toml`
-- `app = Flask(__name__)`
-- `flask run`
+- 无 `node_modules`/`.venv` 就建议安装依赖；用 `npx`/`corepack`/`pipx` 顺带获取工具。
+- 按固定端口清单体检；把映射端口当应用端口；未确认归属就停止进程。
+- 用 `Read`/`cat`/`Get-Content` 把 `.env` 原文带进上下文；`docker compose config`、`docker inspect`、带 argv 的
+  `ps` 直接粘进报告。
+- 把 `.env.example` 当完整 required 清单；把键存在当已注入进程；解析有缺口仍报"确认 missing"。
+- `packageManager` 与锁文件冲突时无依据选一边、顺手改锁文件或直接安装。
+- 地图报 `version_mismatch`/`no_usable_candidate`/`not_found`/`requirement_unsupported` 时另挑一个版本或自动安装；
+  把证据缺口写成"要求已确证未满足"。
+- 越权修复：装依赖、重启服务、改 PATH、改全局配置——需要单独授权。

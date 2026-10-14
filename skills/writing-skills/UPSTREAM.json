@@ -1,0 +1,38 @@
+{
+  "name": "writing-skills",
+  "repository": "https://github.com/anthropics/skills",
+  "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+  "path": "skills/skill-creator",
+  "license": "Apache-2.0",
+  "author": "Anthropic, PBC.",
+  "retrievedAt": "2026-10-14",
+  "additionalSources": [
+    {
+      "repository": "https://github.com/getsentry/skills",
+      "commit": "d18b7aa8ba878354e5c348310230e652f7690f9c",
+      "path": "skills/skill-writer",
+      "license": "Apache-2.0",
+      "author": "Functional Software, Inc. dba Sentry",
+      "retrievedAt": "2026-10-14"
+    },
+    {
+      "repository": "https://github.com/obra/superpowers",
+      "path": "skills/writing-skills",
+      "license": "MIT",
+      "licenseFile": "LICENSES/MIT-obra.txt",
+      "author": "Jesse Vincent / obra",
+      "revision": "收录版本待核验（既有历史来源，本轮未核验具体收录提交；当前上游 LICENSE 为 MIT Copyright (c) 2025 Jesse Vincent，不作为原收录提交的证据）"
+    }
+  ],
+  "usage": "两份 Apache-2.0 上游只读取 SKILL.md 与许可证文本作方法参考（评估循环、对照与留出、描述触发优化、来源改编）；未搬运或执行其脚本、agents/、eval-viewer 或 references/ 包。",
+  "modifications": [
+    "中文精简重写入口；评估方法拆到 references/evaluation.md，新增 EVAL.md 与 evals/cases.json。",
+    "评估改为对照优先：旧版或无技能对照，新会话、同任务、同工具、同预算；触发与执行分开测。",
+    "比较按质量/安全/成本，成本未知写未知；不用关键词或篇幅当成功标准。",
+    "预算感知：6 次会话只做 3 组同题旧/新成对，只粗测一个维度并标注未覆盖。",
+    "冻结未参与调优的留出题；看过结果再调优不得再称留出。",
+    "修正旧清单的硬性 5 次微测试要求与 frontmatter 总长度 1024 的过时说法。",
+    "新增来源三分类与许可保留要求（UPSTREAM.json、NOTICE.txt、LICENSE.txt），与根 provenance 机制配合。"
+  ],
+  "validation": "方法与用例见 EVAL.md 与 evals/cases.json；本仓不宣称已完成公平对照或覆盖全部维度；原始结果与用量保存在私有分区，未知项按未知处理。"
+}

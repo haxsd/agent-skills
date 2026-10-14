@@ -1,18 +1,14 @@
 # Testing Skills With Subagents
 
-**Load this reference when:** creating or editing skills, before deployment, to verify they work under pressure and resist rationalization.
+**Load this reference when:** 对纪律型行为改动做预算允许的压力测试。机械引用或格式修正用相应静态检查；通用评估与对照以 [evaluation.md](evaluation.md) 为准。
 
 ## Overview
 
-**Testing skills is just TDD applied to process documentation.**
+Use a fresh-context old/no-skill control to observe the current behavior, then compare a candidate under the same conditions. A failure can identify a gap; a baseline that already meets the goal is evidence against adding rules, not a reason to manufacture failure.
 
-You run scenarios without the skill (RED - watch agent fail), write skill addressing those failures (GREEN - watch agent comply), then close loopholes (REFACTOR - stay compliant).
+The RED-GREEN-REFACTOR terminology below describes a pressure-test option for behavior changes, not a mandatory development chain for every edit. Quoted TDD imperatives are examples of guidance under test, not new instructions to delete user work.
 
-**Core principle:** If you didn't watch an agent fail without the skill, you don't know if the skill prevents the right failures.
-
-**REQUIRED BACKGROUND:** You MUST understand test-driven-development before using this skill. That skill defines the fundamental RED-GREEN-REFACTOR cycle. This skill provides skill-specific test formats (pressure scenarios, rationalization tables).
-
-**Complete worked example:** See [../examples/CLAUDE_MD_TESTING.md](../examples/CLAUDE_MD_TESTING.md) for a full test campaign testing CLAUDE.md documentation variants.
+**Complete worked example:** See [../examples/CLAUDE_MD_TESTING.md](../examples/CLAUDE_MD_TESTING.md) for a historical upstream pressure-test example; it is not evidence of this repository's current results.
 
 ## When to Use
 
@@ -22,10 +18,10 @@ Test skills that:
 - Could be rationalized away ("just this once")
 - Contradict immediate goals (speed over quality)
 
-Don't test:
-- Pure reference skills (API docs, syntax guides)
-- Skills without rules to violate
-- Skills agents have no incentive to bypass
+This pressure-test format is not needed for:
+- Pure reference skills (use retrieval examples and relevant static checks instead)
+- Mechanical edits with no behavior change
+- Skills without a realistic incentive to bypass the behavior being tested
 
 ## TDD Mapping for Skill Testing
 
@@ -42,14 +38,14 @@ Same cycle as code TDD, different test format.
 
 ## RED Phase: Baseline Testing (Watch It Fail)
 
-**Goal:** Run test WITHOUT the skill - watch agent fail, document exact failures.
+**Goal:** 在采用本压力测试格式时，用旧版或无技能对照观察当前行为；若没有缺口，就记录基线达标，不为使用 RED 术语制造失败。
 
 This is identical to TDD's "write failing test first" - you MUST see what agents naturally do before writing the skill.
 
 **Process:**
 
-- [ ] **Create pressure scenarios** (3+ combined pressures)
-- [ ] **Run WITHOUT skill** - give agents realistic task with pressures
+- [ ] **Create pressure scenarios** (combine pressures; under a tight budget focus the single highest-risk pressure and label the result a coarse test)
+- [ ] **Run WITHOUT skill** - give agents realistic task with pressures, same task/tools/budget as the with-skill arm, fresh context
 - [ ] **Document choices and rationalizations** word-for-word
 - [ ] **Identify patterns** - which excuses appear repeatedly?
 - [ ] **Note effective pressures** - which scenarios trigger violations?
@@ -137,7 +133,7 @@ Forces explicit choice.
 | **Social** | Looking dogmatic, seeming inflexible |
 | **Pragmatic** | "Being pragmatic vs dogmatic" |
 
-**Best tests combine 3+ pressures.**
+**Best tests combine multiple pressures.** With enough budget, combine 3+. Under a tight budget, test the single highest-risk pressure and report it as a coarse test — don't present it as full certification.
 
 **Why this works:** See [persuasion-principles.md](persuasion-principles.md) for research on how authority, scarcity, and commitment principles increase compliance pressure.
 
@@ -264,6 +260,18 @@ it crystal clear that Option A was the only acceptable answer?
    - Make key points more prominent
    - Add foundational principle early
 
+## Budget, Trigger, and Holdout
+
+Pressure scenarios are the final gate; plan them with the budget you actually have:
+
+- **Fair control.** Compare with/without (or old vs new) in fresh contexts, same task, same tools, same budget. An unfair control proves nothing.
+- **Trigger ≠ execution.** Whether the agent selects the skill is a separate question, tested from the description plus task list alone. Pressure scenarios test behavior after the skill is loaded. Don't report one as the other.
+- **Freeze a holdout.** Keep one scenario out of tuning and look at it once at the end. If you tuned after seeing its result, it is no longer a holdout — rotate it.
+- **A tight budget is not a license to over-claim.** With roughly 6 sessions you can coarsely test one dimension (trigger or execution) — for example, three same-task old/new pairs — and must state what stays uncovered. Unknown token/time cost is reported as unknown.
+- **No API access?** Manual evaluation in fresh contexts is valid; don't start paid services or install tools for it.
+
+Full method, scoring dimensions, and budget templates: [evaluation.md](evaluation.md).
+
 ## When Skill is Bulletproof
 
 **Signs of bulletproof skill:**
@@ -310,8 +318,8 @@ Meta-test: "Skill was clear, I should follow it"
 Before deploying skill, verify you followed RED-GREEN-REFACTOR:
 
 **RED Phase:**
-- [ ] Created pressure scenarios (3+ combined pressures)
-- [ ] Ran scenarios WITHOUT skill (baseline)
+- [ ] Created pressure scenarios (combine pressures; a single high-risk pressure is acceptable under a tight budget if labeled a coarse test)
+- [ ] Ran scenarios WITHOUT skill as the control (fresh context, same task/tools/budget)
 - [ ] Documented agent failures and rationalizations verbatim
 
 **GREEN Phase:**
@@ -328,57 +336,26 @@ Before deploying skill, verify you followed RED-GREEN-REFACTOR:
 - [ ] Re-tested - agent still complies
 - [ ] Meta-tested to verify clarity
 - [ ] Agent follows rule under maximum pressure
+- [ ] Froze a holdout scenario that was not used for tuning (see [evaluation.md](evaluation.md)); uncovered dimensions stated honestly
 
-## Common Mistakes (Same as TDD)
+## Common Mistakes Within This Pressure-Test Format
 
-**❌ Writing skill before testing (skipping RED)**
-Reveals what YOU think needs preventing, not what ACTUALLY needs preventing.
-✅ Fix: Always run baseline scenarios first.
+- 在适用本参考的纪律型行为改动中，没有旧版/无技能对照就把候选通过当作改善。先建立对照；基线已经达标时如实记录，不强造失败。
+- 场景压力过弱或过强。按真实任务和预算选压力轴；允许单压力粗测，组合压力用于补充覆盖，三种压力不是统一门槛。
+- 不记录具体错误与条件。保留最小失败证据，不只写“agent错了”，也不输出真实秘密。
+- 用越来越多的禁令修复所有问题。规则遗漏、输出结构与条件判断用不同形式处理。
+- 通过一次便宣称全面有效，或无限继续测试。按事先的预算停止，标注样本与覆盖限制；改动后复测受影响行为。
 
-**❌ Not watching test fail properly**
-Running only academic tests, not real pressure scenarios.
-✅ Fix: Use pressure scenarios that make agent WANT to violate.
+## Quick Reference
 
-**❌ Weak test cases (single pressure)**
-Agents resist single pressure, break under multiple.
-✅ Fix: Combine 3+ pressures (time + sunk cost + exhaustion).
+| 阶段 | 在本压力测试格式中检查什么 |
+|---|---|
+| 对照 | 当前行为与目标的差距，或基线已经满足目标的证据 |
+| 最小改动 | 指导是否针对已观察的缺口 |
+| 复测 | 在同任务、工具与预算下比较结果，不只看服从措辞 |
+| 停止 | 达到预算或目标，交付证据与未覆盖范围 |
 
-**❌ Not capturing exact failures**
-"Agent was wrong" doesn't tell you what to prevent.
-✅ Fix: Document exact rationalizations verbatim.
+## Scope Reminder
 
-**❌ Vague fixes (adding generic counters)**
-"Don't cheat" doesn't work. "Don't keep as reference" does.
-✅ Fix: Add explicit negations for each specific rationalization.
-
-**❌ Stopping after first pass**
-Tests pass once ≠ bulletproof.
-✅ Fix: Continue REFACTOR cycle until no new rationalizations.
-
-## Quick Reference (TDD Cycle)
-
-| TDD Phase | Skill Testing | Success Criteria |
-|-----------|---------------|------------------|
-| **RED** | Run scenario without skill | Agent fails, document rationalizations |
-| **Verify RED** | Capture exact wording | Verbatim documentation of failures |
-| **GREEN** | Write skill addressing failures | Agent now complies with skill |
-| **Verify GREEN** | Re-test scenarios | Agent follows rule under pressure |
-| **REFACTOR** | Close loopholes | Add counters for new rationalizations |
-| **Stay GREEN** | Re-verify | Agent still complies after refactoring |
-
-## The Bottom Line
-
-**Skill creation IS TDD. Same principles, same cycle, same benefits.**
-
-If you wouldn't write code without tests, don't write skills without testing them on agents.
-
-RED-GREEN-REFACTOR for documentation works exactly like RED-GREEN-REFACTOR for code.
-
-## Real-World Impact
-
-From applying TDD to TDD skill itself (2025-10-03):
-- 6 RED-GREEN-REFACTOR iterations to bulletproof
-- Baseline testing revealed 10+ unique rationalizations
-- Each REFACTOR closed specific loopholes
-- Final VERIFY GREEN: 100% compliance under maximum pressure
-- Same process works for any discipline-enforcing skill
+本参考只提供纪律型行为改动的压力测试方法。引用、格式和纯整理用相应静态检查；通用对照、触发/执行分离与留出规则以 [evaluation.md](evaluation.md) 为准。
+没有在本仓复现的上游示例不构成本仓效果数据。每项改动独立验收，可以并行实施，但不能用结构 audit 替代行为证据。

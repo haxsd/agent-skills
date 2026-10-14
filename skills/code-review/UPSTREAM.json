@@ -1,0 +1,23 @@
+{
+  "name": "code-review",
+  "repository": "https://github.com/getsentry/skills",
+  "commit": "d18b7aa8ba878354e5c348310230e652f7690f9c",
+  "path": "skills/secret-serialization, skills/gha-security-review",
+  "license": "Apache-2.0",
+  "author": "Sentry / Functional Software, Inc.",
+  "retrievedAt": "2026-10-14",
+  "modifications": [
+    "新增 references/secret-serialization.md 与 references/github-actions.md：中文改写并合并上游分散参考的要点。",
+    "Actions 参考按本仓校准重写风险评估：按 trigger→checkout→执行→实际 permissions/secrets 追踪，不把 pull_request_target 等同写权限或秘密；env 中转仍需 shell 安全引用。",
+    "凭据参考保留两端追踪与机制表，明确白名单/脱敏是有效防护、原始属性访问不受字段级机制约束。",
+    "入口 SKILL.md 只做路由，不复制上游正文；未随包分发上游脚本与其余参考原文。"
+  ],
+  "alsoBorrowed": [
+    {
+      "repository": "https://github.com/trailofbits/skills",
+      "commit": "8e54050ae63c2f62224c35b1616efe71865b4777",
+      "what": "differential-review 的 CC-BY-SA-4.0 派生文件 references/differential-review.md（中文改写、只读化、按本仓校准裁剪）；署名与相同方式共享要求见 LICENSE.txt"
+    }
+  ],
+  "validation": "维护者案例见 EVAL.md 与 evals/cases.json；专项参考是审查方法，不是自动扫描或可达性证明。本机评估结果保留在私有记录。"
+}

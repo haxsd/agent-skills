@@ -53,9 +53,10 @@
     },
     {
       "name": "env-doctor",
-      "kind": "unverified",
-      "sources": [{"author": "JustHandled Labs（原文件署名）", "url": "https://github.com/search?q=%22env-doctor%22+%22JustHandled%22&type=code", "license": "MIT（原文件声明；原始仓库与版本待核验）"}],
-      "note": "原 SKILL.md 保留 JustHandled Labs 作者元数据；历史本地归档不等于本仓原创，原始来源定位仍待核验。"
+      "kind": "derived",
+      "sources": [{"author": "JustHandled Labs（历史入口署名）", "url": "https://github.com/search?q=%22env-doctor%22+%22JustHandled%22&type=code", "license": "MIT（历史文件声明；原始仓库、版本与授权仍待核验）"}],
+      "contributions": ["独立重写中文诊断入口、检查清单与安全案例，覆盖 PnP、工作区、容器边界、真实端口和变量来源。", "本仓实现只读键状态工具与真实 CLI 回归，新增预算化行为评估；新 MIT 仅覆盖本轮原创文件。"],
+      "note": "当前正文和工具为本仓独立重写，历史署名及未核验来源事实保留在 skills/env-doctor/NOTICE.txt 与 SOURCE-NOTES.md；本轮原创声明不代替历史来源核验或授权。"
     },
     {
       "name": "systematic-debugging",
@@ -157,8 +158,13 @@
     {
       "name": "writing-skills",
       "kind": "derived",
-      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/writing-skills", "license": "MIT（上游已核验；收录版本待核验）"}],
-      "contributions": ["整理跨宿主技能发现说明，将较长的测试、流程图与清单参考拆为按需读取资源。"]
+      "upstreamFiles": ["skills/writing-skills/UPSTREAM.json"],
+      "sources": [
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/writing-skills", "license": "MIT（历史来源；原收录版本待核验）"},
+        {"author": "Functional Software, Inc. dba Sentry", "url": "https://github.com/getsentry/skills/tree/d18b7aa8ba878354e5c348310230e652f7690f9c/skills/skill-writer", "license": "Apache-2.0（本轮方法参考）", "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c"}
+      ],
+      "contributions": ["重写为改动风险分级、旧新公平对照、触发与执行分离、冻结留出题及质量/安全/成本评估，取消无条件昂贵评估规则。", "新增可重复案例和评估参考；修正旧格式与授权约束，按文件保留 Anthropic/Sentry Apache-2.0 和历史 obra MIT 许可。"],
+      "note": "固定 Anthropic skill-creator 与 Sentry skill-writer 只作方法参考，未搬运或执行自动模型脚本；未改写旧资源维持历史许可，原始收录版本不冒充当前上游版本。"
     },
     {
       "name": "using-superpowers",
@@ -245,12 +251,14 @@
     {
       "name": "code-review",
       "kind": "derived",
+      "upstreamFiles": ["skills/code-review/UPSTREAM.json"],
       "sources": [
         {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/requesting-code-review", "license": "MIT（上游已核验；收录版本待核验）"},
-        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/receiving-code-review", "license": "MIT（上游已核验；收录版本待核验）"}
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/receiving-code-review", "license": "MIT（上游已核验；收录版本待核验）"},
+        {"author": "Trail of Bits", "url": "https://github.com/trailofbits/skills/tree/8e54050ae63c2f62224c35b1616efe71865b4777/plugins/differential-review/skills/differential-review", "license": "CC-BY-SA-4.0（仅独立差异审查参考）", "revision": "8e54050ae63c2f62224c35b1616efe71865b4777"}
       ],
-      "contributions": ["本仓编写统一审查与反馈入口，整合只读审查模板、范围化验证和具体评论线程回应。"],
-      "note": "入口为本地编写；当前目录包含上游审查模板，整项按原创改进标注。"
+      "contributions": ["保留只读审查与反馈入口，按差异语义选择差异影响、凭据序列化和 GitHub Actions 专项参考，不把小改动扩大为全仓审计。", "补充实际权限、数据流与有效防护证据，分开严重程度、置信度和待确认项，新增正反例评估。"],
+      "note": "通用入口、历史 obra MIT 模板、Sentry Apache-2.0 参考与 Trail of Bits CC-BY-SA-4.0 参考按文件界定许可；原创改进不把整个目录重授单一许可。"
     },
     {
       "name": "deepseek-subagents",

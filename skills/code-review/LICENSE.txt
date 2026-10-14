@@ -1,0 +1,30 @@
+code-review：许可范围（按文件界定）
+
+本目录同时包含不同来源的材料，整个目录不是单一许可。各文件适用范围如下。
+
+1. 既有材料（本次未重新许可，维持原有署名与许可）
+   - SKILL.md 的通用审查与反馈入口文本：本仓编写与改进的部分；历史来源标注见仓库根目录 ATTRIBUTION.md；
+     其中基于 obra 上游改编的内容按 MIT 提供，文本见 LICENSES/MIT-obra.txt。
+   - references/code-reviewer.md：上游审查模板，来自 Jesse Vincent / obra；
+     许可：MIT，Copyright (c) 2025 Jesse Vincent（上游许可已核验，收录版本待核验）。
+     完整许可文本：LICENSES/MIT-obra.txt。保留原有署名与许可，不因本次改动改授为 Apache-2.0 或 CC-BY-SA-4.0。
+
+2. 新增专项参考（与其上游来源的许可一致）
+   - references/secret-serialization.md、references/github-actions.md：
+     基于 Sentry skills（固定版本 d18b7aa8ba878354e5c348310230e652f7690f9c）改写，
+     按 Apache License 2.0 提供。Copyright 2025 Functional Software, Inc. dba Sentry。
+     完整许可文本：LICENSES/Apache-2.0.txt；版权与修改说明：NOTICE.txt。
+   - references/differential-review.md：
+     基于 Trail of Bits skills（固定版本 8e54050ae63c2f62224c35b1616efe71865b4777）的
+     plugins/differential-review/skills/differential-review 改写，按 CC-BY-SA-4.0 提供。原作者：Trail of Bits。
+     本仓修改：中文重写；只读化（不 checkout 基线）；合并上游 methodology/patterns/adversarial/reporting
+     的必要内容并裁剪自动化产物；按本仓要求分开严重程度与置信度。
+     法律文本：https://creativecommons.org/licenses/by-sa/4.0/legalcode
+     复用需保留署名、许可链接并标明修改；改编作品需以 CC-BY-SA-4.0 或兼容许可共享。无 Trail of Bits 背书。
+
+3. 本仓原创新增
+   - EVAL.md、evals/cases.json、UPSTREAM.json、NOTICE.txt、LICENSE.txt 由本仓维护者编写；
+     本轮原创部分按 Apache-2.0 提供（完整许可文本见 LICENSES/Apache-2.0.txt）。
+   Copyright 2026 agent-skills contributors。它们不改变上述各文件各自的许可。
+
+与 Sentry、Trail of Bits 及其他上游作者均无隶属、背书或认证关系。来源与固定版本记录见 UPSTREAM.json。

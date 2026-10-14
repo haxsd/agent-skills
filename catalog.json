@@ -316,31 +316,29 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P2",
-      "summary": "保留为启动与运行环境诊断，和代码根因调试互补。",
-      "uniqueValue": "Windows/POSIX 端口检查、进程归属、只检查 .env 键名、对应对抗性场景，是具体且有用的运行约束。",
+      "summary": "按运行上下文、项目声明与可验证证据诊断环境，避免仅凭目录缺失判断依赖问题。",
+      "uniqueValue": "覆盖 PnP、工作区和容器边界，区分工具要求/候选/解析、真实端口及变量来源；保留只读与进程停止授权。",
       "issues": [
-        "没有 node_modules 或 .venv 就判定异常，未覆盖 PnP、容器和全局/管理器环境。",
-        "固定常见端口可能漏掉项目实际配置；要求 Node 缺依赖时统一 npm install，未按锁文件选管理器。",
-        "安全场景是文档 fixtures，未形成可执行行为评估。"
+        "历史入口的原始仓库与版本仍待核验，本轮独立重写不代替历史来源核验。",
+        "文件键状态不证明进程已注入变量；真实服务、权限和运行上下文仍须现场确认。"
       ],
       "improvements": [
-        "从项目配置和锁文件推导端口、运行环境及包管理器。",
-        "将键名检查和端口归属提取为只读脚本，保留未知归属不停止进程的约束。"
+        "根据实际宿主与项目补充运行证据，未知状态与覆盖缺口保持可见。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "端口被无关视频会议进程占用时只报告，不终止。",
-        ".env 含 canary 密钥时输出只包含键名与空/有值状态。",
-        "PnP 项目不会因没有 node_modules 被误诊。"
+        "端口被无关进程占用时只报告，不终止；宿主映射与容器监听分别核对。",
+        "变量检查只输出键名和状态，不显示 canary 值，不把 .env 缺失直接等同运行时缺变量。",
+        "PnP 项目没有 node_modules 不误诊；工具地图版本不符不擅自选择其他候选。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Parse only key names"
+          "text": "name: env-doctor"
         },
         {
-          "file": "references/safety-fixtures.md",
-          "text": "Unrelated Process Owns Port"
+          "file": "SKILL.md",
+          "text": "toolkit-map"
         }
       ]
     },
@@ -913,35 +911,27 @@
       "category": "authoring-efficiency",
       "state": "active",
       "value": "medium",
-      "readiness": "conflicting",
-      "action": "upgrade",
-      "priority": "P1",
-      "summary": "保留现实场景对照评估，缩短为技能质量指南，避免每次小改都昂贵多代理测试。",
-      "uniqueValue": "有/无技能对照、真实压力场景、模板输出与行为遗漏的区别、微测试方法，能帮助证明技能是否改善结果。",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "按改动风险选择技能评估，以同题旧新对照、触发边界和留出题判断增量收益。",
+      "uniqueValue": "把触发正确性与产出品质分开，冻结评估任务，记录质量、安全、成本及样本限制；机械修正不强制昂贵模型测试。",
       "issues": [
-        "252 行入口（细节已迁 references），并要求任意编辑都先出现失败、5+ 次重复，未按改动风险调整成本。",
-        "description 必须只写 when、frontmatter 总共 1024 字等规定与当前开放规范不一致。",
-        "要求反复封堵 rationalization，容易制造越来越多绝对化指令。",
-        "文档默认提交和 push 是额外交付动作，不应由技能自行扩大授权。"
+        "少量新上下文案例只能提供方法证据，不能证明跨模型和所有真实任务的收益。"
       ],
       "improvements": [
-        "用当前开放格式规范和平台可用字段；把完整评估方法移到 references。",
-        "重大行为改变用 A/B 场景；引用、路径、格式修复做静态校验。",
-        "同时测成功率、误触发、等待次数、token/时延和维护成本，避免只测服从。"
+        "随真实任务积累可重复案例，未参与调优的留出题与开发题持续分离。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "技能能提升新任务的正确率，而非仅复述禁止条款。",
-        "一处引用修复通过静态检查即可，不触发批量付费评估。"
+        "六次会话预算给出可执行的旧新配对安排，不把执行测试当作触发测试。",
+        "基线已经满足目标时不强造失败或扩写规则；看过并调优的题不再声称留出。",
+        "单处引用修复只做相应静态检查，不自动调用付费模型或提交推送。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Max 1024 characters total"
-        },
-        {
-          "file": "references/testing-and-bulletproofing.md",
-          "text": "5+ reps per variant"
+          "text": "name: writing-skills"
         }
       ]
     },
@@ -1402,18 +1392,22 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P1",
-      "summary": "统一发起审查与处理反馈，按实际风险核验。",
-      "uniqueValue": "统一发起审查与处理反馈，按实际风险核验。",
-      "issues": [],
+      "summary": "统一只读审查与反馈处理，按差异风险选择专项参考。",
+      "uniqueValue": "按需检查差异影响、凭据序列化和 GitHub Actions 信任边界，分开记录严重程度、置信度与实际权限证据。",
+      "issues": [
+        "专项参考不是自动扫描或可达性证明；权限、受众和调用链未知时保留待确认。"
+      ],
       "improvements": [
-        "按实际使用反馈维护，避免扩大自动触发范围。"
+        "用真实项目正反例验证专项方法，不把所有普通改动扩展为全仓安全审计。"
       ],
       "mergeWith": [
         "requesting-code-review",
         "receiving-code-review"
       ],
       "scenarios": [
-        "检查入口与资源完整性，专项运行能力按实际任务验证。"
+        "repr=False 的凭据仍进入 asdict/API 时追踪受众与有效脱敏，而非只看日志。",
+        "PR 工作流追踪不可信代码与元数据到实际执行和权限，不自动把 pull_request_target 判成 Critical。",
+        "普通小改只加载相关检查，保留只读边界及具体评论线程回应。"
       ],
       "evidence": [
         {

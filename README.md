@@ -10,7 +10,7 @@
 |---|---|
 | 需求与规划 | requirement-understanding、writing-plans |
 | 实现与代理编排 | execute-plan、parallel-agents、deepseek-subagent-orchestration、mcp-builder |
-| 质量、调试与审查 | systematic-debugging、variant-analysis、code review、webapp-testing、property-based-testing、windows-powershell-safe |
+| 质量、调试与审查 | env-doctor、systematic-debugging、variant-analysis、code-review、webapp-testing、property-based-testing、windows-powershell-safe |
 | Git 隔离与交付 | using-git-worktrees、finishing-a-development-branch |
 | 品牌、设计与 UI | ui-ux-pro-max、brand、design-system、ui-styling、design、canvas-design、excalidraw-diagrams |
 | 写作与内容 | podcast-to-article、work-humanizer |
