@@ -27,6 +27,10 @@ ACTIONS = {
     "archive-proposed": "建议归档", "archive-retain": "维持归档",
     "retain-external": "保持外部",
 }
+AUTHORSHIP = {
+    "upstream": "第三方引入", "original": "本仓原创",
+    "derived": "原创改进（基于上游）", "unverified": "待核验",
+}
 TEXT_SUFFIXES = {".md", ".py", ".cjs", ".js", ".csv", ".json", ".html", ".sh"}
 NORMALIZED_SUFFIXES = TEXT_SUFFIXES | {".yaml", ".yml", ".txt", ".dot", ".ts", ".svg", ".xml"}
 
@@ -88,6 +92,56 @@ def inventory(root):
     return found
 
 
+def inspect_provenance(root, names, add):
+    relative = "docs/sources/skill-provenance.json"
+    document = read_json(root / relative)
+    if document.get("schemaVersion") != 1 or not isinstance(document.get("skills"), list):
+        raise ValueError("Invalid skill provenance schema")
+    result = {}
+    for entry in document["skills"]:
+        name = entry["name"]
+        if name in result:
+            add("error", "provenance-duplicate", relative, name)
+        if name not in names:
+            add("error", "provenance-unknown-skill", relative, name)
+        kind = entry.get("kind", "unverified")
+        if kind not in AUTHORSHIP:
+            add("error", "provenance-kind", relative, name)
+        upstreams = entry.get("upstreamFiles", [])
+        sources = entry.get("sources", [])
+        existing = (root / "skills" / name / "UPSTREAM.json",
+                    root / "archive" / "skills" / name / "UPSTREAM.json")
+        declared_files = upstreams + entry.get("dependencyFiles", [])
+        for path in existing:
+            if path.is_file() and path.relative_to(root).as_posix() not in declared_files:
+                add("error", "provenance-unclassified-upstream", relative, name)
+        if kind == "original" and (upstreams or sources):
+            add("error", "provenance-original-upstream", relative, name)
+        if kind in {"derived", "upstream"} and not (upstreams or sources):
+            add("error", "provenance-missing-upstream", relative, name)
+        if kind in {"derived", "original"} and not entry.get("contributions"):
+            add("error", "provenance-missing-contributions", relative, name)
+        for source in sources:
+            if (not isinstance(source, dict) or not source.get("author") or
+                    not re.match(r"https://", source.get("url", ""))):
+                add("error", "provenance-source-metadata", relative, name)
+        for reference in upstreams + entry.get("dependencyFiles", []):
+            path = (root / reference).resolve()
+            if not path.is_relative_to(root.resolve()) or not path.is_file():
+                add("error", "provenance-source-path", relative, f"{name}: {reference}")
+                continue
+            data = read_json(path)
+            if (not data.get("repository", "").startswith("https://") or
+                    not re.fullmatch(r"[0-9a-f]{40}", data.get("commit", "")) or
+                    not data.get("license")):
+                add("error", "provenance-source-metadata", reference, name)
+        result[name] = {**entry, "kind": kind}
+    for name in sorted(set(names) - set(result)):
+        add("error", "provenance-missing-entry", relative, name)
+        result[name] = {"name": name, "kind": "unverified"}
+    return result
+
+
 def inspect(root, catalog):
     findings = []
 
@@ -100,6 +154,7 @@ def inspect(root, catalog):
     names = [entry["name"] for entry in entries]
     if len(names) != len(set(names)):
         add("error", "duplicate-catalog-name", "catalog.json", "Skill names must be unique")
+    provenance = inspect_provenance(root, names, add)
     expected = {(entry["state"], entry["name"]) for entry in entries
                 if entry["state"] != "external"}
     found = inventory(root)
@@ -202,7 +257,9 @@ def inspect(root, catalog):
                 add("hint", "unresolved-path-in-entrypoint", row["path"], ref)
     duplicates = [sorted(path for _, path in group)
                   for group in duplicate_map.values() if len({name for name, _ in group}) > 1]
-    return {"baselineCommit": catalog["baselineCommit"], "reviewedAt": catalog["reviewedAt"],
+    for metric in metrics:
+        metric["authorship"] = provenance[metric["name"]]["kind"]
+    return {"provenance": provenance, "baselineCommit": catalog["baselineCommit"], "reviewedAt": catalog["reviewedAt"],
             "counts": dict(Counter(entry["state"] for entry in entries)),
             "scope": "Static consistency; paths marked hint may be generated project assets. Not full YAML validation or behavioral certification.",
             "skills": metrics, "exactDuplicateTextGroupsLF": sorted(duplicates),
@@ -227,15 +284,17 @@ def render_catalog(catalog, audit):
            "分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。",
            "价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。", "",
            "安装目标仍只由 `manifest.json` / `external.json` 决定；不要从本目录生成第二套目标配置。", "",
+           "来源分为第三方引入、本仓原创、原创改进（基于上游）和待核验；原创改进保留上游署名与许可。每项完整来源见 [署名说明](../ATTRIBUTION.md) 和 [来源登记](sources/skill-provenance.json)。", "",
            "逐项审查、整改路线与机器检查结果由维护者在内部保存。", ""]
     for category in catalog["categories"]:
         out.extend([f"## {category['title']}", "",
-                    "| Skill | 当前状态 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |",
-                    "|---|---|---|---|---|---|"])
+                    "| Skill | 当前状态 | 创作归属 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |",
+                    "|---|---|---|---|---|---|---|"])
         for entry in catalog["skills"]:
             if entry["category"] == category["id"]:
                 out.append("| " + " | ".join([
                     table_link(entry, metrics[entry["name"]]), STATES[entry["state"]],
+                    AUTHORSHIP[metrics[entry["name"]]["authorship"]],
                     VALUES[entry["value"]], READINESS[entry["readiness"]],
                     ACTIONS[entry["action"]], entry["priority"]]) + " |")
         out.append("")
@@ -282,12 +341,81 @@ def render_review(catalog, audit):
     return "\n".join(out)
 
 
+def render_source_note(name, kind, state):
+    prefix = "../../../" if state == "archived" else "../../"
+    return ("<!-- provenance:start -->\n"
+            f"> 创作归属：{AUTHORSHIP[kind]}。来源、署名与许可见 "
+            f"[来源说明]({prefix}ATTRIBUTION.md#{name})。\n"
+            "<!-- provenance:end -->")
+
+
+def with_source_note(text, note):
+    pattern = r"<!-- provenance:start -->.*?<!-- provenance:end -->"
+    if re.search(pattern, text, re.S):
+        return re.sub(pattern, lambda _: note, text, flags=re.S)
+    return text.rstrip("\n") + "\n\n" + note + "\n"
+
+
+def render_attribution(root, catalog, audit):
+    out = ["# 来源与署名", "",
+           "本仓库公开维护技能集合。每项技能分别标注创作归属、上游来源和许可；本仓库的改进不改变上游作品的署名与许可要求。", "",
+           "- **第三方引入**：来源于第三方，主要保留其内容；格式、路径或安装适配不宣称整项原创。",
+           "- **本仓原创**：本仓独立编写的技能文本或工具；调用外部工具不等于复制该工具，依赖单独列出。",
+           "- **原创改进（基于上游）**：本仓贡献新的流程、实现或测试，同时列出所基于的上游。原创声明仅覆盖本仓贡献。",
+           "- **待核验**：证据暂不足以确认原作者、确切版本或许可；保留已知线索，不默认视作原创。", "",
+           "创作归属与许可核验是两回事。公开可读、免费下载或市场同名条目均不等于再分发授权。"
+           "历史内容未确认的版本或许可明确标为待核验；本次来源标注不构成全仓授权认证。", "",
+           "机器可读的单一登记为 [skill-provenance.json](docs/sources/skill-provenance.json)；"
+           "已有固定版本继续保存在各项 `UPSTREAM.json`。本文件及各入口来源提示由 `scripts/audit_skills.py` 生成。", ""]
+    for entry in catalog["skills"]:
+        name = entry["name"]
+        record = audit["provenance"][name]
+        path = skill_dir(root, entry)
+        link = (path / "SKILL.md").relative_to(root).as_posix() if path else None
+        title = f"[{name}]({link})" if link else name
+        out.extend([f"## {name}", "", f"{title} · {STATES[entry['state']]} · **{AUTHORSHIP[record['kind']]}**", ""])
+        if record["kind"] in {"original", "derived"}:
+            out.append(f"原创贡献者：{record.get('author', 'agent-skills contributors')}。")
+        if record["kind"] == "original":
+            repository = record.get("originalRepository", "https://github.com/haxsd/agent-skills")
+            out.append(f"- 原创维护仓库：[{repository}]({repository})。")
+        for field, label in (("upstreamFiles", "上游"), ("dependencyFiles", "外部依赖（非技能文本来源）")):
+            for reference in record.get(field, []):
+                data = read_json(root / reference)
+                out.append(f"- {label}：[{data.get('author', data['repository'].removeprefix('https://github.com/'))}]({data['repository']})；"
+                           f"许可：{data['license']}；固定版本：`{data['commit']}`。详情：[{reference}]({reference})。")
+                for borrowed in data.get("alsoBorrowed", []):
+                    out.append(f"  - 另借鉴：[{borrowed['repository']}]({borrowed['repository']})；"
+                               f"版本：`{borrowed.get('commit', '待核验')}`；范围：{borrowed.get('what', '见来源文件')}。")
+        for source in record.get("sources", []):
+            out.append(f"- 来源：[{source['author']}]({source['url']})；"
+                       f"许可：{source.get('license', '待核验')}；收录版本：{source.get('revision', '待核验')}。")
+        for dependency in record.get("dependencies", []):
+            out.append(f"- 外部依赖（非技能文本来源）：[{dependency['author']}]({dependency['url']})；"
+                       f"许可：{dependency.get('license', '待核验')}。")
+        if record.get("contributions"):
+            out.extend(["", "本仓贡献：", *[f"- {value}" for value in record["contributions"]]])
+        if record.get("note"):
+            out.extend(["", record["note"]])
+        out.append("")
+    return "\n".join(out)
+
+
 def outputs(catalog, audit):
-    return {
+    result = {
+        "ATTRIBUTION.md": render_attribution(ROOT, catalog, audit),
         "docs/catalog.md": render_catalog(catalog, audit),
         "docs/reviews/skill-review.md": render_review(catalog, audit),
         "docs/validation/audit-findings.json": json.dumps(audit, ensure_ascii=False, indent=2) + "\n",
     }
+    for entry in catalog["skills"]:
+        path = skill_dir(ROOT, entry)
+        if path is not None:
+            entrypoint = path / "SKILL.md"
+            result[entrypoint.relative_to(ROOT).as_posix()] = with_source_note(
+                entrypoint.read_text(encoding="utf-8-sig"),
+                render_source_note(entry["name"], audit["provenance"][entry["name"]]["kind"], entry["state"]))
+    return result
 
 
 # 这两份报告只写本机（目录已 gitignore），公开仓库不提交，检查模式不要求它们存在。

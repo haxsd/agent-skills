@@ -118,3 +118,7 @@ Skip any step = lying, not verifying
 - Paraphrases and synonyms
 - Implications of success
 - ANY communication suggesting completion/correctness
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../../ATTRIBUTION.md#verification-before-completion)。
+<!-- provenance:end -->

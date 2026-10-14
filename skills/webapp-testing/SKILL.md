@@ -96,3 +96,7 @@ Wait for the UI state needed by the assertion, using locator assertions or a spe
 ## Local integration boundaries
 
 Resolve helper paths relative to this skill, not the target project. Inspect scripts before executing commands that start servers. The upstream shell-based helper only terminates its shell process; process-tree cleanup is not verified on Windows. Prefer an already running server or the project's supported process manager. Use this skill for authorized local application tests; follow the host browser automation rules for existing user browser sessions. Install Playwright or browser binaries only when the task requires them.
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#webapp-testing)。
+<!-- provenance:end -->

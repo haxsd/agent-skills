@@ -97,3 +97,7 @@ If no issue is found, say that the environment looks healthy and identify the ne
 - `.env` findings and evidence must contain key names and empty/present state only, never values.
 - An unrelated process that owns a common port must not be stopped or given an unconditional termination command.
 - POSIX commands must use a `bash` block and Windows commands must use a `powershell` block.
+
+<!-- provenance:start -->
+> 创作归属：待核验。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#env-doctor)。
+<!-- provenance:end -->

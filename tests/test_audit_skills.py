@@ -31,6 +31,12 @@ class AuditTests(unittest.TestCase):
             "name": "example", "files": 1, "bytes": len(text.encode()),
             "description": "Use for fixture checks."}]}), encoding="utf-8")
         (root / "external.json").write_text("[]", encoding="utf-8")
+        source_dir = root / "docs" / "sources"
+        source_dir.mkdir(parents=True)
+        (source_dir / "skill-provenance.json").write_text(json.dumps({
+            "schemaVersion": 1, "skills": [{"name": "example", "kind": "original",
+                                           "contributions": ["Fixture authored locally."]}]
+        }), encoding="utf-8")
         return {"baselineCommit": "fixture", "reviewedAt": "2026-09-30",
                 "categories": [{"id": "testing", "title": "测试"}],
                 "skills": [{"name": "example", "state": "active", "value": "high",
@@ -88,6 +94,125 @@ class AuditTests(unittest.TestCase):
             (second / "reference.md").write_bytes(b"shared\ntext\n")
             groups = audit.inspect(root, catalog)["exactDuplicateTextGroupsLF"]
             self.assertEqual([["archive/skills/second/reference.md", "skills/example/reference.md"]], groups)
+
+    def set_provenance(self, root, entries):
+        (root / "docs" / "sources" / "skill-provenance.json").write_text(
+            json.dumps({"schemaVersion": 1, "skills": entries}), encoding="utf-8")
+
+    def test_unclassified_history_is_visible_not_assumed_original(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            self.set_provenance(root, [])
+            result = audit.inspect(root, catalog)
+            self.assertEqual("unverified", result["skills"][0]["authorship"])
+            catalog["skills"][0]["priority"] = "P2"
+            rendered = audit.render_catalog(catalog, result)
+            self.assertIn("待核验", rendered)
+            self.assertNotIn("| 本仓原创 |", rendered)
+
+    def test_upstream_material_cannot_be_relabelled_as_original(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            self.set_provenance(root, [{"name": "example", "kind": "original",
+                                       "upstreamFiles": ["skills/example/UPSTREAM.json"],
+                                       "contributions": ["Translated and improved."]}])
+            result = audit.inspect(root, catalog)
+            self.assertIn("provenance-original-upstream", {f["code"] for f in result["findings"]})
+
+    def test_derived_skill_requires_upstream_and_contribution(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            self.set_provenance(root, [{"name": "example", "kind": "derived"}])
+            codes = {f["code"] for f in audit.inspect(root, catalog)["findings"]}
+            self.assertIn("provenance-missing-upstream", codes)
+            self.assertIn("provenance-missing-contributions", codes)
+
+    def test_source_files_cannot_escape_repository(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            self.set_provenance(root, [{"name": "example", "kind": "upstream",
+                                       "upstreamFiles": ["../outside.json"]}])
+            codes = {f["code"] for f in audit.inspect(root, catalog)["findings"]}
+            self.assertIn("provenance-source-path", codes)
+
+    def test_dependency_does_not_turn_original_wrapper_into_derivative(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            source = "skills/example/UPSTREAM.json"
+            (root / source).write_text(json.dumps({
+                "repository": "https://github.com/example/tool", "commit": "a" * 40,
+                "license": "MIT"}), encoding="utf-8")
+            self.set_provenance(root, [{"name": "example", "kind": "original",
+                                       "dependencyFiles": [source],
+                                       "contributions": ["Original wrapper text; no tool code copied."]}])
+            result = audit.inspect(root, catalog)
+            self.assertFalse(any(f["level"] == "error" for f in result["findings"]))
+            self.assertEqual("original", result["skills"][0]["authorship"])
+
+    def test_duplicate_or_unknown_provenance_entry_is_rejected(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            entry = {"name": "example", "kind": "unverified"}
+            self.set_provenance(root, [entry, entry, {"name": "typo", "kind": "upstream"}])
+            codes = {f["code"] for f in audit.inspect(root, catalog)["findings"]}
+            self.assertIn("provenance-duplicate", codes)
+            self.assertIn("provenance-unknown-skill", codes)
+
+    def test_original_cannot_hide_existing_upstream_metadata(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            (root / "skills/example/UPSTREAM.json").write_text("{}", encoding="utf-8")
+            codes = {f["code"] for f in audit.inspect(root, catalog)["findings"]}
+            self.assertIn("provenance-unclassified-upstream", codes)
+
+    def test_sources_are_rendered_for_original_and_derived_skills(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            source = "skills/example/UPSTREAM.json"
+            (root / source).write_text(json.dumps({
+                "repository": "https://github.com/example/tool", "commit": "a" * 40,
+                "license": "MIT", "author": "Upstream Author"}), encoding="utf-8")
+            self.set_provenance(root, [{"name": "example", "kind": "derived",
+                                       "upstreamFiles": [source], "contributions": ["Add local tests."]}])
+            result = audit.inspect(root, catalog)
+            rendered = audit.render_attribution(root, catalog, result)
+            self.assertIn("Upstream Author", rendered)
+            self.assertIn("https://github.com/example/tool", rendered)
+            self.assertIn("Add local tests.", rendered)
+            self.assertIn("MIT", rendered)
+            self.assertIn("a" * 40, rendered)
+            note = audit.render_source_note("example", "derived", "active")
+            self.assertIn("../../ATTRIBUTION.md#example", note)
+            archived = audit.render_source_note("example", "derived", "archived")
+            self.assertIn("../../../ATTRIBUTION.md#example", archived)
+
+    def test_source_note_update_preserves_skill_content_and_is_idempotent(self):
+        text = "---\nname: example\ndescription: Fixture.\n---\n\n# Example\n\nKeep this instruction.\n"
+        note = audit.render_source_note("example", "original", "active")
+        updated = audit.with_source_note(text, note)
+        self.assertIn("Keep this instruction.", updated)
+        self.assertEqual(updated, audit.with_source_note(updated, note))
+        changed = audit.with_source_note(updated, audit.render_source_note("example", "derived", "active"))
+        self.assertEqual(1, changed.count("<!-- provenance:start -->"))
+        self.assertNotIn("本仓原创", changed)
+
+    def test_source_metadata_requires_pinned_version_and_license(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            source = "skills/example/UPSTREAM.json"
+            (root / source).write_text('{"repository": "https://github.com/example/tool"}', encoding="utf-8")
+            self.set_provenance(root, [{"name": "example", "kind": "upstream", "upstreamFiles": [source]}])
+            codes = {f["code"] for f in audit.inspect(root, catalog)["findings"]}
+            self.assertIn("provenance-source-metadata", codes)
 
 
 if __name__ == "__main__":

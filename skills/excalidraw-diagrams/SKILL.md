@@ -121,3 +121,7 @@ excalidraw render references/minimal-scene.json --out /tmp/minimal.png
 
 CLI 本体为 MIT（`@excalidraw/cli`）。本 skill 文本由本仓库维护，条款见 `LICENSE.txt`。
 固定参考的上游 commit 见 `UPSTREAM.json`（不 vendoring CLI 源码）。
+
+<!-- provenance:start -->
+> 创作归属：本仓原创。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#excalidraw-diagrams)。
+<!-- provenance:end -->

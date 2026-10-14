@@ -133,3 +133,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "<SKILL_ROOT>\skills\scripts
 git -C "<SKILL_ROOT>" pull
 powershell -NoProfile -ExecutionPolicy Bypass -File "<SKILL_ROOT>\skills\scripts\refresh-tool-index.ps1"
 ```
+
+<!-- provenance:start -->
+> 创作归属：本仓原创。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#reverse-skill)。
+<!-- provenance:end -->

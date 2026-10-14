@@ -104,3 +104,7 @@ node scripts/inject-brand-context.cjs --json | head -20
 1. Parse subcommand from `$ARGUMENTS` (first word)
 2. Load corresponding `references/{subcommand}.md`
 3. Execute with remaining arguments
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#brand)。
+<!-- provenance:end -->

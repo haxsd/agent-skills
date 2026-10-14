@@ -165,3 +165,7 @@ After agents return:
 2. **Check for conflicts** - Did agents edit same code?
 3. **Run full suite** - Verify all fixes work together
 4. **Spot check** - Agents can make systematic errors
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../../ATTRIBUTION.md#dispatching-parallel-agents)。
+<!-- provenance:end -->

@@ -98,3 +98,7 @@ Read only the rules matching the query, schema or security task.
 - [security-privileges](references/security-privileges.md)
 - [security-rls-basics](references/security-rls-basics.md)
 - [security-rls-performance](references/security-rls-performance.md)
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#supabase-postgres-best-practices)。
+<!-- provenance:end -->

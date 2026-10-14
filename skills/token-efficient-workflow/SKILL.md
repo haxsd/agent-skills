@@ -47,3 +47,7 @@ targets: [codex-skills]
 仅在出现持续性项目变化时更新 `/context`：战略决策、结构性变更、新增已知问题、新增下一步动作、重要里程碑完成。
 
 以下情况不更新：单篇文案、小改动、头脑风暴、一次性回复、例行自动化运行。
+
+<!-- provenance:start -->
+> 创作归属：本仓原创。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#token-efficient-workflow)。
+<!-- provenance:end -->

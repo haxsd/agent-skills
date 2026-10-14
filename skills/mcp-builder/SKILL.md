@@ -238,3 +238,7 @@ Load these resources as needed during development:
 ## Local integration boundaries
 
 WebFetch is an upstream tool name; use the host's available documentation/browser tools. Resolve scripts and reference paths relative to this skill. The bundled evaluation harness calls Anthropic and requires separate dependencies and credentials; it is optional and must not run without authorization for that API usage. Protocol and SDK examples must be checked against the target version before implementation.
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#mcp-builder)。
+<!-- provenance:end -->

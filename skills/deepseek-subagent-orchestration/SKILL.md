@@ -86,3 +86,7 @@ Never copy them to tasks, check environments, outputs, or commits.
 
 `deepseek-flash` is a rolling alias. The 2026-09-30 verified mapping is V4.1
 Flash; recheck [release notes](https://api-docs.deepseek.com/updates/) when needed.
+
+<!-- provenance:start -->
+> 创作归属：本仓原创。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#deepseek-subagent-orchestration)。
+<!-- provenance:end -->

@@ -23,3 +23,7 @@ description: 审查代码改动或处理审查反馈；检查需求符合性、�
 4. 审查者建议"完善实现"时先 grep 调用方；没有真实使用的功能按 YAGNI 提议删除。
 5. 按结果回应：已修复内容、核验依据、未处理项及原因；避免奉承、重复复述或无证据的成功声明。
 6. 回复 GitHub 行内审查评论时用评论线程回复接口（`gh api repos/{owner}/{repo}/pulls/{pr}/comments/{id}/replies`），不新建顶层评论。
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#code-review)。
+<!-- provenance:end -->

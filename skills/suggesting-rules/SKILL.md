@@ -44,3 +44,7 @@ user-invocable: false
 - **先查已有规则/指令文件**：已有相关条目就更新它，不新增重复条目
 - 用户已经直接授权写规则时，直接写，不再重复询问
 - 作用范围要如实：不要把单个项目的风格推广成全局规则
+
+<!-- provenance:start -->
+> 创作归属：本仓原创。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#suggesting-rules)。
+<!-- provenance:end -->

@@ -73,3 +73,7 @@ description: 执行书面实施计划：按依赖和工具能力选择顺序执�
 ## 示例
 
 端到端流程演示：[references/example-walkthrough.md](references/example-walkthrough.md)。
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#execute-plan)。
+<!-- provenance:end -->

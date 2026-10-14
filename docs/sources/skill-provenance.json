@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-14",
+  "note": "创作归属与许可核验分别记录。原创改进仅指本仓贡献，不抹去上游署名。未找回确切收录提交时明确待核验，不以当前上游 HEAD 冒充原收录版本。manifest.origin 仍仅表示安装来源目录。",
+  "skills": [
+    {
+      "name": "requirement-understanding",
+      "kind": "derived",
+      "sources": [
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/brainstorming", "license": "MIT（上游已核验；收录版本待核验）"},
+        {"author": "Trail of Bits", "url": "https://github.com/trailofbits/skills", "license": "待核验"}
+      ],
+      "contributions": ["本仓编写中文需求入口，合并复杂度分流、最少关键问题、方案权衡和规格审查参考。"],
+      "note": "原入口为本地编写；当前目录已吸收归档技能的流程与资源，因此按原创改进标注。"
+    },
+    {
+      "name": "brainstorming",
+      "kind": "upstream",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/brainstorming", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "note": "归档保留上游设计流程和视觉辅助资源；本地整理不改变原始归属。"
+    },
+    {
+      "name": "writing-plans",
+      "kind": "derived",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/writing-plans", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "contributions": ["按任务规模缩放规划流程，维护接口、依赖、规格覆盖和本地审查模板。"]
+    },
+    {
+      "name": "executing-plans",
+      "kind": "upstream",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/executing-plans", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "note": "归档的顺序执行流程，当前能力已合入 execute-plan。"
+    },
+    {
+      "name": "execute-plan",
+      "kind": "derived",
+      "sources": [
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/subagent-driven-development", "license": "MIT（上游已核验；收录版本待核验）"},
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/executing-plans", "license": "MIT（上游已核验；收录版本待核验）"}
+      ],
+      "contributions": ["统一顺序执行与委派入口，维护任务账本、审查包和工作区辅助脚本。", "按当前宿主能力适配代理调用，保留恢复执行与成果保护规则。"]
+    },
+    {
+      "name": "parallel-agents",
+      "kind": "derived",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/dispatching-parallel-agents", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "contributions": ["本仓中文重写，区分独立任务并发与同一问题多方案试验，明确隔离和成果整合。"]
+    },
+    {
+      "name": "deepseek-subagent-orchestration",
+      "kind": "original",
+      "contributions": ["独立实现外部 DeepSeek API 工具循环、限定文件权限、命名检查、凭据保护及回归测试。"]
+    },
+    {
+      "name": "env-doctor",
+      "kind": "unverified",
+      "sources": [{"author": "JustHandled Labs（原文件署名）", "url": "https://github.com/search?q=%22env-doctor%22+%22JustHandled%22&type=code", "license": "MIT（原文件声明；原始仓库与版本待核验）"}],
+      "note": "原 SKILL.md 保留 JustHandled Labs 作者元数据；历史本地归档不等于本仓原创，原始来源定位仍待核验。"
+    },
+    {
+      "name": "systematic-debugging",
+      "kind": "derived",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/systematic-debugging", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "contributions": ["调整诊断日志和配置检查的安全边界，维护本地根因追踪、条件等待与调试参考。"]
+    },
+    {
+      "name": "test-driven-development",
+      "kind": "upstream",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/test-driven-development", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "note": "测试流程及 writing-good-tests 参考来自上游体系，未因本地收藏而改称原创。"
+    },
+    {
+      "name": "verification-before-completion",
+      "kind": "upstream",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/verification-before-completion", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "note": "归档原流程，验证证据规则已整理进交付技能。"
+    },
+    {
+      "name": "requesting-code-review",
+      "kind": "upstream",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/requesting-code-review", "license": "MIT（上游已核验；收录版本待核验）"}]
+    },
+    {
+      "name": "receiving-code-review",
+      "kind": "upstream",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/receiving-code-review", "license": "MIT（上游已核验；收录版本待核验）"}]
+    },
+    {
+      "name": "using-git-worktrees",
+      "kind": "derived",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/using-git-worktrees", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "contributions": ["补充宿主管理工作区、detached HEAD 与 submodule 判别，避免重复创建和误清理。"]
+    },
+    {
+      "name": "finishing-a-development-branch",
+      "kind": "derived",
+      "sources": [
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/finishing-a-development-branch", "license": "MIT（上游已核验；收录版本待核验）"},
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/verification-before-completion", "license": "MIT（上游已核验；收录版本待核验）"}
+      ],
+      "contributions": ["整合验证证据契约与成果保护，区分命名分支、detached HEAD 和外部管理工作区。"]
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "kind": "derived",
+      "sources": [{"author": "Next Level Builder", "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill", "license": "MIT（当前上游已核验；本地收录版本待核验）"}],
+      "contributions": ["维护本地检索数据、原生桌面技术栈、来源记录、数据契约及回归测试。"],
+      "note": "本地数据与脚本有扩展，不能用当前上游版本冒充本地内容的完整来源。"
+    },
+    {
+      "name": "brand",
+      "kind": "derived",
+      "sources": [{"author": "Claudekit（原文件署名）", "url": "https://github.com/claudekit", "license": "待核验"}],
+      "contributions": ["维护品牌模板到设计 token 的同步回归测试，补充项目资源与脚本路径边界。"],
+      "note": "作者组织已知，精确技能仓库、收录版本和许可仍待核验；同名市场副本不视为原始作者证据。"
+    },
+    {
+      "name": "design-system",
+      "kind": "derived",
+      "sources": [{"author": "Claudekit（原文件署名）", "url": "https://github.com/claudekit", "license": "待核验（原文件声明 MIT，尚未证实再分发授权）"}],
+      "contributions": ["维护分层 token、组件规范、幻灯片数据与生成校验工具，增加相关回归测试。"],
+      "note": "精确上游技能仓库仍待核验，不把市场同名条目当作同一版本。"
+    },
+    {
+      "name": "ui-styling",
+      "kind": "derived",
+      "sources": [{"author": "Claudekit（原文件署名）", "url": "https://github.com/claudekit", "license": "待核验（原文件声明 MIT，尚未证实再分发授权）"}],
+      "contributions": ["维护组件添加、Tailwind 配置生成与脚本回归测试，补充技能根目录调用边界。"],
+      "note": "许可冲突：SKILL.md 声明 MIT，但本目录 LICENSE.txt 是 Apache-2.0；尚未确认两者各自适用范围。Claudekit 原产品为付费分发，公开 CLI 的许可证不等于技能内容授权，精确来源和收录版本待核验。"
+    },
+    {
+      "name": "design",
+      "kind": "derived",
+      "sources": [{"author": "Claudekit（原文件署名）", "url": "https://github.com/claudekit", "license": "待核验（原文件声明 MIT，尚未证实再分发授权）"}],
+      "contributions": ["维护视觉资产路由、Logo/CIP 检索数据及本地生成工具，补充资源依赖说明。"],
+      "note": "精确上游技能仓库与收录版本待核验；聚合市场副本不是原创证明。"
+    },
+    {
+      "name": "canvas-design",
+      "kind": "upstream",
+      "sources": [{"author": "Anthropic", "url": "https://github.com/anthropics/skills/tree/main/skills/canvas-design", "license": "Apache-2.0（目录 LICENSE.txt；精确收录版本待核验）"}],
+      "note": "字体资产另按 canvas-fonts 中各自许可适用。"
+    },
+    {
+      "name": "graphify",
+      "kind": "upstream",
+      "sources": [{"author": "Graphify Labs / safishamsi", "url": "https://github.com/Graphify-Labs/graphify", "license": "Apache-2.0（当前上游已核验；本地收录版本待核验）", "revision": "本地标记 0.9.56；对应提交待核验"}],
+      "note": "原 safishamsi/graphify 已转为 Graphify-Labs/graphify。保留第三方主体归属；版本标记不等于已确认的固定收录提交。"
+    },
+    {
+      "name": "reverse-skill",
+      "kind": "original",
+      "dependencies": [{"author": "zhaoxuya520", "url": "https://github.com/zhaoxuya520/reverse-skill", "license": "MIT（当前外部仓库已核验；未将包体纳入本仓）"}],
+      "contributions": ["本仓编写外部安全研究技能包的路由入口、定位与预检规则；不打包外部技能包本体。"],
+      "note": "原创声明仅覆盖本仓路由文本，不覆盖外部安全研究技能包。"
+    },
+    {
+      "name": "writing-skills",
+      "kind": "derived",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/writing-skills", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "contributions": ["整理跨宿主技能发现说明，将较长的测试、流程图与清单参考拆为按需读取资源。"]
+    },
+    {
+      "name": "using-superpowers",
+      "kind": "upstream",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/using-superpowers", "license": "MIT（上游已核验；收录版本待核验）"}],
+      "note": "归档保留上游技能发现与宿主适配资料。"
+    },
+    {
+      "name": "token-efficient-workflow",
+      "kind": "original",
+      "contributions": ["本仓维护共用上下文效率规则与 Codex 入口，明确可选项目辅助脚本和持续性状态更新条件。"]
+    },
+    {
+      "name": "suggesting-rules",
+      "kind": "original",
+      "contributions": ["本仓编写重复偏好沉淀流程，按宿主选择规则落点，先检查既有规则避免重复。"]
+    },
+    {
+      "name": "ask-questions-if-underspecified",
+      "kind": "upstream",
+      "sources": [{"author": "Trail of Bits", "url": "https://github.com/trailofbits/skills", "license": "待核验"}],
+      "note": "保留原组织标识；确切收录提交与对应许可待核验。"
+    },
+    {
+      "name": "best-of-n-solving",
+      "kind": "unverified",
+      "sources": [{"author": "原作者待核验；历史归档指向 superpowers 系方法", "url": "https://github.com/obra/superpowers", "license": "此具体技能许可待核验"}],
+      "note": "同上游体系相关不等于已确认由该作者编写；保留来源线索，不宣称原创或已授权。"
+    },
+    {
+      "name": "dispatching-parallel-agents",
+      "kind": "upstream",
+      "sources": [{"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/dispatching-parallel-agents", "license": "MIT（上游已核验；收录版本待核验）"}]
+    },
+    {
+      "name": "slides",
+      "kind": "upstream",
+      "sources": [{"author": "Claudekit（原文件署名）", "url": "https://github.com/claudekit", "license": "待核验"}],
+      "note": "归档 HTML slides 技能；精确上游技能仓库、收录版本与许可待核验。"
+    },
+    {
+      "name": "banner-design",
+      "kind": "upstream",
+      "sources": [{"author": "Claudekit（原文件署名）", "url": "https://github.com/claudekit", "license": "待核验（原文件声明 MIT，尚未证实再分发授权）"}],
+      "note": "精确上游技能仓库与收录版本待核验。"
+    },
+    {
+      "name": "toolkit-map",
+      "kind": "original",
+      "author": "haxsd / toolkit-map contributors",
+      "originalRepository": "https://github.com/haxsd/toolkit-map",
+      "contributions": ["独立维护的本机工具发现、验证和选择层。"],
+      "note": "原创作品在独立仓库维护；本仓只登记外部入口和安装目标，不复制技能内容，许可以原仓库为准。"
+    },
+    {
+      "name": "webapp-testing",
+      "kind": "derived",
+      "upstreamFiles": ["skills/webapp-testing/UPSTREAM.json"],
+      "contributions": ["将固定等待建议调整为可观察界面状态等待，补充宿主浏览器映射、相对路径和进程清理限制。"]
+    },
+    {
+      "name": "mcp-builder",
+      "kind": "upstream",
+      "upstreamFiles": ["skills/mcp-builder/UPSTREAM.json"],
+      "note": "本地仅补充宿主工具映射、路径与可选付费评估边界，主体保持上游归属。"
+    },
+    {
+      "name": "supabase-postgres-best-practices",
+      "kind": "upstream",
+      "upstreamFiles": ["skills/supabase-postgres-best-practices/UPSTREAM.json"],
+      "note": "保留上游数据库规则；本地主要补充发现入口，不宣称主体原创。"
+    },
+    {
+      "name": "property-based-testing",
+      "kind": "upstream",
+      "upstreamFiles": ["skills/property-based-testing/UPSTREAM.json"],
+      "note": "原许可 CC-BY-SA-4.0 继续适用。"
+    },
+    {
+      "name": "development-workflow",
+      "kind": "original",
+      "contributions": ["本仓编写精简开发工作流，按范围组织计划、实施、验证与交付，调用既有专项技能而非复制其主体。"]
+    },
+    {
+      "name": "code-review",
+      "kind": "derived",
+      "sources": [
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/requesting-code-review", "license": "MIT（上游已核验；收录版本待核验）"},
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/receiving-code-review", "license": "MIT（上游已核验；收录版本待核验）"}
+      ],
+      "contributions": ["本仓编写统一审查与反馈入口，整合只读审查模板、范围化验证和具体评论线程回应。"],
+      "note": "入口为本地编写；当前目录包含上游审查模板，整项按原创改进标注。"
+    },
+    {
+      "name": "deepseek-subagents",
+      "kind": "original",
+      "contributions": ["本仓编写 Codex CLI 执行型 DeepSeek 子代理调度、清单校验、进程控制与测试。"]
+    },
+    {
+      "name": "web-design-guidelines",
+      "kind": "upstream",
+      "sources": [
+        {"author": "Vercel", "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines", "license": "待核验（当前仓库无独立许可文件）", "revision": "本地元数据 1.0.0；对应提交待核验"},
+        {"author": "Vercel", "url": "https://github.com/vercel-labs/web-interface-guidelines", "license": "远程规范许可待核验"}
+      ],
+      "note": "技能文本来源于 Vercel agent-skills；远程规范另有来源，二者分别核验。"
+    },
+    {
+      "name": "podcast-to-article",
+      "kind": "derived",
+      "upstreamFiles": ["skills/podcast-to-article/UPSTREAM.json"],
+      "contributions": ["增加 Windows UTF-8 兼容、本地协作说明和脚本调用适配，精简不参与工作流的资源。"]
+    },
+    {
+      "name": "work-humanizer",
+      "kind": "upstream",
+      "upstreamFiles": ["skills/work-humanizer/UPSTREAM.json"],
+      "note": "原文主体来自 Pawel Huryn；本地 slim 打包、中文触发和 Windows 编码修正不宣称整项原创。"
+    },
+    {
+      "name": "excalidraw-diagrams",
+      "kind": "original",
+      "dependencyFiles": ["skills/excalidraw-diagrams/UPSTREAM.json"],
+      "contributions": ["本仓编写本地渲染 wrapper 技能文本和最小示例，使用官方 CLI 而不复制 CLI 源码。"],
+      "note": "UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的 MIT 许可不自动覆盖本仓原创文本。"
+    },
+    {
+      "name": "windows-powershell-safe",
+      "kind": "derived",
+      "upstreamFiles": ["skills/windows-powershell-safe/UPSTREAM.json"],
+      "contributions": ["中文精简改写，加入安全调用决策顺序、宿主版本边界、失败停止规则和经验参考。"]
+    }
+  ]
+}

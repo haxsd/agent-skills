@@ -42,3 +42,7 @@ description: GPT 主代理主动把编码、分析、测试设计和文档等可
 这是主动委派的 skill 和执行脚本，不会强制更改所有聊天的全局模型或保证每次自动选中技能。自动选择保持启用；用户显式使用 `$deepseek-subagents` 时按本流程执行。
 
 任务上下文和工具结果会发送到 DeepSeek。只提供任务必要内容；不发送 API 密钥或不相关凭据。最新外部事实由主代理核验可靠来源后提供，不能把子代理未核验的记忆当成联网研究。
+
+<!-- provenance:start -->
+> 创作归属：本仓原创。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#deepseek-subagents)。
+<!-- provenance:end -->

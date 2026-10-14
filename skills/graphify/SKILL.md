@@ -161,3 +161,7 @@ When the user asks to install the post-commit auto-rebuild hook or wire graphify
 - Always show token cost in the report.
 - Never hide cohesion scores behind symbols - show the raw number.
 - Never run HTML viz on a graph with more than 5,000 nodes without warning the user.
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#graphify)。
+<!-- provenance:end -->

@@ -101,3 +101,7 @@ if ($process.ExitCode -ne 0) { throw "exit code $($process.ExitCode)" }
 - 不要把私密的原始失败日志提交进仓库。
 
 常见翻车样例（经验/文档归纳，未在本机 Windows 复跑）见 `references/repros.md`。
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#windows-powershell-safe)。
+<!-- provenance:end -->

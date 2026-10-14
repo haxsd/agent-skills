@@ -169,3 +169,7 @@ After saving the plan, offer execution choice:
 **If Inline Execution chosen:**
 - **REQUIRED SUB-SKILL:** Use execute-plan (sequential mode)
 - Batch execution with checkpoints for review
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#writing-plans)。
+<!-- provenance:end -->

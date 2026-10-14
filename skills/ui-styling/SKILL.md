@@ -322,3 +322,7 @@ export function LoginForm() {
 - Tailwind UI: https://tailwindui.com
 - Headless UI: https://headlessui.com
 - v0 (AI UI Generator): https://v0.dev
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#ui-styling)。
+<!-- provenance:end -->

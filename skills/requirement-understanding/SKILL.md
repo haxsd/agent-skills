@@ -72,3 +72,7 @@ description: 收到项目或代码需求时，先结合项目结构与代码理�
 - 一次问一堆开放式问题；不用选项和默认值
 - 架构任务只罗列选项，不给真实取舍和推荐
 - 在已有明确授权时反复请求批准
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#requirement-understanding)。
+<!-- provenance:end -->

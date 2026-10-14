@@ -50,3 +50,7 @@ Cursor's `best-of-n-runner` subagent type creates isolated git worktrees — eac
 - Keep prompts specific: include the file paths, the problem statement, and clear success criteria.
 - For simpler problems, this is overkill — just use a single agent.
 - The branches are real git branches, so you can inspect them manually if needed.
+
+<!-- provenance:start -->
+> 创作归属：待核验。来源、署名与许可见 [来源说明](../../../ATTRIBUTION.md#best-of-n-solving)。
+<!-- provenance:end -->

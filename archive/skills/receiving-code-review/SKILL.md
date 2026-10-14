@@ -203,3 +203,7 @@ You understand 1,2,3,6. Unclear on 4,5.
 ## GitHub Thread Replies
 
 When replying to inline review comments on GitHub, reply in the comment thread (`gh api repos/{owner}/{repo}/pulls/{pr}/comments/{id}/replies`), not as a top-level PR comment.
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../../ATTRIBUTION.md#receiving-code-review)。
+<!-- provenance:end -->

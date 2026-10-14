@@ -311,3 +311,7 @@ pip install google-genai pillow
 
 **External sub-skills:** brand, design-system, ui-styling
 **Related Skills:** frontend-design, ui-ux-pro-max, ai-multimodal, chrome-devtools
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#design)。
+<!-- provenance:end -->

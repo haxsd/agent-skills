@@ -37,3 +37,7 @@ When a user provides a file or pattern argument:
 4. Output findings using the format specified in the guidelines
 
 If no files specified, ask the user which files to review.
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#web-design-guidelines)。
+<!-- provenance:end -->

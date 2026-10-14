@@ -248,3 +248,7 @@ This file is **not shipped with this skill**. If it is missing, do not claim it 
 4. Use HSL format for opacity control
 5. Document every token's purpose
 6. **Slides should import project-local `design-tokens.css` and use `var()` when available**
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#design-system)。
+<!-- provenance:end -->

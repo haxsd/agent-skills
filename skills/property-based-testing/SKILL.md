@@ -66,3 +66,7 @@ Load the one that matches the task in front of you:
 If the project already uses a PBT library, just write the tests in it. If it does not,
 adding one is a dependency decision that belongs to the user — offer it once with the
 specific property you would write, and take the answer either way.
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#property-based-testing)。
+<!-- provenance:end -->

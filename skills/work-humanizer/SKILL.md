@@ -171,3 +171,7 @@ Do not bolt on personality. "Honestly,", "Quick heads-up", "Not bad.", "On a hap
 Rewrite mode: the final text. If the user wants notes, add up to five bullets on what changed, plus any spot where a real specific would help ("A real customer number would make this line land"). Interview mode: the numbered questions first; after the answers, the final text.
 
 **Then, for any piece over about 100 words, end with one line that starts "Shorter option:"** (final check 7). Either the option, offered and never applied: the cuts, roughly how much shorter the piece gets, and any fact a cut would lose and where it could move. Or "none, it's already tight." If the writer asks, write the shorter version in full.
+
+<!-- provenance:start -->
+> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#work-humanizer)。
+<!-- provenance:end -->

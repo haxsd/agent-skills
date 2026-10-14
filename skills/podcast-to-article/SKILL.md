@@ -241,3 +241,7 @@ python3 scripts/check_style.py 成稿.md
 - `references/example.md` — 同一段逐字稿的两次处理，原始稿对照成稿
 - `scripts/prep_transcript.py` — 字幕清洗
 - `scripts/check_style.py` — 终稿自检
+
+<!-- provenance:start -->
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#podcast-to-article)。
+<!-- provenance:end -->
