@@ -3,3 +3,6 @@ skills/ui-ux-pro-max/data/** text eol=lf
 skills/deepseek-subagent-orchestration/** text eol=lf
 scripts/*.py text eol=lf
 tests/*.py text eol=lf
+# .sh 要能在 Linux / macOS / Git Bash 上直接执行：shebang 带 \r 会直接报错，
+# 而 Windows 检出默认 autocrlf=true，不钉住 eol 就会被写成 CRLF。
+*.sh text eol=lf

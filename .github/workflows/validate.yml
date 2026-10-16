@@ -63,6 +63,14 @@ jobs:
           $env:TEST_POWERSHELL = (Get-Process -Id $PID).Path
           & $python -m unittest discover -s tests -p 'test_install.py' -v
           exit $LASTEXITCODE
+      # 技能里含 Linux/macOS 专属资产（.sh 脚本、可执行位），Windows 上看不出来：
+      # Linux 检出后 git 才会恢复 100755，可执行位或换行不对会在这里炸。
+      - name: Skill assets on Linux (executable bits, shell scripts)
+        if: runner.os == 'Linux'
+        run: |
+          python scripts/smoke_skills.py --node "$(command -v node)"
+          for f in $(git ls-files '*.sh'); do bash -n "$f" || { echo "::error::bash 语法检查失败: $f"; exit 1; }; done
+          echo "所有 .sh 通过 bash -n；可执行位由 git 检出恢复"
 
   records-guard:
     name: Public repo hygiene

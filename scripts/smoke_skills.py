@@ -44,7 +44,8 @@ def main():
         return result.stdout
 
     def syntax():
-        paths = sorted((ROOT / "skills").rglob("*.py"))
+        # 归档技能的脚本同样要能解析：归档不安装，但会被人翻出来复制使用。
+        paths = sorted((ROOT / "skills").rglob("*.py")) + sorted((ROOT / "archive").rglob("*.py"))
         for path in paths:
             ast.parse(path.read_text(encoding="utf-8-sig"), filename=str(path.relative_to(ROOT)))
         return {"pythonFilesParsed": len(paths), "scope": "syntax only; imports and external APIs not exercised"}

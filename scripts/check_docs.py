@@ -11,6 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def check(root):
     documents = [root / "README.md", root / "ATTRIBUTION.md", root / "archive/README.md"]
     documents += sorted(p for p in (root / "docs").rglob("*.md") if not {"history", "reviews", "validation"} & set(p.relative_to(root / "docs").parts))
+    # 技能正文与归档技能的本地链接同样要查：技能被单独安装后，坏链接只在别人机器上爆发。
+    documents += sorted((root / "skills").rglob("*.md"))
+    documents += sorted((root / "archive" / "skills").rglob("*.md"))
     errors = []
     for file in documents:
         text = file.read_text(encoding="utf-8-sig")

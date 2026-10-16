@@ -31,7 +31,7 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 **2. Dispatch code reviewer subagent:**
 
-Dispatch a `general-purpose` subagent, filling the template at [code-reviewer.md](code-reviewer.md)
+Dispatch a `general-purpose` subagent, filling the template at [code-reviewer.md](../../../skills/code-review/references/code-reviewer.md)
 
 **Placeholders:**
 - `{DESCRIPTION}` - Brief summary of what you built
@@ -92,7 +92,7 @@ You: [Fix progress indicators]
 - Show code/tests that prove it works
 - Request clarification
 
-See template at: [code-reviewer.md](code-reviewer.md)
+See template at: [code-reviewer.md](../../../skills/code-review/references/code-reviewer.md)
 
 <!-- provenance:start -->
 > 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../../ATTRIBUTION.md#requesting-code-review)。
