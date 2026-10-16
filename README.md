@@ -46,4 +46,4 @@ tests/         离线回归测试
 **每项技能都登记来源**：第三方引入、本仓原创、原创改进（基于上游）或待核验，见 [署名说明](ATTRIBUTION.md) 与 [逐项来源登记](docs/sources/skill-provenance.json)。
 原创改进保留上游作者和许可；原创声明仅覆盖本仓贡献。新引入第三方技能需固定上游版本并保留许可证，历史尚未查明的版本与许可如实标为待核验。
 
-本仓库自身内容（原创技能、改写贡献、脚本与文档）以 [MIT 许可](LICENSE) 提供；各技能随附的第三方材料仍按其自身许可，溯源见 [署名说明](ATTRIBUTION.md) 与 [逐项来源登记](docs/sources/skill-provenance.json)。
+本仓库自身内容（原创技能、改写贡献、脚本与文档）以 [MIT 许可](LICENSE) 提供；各技能随附的第三方材料仍按其自身许可，范围说明见 [NOTICE](NOTICE)，溯源见 [署名说明](ATTRIBUTION.md) 与 [逐项来源登记](docs/sources/skill-provenance.json)。
