@@ -192,6 +192,13 @@
       ]
     },
     {
+      "name": "waiting-and-async",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
       "name": "web-design-guidelines",
       "origin": "codex",
       "defaultTargets": [

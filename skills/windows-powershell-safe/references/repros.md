@@ -1,6 +1,6 @@
 # Windows agent × shell 最小翻车样例
 
-> **状态**：全部为「经验/文档」归纳，**未在本机 Windows 复跑**。来自团队 toolkit-map 踩坑与公开约定对照，供 agent 避坑，不作 CI 断言。
+> **状态**：第 1~8 条为「经验/文档」归纳，**未在本机 Windows 复跑**；第 9 条不同——它在**本机 DSH 上实测过**（见该条「依据」）。两类证据不要互相顶替：第 9 条可当本机事实，第 1~8 条仍只作避坑提示，不作 CI 断言。
 
 依据：toolkit-map / AGENTS.md、win-cli-scan（powershell-safe-invocation）、Microsoft about_Character_Encoding、.NET ProcessStartInfo 文档。  
 **主题一句话**：agent 翻车集中在「当 bash 写 Windows」「powershell≠pwsh」「引号叠层」「编码默认值」「退出码拿错对象」。
@@ -97,6 +97,24 @@ if ($LASTEXITCODE -ne 0) { throw "python 不可用，exit=$LASTEXITCODE" }
 # 或走 toolkit-map：map.ps1 find python -Json，看 verification，勿盲信 PATH 第一个
 ```
 - **依据**：经验/文档（toolkit-map AGENTS.md / platform-notes：存在≠可用；0 字节≠一定坏）
+
+### 9. 等条件时先睡一个猜出来的时长（如 `Start-Sleep -Seconds 30`）
+- **翻车命令**：
+```powershell
+Set-Content -LiteralPath .\build\start.ps1 -Value '...'   # 刚启动的准备脚本
+Start-Sleep -Seconds 30                                   # “保险起见先睡 30 秒”
+Test-Path .\build\ready.json                              # 再检查是否就绪
+```
+- **现象**：准备好可能是 3 秒也可能是 90 秒；猜短了要再睡一轮，猜长了就算 5 秒就够了也照样睡满。这不是 token 成本，而是**纯墙钟浪费**——等待时间与真实进度完全脱钩。反过来，宿主本来就会在命令结束时通知 agent，这 30 秒可能一秒都不必花。
+- **正确写法**：要结果就直接前台跑（阻塞到结束，不加 sleep）；要等外部条件就短轮询，命中有上限、命中即停：
+```powershell
+$deadline = (Get-Date).AddSeconds(120)
+while ((Get-Date) -lt $deadline) {
+    if (Test-Path -LiteralPath .\build\ready.json) { break }
+    Start-Sleep -Seconds 3
+}
+```
+- **依据（本机 DSH 实测）**：起一个 12 秒后台任务，全程不调用任何读取接口，完成通知自行到达；一条 12 秒前台命令设 5 秒超时后，控制权仅约 5 秒就返回，随后同样收到完成通知。即「等命令结束」不需要 sleep，只有「等条件满足」才需要短轮询。参见 SKILL.md「等待与异步：不要猜时长」。
 
 ---
 

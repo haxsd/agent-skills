@@ -483,3 +483,15 @@ UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的
 - 新增独立正反例评估场景与报告契约，不绑定 Claude 插件工作流或默认安装 CodeQL/Semgrep。
 
 基于 Trail of Bits 的原创改进；文本与改编参考继续按 CC-BY-SA-4.0 署名、标明修改并相同方式共享。
+
+## waiting-and-async
+
+[waiting-and-async](skills/waiting-and-async/SKILL.md) · 启用 · **本仓原创**
+
+原创贡献者：agent-skills contributors。
+- 原创维护仓库：[https://github.com/haxsd/agent-skills](https://github.com/haxsd/agent-skills)。
+
+本仓贡献：
+- 本仓原创：把「用猜测时长等待」这一浪费形状写成可判定规则（前台阻塞/完成通知优先、条件短轮询 2~5 秒、单次 sleep 上限、时间线证据），并给出宿主完成通知的 10 秒探针与等待反例参考。
+
+规则为原创整理；本机实测仅覆盖 DSH 上的完成通知行为，不构成其他宿主的通用结论。

@@ -1665,6 +1665,38 @@
         {"file": "SKILL.md", "text": "name: variant-analysis"},
         {"file": "UPSTREAM.json", "text": "8e54050ae63c2f62224c35b1616efe71865b4777"}
       ]
+    },
+    {
+      "name": "waiting-and-async",
+      "category": "authoring-efficiency",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "等待纪律入口：区分「等进度」与「等条件」，禁止用猜出来的 sleep 时长当等待手段，改成前台阻塞/完成通知或带上限的短轮询。",
+      "uniqueValue": "把「猜测时长」这一具体浪费形状写成可判定规则（单次 sleep 上限、2~5 秒轮询、命中即停），并给出宿主自有完成通知的 10 秒探针；平台无关，不绑 PowerShell。",
+      "issues": [
+        "触发依赖技能被选中：只靠描述命中，宿主若走命令而不加载技能，本规则不生效（全局副本见 shared/token-efficiency-rules.md）。",
+        "等待时间与通知时机只有本机 DSH 的两次实测；换宿主或换 harness 时必须重跑探针，不能照搬结论。",
+        "「单次 sleep 不超过约 30 秒」与 execute-plan 子代理有界等待（5~10 分钟）作用域不同：本规则限定单次 sleep，事件式等待沿用 task-loop。",
+        "等命令结束是否真的无需 sleep，取决于宿主是否提供完成通知；无通知的宿主只能退回短轮询。"
+      ],
+      "improvements": [
+        "在更多宿主上复测「零轮询完成通知」探针，把结果按宿主分列，而不是当作通用结论。",
+        "若出现真实会话里的等待耗时段记录，用它替换当前的定性判断。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "运行一条耗时命令且需要其结果时，直接前台等待并返回退出码，不额外插入 sleep。",
+        "等待端口、文件或日志就绪时，以 2~5 秒间隔轮询并设上限，条件一满足立即结束，等待时长有起止时间证据。",
+        "长命令转到后台后先做别的工作，靠完成通知取回结果；通知未到且无事可做时缩短等待而不是睡满猜测时长。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: waiting-and-async"},
+        {"file": "SKILL.md", "text": "## 本机实测（DSH，2026-10-16）"},
+        {"file": "references/repro.md", "text": "先睡一个猜出来的时长"}
+      ]
     }
   ]
 }

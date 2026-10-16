@@ -300,6 +300,14 @@
       "contributions": ["中文精简改写，加入安全调用决策顺序、宿主版本边界、失败停止规则和经验参考。"]
     },
     {
+      "name": "waiting-and-async",
+      "kind": "original",
+      "contributions": [
+        "本仓原创：把「用猜测时长等待」这一浪费形状写成可判定规则（前台阻塞/完成通知优先、条件短轮询 2~5 秒、单次 sleep 上限、时间线证据），并给出宿主完成通知的 10 秒探针与等待反例参考。"
+      ],
+      "note": "规则为原创整理；本机实测仅覆盖 DSH 上的完成通知行为，不构成其他宿主的通用结论。"
+    },
+    {
       "name": "skill-scanner",
       "kind": "derived",
       "upstreamFiles": ["skills/skill-scanner/UPSTREAM.json"],
