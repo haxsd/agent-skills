@@ -39,7 +39,9 @@ Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social phot
 
 ## Logo Design (Built-in)
 
-55+ styles, 30 color palettes, 25 industry guides. Gemini Nano Banana models.
+55+ styles, 55 color palettes, 55 industry guides. Gemini Nano Banana models.
+
+> 计数口径：调色板与行业指南来自 `data/logo/colors.csv`、`data/logo/industries.csv`（各 55 条数据行）；改动数据文件时同步改这一行。
 
 ### Logo: Generate Design Brief
 

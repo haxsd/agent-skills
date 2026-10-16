@@ -6,14 +6,15 @@ When to use each design sub-skill.
 
 | Skill | Purpose | Key Files |
 |-------|---------|-----------|
-| brand | Brand identity, voice, assets | SKILL.md + 10 references + 3 scripts |
-| design-system | Token architecture, specs | SKILL.md + 7 references + 2 scripts |
+| brand | Brand identity, voice, assets | SKILL.md + 11 references + 3 scripts |
+| design-system | Token architecture, specs | SKILL.md + 7 references + 9 scripts |
 | ui-styling | Component implementation | SKILL.md + 7 references + 2 scripts |
-| logo-design | AI logo generation (55 styles, 30 palettes) | SKILL.md + 4 references + 2 scripts |
+| logo-design | AI logo generation (55 styles, 55 palettes) | SKILL.md + 4 references + 2 scripts |
 | cip-design | Corporate Identity Program (50 deliverables) | SKILL.md + 3 references + 3 scripts |
 | slides | HTML presentations with Chart.js | SKILL.md + 4 references |
 | banner-design | Banners for social, ads, web, print (22 styles) | SKILL.md + 1 reference |
 | icon-design | SVG icon generation (15 styles, Gemini 3.1 Pro) | SKILL.md + 1 reference + 1 script |
+| social-photos | Social media images (HTML→screenshot) | SKILL.md + 1 reference |
 
 ## Routing by Task Type
 
@@ -181,8 +182,10 @@ npx shadcn@latest add button card input
 
 ## When to Use Multiple Skills
 
-Use **all eight** when:
-- Complete brand package from scratch (logo → CIP → presentation)
+本技能内置 6 个模块（logo-design、cip-design、slides、banner-design、icon-design、social-photos）；跨技能协作涉及的是另外三个：**brand、design-system、ui-styling**。上表把两者列在一起只是索引，不代表它们是同级技能。
+
+Use **all of them** when:
+- 完整品牌包：logo → CIP → 演示文稿，并且需要 token 体系与前端实现
 
 Use **brand + design-system + ui-styling** when:
 - Design system setup and implementation

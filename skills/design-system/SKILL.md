@@ -202,8 +202,9 @@ new Chart(document.getElementById('revenueChart'), {
         labels: ['Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
             data: [5, 12, 28, 45],
-            borderColor: '#FF6B6B',  // Use brand coral
-            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+            borderColor: getComputedStyle(document.documentElement)
+                .getPropertyValue('--color-primary'),   // token, not a literal
+            backgroundColor: 'rgba(37, 99, 235, 0.1)',
             fill: true,
             tension: 0.4
         }]

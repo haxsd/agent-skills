@@ -16,9 +16,12 @@ a ledger file, not only in todos.
 
 - Each plan owns a workspace: at skill start, run this skill's
   `scripts/sdd-workspace PLAN_FILE` — it prints the plan's git-ignored
-  directory (`<repo-root>/.superpowers/sdd/<plan-basename>/`), home to
+  directory (`<repo-root>/.superpowers/sdd/<plan-basename>-<path-hash>/`,
+  where `<path-hash>` is 8 hex characters derived from the plan's canonical
+  path, so two plans with the same basename never collide), home to
   every artifact for THIS plan: ledger, briefs, reports, review packages.
-  Another plan's directory is never yours to read or write.
+  Another plan's directory is never yours to read or write. Always use the
+  path the script printed; do not reconstruct it by hand.
 - Check for this plan's ledger at `<workspace>/progress.md`. If its first
   line names your plan file, tasks with a `Task <N>: complete` line are DONE
   — do not re-dispatch them; resume at the first task without one. A task

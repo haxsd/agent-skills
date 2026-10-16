@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-13",
+  "reviewedAt": "2026-10-16",
   "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
-  "scope": "31 个启用技能、5 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，4 个新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。",
+  "scope": "36 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查：修正账本路径与检查上限描述、消除等待规则重复、补齐字体许可与字体索引。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -98,7 +98,8 @@
       ],
       "improvements": [
         "分流、方案比较与规格自检已迁入 requirement-understanding（references/architecture-design.md、references/spec-reviewer-prompt.md）。",
-        "HARD-GATE 与固定审批已移除；视觉辅助脚本保留归档作参考。"
+        "HARD-GATE 与固定审批已移除；视觉辅助脚本保留归档作参考。",
+        "2026-10-16 复核：spike（可行性验证）路径与「视觉歧义才给线框图」的判断规则未迁入现役技能，是本项仍待处理的两处缺口。"
       ],
       "mergeWith": [
         "requirement-understanding",
@@ -808,11 +809,10 @@
       "improvements": [
         "先锁定文字、尺寸、格式和品牌要求；风格由任务决定。",
         "哲学说明改成可选的短设计 brief；视觉复核用边界、对比、字形和必需信息完整性。",
-        "维护字体用途与许可索引，保留原许可文件。"
+        "维护字体用途与许可索引，保留原许可文件。",
+        "字体许可索引已建立（canvas-fonts/INDEX.md），IBMPlexSerif 与 InstrumentSerif 缺失的 OFL 文本已按同库既有原文补齐。"
       ],
-      "mergeWith": [
-        "ui-styling"
-      ],
+      "mergeWith": [],
       "scenarios": [
         "活动海报完整保留日期地点和主办方，不因 minimal text 丢信息。",
         "中文海报没有缺字，输出尺寸正确，无文字越界。"

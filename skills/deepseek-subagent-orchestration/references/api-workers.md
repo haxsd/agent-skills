@@ -77,7 +77,7 @@ workspace stays unchanged by file tools. Tools:
 - read_file: numbered lines, at most 300 and a bounded response; next_line allows pagination.
 - search: case-insensitive literal search, at most 40 short matches.
 - write_file: complete UTF-8 content, at most 100 KB, exact owned paths only.
-- run_check: fixed named argv, no shell, at most 6 executions; exit/timeout/output recorded.
+- run_check: fixed named argv, no shell, at most 8 executions; exit/timeout/output recorded.
 - finish: summary string and evidence/suggestions/unknowns arrays of strings.
 
 Defaults: at most 8 jobs, 2 concurrent, 80 copied files and 40 owned files per job,

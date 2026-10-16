@@ -170,8 +170,8 @@ Embed conceptual DNA without announcing:
 - Large sizes for impact moments
 
 **Font integration:**
-- Search `./canvas-fonts` directory
-- Download needed fonts
+- `canvas-design` 技能自带 29 个 OFL 字体家族，位于该技能的 `canvas-fonts/` 目录（本技能目录下没有这个目录）；装了 `canvas-design` 就优先用它
+- 没装、或需要别的字体时再自行下载，并**同时保留其许可文件**——随产物分发字体必须带许可
 - Bring typography onto canvas
 - Part of art, not typeset digitally
 

@@ -68,7 +68,11 @@ have no browser, MCP, arbitrary shell, Git publishing, or primary-workspace tool
 
 Execution defaults: 12 model rounds, 4,096 completion tokens per call, 48,000
 reported total tokens per job, 96,000 conversation characters, 60-second HTTP
-timeout, and at most 6 check runs per job. Select larger limits or thinking mode
+timeout, and at most 8 check runs per job (the API path's own default: 2
+concurrent workers out of at most 8 jobs — see
+[references/api-workers.md](references/api-workers.md) for all caps). If you
+are instead using the CLI-process path, its own defaults apply
+(`deepseek-subagents`: 3 concurrent). Select larger limits or thinking mode
 for a justified complex block; small jobs can keep thinking disabled. Round/token
 caps bound the loop, rather than forbidding substantial work. Usage is recorded;
 the total budget uses a conservative input estimate and is not a billing cap.

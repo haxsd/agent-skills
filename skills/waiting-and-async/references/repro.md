@@ -41,4 +41,4 @@ Start-Sleep -Seconds 10  # 多余的 10 秒：没有任何东西会因为这一�
 ## 4. 与其他规则的边界
 
 - 等**子代理**（派发—等待—取回）不是本技能范围：见 `skills/execute-plan/references/task-loop.md` 的有界等待规则。
-- 测试代码里等条件（断言前的条件轮询、按事件等待）见 `skills/systematic-debugging/references/condition-based-waiting.md`；那里的轮询间隔可以到 10ms 级，不要套用本技能的 2~5 秒。
+- 测试代码里等条件（断言前的条件轮询、按事件等待）见 `skills/systematic-debugging/condition-based-waiting.md`；那里的轮询间隔可以到 10ms 级，不要套用本技能的 2~5 秒。
