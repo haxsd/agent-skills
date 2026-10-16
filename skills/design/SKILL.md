@@ -156,6 +156,9 @@ Load `references/banner-sizes-and-styles.md` for complete sizes and styles refer
 | Instagram | Story | 1080 x 1920 |
 | Instagram | Post | 1080 x 1080 |
 | Google Ads | Med Rectangle | 300 x 250 |
+| Google Ads | Leaderboard | 728 x 90 |
+
+**导出到 PNG 的命名约定**（按平台尺寸精确截图，用当前宿主可用的截图能力即可）：`assets/banners/{campaign}/{style}-{width}x{height}.png`，kebab-case；对时间敏感的投放加日期前缀 `{YYMMDD}-{style}-{size}.png`，方便按批次找回。截图后检查实际像素尺寸是否等于目标尺寸，不要只看文件名。
 | Website | Hero | 1920 x 600-1080 |
 
 ### Banner: Top Art Styles
