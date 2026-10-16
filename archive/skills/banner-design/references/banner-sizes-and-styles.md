@@ -1,5 +1,7 @@
 # Banner Sizes & Art Direction Styles Reference
 
+> **去重标记**：本文件与现役副本逐字节相同；现役权威副本在 `skills/design/references/banner-sizes-and-styles.md`，改动时两处都会漂移，请以现役副本为准。
+
 ## Complete Banner Sizes
 
 ### Social Media
