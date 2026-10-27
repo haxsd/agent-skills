@@ -44,7 +44,7 @@ class OutputSafetyTests(unittest.TestCase):
             with self.assertRaises(pdf_tool.PdfToolError):
                 pdf_tool.find_output(output)
             self.assertEqual(
-                output,
+                output.resolve(),
                 pdf_tool.find_output(output, overwrite=True),
             )
 
