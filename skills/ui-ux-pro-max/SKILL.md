@@ -1,10 +1,25 @@
 ---
 name: ui-ux-pro-max
-description: "UI/UX design intelligence for web, mobile, and desktop. This skill should be used when designing, building, reviewing, or fixing interfaces, including pages, components, design systems, accessibility, interaction, responsive layout, typography, color, charts, and stack-specific UI implementation. Searchable local data: 79 searchable styles (50 active), 192 product palettes and reasoning profiles, 74 font pairings, 119 UX guidelines, 105 icons, 17 GSAP presets, 25 chart types, and 22 stacks."
+description: "Searchable local UI/UX design intelligence for web, mobile, and desktop. Use before choosing visual direction, palettes, typography, stack guidance, or accessibility checks. Returns recommendations from bundled data; use ui-styling for React/Tailwind implementation, design-system for token systems, and web-design-guidelines for final standards review."
 ---
 # ui-ux-pro-max
 
-UI/UX design intelligence for web, mobile, and desktop. This skill should be used when designing, building, reviewing, or fixing interfaces, including pages, components, design systems, accessibility, interaction, responsive layout, typography, color, charts, and stack-specific UI implementation. Searchable local data: 79 searchable styles (50 active), 192 product palettes and reasoning profiles, 74 font pairings, 119 UX guidelines, 105 icons, 17 GSAP presets, 25 chart types, and 22 stacks.
+Searchable local UI/UX design intelligence. Use it to retrieve visual direction,
+palettes, typography, UX guidance, and stack-specific recommendations from the
+bundled data.
+
+## Routing Boundary
+
+- This is a search and recommendation skill, not a code generator or a
+  substitute for project-specific design judgment.
+- For React/Tailwind/shadcn implementation, use `ui-styling`.
+- For token architecture and slide systems, use `design-system`.
+- For brand governance and campaign assets, use `brand` or `design`.
+- For a final Web Interface Guidelines audit, use `web-design-guidelines`.
+- Resolve `scripts/...` against this skill's install root. Do not hardcode a
+  particular host's user directory.
+- If Python is unavailable, use the written guidance but do not claim that a
+  data search was performed.
 
 # Prerequisites
 
@@ -20,7 +35,7 @@ If the user prefers not to install Python, skip the CLI searches and instead use
 
 > **Note:** On Windows, use `python` instead of `python3` to run scripts (e.g., `python scripts/search.py` instead of `python3 scripts/search.py`).
 
-> **Curation note:** Numbered Quick Reference §§ are not present in this curated package; runtime `scripts/search.py` plus `data/*.csv` still work. Maintenance scripts `refresh-google-fonts.py`, `refresh-icon-catalog.py`, and `evaluate-relevance.py` are not shipped here.
+> **Curation note:** Numbered Quick Reference §§ are not present in this curated package; runtime `scripts/search.py` plus `data/*.csv` still work.
 
 ---
 
@@ -79,7 +94,7 @@ Extract key information from user request:
 Use `--design-system` when the task needs a coherent product-wide visual direction:
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "<product_type> <industry> <keywords>" --design-system [-p "Project Name"]
+python scripts/search.py "<product_type> <industry> <keywords>" --design-system [-p "Project Name"]
 ```
 
 This command:
@@ -90,7 +105,7 @@ This command:
 
 **Example:**
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "beauty spa wellness service" --design-system -p "Serenity Spa"
+python scripts/search.py "beauty spa wellness service" --design-system -p "Serenity Spa"
 ```
 
 ### Step 2b: Persist Design System (Master + Overrides Pattern)
@@ -98,7 +113,7 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "beauty spa wellness se
 After verifying the design system, save it for **hierarchical retrieval across sessions** with `--persist` and an explicit project root:
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "<query>" --design-system --persist -p "Project Name" --output-dir "<project-root>"
+python scripts/search.py "<query>" --design-system --persist -p "Project Name" --output-dir "<project-root>"
 ```
 
 This creates:
@@ -107,7 +122,7 @@ This creates:
 
 **With page-specific override:**
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "<query>" --design-system --persist -p "Project Name" --page "dashboard" --output-dir "<project-root>"
+python scripts/search.py "<query>" --design-system --persist -p "Project Name" --page "dashboard" --output-dir "<project-root>"
 ```
 
 This also creates:
@@ -134,7 +149,7 @@ Now, generate the code...
 Three optional 1-10 sliders that tune `--design-system` output without changing your query. Add any combination of them to the same command:
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "<query>" --design-system --variance <1-10> --motion <1-10> --density <1-10>
+python scripts/search.py "<query>" --design-system --variance <1-10> --motion <1-10> --density <1-10>
 ```
 
 | Dial | Low (1-3) | Mid (4-7) | High (8-10) |
@@ -149,7 +164,7 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "<query>" --design-syst
 
 **Example:**
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "internal analytics dashboard" --design-system --variance 8 --motion 7 --density 8 -p "Ops Console"
+python scripts/search.py "internal analytics dashboard" --design-system --variance 8 --motion 7 --density 8 -p "Ops Console"
 ```
 
 ### Step 3: Supplement with Detailed Searches (as needed)
@@ -157,7 +172,7 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "internal analytics das
 After getting the design system, use domain searches to get additional details:
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
+python scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
 ```
 
 **When to use detailed searches:**
@@ -182,13 +197,13 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <d
 Get implementation-specific best practices for the user's stack:
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack <stack>
+python scripts/search.py "<keyword>" --stack <stack>
 ```
 
 Example for a known React Native implementation concern:
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "virtualized list" --stack react-native
+python scripts/search.py "virtualized list" --stack react-native
 ```
 
 ---
@@ -219,8 +234,8 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "virtualized list" --st
 **JavaFX enterprise examples:**
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "atlantafx primer enterprise theme" --stack javafx
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "enterprise tableview density permission" --stack javafx
+python scripts/search.py "atlantafx primer enterprise theme" --stack javafx
+python scripts/search.py "enterprise tableview density permission" --stack javafx
 ```
 
 ---
@@ -238,7 +253,7 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "enterprise tableview d
 ### Step 2: Generate Design System
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "AI search tool modern minimal" --design-system -p "AI Search"
+python scripts/search.py "AI search tool modern minimal" --design-system -p "AI Search"
 ```
 
 **Output:** Complete design system with pattern, style, colors, typography, effects, and anti-patterns.
@@ -247,16 +262,16 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "AI search tool modern 
 
 ```bash
 # Get style options for a modern tool product
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "minimalism dark mode" --domain style
+python scripts/search.py "minimalism dark mode" --domain style
 
 # Get UX best practices for search interaction and loading
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "search loading animation" --domain ux
+python scripts/search.py "search loading animation" --domain ux
 ```
 
 ### Step 4: Stack Guidelines
 
 ```bash
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "streaming suspense" --stack nextjs
+python scripts/search.py "streaming suspense" --stack nextjs
 ```
 
 **Then:** Synthesize design system + detailed searches and implement the design.
@@ -269,10 +284,10 @@ The `--design-system` flag supports two output formats:
 
 ```bash
 # ASCII box (default) - best for terminal display
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "fintech crypto" --design-system
+python scripts/search.py "fintech crypto" --design-system
 
 # Markdown - best for documentation
-python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "fintech crypto" --design-system -f markdown
+python scripts/search.py "fintech crypto" --design-system -f markdown
 ```
 
 ---
@@ -301,6 +316,29 @@ python3 ~/.cursor/skills/ui-ux-pro-max/scripts/search.py "fintech crypto" --desi
 ### 交付前的 App UI 检查
 
 交付 App UI（iOS / Android / React Native / Flutter）前，读 [references/app-ui-checklist.md](references/app-ui-checklist.md)：那里有 Common Rules 逐条标准与可勾选的交付清单。桌面 Web 交互不适用其中的移动端条目。
+
+## Data Maintenance
+
+Run maintenance only when the user asks to refresh or verify the bundled catalog. Do
+not install packages, fetch live data, or promote generated candidates as part of a
+normal design task.
+
+- Validate runtime data and contracts:
+  `python scripts/validate_data.py`
+- Verify the derived snapshot:
+  `python scripts/generate-catalog-summary.py --check`
+- Run offline maintainer tests:
+  `python -m unittest discover -s scripts/tests -q`
+- Regenerate font candidates from an offline Developer API snapshot and an official
+  `google/fonts` checkout. Family-set additions or removals require explicit review
+  and `--approve-changes`; `--live` additionally requires
+  `GOOGLE_FONTS_API_KEY` and must not be used for unattended CI.
+- Regenerate the Phosphor manifest only from the pinned package versions recorded in
+  `data/phosphor-icons-upstream.json`; curated imports must still resolve to the
+  official component names.
+- Relevance thresholds are a regression gate, not a quality certification. Changing
+  evaluator logic, judgments, data, or ranking code requires an intentional fingerprint
+  update and review; never tune against held-out cases.
 
 <!-- provenance:start -->
 > 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#ui-ux-pro-max)。

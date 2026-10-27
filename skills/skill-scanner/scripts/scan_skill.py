@@ -96,7 +96,8 @@ EXAMPLE_CUE_RE = re.compile(
     r"\b(?:example|examples|sample|fixture|illustration|demonstration|demonstrates"
     r"|do not run|never run|must not run|unsafe|anti-?pattern|hypothetical"
     r"|illustrative|red team)\b"
-    r"|示例|例如|举例|反例|不要运行|不要执行|请勿运行|勿执行|仅用于测试|演示|对照",
+    r"|示例|例如|举例|反例|攻击示例|合成攻击|测试夹具|不要运行|不要执行|不要照做"
+    r"|请勿运行|勿执行|仅用于测试|仅作测试|不是要执行的指令|演示|对照",
     re.IGNORECASE,
 )
 
@@ -486,7 +487,7 @@ def _lower_confidence(confidence, context):
 
 
 def _context_for(lines, number, in_fence):
-    window = lines[max(0, number - 2):number + 1]
+    window = lines[max(0, number - 8):number + 1]
     for part in window:
         # Cue words inside a URL ("example.com/...") are not documentation
         # markers, so strip URL tokens before probing.

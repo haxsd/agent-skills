@@ -41,3 +41,10 @@
 
 许可文本取自各家族自行分发的 OFL；同一字体的许可正文在各家族间逐字节一致，仅版权行不同。
 新增字体时：一并放入其 OFL 文件，并重新生成本索引。
+
+## 字形覆盖提示
+
+本目录以拉丁字形和展示风格为主，不能据此假定包含中文、日文、韩文或其他文字。使用前运行
+`scripts/check_font_coverage.py FONT [FONT ...] --text-file final-copy.txt`，或用 `--text` 直接检查。
+检查器将多个字体视为 fallback 栈；实际渲染后仍须查看缺字、错误回退、越界和排版问题。详见
+`references/font-coverage.md`。

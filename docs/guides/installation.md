@@ -27,4 +27,4 @@ toolkit-map 独立维护，仅在 `external.json` 登记，不把副本并入此
 
 ## DeepSeek 凭据
 
-安装 skill 后，按 [API 助手配置](../../skills/deepseek-subagent-orchestration/references/api-workers.md) 配置自己的凭据。主对话 GPT 不切换；本机的全局规则和 DPAPI 密文不由这个仓库分发。其他机器需要自己的配置。
+安装 skill 后，按 [API 助手配置](../../skills/deepseek-subagent-orchestration/references/api-workers.md) 配置自己的凭据。常规有界委派优先使用 API 路线；`deepseek-subagents` 是需要 Codex CLI 进程和完整本机工具链时的显式高级路线。两条路线不要同时用于同一工作块。主对话 GPT 不切换；本机的全局规则和 DPAPI 密文不由这个仓库分发。其他机器需要自己的配置。

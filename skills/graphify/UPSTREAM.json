@@ -1,0 +1,17 @@
+{
+  "name": "graphify",
+  "repository": "https://github.com/Graphify-Labs/graphify",
+  "commit": "67f99bd0059dd1bac9e44382907ef9f10098b39f",
+  "tag": "v0.9.56",
+  "path": "graphify/skill.md",
+  "license": "MIT（上游为 Apache-2.0 OR MIT；本派生包选择 MIT）",
+  "author": "Graphify Labs / Safi Shamsi",
+  "retrievedAt": "2026-10-27",
+  "modifications": [
+    "Narrowed triggers to explicit graph or cross-file evidence tasks and added freshness checks.",
+    "Removed fixed subagent lifecycle assumptions; worker dispatch now uses the actual host tool, bounded inline fallback, or an explicit missing-capability report.",
+    "Recorded failed, truncated, or invalid chunks as coverage gaps and made token usage unknown when the host does not expose it.",
+    "Pinned the local skill snapshot to v0.9.56 and added a Windows/PowerShell install boundary."
+  ],
+  "validation": "Static content and host-boundary review only; no graphifyy install or end-to-end graph pipeline was run in this change."
+}

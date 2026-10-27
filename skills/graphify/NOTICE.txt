@@ -1,0 +1,15 @@
+graphify
+
+Based on Graphify Labs / Safi Shamsi's graphify skill:
+https://github.com/Graphify-Labs/graphify
+Pinned version: v0.9.56 (67f99bd0059dd1bac9e44382907ef9f10098b39f)
+
+Upstream is dual-licensed under Apache-2.0 OR MIT. This local derivative elects
+the MIT option; see LICENSE.txt and UPSTREAM.json.
+
+Modified by agent-skills contributors, 2026:
+- Narrowed trigger and freshness guidance.
+- Removed fixed host/subagent schemas and unsafe parallel claims.
+- Added coverage-gap and usage-unknown reporting.
+
+This package is not affiliated with or endorsed by Graphify Labs.

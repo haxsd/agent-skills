@@ -2,11 +2,11 @@
 
 [中文](README.md) · [English](README-EN.md)
 
-> A purpose-categorized skill library for AI agents: 36 active skills, 11 archived skills and 9 categories — browse the catalog, install what you need.
+> A purpose-categorized skill library for AI agents: 38 active skills, 11 archived skills and 10 categories — browse the catalog, install what you need.
 
 ## What's inside
 
-- **36 active skills** across nine categories: requirements & planning, implementation & orchestration, quality & debugging, Git delivery, design & UI, writing, knowledge graph & security research, skill authoring & efficiency, data & backend. Each lives at the stable path `skills/<name>/`.
+- **38 active skills** across ten categories: requirements & planning, implementation & orchestration, quality & debugging, Git delivery, design & UI, writing, documents & office, knowledge graph & security research, skill authoring & prompt optimization, data & backend. Each lives at the stable path `skills/<name>/`.
 - **11 archived skills**: historical skills and drafts under `archive/`, not installed by default, kept for reference.
 - **Catalog index**: category, value and upgrade notes live in `catalog.json`; the human-readable version is [docs/catalog.md](docs/catalog.md).
 - **Traceable provenance**: every skill records its source (third-party / original / improved from upstream / unverified) and license in [ATTRIBUTION.md](ATTRIBUTION.md) and [skill-provenance.json](docs/sources/skill-provenance.json).
@@ -22,7 +22,7 @@ From the repo root in Windows PowerShell, dry-run first:
 .\install.ps1 -Only deepseek-subagent-orchestration -Target codex
 ```
 
-Full install, uninstall and external-source setup: [installation guide](docs/guides/installation.md). The [DeepSeek API helper](skills/deepseek-subagent-orchestration/SKILL.md) keeps the current GPT lead agent and hands independent work blocks to your own `deepseek-flash` API; credentials are configured separately.
+Full install, uninstall and external-source setup: [installation guide](docs/guides/installation.md). The [DeepSeek API helper](skills/deepseek-subagent-orchestration/SKILL.md) keeps the current GPT lead and, when the user explicitly requests DeepSeek delegation, hands bounded work to your own `deepseek-flash` API. Use `deepseek-subagents` only when full Codex CLI worker processes and local toolchains are required; the two routes are mutually exclusive.
 
 ## Layout
 

@@ -1,230 +1,169 @@
 ---
 name: finishing-a-development-branch
-description: Use when implementation is complete, all tests pass, and you need to decide how to integrate the work
+description: 在实现完成、需要合并、创建 PR、保留分支或清理工作时使用。复用已有授权和有效验证证据，正确区分普通仓库、linked worktree、detached HEAD 与 submodule；破坏性操作必须先确认。Use when implementation is complete and integration is the next step.
 ---
 
-# Finishing a Development Branch
+# 完成开发分支
 
-## Overview
+交付的目标不是“再跑一遍所有测试、再问一遍菜单”，而是在不丢成果的前提下，把当前状态安全地变成用户选择的交付结果。
 
-**Core principle:** Verify tests → Detect environment → Present options → Execute choice → Clean up.
+## 0. 先读取已有决定
 
-**Announce at start:** "I'm using the finishing-a-development-branch skill to complete this work."
+检查对话、计划、仓库说明和当前任务上下文，确认用户是否已经明确选择：
 
-## Step 1: Verify Tests
+- 本地合并到某个基线分支
+- 推送并创建 PR / MR
+- 保留分支和工作区
+- 丢弃成果
 
-Follow the shared evidence contract in [references/verification.md](references/verification.md): evidence before claims, bound to the current code state.
+用户已经选择时，直接沿用它，不再展示菜单。只有交付方式确实未定，才在验证后询问一次。
 
-Run the project's full test suite (`npm test` / `cargo test` / `pytest` / `go test ./...`).
+## 1. 记录状态与验证证据
 
-**If tests fail**, report the failures and stop — the menu comes after a green suite:
-
-```
-Tests failing (<N> failures). Must fix before completing:
-
-[Show failures]
-```
-
-**If tests pass:** continue to Step 2.
-
-## Step 2: Detect Environment
+先采集当前状态：
 
 ```bash
-GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2>/dev/null && pwd -P)
-GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2>/dev/null && pwd -P)
-# Capture now, while still inside the workspace — Step 5 changes directory
-# before cleanup (Step 6) needs this value
-WORKTREE_PATH=$(git rev-parse --show-toplevel)
+git status --porcelain=v1 -uall
+git branch --show-current
+git rev-parse HEAD
+git rev-parse --show-toplevel
+git log --oneline --decorate -n 10
 ```
 
-This determines which menu to show and how cleanup works:
+按 [references/verification.md](references/verification.md) 的证据契约判断：
 
-| State | Menu | Cleanup |
-|-------|------|---------|
-| `GIT_DIR == GIT_COMMON` (normal repo) | Standard 3 options | No worktree to clean up |
-| `GIT_DIR != GIT_COMMON`, named branch | Standard 3 options | Provenance-based (see Step 6) |
-| `GIT_DIR != GIT_COMMON`, detached HEAD | Reduced 2 options (no merge) | Externally managed — leave in place |
+- 验证必须绑定当前代码状态、命令和真实输出。
+- 状态未变且已有通过的证据，可以直接复用，不重复运行只为“再说一遍”。
+- 代码、依赖或配置发生变化时，只补跑受影响的检查；合并或推送前再核对目标状态的集成门禁。
+- 如果关键验证不可运行，明确报告缺口，不要用“应该没问题”替代。
 
-## Step 3: Determine Base Branch
+**测试或构建失败时停止交付。** 保留分支和工作区，报告失败和仍未验证的范围。
 
-The base branch is whatever this work forked from — usually named in the
-plan, the conversation, or the branch's upstream. If it is not already
-known, ask: "This branch split from <your best guess> - is that correct?"
-Confirm before merging: merging into the wrong base is expensive to undo.
-
-## Step 4: Present Options
-
-**Normal repo and named-branch worktree — present exactly these 3 options:**
-
-```
-Implementation complete. What would you like to do?
-
-1. Merge back to <base-branch> locally
-2. Push and create a Pull Request
-3. Keep the branch as-is (I'll handle it later)
-
-Which option?
-```
-
-**Detached HEAD — present exactly these 2 options:**
-
-```
-Implementation complete. You're on a detached HEAD (externally managed workspace).
-
-1. Push as new branch and create a Pull Request
-2. Keep as-is (I'll handle it later)
-
-Which option?
-```
-
-Present the menu exactly as written — concise, with every option coming
-from the list above. Discarding the work happens only in response to your
-human partner explicitly asking for it (see "If your human partner asks to
-discard the work" below). Wait for their answer; the integration decision
-is theirs.
-
-## Step 5: Execute Choice
-
-### Option 1: Merge Locally
+## 2. 判断当前环境
 
 ```bash
-# Get main repo root for CWD safety
-MAIN_ROOT=$(git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel)
-cd "$MAIN_ROOT"
-
-# Merge first — verify success before removing anything
-git checkout <base-branch>
-git pull
-git merge <feature-branch>
-
-# Verify tests on merged result
-<test command>
+git rev-parse --show-toplevel
+git rev-parse --git-dir
+git rev-parse --git-common-dir
+git rev-parse --show-superproject-working-tree
 ```
 
-If tests fail on the merged result: stop, leave the worktree and branch in
-place, and investigate — nothing has been pushed, so the merge is local
-and recoverable.
+**Submodule guard：** `GIT_DIR != GIT_COMMON` 也出现在 submodule 中。`git rev-parse --show-superproject-working-tree` 返回非空路径时，这是父项目里的 submodule，不要把它当成 linked worktree，也不要清理其工作区。
 
-Once the merged result is green: clean up the worktree (Step 6), then
-delete the branch:
+排除 submodule 后：
+
+| 状态 | 判断 | 默认处理 |
+|---|---|---|
+| `GIT_DIR == GIT_COMMON` | 普通仓库 | 无额外 worktree 可清理 |
+| `GIT_DIR != GIT_COMMON`，有命名分支 | linked worktree | 先确认归属，再决定是否清理 |
+| `GIT_DIR != GIT_COMMON`，detached HEAD | 通常是外部管理的试验工作区 | 默认保留，不按自有 worktree 删除 |
+
+路径所在目录、目录名和当前分支都不足以证明 worktree 由谁创建。
+
+## 3. 判断 worktree 归属
+
+按以下顺序取权威证据：
+
+1. 宿主工作区管理工具提供的 attachment、创建记录或工作区清单。
+2. 本次对话中明确的创建动作：哪个工具创建、创建了哪个路径、由谁负责清理。
+3. 用户明确说明该工作区归当前任务所有。
+
+以下证据**只能证明存在，不能证明归属**：
+
+- 路径在 `.worktrees/`、`worktrees/` 或其他常见目录下
+- `git worktree list --porcelain` 中存在该项
+- 目录名看起来像当前分支或任务名
+
+没有归属证据时，把 worktree 视为外部管理并保留。不要为了“干净”清理其他任务或人工创建的工作区。
+
+确认归当前任务所有后，清理前仍要检查未提交和未跟踪文件：
 
 ```bash
-git branch -d <feature-branch>
+git -C <worktree-path> status --porcelain=v1 -uall
 ```
 
-### Option 2: Push and Create PR
+有成果时列出文件，让用户选择提交、移出、删除或保留。**不得自行使用 `--force`。**
 
-```bash
-git push -u origin <feature-branch>
-# From a detached HEAD, name the new branch on the remote:
-# git push origin HEAD:refs/heads/<new-branch>
+## 4. 交付选择
+
+只有没有已有决定时才展示一次简短菜单。
+
+普通仓库或命名分支：
+
+```text
+实现已完成，验证结果见上。请选择交付方式：
+1. 合入本地基线分支
+2. 推送并创建 PR/MR
+3. 保留当前分支和工作区
 ```
 
-Then create the pull/merge request against <base-branch> with the forge's
-tooling — its CLI if one is available, or the creation URL most forges
-print when you push — following the repo's PR template and conventions if
-present, and report the URL to your human partner.
+detached HEAD：
 
-Keep the worktree — your human partner iterates on PR feedback there.
-
-### Option 3: Keep As-Is
-
-Report: "Keeping branch <name>. Worktree preserved at <path>."
-
-### If your human partner asks to discard the work
-
-This path exists only as a response to an explicit request to throw the
-work away. Confirm first:
-
-```
-This will permanently delete:
-- Branch <name>
-- All commits: <commit-list>
-- Worktree at <path>
-
-Type 'discard' to confirm.
+```text
+当前是 detached HEAD。请选择：
+1. 推送为新分支并创建 PR/MR
+2. 保留当前状态
 ```
 
-Wait for that exact confirmation. When it arrives:
+丢弃成果不放进常规菜单。只有用户明确要求丢弃时，才单独确认；确认前列出分支、提交和未提交文件，并要求用户明确回复 `discard`。
 
-```bash
-MAIN_ROOT=$(git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel)
-cd "$MAIN_ROOT"
-```
+## 5. 执行交付
 
-Then clean up the worktree (Step 6) and force-delete the branch:
+### 本地合并
 
-```bash
-git branch -D <feature-branch>
-```
+1. 从计划、上游分支或用户说明确定基线；仍不明确时先问，不猜 `main`。
+2. 检查基线是否有未处理的上游变更。未经授权不要自动 `pull`、rebase 或覆盖本地提交。
+3. 切到基线并合并；冲突时停止，保留分支和工作区。
+4. 在合并后的状态运行集成检查。失败时停止并保留证据。
+5. 只有合并成功且归属明确时，才清理自有 worktree，再用 `git branch -d` 删除已合并分支。
 
-## Step 6: Cleanup Workspace
+### 推送并创建 PR/MR
 
-**Runs for Option 1 and confirmed discards.** Options 2 and 3 always
-preserve the worktree. Both callers have already changed directory to the
-main repo root — worktree removal must run from outside the worktree —
-and use the `GIT_DIR`/`GIT_COMMON`/`WORKTREE_PATH` values captured in
-Step 2, from before that directory change.
+1. 确认远程、分支名和用户授权；不要向错误远程推送。
+2. 普通推送失败时调查原因，不自动 force-push。
+3. 按仓库模板创建 PR/MR，报告 URL、基线分支和验证证据。
+4. 保留 worktree，后续评审修改通常仍在该工作区进行。
 
-**If `GIT_DIR == GIT_COMMON`:** Normal repo, no worktree to clean up. Done.
+detached HEAD 需要新分支时，明确记录新分支名，再按宿主流程推送。
 
-**If `WORKTREE_PATH` is under `.worktrees/` or `worktrees/`:** this workflow
-created this worktree — we own cleanup:
+### 保留
 
-```bash
-git worktree remove "$WORKTREE_PATH"
-git worktree prune  # Self-healing: clean up any stale registrations
-```
+报告分支、HEAD、worktree 路径和尚未处理的风险。不要顺手清理“看起来过期”的内容。
 
-**If removal is refused** (`contains modified or untracked files`): the
-worktree holds files that exist nowhere else — uncommitted plans, notes,
-or scratch work. Never `--force` on your own initiative. Show your human
-partner what is at stake and ask:
+### 丢弃
 
-```bash
-git -C "$WORKTREE_PATH" status --porcelain -uall
-```
+只在用户完成明确确认后执行。先保存或展示将丢失的提交和文件，再清理当前任务确实拥有的 worktree，最后按确认范围删除分支。外部工作区不代为删除。
 
-```
-Worktree removal refused — these files were never committed:
+## 6. 交付报告
 
-<file list>
+用简短结果说明：
 
-1. Commit them to <branch> before cleanup
-2. Move them into <main repo root>
-3. Delete them (unrecoverable)
+- 交付方式与实际发生的外部副作用
+- 分支、基线、HEAD 或 PR/MR URL
+- 验证命令和关键输出；哪些检查因状态未变而复用
+- 尚未运行的检查、未解决风险和保留的工作区
 
-Which?
-```
+## 快速参考
 
-Carry out the choice, then remove the worktree.
+| 场景 | 合并 | 推送 | 默认保留 worktree | 删除分支 |
+|---|---|---|---|---|
+| 本地合并成功 | 是 | 否 | 否，仅限确认自有并可安全清理时 | `git branch -d` |
+| 创建 PR/MR | 否 | 是 | 是 | 否 |
+| 保留 | 否 | 否 | 是 | 否 |
+| 明确丢弃 | 否 | 否 | 仅清理确认自有的 | 仅清理确认范围 |
 
-**Otherwise:** The host environment owns this workspace — leave it in
-place. If your platform provides a workspace-exit tool, use it.
+## 常见自我辩解
 
-## Quick Reference
-
-| Option | Merge | Push | Keep Worktree | Cleanup Branch |
-|--------|-------|------|---------------|----------------|
-| 1. Merge locally | yes | - | - | yes |
-| 2. Create PR | - | yes | yes | - |
-| 3. Keep as-is | - | - | yes | - |
-| Discard (explicit request only) | - | - | - | yes (force) |
-
-## Common Rationalizations
-
-| Excuse | Reality |
-|--------|---------|
-| "Tests passed earlier this session" | Run the suite on the tree you are about to integrate. A green run only proves the tree it ran on. |
-| "They obviously want it merged" | Integration is your human partner's decision. Present the menu and wait. |
-| "They seem done with this feature — I'll offer to discard it" | The menu is complete as written. Discard happens only when your human partner asks for it in so many words. |
-| "'Yeah, get rid of it' counts as confirmation" | Only the typed word `discard` authorizes deletion. |
-| "The PR is up, so the worktree is clutter now" | PR feedback gets fixed in that worktree. It stays until the work lands. |
-| "This other worktree looks stale — I'll clean it too" | Clean up only worktrees under `.worktrees/` or `worktrees/`. Everything else belongs to the host. |
-| "Removal refused — `--force` is just finishing the cleanup" | The refusal means files exist only in that worktree. `--force` destroys them permanently. Show your human partner and ask. |
-| "The merged-result failure is probably flaky" | A failing merged result stops everything. Branch and worktree stay put while you investigate. |
-| "The base branch is obviously main" | Confirm the fork point or ask. Merging into the wrong base is expensive to undo. |
-| "The push was rejected — force-push will fix it" | A rejected push means the remote moved. Investigate; force-push only on your human partner's explicit request. |
+| 借口 | 实际 |
+|---|---|
+| “测试之前跑过，再跑一遍最稳” | 同一状态的有效证据可复用；状态变了才补跑受影响检查。 |
+| “用户说了完成，肯定想合并” | “完成”不等于选择交付方式；没有明确选择时询问一次。 |
+| “目录在 .worktrees/ 下，所以是我们的” | 目录名不证明归属；用宿主记录或明确创建记录判断。 |
+| “这是 submodule，也是 GIT_DIR 不同，按 worktree 清理” | submodule 不是 linked worktree，必须单独识别并保留。 |
+| “PR 已创建，worktree 可以删了” | PR 反馈通常还要在原工作区修，保留到交付完成。 |
+| “移除被拒绝，`--force` 只是收尾” | 拒绝说明有成果只存在这里；先展示并让用户决定。 |
+| “推送被拒绝，force-push 更快” | 远程已变化，先调查；force-push 只在用户明确要求时使用。 |
+| “基线大概是 main” | 合并错基线的代价高；从计划/上游确认，仍不明确就问。 |
 
 <!-- provenance:start -->
 > 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#finishing-a-development-branch)。

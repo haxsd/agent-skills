@@ -1,6 +1,6 @@
 ---
 name: deepseek-subagent-orchestration
-description: Delegate independent work blocks to the user's DeepSeek Flash API while the current Codex GPT model leads. Use for multi-step implementation, test writing, diagnosis, documentation, batch analysis, solution comparison, and independent review; supports scoped file tools and named checks.
+description: Preferred route for explicitly requested DeepSeek Flash delegation on bounded work blocks while the current Codex GPT model leads. Workers use the DeepSeek API, copied workspaces, scoped file tools and named checks. Use when the user asks to delegate to DeepSeek or selects this skill; for full Codex CLI processes or independent worktrees use deepseek-subagents instead. Task size alone does not authorize external data transfer.
 ---
 
 # GPT primary with DeepSeek workers
@@ -9,14 +9,25 @@ Keep the current conversation's GPT model, provider, and reasoning settings.
 Use this skill's `scripts/deepseek_worker.py` and the user's `deepseek-flash` API.
 Workers are external API agents, not native Codex subagent threads.
 
-## Default routing
+## Route selection
 
-For a nontrivial task, first identify independent work blocks with a concrete
-deliverable and acceptance criteria. **Delegate a useful block by default when
-one exists**; do not restrict delegation to tiny or repetitive tasks. Briefly
-state the division of work. If none is suitable, give the concrete reason once
-(for example, a single tightly dependent edit), then work directly. Do not force
-an API call for every reply or split a trivial task to satisfy a quota.
+This is the **default bounded-work route when the user explicitly requests
+DeepSeek delegation or selects this skill**. It keeps the current Codex process
+and sends selected files and task context to the DeepSeek API.
+
+- If the user did not request DeepSeek delegation, work directly. Multi-step
+  complexity alone is not authorization to send context to an external model.
+- Use `deepseek-subagents` instead only when the user explicitly needs Codex CLI
+  worker processes, a full local toolchain or independent worktrees.
+- Do not run the API and CLI routes for the same work block, and do not claim one
+  route's permissions or isolation model for the other.
+
+Within that explicit delegation, identify independent blocks with a concrete
+deliverable and acceptance criteria. Delegate a useful block when one exists; do
+not restrict delegation to tiny or repetitive tasks. Briefly state the division
+of work. If none is suitable, give the concrete reason once (for example, a
+single tightly dependent edit), then work directly. Do not force an API call for
+every reply or split a trivial task to satisfy a quota.
 
 Good worker assignments include implementing a bounded module, adding tests,
 investigating a failure, exploring selected sources, producing documentation,
@@ -71,7 +82,7 @@ reported total tokens per job, 96,000 conversation characters, 60-second HTTP
 timeout, and at most 8 check runs per job (the API path's own default: 2
 concurrent workers out of at most 8 jobs — see
 [references/api-workers.md](references/api-workers.md) for all caps). If you
-are instead using the CLI-process path, its own defaults apply
+are instead using the explicitly selected CLI-process path, its own defaults apply
 (`deepseek-subagents`: 3 concurrent). Select larger limits or thinking mode
 for a justified complex block; small jobs can keep thinking disabled. Round/token
 caps bound the loop, rather than forbidding substantial work. Usage is recorded;

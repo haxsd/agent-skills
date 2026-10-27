@@ -21,6 +21,7 @@
 
 本仓贡献：
 - 本仓编写中文需求入口，合并复杂度分流、最少关键问题、方案权衡和规格审查参考。
+- 已迁入 spike 可行性验证路径和“只有图形比文字更清楚时才提供视觉选项”的按需判断。
 
 原入口为本地编写；当前目录已吸收归档技能的流程与资源，因此按原创改进标注。
 
@@ -40,7 +41,8 @@
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/writing-plans)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
 
 本仓贡献：
-- 按任务规模缩放规划流程，维护接口、依赖、规格覆盖和本地审查模板。
+- 按可独立验收的交付物拆分计划，维护接口、依赖、规格覆盖和本地审查模板。
+- 重写为证据驱动流程，移除预写完整代码、固定 2–5 分钟步骤、强制逐步提交和固定 docs/plans 默认；落盘遵守项目规则，已有执行授权不重复询问。
 
 ## executing-plans
 
@@ -71,6 +73,7 @@
 
 本仓贡献：
 - 本仓中文重写，区分独立任务并发与同一问题多方案试验，明确隔离和成果整合。
+- 移除宿主专用角色名和“同一条消息即并发”的假设；增加能力探测、写入归属矩阵、隔离降级、预声明判据和成果保留边界。
 
 ## deepseek-subagent-orchestration
 
@@ -104,14 +107,21 @@
 
 本仓贡献：
 - 调整诊断日志和配置检查的安全边界，维护本地根因追踪、条件等待与调试参考。
+- 诊断示例只输出变量名或 SET/UNSET，禁止在日志和报告中打印环境值。
 
 ## test-driven-development
 
-[test-driven-development](skills/test-driven-development/SKILL.md) · 启用 · **第三方引入**
+[test-driven-development](skills/test-driven-development/SKILL.md) · 启用 · **原创改进（基于上游）**
 
+原创贡献者：agent-skills contributors。
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/test-driven-development)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
 
-测试流程及 writing-good-tests 参考来自上游体系，未因本地收藏而改称原创。
+本仓贡献：
+- 把无条件的“未先写测试就删除代码”改为风险分级的测试先行流程，保留用户已有成果。
+- 增加 test-after 证据要求、事故止血、旧代码 characterization、文档/配置替代验证和停止条件。
+- 校准 writing-good-tests，保留行为断言、独立期望值和变异检查。
+
+基于 obra MIT 上游的原创改进；保留上游署名，新增规则与示例按本仓 MIT 贡献。
 
 ## verification-before-completion
 
@@ -153,18 +163,22 @@
 
 本仓贡献：
 - 整合验证证据契约与成果保护，区分命名分支、detached HEAD 和外部管理工作区。
+- 改为复用同状态有效证据、只补失效检查；worktree 归属改用宿主记录或明确创建记录；增加 submodule guard、未提交成果检查和清理授权边界。
 
 ## ui-ux-pro-max
 
 [ui-ux-pro-max](skills/ui-ux-pro-max/SKILL.md) · 启用 · **原创改进（基于上游）**
 
 原创贡献者：agent-skills contributors。
-- 来源：[Next Level Builder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)；许可：MIT（当前上游已核验；本地收录版本待核验）；收录版本：待核验。
+- 上游：[Next Level Builder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)；许可：MIT；固定版本：`a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5`。详情：[skills/ui-ux-pro-max/UPSTREAM.json](skills/ui-ux-pro-max/UPSTREAM.json)。
+- 来源：[Next Level Builder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5/src/ui-ux-pro-max)；许可：MIT（上游已核验）；收录版本：a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5。
 
 本仓贡献：
 - 维护本地检索数据、原生桌面技术栈、来源记录、数据契约及回归测试。
+- 移除硬编码宿主用户目录，改为技能根目录调用，并补充与实现/审查技能的职责边界。
+- 补回并本地化字体、图标、快照与相关性门禁维护工具；增加离线夹具、原子发布、人工审批与跨平台换行归一化。
 
-本地数据与脚本有扩展，不能用当前上游版本冒充本地内容的完整来源。
+目录整体按 MIT 上游派生并保留 LICENSE.txt、NOTICE.txt 与 UPSTREAM.json；本地改写与测试继续按本仓 MIT 提供，不冒充上游原样分发。
 
 ## brand
 
@@ -187,6 +201,7 @@
 
 本仓贡献：
 - 维护分层 token、组件规范、幻灯片数据与生成校验工具，增加相关回归测试。
+- 接收 design 迁出的幻灯片参考资料，形成演示文稿的单一维护来源。
 
 精确上游技能仓库仍待核验，不把市场同名条目当作同一版本。
 
@@ -199,6 +214,7 @@
 
 本仓贡献：
 - 维护组件添加、Tailwind 配置生成与脚本回归测试，补充技能根目录调用边界。
+- 移除 canvas/poster 职责和重复参考，收窄为 React 项目中的 shadcn/Tailwind 实现层。
 
 许可冲突：SKILL.md 声明 MIT，但本目录 LICENSE.txt 是 Apache-2.0；尚未确认两者各自适用范围。Claudekit 原产品为付费分发，公开 CLI 的许可证不等于技能内容授权，精确来源和收录版本待核验。
 
@@ -211,24 +227,38 @@
 
 本仓贡献：
 - 维护视觉资产路由、Logo/CIP 检索数据及本地生成工具，补充资源依赖说明。
+- 将 slides 参考资料迁入 design-system，收窄触发边界并移除固定宿主路径和命令依赖。
 
 精确上游技能仓库与收录版本待核验；聚合市场副本不是原创证明。
 
 ## canvas-design
 
-[canvas-design](skills/canvas-design/SKILL.md) · 启用 · **第三方引入**
+[canvas-design](skills/canvas-design/SKILL.md) · 启用 · **原创改进（基于上游）**
 
+原创贡献者：agent-skills contributors。
 - 来源：[Anthropic](https://github.com/anthropics/skills/tree/main/skills/canvas-design)；许可：Apache-2.0（目录 LICENSE.txt；精确收录版本待核验）；收录版本：待核验。
 
-字体资产另按 canvas-fonts 中各自许可适用。
+本仓贡献：
+- 重构为 brief-first 流程，取消虚构用户审美评价、强制抽象/少字、固定 4–6 段宣言和固定输出格式。
+- 新增标准库 TTF/OTF/TTC 字形覆盖检查器、6 项回归测试、渲染后验收清单和字体选择参考。
+- 保留本地字体与许可索引；中文字形覆盖改为可执行验证，不能验证时明确报告未验证。
+
+整体按 Apache-2.0 上游派生并保留 LICENSE.txt；字体资产另按 canvas-fonts 中各自许可适用。
 
 ## graphify
 
-[graphify](skills/graphify/SKILL.md) · 启用 · **第三方引入**
+[graphify](skills/graphify/SKILL.md) · 启用 · **原创改进（基于上游）**
 
-- 来源：[Graphify Labs / safishamsi](https://github.com/Graphify-Labs/graphify)；许可：Apache-2.0（当前上游已核验；本地收录版本待核验）；收录版本：本地标记 0.9.56；对应提交待核验。
+原创贡献者：agent-skills contributors。
+- 上游：[Graphify Labs / Safi Shamsi](https://github.com/Graphify-Labs/graphify)；许可：MIT（上游为 Apache-2.0 OR MIT；本派生包选择 MIT）；固定版本：`67f99bd0059dd1bac9e44382907ef9f10098b39f`。详情：[skills/graphify/UPSTREAM.json](skills/graphify/UPSTREAM.json)。
+- 来源：[Graphify Labs / Safi Shamsi](https://github.com/Graphify-Labs/graphify/tree/v0.9.56)；许可：Apache-2.0 OR MIT（上游双许可；本派生包选择 MIT）；收录版本：67f99bd0059dd1bac9e44382907ef9f10098b39f。
 
-原 safishamsi/graphify 已转为 Graphify-Labs/graphify。保留第三方主体归属；版本标记不等于已确认的固定收录提交。
+本仓贡献：
+- 收敛触发边界和 fast path，要求先检查图与源文件的新鲜度，小查找回退原生搜索。
+- 移除固定子代理工具 schema，改为当前宿主适配、受限内联回退或明确报告能力缺失。
+- 把失败/截断/非法 chunk 记录为覆盖缺口；宿主不提供 usage 时成本标为未知。
+
+基于上游 v0.9.56 的本地改进；保留双许可选择说明，派生包选择 MIT。原 safishamsi/graphify 已转为 Graphify-Labs/graphify。
 
 ## reverse-skill
 
@@ -240,6 +270,7 @@
 
 本仓贡献：
 - 本仓编写外部安全研究技能包的路由入口、定位与预检规则；不打包外部技能包本体。
+- 新增跨平台只读预检脚本与离线回归测试，统一检查规则、路由、建案、复核和可选工具资源。
 
 原创声明仅覆盖本仓路由文本，不覆盖外部安全研究技能包。
 
@@ -409,12 +440,17 @@ toolkit-map · 外部 · **本仓原创**
 
 ## web-design-guidelines
 
-[web-design-guidelines](skills/web-design-guidelines/SKILL.md) · 启用 · **第三方引入**
+[web-design-guidelines](skills/web-design-guidelines/SKILL.md) · 启用 · **原创改进（基于上游）**
 
+原创贡献者：agent-skills contributors。
 - 来源：[Vercel](https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines)；许可：待核验（当前仓库无独立许可文件）；收录版本：本地元数据 1.0.0；对应提交待核验。
 - 来源：[Vercel](https://github.com/vercel-labs/web-interface-guidelines)；许可：远程规范许可待核验；收录版本：待核验。
 
-技能文本来源于 Vercel agent-skills；远程规范另有来源，二者分别核验。
+本仓贡献：
+- 重新编写审查范围、证据、输出和失败边界；未复制远程规则集。
+- 联网失败时禁止伪造合规结论，并把源码审查与浏览器行为验证分开。
+
+技能文本来源于 Vercel agent-skills；远程规范另有来源，二者分别核验，历史再分发许可仍待确认。
 
 ## podcast-to-article
 
@@ -495,3 +531,34 @@ UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的
 - 本仓原创：把「用猜测时长等待」这一浪费形状写成可判定规则（前台阻塞/完成通知优先、条件短轮询 2~5 秒、单次 sleep 上限、时间线证据），并给出宿主完成通知的 10 秒探针与等待反例参考。
 
 规则为原创整理；本机实测仅覆盖 DSH 上的完成通知行为，不构成其他宿主的通用结论。
+
+## prompt-optimizer
+
+[prompt-optimizer](skills/prompt-optimizer/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Functional Software, Inc. dba Sentry](https://github.com/getsentry/skills)；许可：Apache-2.0；固定版本：`d12f250460ffd961f549dbebf7eeb0cf4afd4c2e`。详情：[skills/prompt-optimizer/UPSTREAM.json](skills/prompt-optimizer/UPSTREAM.json)。
+
+本仓贡献：
+- 独立中文重写可复用 prompt 的契约、候选对照、留出验证和交付证据。
+- 新增间接注入、工具授权、秘密占位与非 prompt 瓶颈的停止边界。
+- 独立实现标准库 prompt/eval 审计、blocking 回归比较、离线测试和合成验收场景。
+
+方法参考 Sentry 的 Apache-2.0 prompt-optimizer，并审阅 Trail of Bits static-analysis 的质量门；未搬运上游文本、脚本或示例。provider 行为未被本轮验证。
+
+## pdf-toolkit
+
+[pdf-toolkit](skills/pdf-toolkit/SKILL.md) · 启用 · **本仓原创**
+
+原创贡献者：agent-skills contributors。
+- 原创维护仓库：[https://github.com/haxsd/agent-skills](https://github.com/haxsd/agent-skills)。
+- 外部依赖（非技能文本来源）：[pypdf contributors](https://github.com/py-pdf/pypdf)；许可：BSD-3-Clause。
+- 外部依赖（非技能文本来源）：[pdfplumber contributors](https://github.com/jsvine/pdfplumber)；许可：MIT。
+- 外部依赖（非技能文本来源）：[ReportLab contributors](https://github.com/reportlab/reportlab)；许可：BSD-3-Clause。
+- 外部依赖（非技能文本来源）：[Poppler contributors](https://poppler.freedesktop.org/)；许可：GPL-2.0-or-later。
+
+本仓贡献：
+- 本仓独立实现 PDF 检查、文本/表格提取、合并/拆分/旋转、加密、表单、创建、水印与页图渲染 CLI。
+- 设计路径越界、输出覆盖、密码泄漏和写入后验证边界，并加入标准库单元测试与可选依赖集成测试。
+
+能力需求参考公开 PDF 工作流，但未复制受限技能的文本或代码；这里只登记未打包的外部运行时依赖。

@@ -44,7 +44,10 @@ jobs:
             @('scripts/audit_skills.py', '--check'),
             @('scripts/check_docs.py'),
             @('-m', 'unittest', 'discover', '-s', 'tests', '-q'),
-            @('skills/ui-ux-pro-max/scripts/validate_data.py')
+            @('skills/ui-ux-pro-max/scripts/validate_data.py'),
+            @('skills/ui-ux-pro-max/scripts/generate-catalog-summary.py', '--check'),
+            @('skills/ui-ux-pro-max/scripts/evaluate-relevance.py'),
+            @('-m', 'unittest', 'discover', '-s', 'skills/ui-ux-pro-max/scripts/tests', '-q')
           )
           foreach ($command in $commands) {
             & $python @command

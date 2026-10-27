@@ -23,7 +23,9 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 
 **Example:**
 ```markdown
-✅ Write code before test? Delete it. Start over. No exceptions.
+✅ Untested behavior change? Stop adding behavior. Demonstrate a failing check
+against the pre-change code, or label the evidence test-after. Never delete
+existing user work.
 ❌ Consider writing tests first when feasible.
 ```
 

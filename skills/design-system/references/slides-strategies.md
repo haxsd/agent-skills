@@ -1,5 +1,7 @@
 # Slide Strategies
 
+Use this reference only from `design-system`, which owns the slide workflow.
+
 15 proven deck structures with emotion arcs.
 
 ## Strategy Selection

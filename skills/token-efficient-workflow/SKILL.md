@@ -6,7 +6,24 @@ targets: [codex-skills]
 
 # Token 效率工作流（Codex 侧）
 
-通用准则以仓库根目录下的 `shared/token-efficiency-rules.md` 为唯一权威来源（核心规则、任务分级、噪声路径、日志处理、最小 diff、输出格式、排查顺序）。本文件只列 Codex 侧特有的条款，通用规则不再重复。
+通用准则以 `token-efficiency-rules.md` 为唯一权威来源（核心规则、任务分级、噪声路径、日志处理、最小 diff、输出格式、排查顺序）。按以下顺序找第一个存在且可读的路径，只找一次，不做全盘扫描：
+
+1. 安装布局（Windows）：`%USERPROFILE%\tools\shared\token-efficiency-rules.md`
+2. 安装布局（POSIX/手工）：`~/tools/shared/token-efficiency-rules.md`
+3. 源码仓库：`<repo>/shared/token-efficiency-rules.md`
+
+找到后读一次并按它执行。都找不到时，使用下面的「最小自包含规则」并说明共享权威文件不可用；不要自行创建替代文件。
+
+## 0. 最小自包含规则（共享文件缺失时）
+
+这不是第二份权威规则，只是离线回退：
+
+- 先分级：`simple` 直接做；`standard` 读最少相关文件；`deep` 先短计划，涉及凭据、生产数据、破坏性操作或多工具协作时先确认。
+- 先精确搜索，再打开文件；不默认递归列目录、整份读日志或加载生成物/依赖目录。
+- 大输出先摘要；日志只保留相关错误和 20–40 行关键上下文，再给下一步验证。
+- 只改必要范围；不做无关重排，不覆盖用户已有改动。
+- 最终答复保持简短，但必须包含实际结果、验证证据和未知/风险；不能用“简短”跳过验证。
+- 没观察到 token、耗时或运行状态就写未知，不估算成事实。
 
 ## 1. 项目内上下文顺序
 
@@ -15,7 +32,7 @@ targets: [codex-skills]
 1. `AGENTS.md`
 2. `context/CURRENT_STATE.md`，任务依赖当前状态时
 3. `context/KNOWN_ISSUES.md`，任务涉及风险、错误、自动化、客户、健康、广告、数据时
-4. `references/INDEX.md`，确需项目参考时
+4. 项目 `references/` 下的索引（如果存在，且确需项目参考时）
 5. 通过搜索命中的、或用户指定的具体文件
 
 不要默认打开整个 `references/`、`agents/`、`context/`、`skills/`。存在 `PROJECT_EXCLUSIONS.md` 时，先遵守它再搜索或打开文件。若项目结构不同或上述目录不存在，就以实际存在的入口文档为准，不要假设固定布局。

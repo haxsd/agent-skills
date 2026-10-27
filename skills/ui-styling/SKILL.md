@@ -1,16 +1,28 @@
 ---
 name: ui-styling
-description: Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual designs. Use when building user interfaces, implementing design systems, creating responsive layouts, adding accessible components (dialogs, dropdowns, forms, tables), customizing themes and colors, implementing dark mode, generating visual designs and posters, or establishing consistent styling patterns across applications.
+description: Implement accessible web interfaces with shadcn/ui, Radix UI, and Tailwind CSS. Use for component composition, responsive layouts, themes, dark mode, Tailwind configuration, and design-token integration in existing React projects. Do not use for brand strategy, visual artwork, slide decks, or framework-agnostic UI research.
 argument-hint: "[component or layout]"
 license: MIT
 metadata:
   author: claudekit
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # UI Styling Skill
 
-Comprehensive skill for creating beautiful, accessible user interfaces combining shadcn/ui components, Tailwind CSS utility styling, and canvas-based visual design systems.
+Implementation skill for accessible React interfaces using shadcn/ui and
+Tailwind CSS. Design strategy and non-code visual assets have separate owners.
+
+## Routing Boundary
+
+- Use this skill when the project already uses, or explicitly wants, React plus
+  shadcn/ui or Tailwind.
+- For design research, palettes, typography, and UX checklists, use
+  `ui-ux-pro-max`.
+- For token architecture, use `design-system`; this skill consumes those
+  tokens.
+- For brand governance, posters, artwork, and campaign assets, use `brand` or
+  `design` rather than this skill.
 
 ## Reference
 
@@ -25,8 +37,7 @@ Use when:
 - Styling with utility-first CSS approach
 - Creating responsive, mobile-first layouts
 - Implementing dark mode and theme customization
-- Building design systems with consistent tokens
-- Generating visual designs, posters, or brand materials
+- Consuming an existing token system in components
 - Rapid prototyping with immediate visual feedback
 - Adding complex UI patterns (data tables, charts, command palettes)
 
@@ -45,13 +56,6 @@ Use when:
 - Mobile-first responsive design
 - Consistent design tokens (colors, spacing, typography)
 - Automatic dead code elimination
-
-### Visual Design Layer: Canvas
-- Museum-quality visual compositions
-- Philosophy-driven design approach
-- Sophisticated visual communication
-- Minimal text, maximum visual impact
-- Systematic patterns and refined aesthetics
 
 ## Quick Start
 
@@ -193,21 +197,6 @@ Covers:
 - Layer organization (@layer base, components, utilities)
 - Apply directive for component extraction
 
-## Visual Design System
-
-**Canvas-based design philosophy, visual communication principles, and sophisticated compositions.**
-
-See: `references/canvas-design-system.md`
-
-Covers:
-- Design philosophy approach
-- Visual communication over text
-- Systematic patterns and composition
-- Color, form, and spatial design
-- Minimal text integration
-- Museum-quality execution
-- Multi-page design systems
-
 ## Utility Scripts
 
 **Python automation for component installation and configuration generation.**
@@ -248,9 +237,6 @@ python scripts/tailwind_config_gen.py --colors brand:blue --fonts display:Inter
 - `references/tailwind-utilities.md` - Core utility classes
 - `references/tailwind-responsive.md` - Responsive design
 - `references/tailwind-customization.md` - Configuration and extensions
-
-**Visual Design**
-- `references/canvas-design-system.md` - Design philosophy and canvas workflows
 
 **Automation**
 - `scripts/shadcn_add.py` - Component installation

@@ -1,5 +1,7 @@
 # Copywriting Formulas
 
+Use this reference only from `design-system`, which owns the slide workflow.
+
 25 formulas for persuasive slide copy.
 
 ## Core Formulas

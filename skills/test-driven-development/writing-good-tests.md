@@ -13,9 +13,12 @@ here:
 2. Every test exercises the real thing
 ```
 
-Strict TDD produces both naturally: a test written first and watched
+Test-first produces both naturally: a test written first and watched
 failing against real code has already proven it can fail, and only earns
-a mock when the real dependency proves slow or external.
+a mock when the real dependency proves slow or external. A test written
+after the implementation can still earn its place if it fails against
+the pre-change code or a deliberate temporary mutation; otherwise label
+the evidence as test-after rather than claiming test-first.
 
 ## Principle 1: Name the Break
 
@@ -93,7 +96,7 @@ expect(screen.getByRole('navigation')).toBeInTheDocument();
 expect(screen.getByTestId('sidebar-mock')).toBeInTheDocument();
 ```
 
-**your human partner's correction:** "Are we testing the behavior of a
+**Reviewer question:** "Are we testing the behavior of a
 mock?"
 
 **Mock at the right level.** Learn every side effect of the real method
@@ -129,7 +132,7 @@ class own this resource's lifecycle? Wrong answers → test utility.
 **Prefer real components over complex mocks.** When mock setup outgrows
 the test logic, mocks miss methods the real components have, or tests
 break when the mock changes, switch to an integration test with real
-components. **your human partner's question:** "Do we need to be using a
+components. **Reviewer question:** "Do we need to be using a
 mock here?"
 
 ### Gate Function
@@ -149,10 +152,10 @@ BEFORE adding a mock or test helper:
 
 ## Tests Ship With the Implementation
 
-The TDD cycle — failing test, minimal implementation, refactor — is what
-"complete" means. Ship the tests the behavior needs and only those:
-trivial code and human prose earn none, and a test written to satisfy
-process costs maintenance forever.
+Ship the tests the behavior needs and only those: trivial code and human
+prose earn none, and a test written only to satisfy process costs
+maintenance forever. Test-first when feasible; for test-after, preserve
+the evidence that the test fails against the old behavior.
 
 ## The Mutation Check
 

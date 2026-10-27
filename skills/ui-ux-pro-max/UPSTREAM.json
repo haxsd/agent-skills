@@ -1,0 +1,17 @@
+{
+  "name": "ui-ux-pro-max",
+  "repository": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+  "commit": "a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5",
+  "tag": "v2.15.0",
+  "path": "src/ui-ux-pro-max",
+  "license": "MIT",
+  "author": "Next Level Builder",
+  "retrievedAt": "2026-10-27",
+  "modifications": [
+    "Curated the runtime data and scripts into a host-neutral skill package with skill-relative paths.",
+    "Added and adapted catalog refresh, snapshot summary and relevance-gate maintenance tools; normalized fingerprint line endings for Windows and POSIX checkouts.",
+    "Added explicit review/approval, bounded input, atomic publication, interruption sentinel and offline fixture tests for generated catalogs.",
+    "Rewrote routing and maintenance guidance; local data contracts and regression tests may differ from the pinned upstream tag."
+  ],
+  "validation": "154 nested unittest checks pass locally; catalog summary hashes match; relevance metrics equal the pinned baseline. Live Google Fonts and Phosphor refresh endpoints were not called."
+}

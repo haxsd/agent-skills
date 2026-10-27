@@ -1,5 +1,7 @@
 # HTML Slide Template
 
+Use this reference only from `design-system`, which owns the slide workflow.
+
 Complete HTML structure with navigation, tokens, and Chart.js integration.
 
 ## Base Structure

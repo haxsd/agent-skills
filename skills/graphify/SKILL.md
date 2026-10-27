@@ -1,6 +1,6 @@
 ---
 name: graphify
-description: "Use for any question about a codebase, its architecture, file relationships, or project content — especially when graphify-out/ exists, where the question should be treated as a graphify query first. Turns any input (code, docs, papers, images, videos) into a persistent knowledge graph with god nodes, community detection, and query/path/explain tools."
+description: "Build, update, or query a persistent knowledge graph for code, docs, papers, images, or video. Use when the user explicitly asks for a graph or cross-file architecture map, or when a current graph is the requested evidence source. Do not use for routine symbol lookup, single-file questions, or as the default first step for every codebase question."
 targets: [codex-skills]
 ---
 
@@ -47,11 +47,40 @@ Turn any folder of files into a navigable knowledge graph with community detecti
 
 Drop any folder of code, docs, papers, images, or video into graphify and get a queryable knowledge graph. Persistent across sessions, honest audit trail (EXTRACTED/INFERRED/AMBIGUOUS), community detection surfaces cross-document connections you wouldn't think to ask about.
 
+## Trigger Boundary
+
+- Use native search first for a symbol, one file, or a narrow call-site question.
+- Build or refresh a graph when the user asks for architecture, cross-file
+  relationships, a knowledge map, or a graph-backed answer.
+- Reuse an existing graph only after checking that it is current for the
+  requested sources. If source files changed, report staleness and update before
+  presenting the graph as evidence.
+- A graph answer must preserve EXTRACTED, INFERRED, and AMBIGUOUS labels and
+  state any unprocessed or failed sources. Never present partial extraction as
+  complete.
+
+## Host Adaptation
+
+The CLI examples below are model instructions, not permission to execute
+unsupported syntax. Use the current host's actual tool names and schemas. Do
+not invent `spawn_agent`, `wait_agent`, or `close_agent` arguments. On Windows,
+use the verified PowerShell/Python runtime and adapt shell snippets; do not
+assume Bash. Ask before installing `graphifyy` or system packages.
+
+The bundled workflow tracks upstream `v0.9.56`, but `.graphify_version` is a
+snapshot marker, not proof of the installed package. Verify the interpreter and
+installed distribution version before debugging or claiming version parity.
+
 ## What You Must Do When Invoked
 
 If the user invoked `/graphify --help` or `/graphify -h` (with no other arguments), print the contents of the `## Usage` section above verbatim and stop. Do not run any commands, do not detect files, do not default the path to `.`. Just print the Usage block and return.
 
-**Fast path — existing graph:** Before doing anything else, check whether `graphify-out/graph.json` exists. The expected location is `graphify-out/graph.json` relative to the **current working directory** (i.e. the project root where you are running commands). If it exists AND the user's request is a natural-language question about the codebase (e.g. "How does X work?", "What calls Y?", "Trace the data flow through Z") and NOT an explicit rebuild command (`--update`, `--cluster-only`, or a bare path/URL that implies fresh extraction): **skip Steps 1–5 entirely and jump straight to `## For /graphify query`.** Run `graphify query "<question>"` immediately. Do not run detect. Do not check corpus size. Do not ask the user to narrow. The graph is already built — use it.
+**Fast path — existing graph:** Use the fast path only when the user explicitly
+asks to query, explain, or trace the graph, or asks a cross-file architecture
+question and the graph manifest is current. Before querying, compare the graph
+manifest or source hashes with the requested sources; if stale, say so and update
+or use native search. A simple symbol lookup or single-file question should not
+trigger graph loading.
 
 If no path was given, use `.` (current directory). Do not ask the user for a path.
 
@@ -65,7 +94,10 @@ Only when the path is one or more `https://github.com/...` URLs, or several loca
 
 ### Step 1 - Ensure graphify is installed
 
-Resolve the graphify Python interpreter, install `graphifyy` if needed, and write `graphify-out/.graphify_python` plus `.graphify_root`. See `references/setup-and-detect.md` (Step 1). **In every subsequent bash block, replace `python3` with `$(cat graphify-out/.graphify_python)`.**
+Resolve the graphify Python interpreter and write `graphify-out/.graphify_python`
+plus `.graphify_root`. If `graphifyy` is missing, ask before installing it.
+See `references/setup-and-detect.md` (Step 1). Adapt interpreter commands to the
+current shell; do not assume Bash or `python3`.
 
 ### Step 2 - Detect files
 
@@ -163,5 +195,5 @@ When the user asks to install the post-commit auto-rebuild hook or wire graphify
 - Never run HTML viz on a graph with more than 5,000 nodes without warning the user.
 
 <!-- provenance:start -->
-> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#graphify)。
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#graphify)。
 <!-- provenance:end -->

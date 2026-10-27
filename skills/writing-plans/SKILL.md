@@ -1,174 +1,147 @@
 ---
 name: writing-plans
-description: Use when you have a spec or requirements for a multi-step task, before touching code
+description: 把已确认的需求、规格或多步骤任务整理成可执行、可审查的实施计划；用于跨文件、接口或验收依赖明显的任务。单步改动、已有清晰步骤或纯调查不要套用。Use when you have a spec or requirements for a multi-step task, before touching code.
 ---
 
-# Writing Plans
+# 编写实施计划
 
-## Overview
+把“要做什么”变成“按什么顺序做、改哪里、如何证明完成”。计划服务于执行和审查，不是提前把实现完整写一遍。
 
-Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
+## 何时写
 
-Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
+值得写计划：
 
-**Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
+- 任务需要多个可独立验收的阶段，或跨多个文件、模块和接口
+- 任务包含迁移、兼容、并发、数据变更等高风险衔接
+- 需要交给另一个会话、子代理或未来的自己继续执行
+- 规格已经确认，但实施顺序和验证方式仍需要设计
 
-**Context:** If working in an isolated worktree, it should have been created via the `using-git-worktrees` skill at execution time.
+不要写完整计划：
 
-**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
-- (User preferences for plan location override this default)
+- 一行文案、明确的小 bug、单文件单步骤改动
+- 只是需要调查、解释或做一个可行性验证
+- 已有可执行的计划，且当前只是按原计划推进
+- 关键产品取舍尚未确定；先回到 `requirement-understanding`
 
-## Scope Check
+有界任务可以在对话里给几句话的计划；只有任务长到容易丢失上下文时，才需要单独落盘。
 
-If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during requirement understanding. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.
+## 先收集事实
 
-## File Structure
+1. 读用户需求、项目 `AGENTS.md` / `CONTRIBUTING`、规格和相关设计记录。
+2. 浏览受影响文件、现有测试、错误处理方式和近期提交，优先复用项目已有模式。
+3. 记录当前基线：分支、提交或工作树状态，以及现在已经跑过的验证。
+4. 把尚未确定且会影响实现的事项写成问题；不要用 `TBD` 或“到时候再看”混过去。
 
-Before defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.
+计划基于仓库事实，不基于对常见项目结构的猜测。
 
-- Design units with clear boundaries and well-defined interfaces. Each file should have one clear responsibility.
-- You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.
-- Files that change together should live together. Split by responsibility, not by technical layer.
-- In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.
+## 计划位置与持久化
 
-This structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.
+- 用户指定路径时，使用用户路径。
+- 否则检查项目是否已有被允许的计划目录；不要擅自创造新的文档体系。
+- 检查 `AGENTS.md`、`.gitignore` 和项目约定。不得把计划写进项目禁止或未忽略的路径；例如本仓公开树禁止 `docs/plans/`。
+- 没有合适路径时，把计划留在对话中，或写入已被忽略的临时目录，并明确告诉用户位置。
+- 计划文件是否提交，按用户要求或项目约定；默认不提交。
 
-## Task Right-Sizing
+## 计划头
 
-A task is the smallest unit that carries its own test cycle and is worth a
-fresh reviewer's gate. When drawing task boundaries: fold setup,
-configuration, scaffolding, and documentation steps into the task whose
-deliverable needs them; split only where a reviewer could meaningfully
-reject one task while approving its neighbor. Each task ends with an
-independently testable deliverable.
-
-## Bite-Sized Task Granularity
-
-**Each step is one action (2-5 minutes):**
-- "Write the failing test" - step
-- "Run it to make sure it fails" - step
-- "Implement the minimal code to make the test pass" - step
-- "Run the tests and make sure they pass" - step
-- "Commit" - step
-
-## Plan Document Header
-
-**Every plan MUST start with this header:**
+按任务需要选择字段，不要为了模板完整而制造空章节。
 
 ```markdown
-# [Feature Name] Implementation Plan
+# [任务名称] 实施计划
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use execute-plan to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+**目标：** 一句话说明最终要交付什么
 
-**Goal:** [One sentence describing what this builds]
+**背景与约束：** 只写会影响实现选择的项目事实、版本限制和边界
 
-**Architecture:** [2-3 sentences about approach]
+**规格：** [规格路径；没有规格就删掉此行]
 
-**Tech Stack:** [Key technologies/libraries]
+**当前基线：** [分支/提交/工作树状态，以及已通过的验证]
 
-**Spec:** [path to the spec/design doc this plan implements — the plan
-argues from the spec, so the spec travels with it; executors read both]
-
-## Global Constraints
-
-[The spec's project-wide requirements — version floors, dependency limits,
-naming and copy rules, platform requirements — one line each, with exact
-values copied verbatim from the spec. Every task's requirements implicitly
-include this section.]
-
----
+**完成标准：** [可观察的用户行为、接口结果或产物]
 ```
 
-## Task Structure
+## 任务设计
 
-````markdown
-### Task N: [Component Name]
+任务边界按“可独立验收的交付物”划分，不按时间切。一个任务可以包含必要的配置、测试和文档；只把可分别审查、分别回滚的部分拆开。
 
-**Files:**
-- Create: `exact/path/to/file.py`
-- Modify: `exact/path/to/existing.py:123-145`
-- Test: `tests/exact/path/to/test.py`
+每个任务至少写清：
 
-**Interfaces:**
-- Consumes: [what this task uses from earlier tasks — exact signatures]
-- Produces: [what later tasks rely on — exact function names, parameter
-  and return types. A task's implementer sees only their own task; this
-  block is how they learn the names and types neighboring tasks use.]
+```markdown
+### Task N: [可独立验收的交付物]
 
-- [ ] **Step 1: Write the failing test**
+**文件与范围：**
+- 新建：`path/to/file`
+- 修改：`path/to/existing`
+- 测试：`path/to/test`（如果有可运行测试面）
 
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
+**依赖：** 依赖哪个任务、接口或外部条件
+
+**接口：** 只在跨任务时写准 exact 输入、输出、类型、错误语义和所有权
+
+**实施步骤：**
+1. [具体动作；不要写“实现功能”这种空话]
+2. [必要时说明要沿用的现有模式]
+3. [必要的兼容、错误处理或迁移动作]
+
+**验证：**
+- 命令：`...`
+- 期望：退出码、关键输出或可观察行为
+- 无法自动验证时：具体的人工检查步骤与证据
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+### 代码示例的边界
 
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: FAIL with "function not defined"
+代码片段只用于消除真正的实现歧义：
 
-- [ ] **Step 3: Write minimal implementation**
+- 复杂算法、并发时序或容易写错的边界
+- 必须精确匹配的外部 API、协议或数据形状
+- 跨任务共享的签名、类型或迁移映射
+- 现有代码没有可复用模式，且不给示例就会写错的地方
 
-```python
-def function(input):
-    return expected
-```
+其余步骤写清目标文件、行为、约束和验收，不把整段实现提前写死。计划不是代码生成器的输入模板。
 
-- [ ] **Step 4: Run test to verify it passes**
+### 测试与提交
 
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: PASS
+- 行为变化且有可运行测试面：优先先写失败测试，再最小实现并验证。
+- 文档、纯配置、生成物或没有测试面：写替代验证，不强行制造样板测试。
+- 旧代码 bug：先做 characterization 或复现测试；无法自动化时记录可重复的手工证据。
+- 提交步骤只在用户要求或仓库规范要求时加入。不要默认每个任务一次 commit。
 
-- [ ] **Step 5: Commit**
+## 写完后自检
 
-```bash
-git add tests/path/test.py src/path/file.py
-git commit -m "feat: add specific feature"
-```
-````
+| 检查 | 通过标准 |
+|---|---|
+| 规格覆盖 | 每条需求都能指向具体任务；没有任务在实现未要求的功能 |
+| 接口一致 | 生产者和消费者使用同一签名、类型、字段和错误语义 |
+| 文件冲突 | 同一文件只有一个写入所有者；并发任务有明确隔离 |
+| 可执行性 | 任务顺序、依赖和前置条件足够明确，执行者不需要猜关键事实 |
+| 验证证据 | 每个任务都有可运行命令或具体人工检查，不用“应该可以” |
+| 范围 | 能拆成独立计划就拆；不要把多个子系统塞进一个计划 |
+| 回滚与风险 | 高风险变更说明失败时的止损、回滚或保留成果方式 |
 
-## No Placeholders
+发现问题就直接修，不需要再走一轮形式化审批。
 
-Every step must contain the actual content an engineer needs. These are **plan failures** — never write them:
-- "TBD", "TODO", "implement later", "fill in details"
-- "Add appropriate error handling" / "add validation" / "handle edge cases"
-- "Write tests for the above" (without actual test code)
-- "Similar to Task N" (repeat the code — the engineer may be reading tasks out of order)
-- Steps that describe what to do without showing how (code blocks required for code steps)
-- References to types, functions, or methods not defined in any task
+## 交接
 
-## Self-Review
+计划完成后，用一句话说明计划位置、任务数量、基线验证和仍未解决的风险。
 
-After writing the complete plan, look at the spec with fresh eyes and check the plan against it. This is a checklist you run yourself — not a subagent dispatch.
+如果用户已经指定执行方式，直接沿用，不要再问菜单。没有指定时，只在下一步确实需要选择时给出简短选项：
 
-**1. Spec coverage:** Skim each section/requirement in the spec. Can you point to a task that implements it? List any gaps.
+- 在当前会话按任务顺序执行
+- 交给 `execute-plan` 按宿主能力选择顺序或委派模式
 
-**2. Placeholder scan:** Search your plan for red flags — any of the patterns from the "No Placeholders" section above. Fix them.
+实施细节由 `execute-plan` 负责；本技能只负责把计划写到可执行、可审查。
 
-**3. Type consistency:** Do the types, method signatures, and property names you used in later tasks match what you defined in earlier tasks? A function called `clearLayers()` in Task 3 but `clearFullLayers()` in Task 7 is a bug.
+## 反模式
 
-If you find issues, fix them inline. No need to re-review — just fix and move on. If you find a spec requirement with no task, add the task.
-
-## Execution Handoff
-
-After saving the plan, offer execution choice:
-
-**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
-
-**1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
-
-**2. Inline Execution** - Execute tasks in this session using execute-plan (sequential mode), batch execution with checkpoints
-
-**Which approach?"**
-
-**If Subagent-Driven chosen:**
-- **REQUIRED SUB-SKILL:** Use execute-plan (delegated mode)
-- Fresh subagent per task + two-stage review
-
-**If Inline Execution chosen:**
-- **REQUIRED SUB-SKILL:** Use execute-plan (sequential mode)
-- Batch execution with checkpoints for review
+| 反模式 | 后果 |
+|---|---|
+| 每个任务预写完整实现 | 计划变成未经运行的代码，重复劳动并固化错误方案 |
+| 固定“2–5 分钟一步” | 时间不是可验收边界，任务会被切碎或漏掉集成工作 |
+| 每个任务强制测试先行和 commit | 对文档、配置、探索任务不适用，也违背用户交付偏好 |
+| 使用 `TBD`、`TODO`、“适当处理” | 执行者会在关键处自由发挥 |
+| 默认写进 `docs/plans/` | 可能与项目禁令、忽略规则或内部资料边界冲突 |
+| 计划完成后再次询问已选执行方式 | 重复打断用户，丢失已有授权 |
 
 <!-- provenance:start -->
 > 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#writing-plans)。

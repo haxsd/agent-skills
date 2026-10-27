@@ -1,0 +1,25 @@
+{
+  "name": "prompt-optimizer",
+  "repository": "https://github.com/getsentry/skills",
+  "commit": "d12f250460ffd961f549dbebf7eeb0cf4afd4c2e",
+  "path": "skills/prompt-optimizer",
+  "license": "Apache-2.0",
+  "author": "Functional Software, Inc. dba Sentry",
+  "retrievedAt": "2026-10-27",
+  "modifications": [
+    "Rewrote the workflow as an independent Chinese prompt-engineering skill with explicit trust boundaries, prompt contracts and delivery evidence.",
+    "Added tool authorization, secret handling, indirect prompt-injection tests and non-prompt-bottleneck stop rules.",
+    "Added an independently implemented standard-library prompt/eval audit CLI with offline regression tests; no upstream scripts are included.",
+    "Added blocking regression comparison, frozen held-out validation and synthetic behavior cases; no upstream examples or reference files are copied."
+  ],
+  "alsoReviewed": [
+    {
+      "repository": "https://github.com/trailofbits/skills",
+      "commit": "196a9073ab10d35bacf111f945e02c00b2c6883a",
+      "path": "plugins/static-analysis",
+      "license": "CC-BY-SA-4.0",
+      "usage": "Method review only: quality gates and explicit reporting of failed/skipped scans; no text, code or plugin assets copied."
+    }
+  ],
+  "validation": "15 offline prompt-audit tests pass; the bundled eval fixture validates; the skill entrypoint passes its own lint with no findings. No model-behavior or provider API evaluation was run."
+}

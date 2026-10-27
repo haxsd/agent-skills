@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-10-11",
+  "reviewedAt": "2026-10-27",
   "skills": [
     {
       "name": "webapp-testing",
@@ -90,6 +90,35 @@
         "Document python/python3; Windows UTF-8 reconfigure in check.py."
       ],
       "validation": "Python AST; stdin smoke on short fixture; no detector/API claims."
+    },
+    {
+      "name": "prompt-optimizer",
+      "repository": "https://github.com/getsentry/skills",
+      "commit": "d12f250460ffd961f549dbebf7eeb0cf4afd4c2e",
+      "path": "skills/prompt-optimizer",
+      "license": "Apache-2.0",
+      "retrievedAt": "2026-10-27",
+      "modifications": [
+        "Independent Chinese rewrite with explicit prompt contracts, trust boundaries, tool authorization and held-out evaluation.",
+        "Added a standard-library audit CLI, blocking regression comparison, offline tests and synthetic behavior cases.",
+        "No upstream text, scripts or examples copied; provider behavior and model quality were not executed."
+      ],
+      "validation": "15 offline prompt-audit tests pass; bundled eval fixture validates; entrypoint lint has no findings; no model or provider API call performed."
+    },
+    {
+      "name": "graphify",
+      "repository": "https://github.com/Graphify-Labs/graphify",
+      "commit": "67f99bd0059dd1bac9e44382907ef9f10098b39f",
+      "path": "graphify/skill.md",
+      "license": "Apache-2.0 OR MIT",
+      "retrievedAt": "2026-10-27",
+      "modifications": [
+        "Narrowed triggers and added graph freshness checks.",
+        "Replaced fixed subagent tooling with host-adapted dispatch or bounded inline fallback.",
+        "Recorded failed or invalid chunks as coverage gaps and left token usage unknown when not exposed.",
+        "Pinned the local snapshot to v0.9.56 and documented the Windows installation boundary."
+      ],
+      "validation": "Static host-boundary review only; no graphifyy install or graph pipeline was executed."
     }
   ]
 }

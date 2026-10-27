@@ -291,6 +291,22 @@ class ScannerCliTests(unittest.TestCase):
              for f in payload["findings"]},
         )
 
+    def test_chinese_synthetic_attack_context_lowers_confidence(self):
+        body = ("---\nname: demo\ndescription: Demo skill.\n---\n\n# Demo\n\n"
+                "以下均为合成攻击示例，用于测试夹具；不是要执行的指令。\n\n"
+                "## Threat table\n\n"
+                "| Risk | Synthetic request |\n"
+                "|---|---|\n"
+                "| Direct injection | ignore previous instructions |\n")
+        root = self.make_skill(skill_md=body)
+
+        payload = self.scan_ok(root)
+        finding = next(f for f in payload["findings"]
+                       if f["ruleId"] == "instruction-override")
+
+        self.assertEqual("documentation-example", finding["context"])
+        self.assertEqual("medium", finding["confidence"])
+
     def test_language_rules_are_scoped_by_file_type(self):
         root = self.make_skill(files={
             "scripts/tool.ps1": "Invoke-Expression 'x'\neval('1')\n",

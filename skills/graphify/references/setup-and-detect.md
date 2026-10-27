@@ -2,6 +2,13 @@
 
 Load this for Steps 1–2 of the full pipeline (install interpreter, detect corpus).
 
+> **Windows / PowerShell:** the bash block below is the Unix reference path, not
+> permission to run Unix package-manager flags on Windows. Use the verified
+> PowerShell/Python runtime, check whether `graphifyy` is already installed, and
+> ask before installing or upgrading it. Do not use
+> `--break-system-packages` on Windows. Persist the resolved absolute Python
+> path in `graphify-out/.graphify_python` for later steps.
+
 ### Step 1 - Ensure graphify is installed
 
 ```bash

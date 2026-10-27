@@ -2,11 +2,11 @@
 
 [中文](README.md) · [English](README-EN.md)
 
-> 按用途分类的 agent 技能库：36 个启用技能、11 个归档技能、9 个用途分类，按目录索引查、按需安装。
+> 按用途分类的 agent 技能库：38 个启用技能、11 个归档技能、10 个用途分类，按目录索引查、按需安装。
 
 ## 核心能力
 
-- **36 个启用技能**：覆盖需求与规划、实现与代理编排、质量与调试、Git 交付、设计与 UI、写作、知识图谱与安全研究、技能维护、数据库与后端九类，全部在 `skills/<name>/` 保持稳定路径。
+- **38 个启用技能**：覆盖需求与规划、实现与代理编排、质量与调试、Git 交付、设计与 UI、写作、文档与办公、知识图谱与安全研究、技能维护与提示词优化、数据库与后端十类，全部在 `skills/<name>/` 保持稳定路径。
 - **11 个归档技能**：历史技能与草稿放在 `archive/`，默认不安装，可作维护参考。
 - **目录索引**：分类、价值判断与升级建议写入 `catalog.json`，人读版本见[分类目录](docs/catalog.md)。
 - **来源可溯**：每项技能登记来源（第三方引入 / 原创 / 原创改进 / 待核验）与许可证，见[署名说明](ATTRIBUTION.md)与[逐项来源登记](docs/sources/skill-provenance.json)。
@@ -22,7 +22,7 @@
 .\install.ps1 -Only deepseek-subagent-orchestration -Target codex
 ```
 
-完整安装、卸载与外部源配置见[安装指南](docs/guides/installation.md)。[DeepSeek API 助手](skills/deepseek-subagent-orchestration/SKILL.md)保留当前 GPT 主代理，默认把独立工作块交给自己的 `deepseek-flash` API，凭据单独配置。
+完整安装、卸载与外部源配置见[安装指南](docs/guides/installation.md)。[DeepSeek API 助手](skills/deepseek-subagent-orchestration/SKILL.md)保留当前 GPT 主代理，在用户明确要求 DeepSeek 委派时把独立工作块交给自己的 `deepseek-flash` API；需要 Codex CLI 进程和完整本机工具链时改用 `deepseek-subagents`，两条路线互斥。
 
 ## 仓库结构
 

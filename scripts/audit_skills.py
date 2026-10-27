@@ -251,7 +251,7 @@ def inspect(root, catalog):
                     duplicate_map[hashlib.sha256(normalized).hexdigest()].append((name, relative))
         # These are hints, not hard failures: some paths are generated project assets.
         candidates = set(re.findall(
-            r"(?<![\w/])(?:references|scripts|templates|assets|data)/[\w./-]+\.(?:md|py|cjs|js|json|csv|css|html|sh)", text))
+            r"(?<![\w/])(?:references|scripts|templates|assets|data)/[\w./-]+\.(?:md|py|json|cjs|js|csv|css|html|sh)", text))
         for ref in sorted(candidates):
             if not (path / ref).is_file() and not (root / ref).is_file():
                 add("hint", "unresolved-path-in-entrypoint", row["path"], ref)

@@ -1,6 +1,6 @@
 interface:
   display_name: "GPT 主代理 + DeepSeek 子代理"
-  short_description: "GPT 主动拆分和验收，DeepSeek V4.1 Flash 并行执行子任务"
-  default_prompt: "使用 $deepseek-subagents，让 GPT 担任主代理，主动把可执行子任务分配给 DeepSeek V4.1 Flash 并汇总验证结果。"
+  short_description: "显式启用 Codex CLI DeepSeek worker；普通有界委派优先使用 API 路线"
+  default_prompt: "使用 $deepseek-subagents，仅在本任务确实需要 Codex CLI 进程和隔离工作区时，让 GPT 主代理拆分并验收 DeepSeek V4.1 Flash 子任务。"
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

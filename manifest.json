@@ -253,6 +253,20 @@
       "defaultTargets": [
         "agents"
       ]
+    },
+    {
+      "name": "pdf-toolkit",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "prompt-optimizer",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
     }
   ]
 }

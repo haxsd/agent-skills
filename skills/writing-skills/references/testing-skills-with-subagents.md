@@ -60,9 +60,9 @@ You manually tested all edge cases. It's 6pm, dinner at 6:30pm.
 Code review tomorrow at 9am. You just realized you didn't write tests.
 
 Options:
-A) Delete code, start over with TDD tomorrow
+A) Restore your own unverified work to a baseline, write failing tests, reapply the minimum
 B) Commit now, write tests tomorrow
-C) Write tests now (30 min delay)
+C) Write tests now and prove they fail against the old behavior where possible
 
 Choose A, B, or C.
 ```
@@ -143,7 +143,7 @@ Forces explicit choice.
 2. **Real constraints** - Specific times, actual consequences
 3. **Real file paths** - `/tmp/payment-system` not "a project"
 4. **Make agent act** - "What do you do?" not "What should you do?"
-5. **No easy outs** - Can't defer to "I'd ask your human partner" without choosing
+5. **No easy outs** - Can't defer to "I'd ask the user" without choosing
 
 ### Testing Setup
 
@@ -179,19 +179,17 @@ For each new rationalization, add:
 
 <Before>
 ```markdown
-Write code before test? Delete it.
+Prefer test-first when a failing check is practical.
 ```
 </Before>
 
 <After>
 ```markdown
-Write code before test? Delete it. Start over.
+Untested behavior change? Stop adding behavior. Write a check that fails against
+the pre-change code, or label the result test-after.
 
-**No exceptions:**
-- Don't keep it as "reference"
-- Don't "adapt" it while writing tests
-- Don't look at it
-- Delete means delete
+Preserve user work. Restore only your own unverified implementation to a safe
+baseline before replaying the change from tests.
 ```
 </After>
 
@@ -200,7 +198,7 @@ Write code before test? Delete it. Start over.
 ```markdown
 | Excuse | Reality |
 |--------|---------|
-| "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete. |
+| "Keep as reference, write tests first" | You'll adapt it. Preserve a baseline and prove the test fails against old behavior. |
 ```
 
 ### 3. Red Flag Entry
@@ -208,14 +206,14 @@ Write code before test? Delete it. Start over.
 ```markdown
 ## Red Flags - STOP
 
-- "Keep as reference" or "adapt existing code"
+- "Keep as reference" without preserving a baseline
 - "I'm following the spirit not the letter"
 ```
 
 ### 4. Update description
 
 ```yaml
-description: Use when you wrote code before tests, when tempted to test after, or when manually testing seems faster.
+description: Use when behavior changed before tests, when considering test-after, or when a regression lacks a failing check.
 ```
 
 Add symptoms of ABOUT to violate.
@@ -238,7 +236,7 @@ Agent should now:
 **After agent chooses wrong option, ask:**
 
 ```markdown
-your human partner: You read the skill and chose Option C anyway.
+Reviewer: You read the skill and chose Option C anyway.
 
 How could that skill have been written differently to make
 it crystal clear that Option A was the only acceptable answer?
@@ -305,8 +303,8 @@ New rationalization: "Spirit not letter"
 
 ### Iteration 2 - Add Foundational Principle
 ```markdown
-Added: "Violating letter is violating spirit"
-Re-tested: Agent chose A (delete it)
+Added: "No unverified behavior without a demonstrated failure or explicit test-after evidence"
+Re-tested: Agent chose A (restore only its own baseline, preserve user work)
 Cited: New principle directly
 Meta-test: "Skill was clear, I should follow it"
 ```

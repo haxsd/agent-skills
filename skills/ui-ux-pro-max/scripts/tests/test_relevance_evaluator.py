@@ -105,6 +105,37 @@ class TestThresholdGate(unittest.TestCase):
             self.assertNotEqual(
                 evaluator.oracle_fingerprint(selected), evaluator.oracle_fingerprint(canonical))
 
+    def test_fingerprints_ignore_checkout_line_endings(self):
+        original = evaluator.ROOT, evaluator.RUNTIME_DIR, evaluator.DATA_DIR
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            runtime = root / "scripts"
+            data = root / "data"
+            runtime.mkdir(parents=True)
+            data.mkdir(parents=True)
+            for name in ("core.py", "design_system.py", "reasoning_contract.py"):
+                (runtime / name).write_bytes(f"{name}\nsecond line\n".encode())
+            (runtime / "relevance_metrics.py").write_bytes(b"metrics\n")
+            (data / "styles.csv").write_bytes(b"No,Style\n1,Test\n")
+            evaluator.ROOT, evaluator.RUNTIME_DIR, evaluator.DATA_DIR = root, runtime, data
+            try:
+                lf_runtime = evaluator.runtime_fingerprint()
+                for name in ("core.py", "design_system.py", "reasoning_contract.py"):
+                    path = runtime / name
+                    path.write_bytes(
+                        path.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+                    )
+                (data / "styles.csv").write_bytes(b"No,Style\r\n1,Test\r\n")
+                self.assertEqual(lf_runtime, evaluator.runtime_fingerprint())
+
+                cases = root / "cases.json"
+                cases.write_bytes(b'{"schemaVersion": 1}\n')
+                lf_oracle = evaluator.oracle_fingerprint(cases)
+                cases.write_bytes(b'{"schemaVersion": 1}\r\n')
+                self.assertEqual(lf_oracle, evaluator.oracle_fingerprint(cases))
+            finally:
+                evaluator.ROOT, evaluator.RUNTIME_DIR, evaluator.DATA_DIR = original
+
     def test_metric_sample_and_locked_case_failures_are_actionable(self):
         report = {
             "metrics": {"precisionAt1": 0.5},

@@ -1,0 +1,16 @@
+Canvas Design
+
+This package is derived from Anthropic's canvas-design skill:
+https://github.com/anthropics/skills/tree/main/skills/canvas-design
+
+The upstream work is licensed under the Apache License, Version 2.0.
+See LICENSE.txt in this directory. The exact upstream snapshot revision is
+not yet verified, so this notice does not claim that the local files match
+any specific upstream commit.
+
+Local changes by agent-skills contributors include the brief-first workflow,
+the standard-library font coverage checker, the rendering checklist, and the
+font selection reference. Upstream attribution is preserved.
+
+Font binaries under canvas-fonts/ are distributed with their own SIL Open
+Font License files. See canvas-fonts/INDEX.md and the per-family OFL files.

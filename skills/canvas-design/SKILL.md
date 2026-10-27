@@ -1,134 +1,133 @@
 ---
 name: canvas-design
-description: Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.
+description: 创建海报、封面、静态艺术、信息图等 .pdf/.png 视觉作品。先锁定必需文案、尺寸、格式、品牌和语言，再创作；本地字体必须验证字形覆盖和许可。Use when the user asks for a poster, cover, static artwork, print piece, or another finished visual artifact.
 license: Complete terms in LICENSE.txt
 ---
 
-These are instructions for creating design philosophies - aesthetic movements that are then EXPRESSED VISUALLY. Output only .md files, .pdf files, and .png files.
+# Canvas Design
 
-Complete this in two steps:
-1. Design Philosophy Creation (.md file)
-2. Express by creating it on a canvas (.pdf file or .png file)
+先保证作品说对、做完、可读，再追求风格。视觉概念服务于 brief，不是用来替代 brief。
 
-First, undertake this task:
+## 1. 开始前锁定 brief
 
-## DESIGN PHILOSOPHY CREATION
+从用户需求中提取并复述这些信息：
 
-To begin, create a VISUAL PHILOSOPHY (not layouts or templates) that will be interpreted through:
-- Form, space, color, composition
-- Images, graphics, shapes, patterns
-- Minimal text as visual accent
+| 项目 | 必须确认的内容 |
+|---|---|
+| 用途与受众 | 活动、产品、展览、社交媒体、印刷品；谁会看到 |
+| 必需文案 | 标题、副标题、日期、地点、主办方、CTA、免责声明，尽量原文照录 |
+| 尺寸与格式 | 页面尺寸、像素或毫米、横竖版、页数、PDF/PNG/其他 |
+| 输出约束 | 出血、安全区、DPI、色彩模式、文件名、交付数量 |
+| 品牌资产 | Logo、色值、字体、留白和禁用规则；资产路径与版本 |
+| 语言与字形 | 中文、日文、韩文、阿拉伯文等多语言，是否允许系统字体回退 |
+| 审美方向 | 用户给的参考、风格词或明确偏好；没有则从内容推导 |
 
-### THE CRITICAL UNDERSTANDING
-- What is received: Some subtle input or instructions by the user that should be taken into account, but used as a foundation; it should not constrain creative freedom.
-- What is created: A design philosophy/aesthetic movement.
-- What happens next: Then, the same version receives the philosophy and EXPRESSES IT VISUALLY - creating artifacts that are 90% visual design, 10% essential text.
+信息足够时直接创作，并列出关键假设。只有会改变结果且无法从上下文推断的缺口才追问；不要虚构用户已经发表过审美评价。
 
-Consider this approach:
-- Write a manifesto for an art movement
-- The next phase involves making the artwork
+## 2. 选择视觉方向
 
-The philosophy must emphasize: Visual expression. Spatial communication. Artistic interpretation. Minimal words.
+风格可以从 brief 中长出来：极简、编辑排版、密集信息图、摄影、拼贴、几何、手绘或纯字体设计都可以。不要预设“艺术必须抽象、文字必须最少”。
 
-### HOW TO GENERATE A VISUAL PHILOSOPHY
+如果有助于对齐，写一份不超过一页的设计 brief：
 
-**Name the movement** (1-2 words): "Brutalist Joy" / "Chromatic Silence" / "Metabolist Dreams"
+- 核心概念与视觉隐喻
+- 构图、色彩、材质和字体方向
+- 必需信息如何进入画面
+- 明确不做什么，避免范围漂移
 
-**Articulate the philosophy** (4-6 paragraphs - concise but complete):
+设计 brief 是可选的中间产物。用户只要求成品时，不必额外交付一篇宣言；需要交付时，单独命名，不混入最终 PDF/PNG。
 
-To capture the VISUAL essence, express how the philosophy manifests through:
-- Space and form
-- Color and material
-- Scale and rhythm
-- Composition and balance
-- Visual hierarchy
+原创表达可以借鉴一般设计语言，但不要复制在售作品、品牌系统或特定艺术家的可识别作品。
 
-**CRITICAL GUIDELINES:**
-- **Avoid redundancy**: Each design aspect should be mentioned once. Avoid repeating points about color theory, spatial relationships, or typographic principles unless adding new depth.
-- **Emphasize craftsmanship REPEATEDLY**: The philosophy MUST stress multiple times that the final work should appear as though it took countless hours to create, was labored over with care, and comes from someone at the absolute top of their field. This framing is essential - repeat phrases like "meticulously crafted," "the product of deep expertise," "painstaking attention," "master-level execution."
-- **Leave creative space**: Remain specific about the aesthetic direction, but concise enough that the next Claude has room to make interpretive choices also at a extremely high level of craftmanship.
+## 3. 字体与字形覆盖
 
-The philosophy must guide the next version to express ideas VISUALLY, not through text. Information lives in design, not paragraphs.
+优先使用 `canvas-fonts/` 中的本地字体。字体家族、字重和许可文件见 [canvas-fonts/INDEX.md](canvas-fonts/INDEX.md)。
 
-### PHILOSOPHY EXAMPLES
+**任何非拉丁文字都必须先验证覆盖率。** 字体文件存在，不代表包含中文、日文、韩文、阿拉伯文或所需标点。
 
-**"Concrete Poetry"**
-Philosophy: Communication through monumental form and bold geometry.
-Visual expression: Massive color blocks, sculptural typography (huge single words, tiny labels), Brutalist spatial divisions, Polish poster energy meets Le Corbusier. Ideas expressed through visual weight and spatial tension, not explanation. Text as rare, powerful gesture - never paragraphs, only essential words integrated into the visual architecture. Every element placed with the precision of a master craftsman.
+```bash
+python scripts/check_font_coverage.py \
+  canvas-fonts/WorkSans-Regular.ttf \
+  /path/to/a-verified-cjk-font.ttf \
+  --text "活动主题 2026 年 10 月 27 日" \
+  --json
+```
 
-**"Chromatic Language"**
-Philosophy: Color as the primary information system.
-Visual expression: Geometric precision where color zones create meaning. Typography minimal - small sans-serif labels letting chromatic fields communicate. Think Josef Albers' interaction meets data visualization. Information encoded spatially and chromatically. Words only to anchor what color already shows. The result of painstaking chromatic calibration.
+也可以把最终文案放进文件后检查：
 
-**"Analog Meditation"**
-Philosophy: Quiet visual contemplation through texture and breathing room.
-Visual expression: Paper grain, ink bleeds, vast negative space. Photography and illustration dominate. Typography whispered (small, restrained, serving the visual). Japanese photobook aesthetic. Images breathe across pages. Text appears sparingly - short phrases, never explanatory blocks. Each composition balanced with the care of a meditation practice.
+```bash
+python scripts/check_font_coverage.py FONT [FONT ...] --text-file final-copy.txt
+```
 
-**"Organic Systems"**
-Philosophy: Natural clustering and modular growth patterns.
-Visual expression: Rounded forms, organic arrangements, color from nature through architecture. Information shown through visual diagrams, spatial relationships, iconography. Text only for key labels floating in space. The composition tells the story through expert spatial orchestration.
+脚本把多个字体视为回退栈，只要求每个非空白字符至少被一个字体覆盖。退出码 `0` 表示覆盖完整，`1` 表示有缺字，`2` 表示字体或参数无法解析。
 
-**"Geometric Silence"**
-Philosophy: Pure order and restraint.
-Visual expression: Grid-based precision, bold photography or stark graphics, dramatic negative space. Typography precise but minimal - small essential text, large quiet zones. Swiss formalism meets Brutalist material honesty. Structure communicates, not words. Every alignment the work of countless refinements.
+处理规则：
 
-*These are condensed examples. The actual design philosophy should be 4-6 substantial paragraphs.*
+- 中文、日文、韩文优先使用系统或用户提供、且许可允许当前用途的 CJK 字体；不要默认随包字体能覆盖。
+- 只有文本、没有字体时，不能把“渲染出来没有报错”当成字形完整；必须查看实际渲染图，确认没有豆腐块、方框或错误替换。
+- 新增外部字体时，把字体和对应许可文件放在一起；没有许可证据就不随成品分发字体。
+- 需要混合字体时，明确每段文字的 fallback 顺序，并检查标点、数字和粗细是否协调。
+- 不能运行检查时，明确报告“字形覆盖未验证”，不要声称已完成。
 
-### ESSENTIAL PRINCIPLES
-- **VISUAL PHILOSOPHY**: Create an aesthetic worldview to be expressed through design
-- **MINIMAL TEXT**: Always emphasize that text is sparse, essential-only, integrated as visual element - never lengthy
-- **SPATIAL EXPRESSION**: Ideas communicate through space, form, color, composition - not paragraphs
-- **ARTISTIC FREEDOM**: The next Claude interprets the philosophy visually - provide creative room
-- **PURE DESIGN**: This is about making ART OBJECTS, not documents with decoration
-- **EXPERT CRAFTSMANSHIP**: Repeatedly emphasize the final work must look meticulously crafted, labored over with care, the product of countless hours by someone at the top of their field
+## 4. 构图与排版
 
-**The design philosophy should be 4-6 paragraphs long.** Fill it with poetic design philosophy that brings together the core vision. Avoid repeating the same points. Keep the design philosophy generic without mentioning the intention of the art, as if it can be used wherever. Output the design philosophy as a .md file.
+先建立信息层级，再决定视觉语言：
 
----
+- 必需信息必须全部出现，不能为了“纯艺术”删掉日期、地点、主办方或安全声明。
+- 标题、正文、标签和 CTA 形成可读层级；不要用装饰性小字承载关键信息。
+- 精确按目标尺寸建立画布；预留安全区，文字、Logo 和关键图形不贴边。
+- 检查重叠、裁切、溢出、孤立标点、错误换行和过窄行宽。
+- 对比度满足可读性；浅色字压在复杂照片上时加遮罩或改变构图。
+- 信息密度由内容决定。极简和密集都可以成立，前提是层级清楚且没有丢失信息。
+- Logo 保持比例和最小尺寸，不拉伸、不重绘，除非用户明确要求做变体。
 
-## DEDUCING THE SUBTLE REFERENCE
+如果视觉概念与可读性冲突，先保证可读性和 brief 完整性，再寻找同样有表现力的替代构图。
 
-**CRITICAL STEP**: Before creating the canvas, identify the subtle conceptual thread from the original request.
+## 5. 输出
 
-**THE ESSENTIAL PRINCIPLE**:
-The topic is a **subtle, niche reference embedded within the art itself** - not always literal, always sophisticated. Someone familiar with the subject should feel it intuitively, while others simply experience a masterful abstract composition. The design philosophy provides the aesthetic language. The deduced topic provides the soul - the quiet conceptual DNA woven invisibly into form, color, and composition.
+- 严格使用用户要求的格式、尺寸、页数和文件名。
+- 未指定格式时，按最终用途选择：屏幕预览通常用 PNG，印刷或需要矢量文字时用 PDF；有疑问就说明默认选择。
+- 印刷尺寸应保留足够的输出分辨率；不要用低分辨率截图冒充印刷文件。
+- 多页作品保持统一的视觉系统，同时让每页承担独立的阅读任务。
+- 最终交付至少包含可打开的目标文件。设计 brief、源文件或字体说明只在用户需要或项目要求时附加。
 
-This is **VERY IMPORTANT**: The reference must be refined so it enhances the work's depth without announcing itself. Think like a jazz musician quoting another song - only those who know will catch it, but everyone appreciates the music.
+## 6. 渲染后验收
 
----
+不要只看生成代码就宣布完成。导出后实际查看渲染结果，并按 [references/quality-checks.md](references/quality-checks.md) 检查。
 
-## CANVAS CREATION
+最低验收线：
 
-With both the philosophy and the conceptual framework established, express it on a canvas. Take a moment to gather thoughts and clear the mind. Use the design philosophy created and the instructions below to craft a masterpiece, embodying all aspects of the philosophy with expert craftsmanship.
+- 所有必需文字逐字核对，没有错字、漏字、乱码或占位符
+- 画布尺寸和格式符合要求，文件可以打开
+- 没有文字越界、重叠、裁切或不可读的低对比区域
+- 字体的实际字形与文案语言匹配，回退栈中的每个字符都可显示
+- Logo、图片、图标和装饰没有变形或错误缩放
+- 与 brief 的受众、品牌和使用场景一致
 
-**IMPORTANT**: For any type of content, even if the user requests something for a movie/game/book, the approach should still be sophisticated. Never lose sight of the idea that this should be art, not something that's cartoony or amateur.
+视觉判断需要查看实际图像或 PDF 渲染页；检查命令通过不等于构图合格。
 
-To create museum or magazine quality work, use the design philosophy as the foundation. Create one single page, highly visual, design-forward PDF or PNG output (unless asked for more pages). Generally use repeating patterns and perfect shapes. Treat the abstract philosophical design as if it were a scientific bible, borrowing the visual language of systematic observation—dense accumulation of marks, repeated elements, or layered patterns that build meaning through patient repetition and reward sustained viewing. Add sparse, clinical typography and systematic reference markers that suggest this could be a diagram from an imaginary discipline, treating the invisible subject with the same reverence typically reserved for documenting observable phenomena. Anchor the piece with simple phrase(s) or details positioned subtly, using a limited color palette that feels intentional and cohesive. Embrace the paradox of using analytical visual language to express ideas about human experience: the result should feel like an artifact that proves something ephemeral can be studied, mapped, and understood through careful attention. This is true art. 
+## 7. 迭代
 
-**Text as a contextual element**: Text is always minimal and visual-first, but let context guide whether that means whisper-quiet labels or bold typographic gestures. A punk venue poster might have larger, more aggressive type than a minimalist ceramics studio identity. Most of the time, font should be thin. All use of fonts must be design-forward and prioritize visual communication. Regardless of text scale, nothing falls off the page and nothing overlaps. Every element must be contained within the canvas boundaries with proper margins. Check carefully that all text, graphics, and visual elements have breathing room and clear separation. This is non-negotiable for professional execution. **IMPORTANT: Use different fonts if writing text. Search the `./canvas-fonts` directory. Regardless of approach, sophistication is non-negotiable.**
+以渲染结果为依据修改，而不是继续堆叠元素。优先修：
 
-Download and use whatever fonts are needed to make this a reality. **Prefer the bundled `canvas-fonts/` library (29 OFL-licensed families; index in `canvas-fonts/INDEX.md`)** — it is already on disk and licensed for redistribution. Only download an outside font when the bundled set genuinely cannot express the idea, and keep its license file beside it: shipping a font binary without its license is not acceptable. Get creative by making the typography actually part of the art itself -- if the art is abstract, bring the font onto the canvas, not typeset digitally.
+1. 必需信息缺失或错误
+2. 可读性和边界问题
+3. 层级、视觉重心和留白
+4. 细节质感与一致性
 
-To push boundaries, follow design instinct/intuition while using the philosophy as a guiding principle. Embrace ultimate design freedom and choice. Push aesthetics and design to the frontier. 
+每次修改后重新查看受影响区域。没有明确收益时停止加装饰；不要为了“看起来更用力”引入无关效果。
 
-**CRITICAL**: To achieve human-crafted quality (not AI-generated), create work that looks like it took countless hours. Make it appear as though someone at the absolute top of their field labored over every detail with painstaking care. Ensure the composition, spacing, color choices, typography - everything screams expert-level craftsmanship. Double-check that nothing overlaps, formatting is flawless, every detail perfect. Create something that could be shown to people to prove expertise and rank as undeniably impressive.
+## 反模式
 
-Output the final result as a single, downloadable .pdf or .png file, alongside the design philosophy used as a .md file.
-
----
-
-## FINAL STEP
-
-**IMPORTANT**: The user ALREADY said "It isn't perfect enough. It must be pristine, a masterpiece if craftsmanship, as if it were about to be displayed in a museum."
-
-**CRITICAL**: To refine the work, avoid adding more graphics; instead refine what has been created and make it extremely crisp, respecting the design philosophy and the principles of minimalism entirely. Rather than adding a fun filter or refactoring a font, consider how to make the existing composition more cohesive with the art. If the instinct is to call a new function or draw a new shape, STOP and instead ask: "How can I make what's already here more of a piece of art?"
-
-Take a second pass. Go back to the code and refine/polish further to make this a philosophically designed masterpiece.
-
-## MULTI-PAGE OPTION
-
-To create additional pages when requested, create more creative pages along the same lines as the design philosophy but distinctly different as well. Bundle those pages in the same .pdf or many .pngs. Treat the first page as just a single page in a whole coffee table book waiting to be filled. Make the next pages unique twists and memories of the original. Have them almost tell a story in a very tasteful way. Exercise full creative freedom.
+| 反模式 | 后果 |
+|---|---|
+| 虚构“用户已经说过”的审美评价 | 把模板假设当成需求，偏离真实 brief |
+| 强制抽象、少字、单一风格 | 活动海报可能丢掉日期、地点和主办方 |
+| 只因为字体文件存在就假定支持中文 | 成品出现豆腐块或错误字形 |
+| 只看代码不看渲染 | 越界、重叠、裁切和低对比无法被发现 |
+| 固定输出 md/pdf/png 和长篇宣言 | 增加交付噪音，掩盖真正的验收缺口 |
+| 发现越界后继续加元素 | 问题叠加，返工成本更高 |
 
 <!-- provenance:start -->
-> 创作归属：第三方引入。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#canvas-design)。
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#canvas-design)。
 <!-- provenance:end -->

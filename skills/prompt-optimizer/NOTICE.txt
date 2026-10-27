@@ -1,0 +1,16 @@
+prompt-optimizer
+
+Method reference:
+https://github.com/getsentry/skills/tree/d12f250460ffd961f549dbebf7eeb0cf4afd4c2e/skills/prompt-optimizer
+
+Copyright 2025 Functional Software, Inc. dba Sentry
+Licensed under the Apache License, Version 2.0; see LICENSE.txt.
+
+Modified and independently extended by agent-skills contributors, 2026:
+- Rewritten workflow and Chinese guidance.
+- Added trust-boundary, tool-authorization and prompt-injection controls.
+- Added prompt audit, eval validation and recorded-result comparison tools.
+- Added local fixtures, tests and maintenance documentation.
+
+No upstream scripts are included. This package is not affiliated with,
+endorsed by, or certified by Sentry.

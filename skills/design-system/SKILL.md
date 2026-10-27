@@ -72,6 +72,15 @@ node scripts/validate-tokens.cjs --dir src/
 | States & Variants | `references/states-and-variants.md` |
 | Tailwind Integration | `references/tailwind-integration.md` |
 
+### Slide References
+
+| Topic | File |
+|-------|------|
+| HTML template | `references/slides-html-template.md` |
+| Layout patterns | `references/slides-layout-patterns.md` |
+| Copywriting formulas | `references/slides-copywriting-formulas.md` |
+| Deck strategies | `references/slides-strategies.md` |
+
 ## Component Spec Pattern
 
 | Property | Default | Hover | Active | Disabled |

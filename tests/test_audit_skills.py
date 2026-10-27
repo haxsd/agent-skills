@@ -80,6 +80,22 @@ class AuditTests(unittest.TestCase):
             self.assertEqual("hint", unresolved[0]["level"])
             self.assertFalse(any(item["level"] == "error" for item in findings))
 
+    def test_json_path_is_not_truncated_to_js(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            catalog = self.fixture(root)
+            references = root / "skills/example/references"
+            references.mkdir()
+            (references / "schema.json").write_text("{}\n", encoding="utf-8")
+            path = root / "skills/example/SKILL.md"
+            with path.open("a", encoding="utf-8") as handle:
+                handle.write("Validate `references/schema.json` before delivery.\n")
+            findings = audit.inspect(root, catalog)["findings"]
+            messages = [item["message"] for item in findings
+                        if item["code"] == "unresolved-path-in-entrypoint"]
+            self.assertNotIn("references/schema.js", messages)
+            self.assertNotIn("references/schema.json", messages)
+
     def test_duplicate_detection_is_cross_skill_and_line_ending_independent(self):
         with tempfile.TemporaryDirectory() as raw:
             root = Path(raw)

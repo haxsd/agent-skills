@@ -23,7 +23,7 @@ Design banners across social, ads, web, and print formats. Generates multiple ar
 
 ## Prerequisites
 
-**Python:** This skill uses Python scripts. On Windows, use `python` instead of `python3` (e.g., `python scripts/search.py` instead of `python3 scripts/search.py`).
+**Python:** This skill uses Python scripts from external skills. On Windows, use `python` instead of `python3` (e.g., `python ai-artist/scripts/search.py` instead of `python3 ai-artist/scripts/search.py`).
 
 ## Workflow
 
@@ -92,7 +92,7 @@ For each art direction option:
    **Aspect ratios:** `1:1`, `16:9`, `9:16`, `3:4`, `4:3`, `2:3`, `3:2`
    Match to platform - e.g., Twitter header = `3:1` (use `3:2` closest), Instagram story = `9:16`
 
-   **Pro model prompt tips** (see `ai-artist` references/nano-banana-pro-examples.md):
+   **Pro model prompt tips** (see `ai-artist/references/nano-banana-pro-examples.md`):
    - Be descriptive: style, lighting, mood, composition, color palette
    - Include art direction: "minimalist flat design", "cyberpunk neon", "editorial photography"
    - Specify no-text: "no text, no letters, no words" (text overlaid in HTML step)

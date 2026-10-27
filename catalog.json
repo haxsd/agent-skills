@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-16",
-  "baselineCommit": "d79b0c11b3dd1c89a3c39e596c8cb62ccc938f07",
-  "scope": "36 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查：修正账本路径与检查上限描述、消除等待规则重复、补齐字体许可与字体索引。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
+  "reviewedAt": "2026-10-27",
+  "baselineCommit": "f4d28cf7c0ff98f38793060a8511f4c05b71512b",
+  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -28,6 +28,10 @@
       "id": "writing-content",
       "title": "写作与内容"
     },
+  {
+    "id": "documents",
+    "title": "文档与办公"
+  },
     {
       "id": "knowledge-security",
       "title": "知识图谱与安全研究"
@@ -47,19 +51,19 @@
       "category": "requirements-planning",
       "state": "active",
       "value": "medium",
-      "readiness": "conflicting",
-      "action": "merge",
+      "readiness": "conditional",
+      "action": "retain",
       "priority": "P1",
-      "summary": "先读项目再识别需求缺口，与 brainstorming 统一成一个按复杂度分流的入口。",
+      "summary": "统一需求入口已吸收 brainstorming 与追问规则，按复杂度分流而不重复确认。",
       "uniqueValue": "结合现有代码定位范围、避免向用户询问可自行查明的信息，有实际帮助；内容短，适合作为共用的需求澄清参考。",
       "issues": [
         "追问技巧已内联；归档技能 ask-questions-if-underspecified 仅作维护参考，默认安装不可发现。",
-        "中大型修改固定等待确认，与已有授权下持续执行的工作方式冲突。",
-        "在执行任何命令之前要求浏览项目和阅读代码，字面顺序自相矛盾。"
+        "架构路径仍可能在方案和规格阶段连续等待确认；正文已加入明确授权下继续推进的例外，真实触发仍需验收。",
+        "有界任务与架构任务的边界依赖判断，跨模块重构时可能低估影响范围。"
       ],
       "improvements": [
-        "将澄清规则和验收标准并入统一需求入口；明确只有影响结果的必需信息缺失才等待。",
-        "保留简单任务直接执行、复杂任务提供可审阅方案的分流。"
+        "已把只读调查与修改前确认分开；已有授权时列假设继续，不再重复等待。",
+        "已明确只有范围、验收或高风险取舍不明时才暂停，并保留独立调查并行推进。"
       ],
       "mergeWith": [
         "brainstorming",
@@ -99,7 +103,7 @@
       "improvements": [
         "分流、方案比较与规格自检已迁入 requirement-understanding（references/architecture-design.md、references/spec-reviewer-prompt.md）。",
         "HARD-GATE 与固定审批已移除；视觉辅助脚本保留归档作参考。",
-        "2026-10-16 复核：spike（可行性验证）路径与「视觉歧义才给线框图」的判断规则未迁入现役技能，是本项仍待处理的两处缺口。"
+        "spike（可行性验证）路径和“只有图形比文字更清楚时才提供视觉选项”的规则已在 requirement-understanding 现行入口落地；归档件不再承担默认触发。"
       ],
       "mergeWith": [
         "requirement-understanding",
@@ -126,32 +130,35 @@
       "state": "active",
       "value": "medium",
       "readiness": "conditional",
-      "action": "upgrade",
+      "action": "retain",
       "priority": "P1",
-      "summary": "复杂任务的接口与验收规划值得保留，去掉预先写全实现代码的要求。",
-      "uniqueValue": "全局约束、任务输入输出接口、规格覆盖检查，能减少多任务执行中的签名和类型漂移。",
+      "summary": "按可独立验收的交付物拆计划；只写关键接口和难点示例，按项目规则选择落盘位置，已有执行授权直接沿用。",
+      "uniqueValue": "任务边界、接口契约、验证证据和规格覆盖检查，能减少多任务执行中的签名漂移和上下文丢失；计划不会替代真实实现与运行验证。",
       "issues": [
-        "每个代码步骤必须提供完整实际代码，规划阶段容易重复实现并固化尚未验证的方案。",
-        "固定 2–5 分钟步骤、测试先行和逐步提交并不适用于所有任务。",
-        "最后再次要求选择执行方式，可能重复用户已有指令。"
+        "计划质量仍依赖执行者读取仓库事实；没有规格、验收标准或可运行测试面时，验证设计会变弱。",
+        "对话内计划适合有界任务，跨会话、多代理和需要恢复的长任务才值得单独落盘。",
+        "计划只定义实现和证据，不能替代执行阶段的实际 diff、测试和构建结果。"
       ],
       "improvements": [
-        "计划写目标、文件范围、依赖、接口和验收，代码示例只覆盖难点。",
-        "按任务复杂度决定是否落盘；保留用户已选执行方式，避免重复确认。"
+        "已移除每个步骤预写完整实现、固定 2–5 分钟粒度和强制逐任务提交。",
+        "代码示例只用于接口、算法、并发、迁移或现有模式不足的难点，其余写文件、行为、约束和验收。",
+        "计划落盘遵守 AGENTS、项目惯例和忽略规则；没有允许路径时留在对话或已忽略临时目录。",
+        "用户已选择执行方式时不再重复询问；任务拆分和验证只使用仓库可核实事实。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "多模块任务的计划能发现接口不一致。",
-        "小配置修改不生成完整实施计划或样板测试。"
+        "多模块任务的计划能发现接口不一致，并为每个交付物列出可观察验证。",
+        "小配置修改不生成完整实施计划或样板测试。",
+        "本仓执行计划不会创建公开树禁止的 docs/plans 目录。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Every step must contain the actual content"
+          "text": "任务边界按“可独立验收的交付物”划分"
         },
         {
           "file": "SKILL.md",
-          "text": "**Interfaces:**"
+          "text": "代码片段只用于消除真正的实现歧义"
         }
       ]
     },
@@ -235,18 +242,19 @@
       "state": "active",
       "value": "high",
       "readiness": "conditional",
-      "action": "upgrade",
+      "action": "retain",
       "priority": "P1",
-      "summary": "已成功整合两种并行情形，但必须把 Cursor 专用角色改成能力适配。",
-      "uniqueValue": "区分独立任务并行和同一问题多方案探索，强调文件归属、隔离、成功判据与整合证据。",
+      "summary": "按宿主能力选择真实并发、隔离试验或顺序执行；以写入归属、成功判据和实际 diff 整合结果。",
+      "uniqueValue": "能力探测、写入归属矩阵、隔离降级、多方案比较、成果保留和整合后验证，避免把批量排队或共享目录误称为并行。",
       "issues": [
-        "generalPurpose 与 best-of-n-runner 是特定宿主角色，不能默认所有平台具备。",
-        "同一条消息才能并发的说法依赖运行时，并不是一般性规则。",
-        "多方案模式默认合并胜者并清理其余分支，缺少成果保留和授权边界。"
+        "宿主是否支持子代理、真实并发、隔离和清理，必须由当前工具 schema 或实际调度证明。",
+        "没有隔离时不能并行写同一工作树；只能只读并行、独立副本或顺序试验。",
+        "多方案胜负可能包含主观判断；技能要求预声明判据并报告权衡，不把它包装成自动 benchmark。"
       ],
       "improvements": [
-        "保留一个入口，把角色、并发数量、隔离实现放进平台适配层。",
-        "区分共享目录分工与真正隔离的方案试验；整合和清理遵守用户已授权范围。"
+        "已移除 generalPurpose、best-of-n-runner 等宿主专用角色名和固定调用语法。",
+        "已删除“同一条消息必然并发”的假设；要求报告实际调度模式，能力不足时降级。",
+        "增加写入归属矩阵、四种隔离顺序、整合后重新验证和失败/非胜出成果保留。"
       ],
       "mergeWith": [
         "best-of-n-solving",
@@ -254,16 +262,17 @@
       ],
       "scenarios": [
         "独立只读任务并行，重叠写任务先分配归属。",
-        "不支持专用 runner 的环境选择原生子代理和隔离目录，或退回顺序探索。"
+        "不支持专用 runner 的环境使用宿主原生子代理、独立副本或顺序探索，并明确实际并发模式。",
+        "多方案试验保留所有产物，清理和分支删除需要明确授权。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "best-of-n-runner"
+          "text": "并行是资源换时间的策略"
         },
         {
           "file": "SKILL.md",
-          "text": "所有派发必须写在同一条消息里"
+          "text": "同一路径只允许一个写入者"
         }
       ]
     },
@@ -275,13 +284,16 @@
       "readiness": "runnable",
       "action": "retain",
       "priority": "P2",
-      "summary": "已升级并实测：GPT 主代理保持当前模型，DeepSeek 默认承接独立工作块，可在复制目录读写授权文件并执行命名检查。",
-      "uniqueValue": "标准库外部 API 工具循环避开宿主模型白名单；独立文件副本、精确写权限、固定检查 argv、DPAPI 凭据保护与真实操作日志构成可验收的执行助手。",
+      "summary": "DeepSeek 委派的首选有界路线：仅在用户明确请求或选中本技能时，保持 GPT 主代理并让 API worker 在复制目录读写授权文件、执行命名检查。",
+      "uniqueValue": "标准库外部 API 工具循环避开宿主模型白名单；独立文件副本、精确写权限、固定检查 argv、DPAPI 凭据保护与真实操作日志构成可验收的执行助手。与完整 CLI 进程路线互斥。",
       "issues": [
+        "任务体量大本身不授权把上下文发给外部模型；未请求 DeepSeek 时直接在主代理完成。",
+        "需要完整 Codex CLI 进程、任意本机工具链或独立 worktree 时，应显式改用 deepseek-subagents，而不是给 API worker 扩大权限。",
         "命名检查进程不是 OS 沙箱，只适合已授权的可信项目命令；文件工具边界不能限制检查代码的所有宿主访问。",
         "多轮长上下文可能触及预算，需要任务级配置；连通和局部执行实测不证明整项任务节省 GPT 额度或加速。"
       ],
       "improvements": [
+        "保持两套 DeepSeek 路线的互斥触发和权限模型；同一工作块只选一套。",
         "用真实工作块比较派发、验收与直接执行的总成本及耗时。",
         "滚动别名升级时复核返回型号；复杂任务显式调整预算与 thinking。"
       ],
@@ -349,17 +361,16 @@
       "state": "active",
       "value": "high",
       "readiness": "conditional",
-      "action": "upgrade",
+      "action": "retain",
       "priority": "P1",
-      "summary": "根因追踪和基于条件的等待有价值，需要缩短入口并修诊断输出示例。",
+      "summary": "根因追踪和基于条件的等待入口；诊断示例已改为只显示变量名，不再泄露值。",
       "uniqueValue": "复现、边界定位、单一假设、最小验证；附带 root-cause-tracing、condition-based-waiting 和 polluter 排查工具。",
       "issues": [
-        "示例 env | grep IDENTITY 会输出变量值，与 env-doctor 的键名原则不一致。",
         "每种故障都走四阶段、读完整参考、三次失败必讨论架构，边界过硬。",
         "95% 无根因案例的断言未附测量证据；多段反合理化表重复。"
       ],
       "improvements": [
-        "诊断日志仅输出脱敏后的存在性、长度或状态。",
+        "诊断示例仅输出变量名或 SET/UNSET，不打印环境值；补真实多服务案例后再扩大证据。",
         "入口保留证据→假设→最小实验→修复；复杂并发、跨系统和测试污染按需读参考。",
         "重复失败时按证据重估假设，不固定归因于架构。"
       ],
@@ -371,7 +382,7 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "env | grep IDENTITY"
+          "text": "List variable names or presence only"
         },
         {
           "file": "SKILL.md",
@@ -384,19 +395,18 @@
       "category": "quality-debugging",
       "state": "active",
       "value": "medium",
-      "readiness": "conflicting",
-      "action": "upgrade",
+      "readiness": "conditional",
+      "action": "retain",
       "priority": "P1",
-      "summary": "保留能证明回归的测试设计，取消无条件删除已有实现的规定。",
-      "uniqueValue": "先定义可观察行为、确认测试能抓住错误、避免只验证 mock；writing-good-tests 参考值得保留。",
+      "summary": "行为变更优先测试先行；已有代码、事故修复、文档/配置和一次性探索按风险选择可验证路径，不删除用户已有成果。",
+      "uniqueValue": "区分 test-first 与有证据的 test-after，要求测试先抓住真实失败；保留行为断言、独立期望值、mock 边界和变异检查。",
       "issues": [
-        "未先写失败测试就 Delete code，并对文档/配置等小改动要求额外豁免批准。",
-        "每个新函数必须测试和全套输出零警告，并不等同于行为覆盖。",
-        "大段重复禁令把测试方法变成适用于所有任务的纪律入口。"
+        "test-after 只有在能证明旧行为失败时才算强证据；无法回退或变异的场景仍需如实标注限制。",
+        "外部系统、视觉与硬件行为可能只能做集成或人工验证；自动化测试不能覆盖全部风险。"
       ],
       "improvements": [
-        "新业务行为和 bug 回归优先测试先行，已有代码用最小回归测试验证。",
-        "按风险选择单元、集成或人工验证，不删除用户或其他任务的实现。"
+        "已改为风险分级：新行为/ bug 优先 RED，旧代码可先 characterization 或说明 test-after。",
+        "已禁止删除用户已有工作；只回退自己未验证的临时实现，并记录验证顺序。"
       ],
       "mergeWith": [],
       "scenarios": [
@@ -406,11 +416,11 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Write code before the test? Delete it."
+          "text": "行为变更优先测试先行"
         },
         {
           "file": "SKILL.md",
-          "text": "Every new function/method has a test"
+          "text": "Do not delete existing user work to manufacture a TDD story."
         }
       ]
     },
@@ -563,35 +573,38 @@
       "state": "active",
       "value": "high",
       "readiness": "conditional",
-      "action": "upgrade",
+      "action": "retain",
       "priority": "P1",
-      "summary": "保留交付与成果保护，整合精简后的验证规则。",
-      "uniqueValue": "区分命名分支、detached HEAD 和外部管理 worktree；PR 后保留工作区；拒绝强制删除未提交成果。",
+      "summary": "复用同状态验证证据，按已有授权完成合并、PR 或保留；正确区分 submodule、linked worktree 和 detached HEAD。",
+      "uniqueValue": "验证证据绑定、只补失效检查、宿主归属判断、submodule guard、PR 后保留工作区和未提交成果保护。",
       "issues": [
-        "无条件重新运行全量测试并再次展示固定菜单，忽略已选交付方式。",
-        "以路径位于 .worktrees/worktrees 推断归属，目录名不能证明由谁创建。",
-        "没有 using-git-worktrees 中的 submodule 保护，GIT_DIR/GIT_COMMON 判断可能误分。"
+        "worktree 归属依赖宿主管理记录或用户明确说明；没有权威证据时只能保留，不能自动清理。",
+        "交付方式未指定时仍需一次选择；合并、推送、删除和清理都是有外部副作用的动作。",
+        "验证证据只能证明实际运行过的检查；不可运行的集成门禁必须作为缺口报告。"
       ],
       "improvements": [
-        "沿用已授权的 PR/交付选择；只补缺少或已失效的验证。",
-        "使用宿主 attachment 或明确创建记录判断 worktree 归属；加入 submodule 判别。",
-        "破坏性操作保留成果检查和真实授权，提交描述围绕最终改动。"
+        "已改为复用同一代码状态的有效证据，只补跑受变更影响的检查，不再无条件重跑全量测试。",
+        "已读取用户已选的 PR/合并/保留方式，避免重复菜单。",
+        "worktree 归属改用宿主 attachment、workspace 清单或明确创建记录；路径名不再作为所有权证据。",
+        "增加 submodule guard、清理前未提交文件检查、禁止自动 force 和更完整的交付报告。"
       ],
       "mergeWith": [
         "verification-before-completion"
       ],
       "scenarios": [
         "已有创建 PR 指令时直接准备交付，无重复菜单。",
-        "有未提交文件的工作区在清理失败后完整保留。"
+        "有未提交文件的工作区在清理失败后完整保留。",
+        "submodule 不被误判为 linked worktree。",
+        "状态未变的测试证据被复用，状态变化后只补受影响检查。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "created this worktree — we own cleanup:"
+          "text": "交付的目标不是“再跑一遍所有测试、再问一遍菜单”"
         },
         {
           "file": "SKILL.md",
-          "text": "Present the menu exactly"
+          "text": "路径所在目录、目录名和当前分支都不足以证明 worktree 由谁创建"
         }
       ]
     },
@@ -600,19 +613,19 @@
       "category": "design",
       "state": "active",
       "value": "high",
-      "readiness": "incomplete",
-      "action": "upgrade",
-      "priority": "P0",
-      "summary": "本仓库最值得投入的资产之一：保留本地检索数据，补齐维护链和失效引用。",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "本地检索数据与维护链已闭合：标准库 BM25、字体/图标刷新、快照和相关性门禁可离线复现；入口仍需按需加载。",
       "uniqueValue": "标准库 BM25、产品/配色/字体/图标/UX/22 技术栈数据、检索契约、MASTER/page overrides、相关性和数据回归场景。",
       "issues": [
         "正文已去掉失效的 Quick Reference § 引用，改为 Common Rules + scripts/search.py；编号 Quick Reference 章节仍未收录。",
-        "catalog refresh 与 relevance evaluator 测试依赖未收录的 refresh-google-fonts.py、refresh-icon-catalog.py、evaluate-relevance.py。",
-        "baseline Windows 检出将数据改为 CRLF，4 个字节哈希校验失败；本轮通过 LF 属性修复。",
-        "入口长且广，移动端与 web/desktop 规则仍需进一步分流。"
+        "真实上游字体/图标刷新未在本轮调用；离线夹具只证明校验、确定性和失败关闭，不证明当前上游数据无变化。",
+        "入口长且广，移动端与 web/desktop 规则仍需进一步分流；硬编码宿主路径已移除。"
       ],
       "improvements": [
-        "补回真实上游维护脚本或明确划分运行包和维护包；不要删除失败测试来制造通过。",
+        "维护脚本已补齐；定期在固定输入上刷新并人工审查 family-set diff，不自动提升候选。",
+        "相关性指纹已按 LF 归一化，Windows/POSIX 检出不再因换行差异误报。",
         "恢复短 checklist 或改成实际存在的章节链接。",
         "将固定栈和格式细节拆成按需参考；数据更新保留来源、真实验证日期和相关性门槛。"
       ],
@@ -625,7 +638,7 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Curation note"
+          "text": "Routing Boundary"
         },
         {
           "file": "scripts/tests/test_catalog_refresh.py",
@@ -678,22 +691,21 @@
       "state": "active",
       "value": "high",
       "readiness": "conditional",
-      "action": "upgrade",
+      "action": "retain",
       "priority": "P1",
-      "summary": "保留 token 与组件规范；把幻灯片制作迁到 design 的单一模块。",
+      "summary": "Token 体系与幻灯片制作的单一归属；design 只负责路由视觉资产请求。",
       "uniqueValue": "primitive→semantic→component 模型、token 生成/校验脚本、starter、组件状态参考，以及 slide 结构化策略数据。",
       "issues": [
-        "token 职责与 slide 制作混在入口，和 design 的 slides 模块重叠。",
+        "Token 架构与幻灯片制作仍在同一入口，但已分节管理；深度演示任务仍需项目本地 token 文件。",
         "营销向 slide 约束已弱化为 guidance，不再写成对所有 slides 的硬性 MUST。",
         "assets/css/slide-animations.css、示例 pitch HTML 已标明为项目可选产物，本仓库不提供。",
         "token 示例禁止原始 hex，而 Chart.js 示例直接硬编码配色，契约不一致。"
       ],
       "improvements": [
-        "token 入口只处理生成、映射和一致性；slide 数据与脚本收敛到单一实现，先检查引用再移动。",
-        "对图表库、对齐和目标保留项目选择；补 token 引用循环、缺失 alias 和零值测试。"
+        "幻灯片参考资料已从 design 迁入，形成单一来源。",
+        "Token 与 slide 分节维护；后续补充引用循环、缺失 alias 和零值测试。"
       ],
       "mergeWith": [
-        "design",
         "slides"
       ],
       "scenarios": [
@@ -703,7 +715,7 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Center align content"
+          "text": "Slide References"
         },
         {
           "file": "scripts/generate-tokens.cjs",
@@ -717,22 +729,19 @@
       "state": "active",
       "value": "medium",
       "readiness": "conditional",
-      "action": "upgrade",
+      "action": "retain",
       "priority": "P1",
       "summary": "缩窄为 shadcn/Tailwind 实现，移除海报和艺术创作职责。",
       "uniqueValue": "可访问组件组合、Tailwind 响应式与主题参考、组件添加和配置生成脚本。",
       "issues": [
-        "poster/canvas 触发与 canvas-design 重叠，一般 UI 知识与 ui-ux-pro-max 重叠。",
-        "入口介绍 CSS-first @theme/Vite 方案，配置生成器仍输出 darkMode/content/theme JS 配置，需要按项目版本分流。",
+        "入口介绍 CSS-first @theme/Vite 方案，配置生成器仍输出 legacy JS 配置，需要按 Tailwind 主版本分流。",
         "多个代码示例和工具路径假设 React/特定包管理器，应按实际项目调整。"
       ],
       "improvements": [
-        "描述只覆盖 shadcn/Tailwind 具体实现；设计决策按需用 ui-ux-pro-max。",
-        "检测 Tailwind 主版本和现有组件，分别生成合适配置；艺术参考收敛到 canvas-design。"
+        "移除 canvas/poster 触发与重复参考，职责边界指向 design、canvas-design 和 ui-ux-pro-max。",
+        "检测 Tailwind 主版本和现有组件，再选择配置生成方式。"
       ],
-      "mergeWith": [
-        "canvas-design"
-      ],
+      "mergeWith": [],
       "scenarios": [
         "现有 shadcn 项目只添加所需组件，保留主题和 aliases。",
         "不同 Tailwind 配置模式的生成结果能被对应项目实际编译。"
@@ -740,7 +749,7 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Generating visual designs, posters"
+          "text": "Implement accessible web interfaces"
         },
         {
           "file": "scripts/tailwind_config_gen.py",
@@ -753,22 +762,20 @@
       "category": "design",
       "state": "active",
       "value": "high",
-      "readiness": "incomplete",
-      "action": "upgrade",
-      "priority": "P0",
-      "summary": "收敛为 logo、CIP、icon、banner、HTML slides 的视觉资产入口。",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "收敛为 logo、CIP、banner、icon、社交图片的视觉资产入口；slides 已迁出。",
       "uniqueValue": "Logo/CIP 的 BM25 数据、Gemini 生成器、CIP HTML 输出、SVG 图标和营销资产参考；存在可复用工具资产。",
       "issues": [
-        "brand/tokens/UI/海报同时抢占另外五个设计技能的触发。",
-        "banner/social 依赖 frontend-design、ai-artist、ai-multimodal、chrome-devtools、assets-organizing 等，本仓库未提供完整链。",
-        "~/.claude 固定路径、AskUserQuestion 和 /ckm 命令依赖特定宿主。",
-        "Logo 永远白底、随机挑选设计技能和固定数量创意，可能违背用户需求。",
+        "图像生成、浏览器预览和截图导出仍取决于宿主能力；本仓库不提供这些运行时。",
+        "Logo/CIP 的生成器依赖外部模型和 API 配置；没有凭据时只能完成检索与 brief。",
         "Gemini model IDs 与广告平台规则需在实际执行时核实，不能把仓库快照当实时可用性证明。"
       ],
       "improvements": [
-        "缩短为视觉资产路由，brand/tokens/UI 直接转向各自技能，slides 只保留一套来源。",
-        "图像与截图改成当前宿主能力适配；缺少工具先说明能力边界，避免固定技能名硬依赖。",
-        "模型可配置；尊重透明背景、已有品牌和用户指定数量。"
+        "slides 文档与流程统一迁入 design-system，design 不再复制同一能力。",
+        "移除 ~/.claude 固定路径、AskUserQuestion 和 /ckm 命令依赖，改为技能根目录与宿主能力适配。",
+        "尊重透明背景、已有品牌和用户指定数量；无法生成时明确报告能力缺口。"
       ],
       "mergeWith": [
         "banner-design",
@@ -777,16 +784,17 @@
       "scenarios": [
         "离线 Logo/CIP search 能输出相关 brief。",
         "透明 logo 请求保持透明；无 Gemini key 时不声称图像已生成。",
-        "HTML slides 只有一个创建流程并通过实际视觉检查。"
+        "幻灯片请求路由到 design-system，不在 design 内启动第二套创建流程。",
+        "宿主没有截图工具时明确报告，不把未渲染的 HTML 当成最终图片。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "ALWAYS** generate output logo images with white background"
+          "text": "Visual asset production for logos"
         },
         {
           "file": "SKILL.md",
-          "text": "randomly invoke"
+          "text": "Presentations, pitch decks"
         }
       ]
     },
@@ -796,35 +804,35 @@
       "state": "active",
       "value": "medium",
       "readiness": "conditional",
-      "action": "upgrade",
+      "action": "retain",
       "priority": "P2",
-      "summary": "保留静态艺术构图和字体资产，取消虚构用户意见与固定审美限制。",
-      "uniqueValue": "视觉层次、间距、概念到构图的转化、二次精修流程及带字体许可文本的本地字体库。",
+      "summary": "以 brief 为先的静态视觉生产：保留本地字体资产和创作自由，同时用字形覆盖、必需文案和渲染检查约束成品。",
+      "uniqueValue": "29 个本地 OFL 字体家族、标准库 TTF/OTF/TTC 字形覆盖检查、渲染后验收清单，以及可伸缩的视觉概念到构图流程。",
       "issues": [
-        "声称用户 ALREADY said 某段审美评价，实际是模板虚构的用户指令。",
-        "把原始输入降格为 subtle foundation、强制抽象和少文本，可能丢失海报必需信息。",
-        "固定输出 md/pdf/png、4–6 段宣言与 museum quality 重复强调，增加成本但缺少验收指标。",
-        "字体库有多项许可文本，但是否满足当前中文项目字形覆盖未验证。"
+        "随包字体以拉丁字形和设计风格为主；中文、日文、韩文和其他文字仍需要经验证的系统字体或用户字体。",
+        "审美质量仍包含主观判断；检查器只能证明 cmap 覆盖，最终构图和可读性必须查看实际渲染。",
+        "外部字体、图片和品牌资产的许可与使用范围仍由当前项目具体确认，不能由字体索引替代。"
       ],
       "improvements": [
-        "先锁定文字、尺寸、格式和品牌要求；风格由任务决定。",
-        "哲学说明改成可选的短设计 brief；视觉复核用边界、对比、字形和必需信息完整性。",
-        "维护字体用途与许可索引，保留原许可文件。",
-        "字体许可索引已建立（canvas-fonts/INDEX.md），IBMPlexSerif 与 InstrumentSerif 缺失的 OFL 文本已按同库既有原文补齐。"
+        "已取消虚构的用户审美评价、强制抽象/少字和固定 4–6 段宣言；风格由 brief 决定。",
+        "已把输出格式、页数、设计 brief 和附加文件改为按用户需求选择，不再固定 md/pdf/png。",
+        "新增标准库 check_font_coverage.py，支持 TTF/OTF/TTC fallback 栈、缺字退出码和 JSON 输出；另有 6 项回归测试。",
+        "新增渲染后验收清单和字体选择参考；字体许可索引保留，中文字形覆盖不再靠假设。"
       ],
       "mergeWith": [],
       "scenarios": [
         "活动海报完整保留日期地点和主办方，不因 minimal text 丢信息。",
-        "中文海报没有缺字，输出尺寸正确，无文字越界。"
+        "中文海报用经验证的 CJK 字体，缺字时检查器返回非零退出码。",
+        "输出尺寸正确，渲染后没有文字越界、重叠或豆腐块。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "The user ALREADY said"
+          "text": "任何非拉丁文字都必须先验证覆盖率"
         },
         {
           "file": "SKILL.md",
-          "text": "it should not constrain creative freedom"
+          "text": "所有必需文字逐字核对"
         }
       ]
     },
@@ -834,21 +842,19 @@
       "state": "active",
       "value": "high",
       "readiness": "external",
-      "action": "upgrade",
-      "priority": "P0",
-      "summary": "知识图谱是独特能力，缩窄触发并改为可复现的外部工具适配。",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "知识图谱专项能力；已锁定上游 v0.9.56，触发收敛到显式图任务/跨文件证据，宿主工具与新鲜度检查明确。",
       "uniqueValue": "AST/语义分离、EXTRACTED/INFERRED/AMBIGUOUS 证据类型、缓存 prompt 归属、增量图完整性与词汇扩展，适合多文件知识导航。",
       "issues": [
-        "任意代码库问题都优先 graphify，普通查找也可能启动重型构图。",
-        "依赖 graphifyy 外部包但未锁定版本；.graphify_version 是技能快照，不是已安装包证明。",
-        "Bash 流程不适配原生 PowerShell；安装含 --break-system-packages。",
-        "Codex 段写 spawn_agent(agent_type=...)、wait_agent(handle)、close_agent，和当前可用工具 schema 不一致。",
-        "已有图查询未先检查源文件是否已变化；部分失败 chunk 可继续产出，报告须标明覆盖缺口。"
+        "依赖外部 graphifyy 包；技能快照锁定 v0.9.56，但 .graphify_version 不是已安装包证明，运行前仍需核对实际版本。",
+        "参考中的安装主流程以 Bash 为参考；Windows 已加显式边界，但仍需在目标宿主实测解释器发现与安装。",
+        "没有端到端的图构建回归测试；失败/截断 chunk 只能作为覆盖缺口报告，不能证明图完整。"
       ],
       "improvements": [
-        "仅在用户要求知识图谱或现有有效图能显著帮助跨文件问题时使用；小查找用原生搜索。",
-        "外部包使用项目环境和明确版本，重型流程做成可测试脚本；平台适配不写死生命周期。",
-        "查询之前检查 freshness，保留未完整抽取的源文件清单和未知 token 使用量。"
+        "触发描述和 fast path 已改为显式图任务或当前图证据；小查找回退原生搜索。",
+        "已移除固定 Agent 工具依赖，改为当前宿主生命周期、受限内联回退或明确报告缺失能力。",
+        "已把 v0.9.56 的提交锁进 UPSTREAM.json；查询前检查 freshness，失败 chunk 不静默当空结果。"
       ],
       "mergeWith": [],
       "scenarios": [
@@ -859,15 +865,15 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "Use for any question"
+          "text": "Do not use for routine symbol lookup"
         },
         {
-          "file": "references/setup-and-detect.md",
-          "text": "--break-system-packages"
+          "file": "UPSTREAM.json",
+          "text": "67f99bd0059dd1bac9e44382907ef9f10098b39f"
         },
         {
           "file": "references/extraction-pipeline.md",
-          "text": "close_agent(handle)"
+          "text": "Host-neutral dispatch rule"
         }
       ]
     },
@@ -877,22 +883,23 @@
       "state": "active",
       "value": "medium",
       "readiness": "external",
-      "action": "upgrade",
-      "priority": "P0",
-      "summary": "保留安全研究路由入口，实际价值取决于独立技能包与工具链。",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "安全研究路由入口已带只读预检脚本，实际价值仍取决于外部技能包与工具链。",
       "uniqueValue": "按任务路由到专项方法、案例证据链、授权 scope 和交付自检；无需把大型技能包复制进本仓库。",
       "issues": [
-        "外部包路径改为 REVERSE_SKILL_ROOT / 常见本地候选解析；未找到时 STOP，不再写死 Administrator 路径。",
+        "预检只检查文件可用性，不能证明外部技能版本兼容、规则内容安全或工具确实可运行。",
         "49 模块/89 入口与工具具备清单仍是历史快照，不能代表现状；正文已标明需动态检查。",
         "依赖的 RULES、路由、建案、bootstrap 和复核均不在本仓库，需外部版本记录。"
       ],
       "improvements": [
-        "通过 REVERSE_SKILL_ROOT 或当前用户位置解析依赖，预检规则/路由脚本后再执行。",
+        "新增 scripts/preflight.py：跨平台解析 REVERSE_SKILL_ROOT/默认候选，输出缺失文件 JSON 和非零退出码。",
         "记录上游仓库、期望版本和本地验证状态；工具状态用 toolkit-map 动态查询。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "外部目录缺失时指出具体依赖，不猜工具可用。",
+        "外部目录缺失时脚本列出 tested 与 missingRequired，不猜工具可用。",
+        "预检通过后再读规则和路由；脚本不安装、不修复、不执行外部包。",
         "离线样本按本地 scope 建案，未授权外部目标不启动网络动作。"
       ],
       "evidence": [
@@ -901,8 +908,8 @@
           "text": "REVERSE_SKILL_ROOT"
         },
         {
-          "file": "SKILL.md",
-          "text": "预检"
+          "file": "scripts/preflight.py",
+          "text": "Read-only preflight"
         }
       ]
     },
@@ -977,18 +984,18 @@
       "state": "active",
       "value": "medium",
       "readiness": "conditional",
-      "action": "upgrade",
-      "priority": "P0",
-      "summary": "通用省上下文规则更适合作为运行规则，平台入口修好路径和 UI 元数据。",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "通用省上下文规则更适合作为运行规则；安装后的共享文件路径和共享缺失时的最小回退已补齐。",
       "uniqueValue": "共享准则单一来源、窄搜索与日志摘要、只更新持续项目变化，适合长期约定。",
       "issues": [
-        "权威规则已改为仓库内 shared/token-efficiency-rules.md，不再写死 Administrator/tools/shared。",
+        "共享文件在源码、Windows 安装和 POSIX 手工布局下各有路径；正文已要求按顺序找一次，缺失时用最小回退。",
         "codex-helpers 四个脚本未收录；正文已改为可选并在缺失时回退原生工具。",
         "上下文固定模板不适用于任意项目；正文已改为缺失则跳过。",
-        "广泛触发几乎所有任务；shared 的一次整改后冻结规则会阻止未来合理维护。"
+        "广泛触发几乎所有任务；技能未被宿主选中时这些规则不会自动生效，这属于宿主规则层问题。"
       ],
       "improvements": [
-        "从技能根或显式配置定位共享文件，辅助脚本不存在时退回原生搜索。",
+        "已补安装/源码/手工布局的共享文件顺序和最小自包含回退。",
         "共用内容作为宿主规则，skill 仅提供项目大型日志/上下文整理的特殊流程。",
         "不把 CSV 等文件类型永久视为噪声；以当前任务范围决定读取。"
       ],
@@ -1000,11 +1007,11 @@
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "shared/token-efficiency-rules.md"
+          "text": "%USERPROFILE%\\tools\\shared\\token-efficiency-rules.md"
         },
         {
           "file": "SKILL.md",
-          "text": "项目辅助脚本（可选）"
+          "text": "最小自包含规则"
         }
       ]
     },
@@ -1174,19 +1181,20 @@
       "category": "design",
       "state": "archived",
       "value": "medium",
-      "readiness": "incomplete",
+      "readiness": "external",
       "action": "archive-retain",
       "priority": "P1",
-      "summary": "保留尺寸与艺术方向参考，流程并入 design，缺依赖时不恢复启用。",
+      "summary": "归档保留尺寸与艺术方向参考；完整流程依赖外部技能，能力由 design 承接，缺依赖时不恢复启用。",
       "uniqueValue": "多平台画布尺寸、safe zone 和 HTML 到 PNG 的交付流程，具有专项参考价值。",
       "issues": [
-        "关键生成与导出依赖缺失：frontend-design、ai-artist、ai-multimodal、chrome-devtools。",
+        "完整流程还依赖未随本仓分发的外部技能 frontend-design、ai-artist、ai-multimodal 与 chrome-devtools。",
         "默认三方案与 Pinterest 调研对单一明确需求增加无关工作。",
         "Meta 文本比例规则是时效性断言；Never expose file paths 会阻碍用户拿到作品。",
-        "banner-sizes-and-styles 与 design 内置参考存在完全重复。"
+        "banner-sizes-and-styles 与 design 的 banner/social 参考高度重叠，但全仓精确重复检查未发现逐字相同文件。"
       ],
       "improvements": [
-        "使用宿主现有图像和截图工具，维护单一尺寸表，执行时核实平台规格。",
+        "外部 ai-artist 路径已明确标注，避免被误认为本仓缺失文件。",
+        "当前由 design 承接视觉路由；如恢复启用，先重新验证外部技能接口、平台规格和宿主图像/截图工具。",
         "交付预览、尺寸与用户可用文件路径，去掉禁止展示路径等无关规则。"
       ],
       "mergeWith": [
@@ -1424,17 +1432,22 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P1",
-      "summary": "Codex CLI 执行型 DeepSeek 子代理，提供清单校验、进程调度与测试。",
-      "uniqueValue": "Codex CLI 执行型 DeepSeek 子代理，提供清单校验、进程调度与测试。",
+      "summary": "显式启用的 Codex CLI 执行型 DeepSeek 子代理，用于需要完整本机工具链、进程级隔离或独立 worktree 的委派。",
+      "uniqueValue": "为独立工作块启动完整 Codex CLI 进程，支持清单校验、进程调度、并行 worktree 和真实终端工具；与常规 API worker 的受限权限模型分开。",
       "issues": [
+        "权限和工具面比 API worker 更大，不能让模型因任务多步骤而隐式选择；已配置 allow_implicit_invocation=false。",
+        "与 deepseek-subagent-orchestration 功能相邻；同一工作块只能选一条路线，避免重复执行和权限混用。",
         "需要本机 Codex CLI、DeepSeek 凭据和账户配置；仓库不包含凭据。"
       ],
       "improvements": [
-        "按实际使用反馈维护，避免扩大自动触发范围。"
+        "保持显式高级路线；常规有界任务优先 API worker。",
+        "按实际进程级任务验证 worktree 隔离、超时清理与失败汇报。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "检查入口与资源完整性，专项运行能力按实际任务验证。"
+        "用户明确要求 Codex CLI DeepSeek 并行 worker 或独立 worktree 时才启用。",
+        "普通多步骤任务没有点名本技能时，不因体量自动走完整 CLI 进程或发送外部上下文。",
+        "与 API worker 不并发处理同一工作块。"
       ],
       "evidence": [
         {
@@ -1451,23 +1464,26 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P1",
-      "summary": "按远程维护的界面规范执行专项设计审查。",
-      "uniqueValue": "按远程维护的界面规范执行专项设计审查。",
+      "summary": "按当前 Web Interface Guidelines 执行专项审查；补审查契约、输出格式和失败边界。",
+      "uniqueValue": "用远程维护的规范做可追溯的界面审查；明确区分确认违规、VERIFY 和越界项。",
       "issues": [
-        "需要联网取得当前规范，来源许可需单独确认；仓库现已公开，仍需注意上游许可。"
+        "需要联网取得当前规范；远程规范未固定版本，历史许可仍需单独确认。",
+        "源码审查不能替代浏览器渲染和交互验证；需要实际界面证据时应转 webapp-testing。"
       ],
       "improvements": [
-        "按实际使用反馈维护，避免扩大自动触发范围。"
+        "新增审查范围、证据、输出和失败边界；联网失败时停止合规结论。",
+        "要求记录抓取日期，并把远程规范与本地启发式检查明确分开。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "检查入口与资源完整性，专项运行能力按实际任务验证。"
+        "联网失败时报告具体 URL 与失败，不编造规则或合规结论。",
+        "对指定文件输出 path:line 证据；不确定项标 VERIFY。",
+        "需要实际渲染验证时转 webapp-testing，而不是只读源码下结论。"
       ],
       "evidence": [
-        {
-          "file": "SKILL.md",
-          "text": "name: web-design-guidelines"
-        }
+        {"file": "SKILL.md", "text": "Review Contract"},
+        {"file": "SKILL.md", "text": "No violations found in the reviewed files"},
+        {"file": "SKILL.md", "text": "If the guideline fetch fails"}
       ]
     },
     {
@@ -1697,6 +1713,71 @@
         {"file": "SKILL.md", "text": "name: waiting-and-async"},
         {"file": "SKILL.md", "text": "## 本机实测（DSH，2026-10-16）"},
         {"file": "references/repro.md", "text": "先睡一个猜出来的时长"}
+      ]
+    },
+    {
+      "name": "prompt-optimizer",
+      "category": "authoring-efficiency",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "把可复用 prompt 改成可验证的提示词包，用对照用例、留出题和显式信任边界决定是否保留改动。",
+      "uniqueValue": "补上提示词行为优化的空白：契约分层、工具/注入边界、候选对照、blocking 回归、静态审计与 eval 记录校验，不依赖付费 API。",
+      "issues": [
+        "本轮只完成静态审计和离线夹具测试，未运行真实模型行为或 provider 迁移评估。",
+        "`prompt_audit.py` 是启发式只读检查，不能证明 prompt 好、注入防护有效或秘密已彻底清除。",
+        "provider 的模型快照、工具参数和 reasoning 行为会漂移，正文明确要求查当前官方文档而不是内置过期常量。"
+      ],
+      "improvements": [
+        "有目标模型和真实失败样本后，补 baseline/candidate 成对测试与冻结 held-out 结果。",
+        "按实际误报补充 lint 规则；不把静态无命中升级为质量或安全认证。",
+        "新增 provider 适配时记录核验日期、模型快照和未覆盖能力。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "矛盾的 always/never 规则被改成明确条件，并给出可执行行为检查。",
+        "不可信 issue 文本中的注入指令不被当系统指令，工具权限仍由宿主执行。",
+        "候选改善开发集但导致 blocking 回归时，比较器输出 blocked，不自动宣布胜出。",
+        "没有运行模型时明确写未运行，不把静态 lint 当行为认证。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: prompt-optimizer"},
+        {"file": "scripts/prompt_audit.py", "text": "def compare_runs"},
+        {"file": "EVAL.md", "text": "尚未在本轮真实模型会话中执行"},
+        {"file": "UPSTREAM.json", "text": "d12f250460ffd961f549dbebf7eeb0cf4afd4c2e"}
+      ]
+    },
+    {
+      "name": "pdf-toolkit",
+      "category": "documents",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "独立实现的 PDF 操作工具箱，覆盖检查、提取、转换、表单、创建和页图验证。",
+      "uniqueValue": "不复制受限技能文本；提供多命令 CLI、统一路径与密码边界、写入后重新打开验证，以及表单字段与 widget 双层检查。",
+      "issues": [
+        "OCR、复杂版式转换、数字签名和可靠涂黑不在范围内；需要外部工具时明确报告。",
+        "Python 依赖和 Poppler 渲染器需按项目环境安装；缺失时只执行不需要它们的命令。",
+        "基础 PDF 生成器只支持文本、标题、页码和自定义 TrueType 字体，不替代复杂排版引擎。"
+      ],
+      "improvements": [
+        "按真实文档样本扩充 flattened 表单输出和 OCR 验证。",
+        "增加更多字体覆盖、损坏文件和页面渲染回归样本。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "加密 PDF 在密码缺失时停止，密码不进入日志；合并后页数等于输入页数之和。",
+        "填表后重新打开核对 /V 与 widget 数量，再渲染检查外观。",
+        "扫描件没有文本层时报告 OCR 不在范围内，不伪造提取结果。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "Never overwrite the source"},
+        {"file": "SKILL.md", "text": "Reopen every written PDF"},
+        {"file": "scripts/pdf_tool.py", "text": "AES-256 encryption is unavailable"}
       ]
     }
   ]

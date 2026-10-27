@@ -1,5 +1,7 @@
 # Layout Patterns
 
+Use this reference only from `design-system`, which owns the slide workflow.
+
 25 slide layouts with CSS structures and animation classes.
 
 ## Layout Selection by Use Case

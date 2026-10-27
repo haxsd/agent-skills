@@ -31,12 +31,29 @@ description: 逆向工程 / 渗透测试 / 安全研究技能路由包（reverse
 
 ## 预检（Preflight，任何动作之前）
 
-在读取规则、路由、建案例、跑脚本**之前**，先确认 `<SKILL_ROOT>` 下这些关键文件确实存在（存在性检查即可，不要试图凭空创建）：
+先运行本技能自带的只读预检脚本：
+
+```powershell
+python scripts/preflight.py
+python scripts/preflight.py --root "<SKILL_ROOT>"
+```
+
+脚本按 `REVERSE_SKILL_ROOT`、用户明确给出的 `--root`、默认 `$HOME/tools/reverse-skill` 的顺序解析路径，并输出 JSON：
+
+- `ok`: 必需文件是否齐全。
+- `root`: 实际解析到的目录。
+- `missingRequired`: 缺失的规则、路由、建案或复核文件。
+- `optional`: 工具索引、bootstrap、field-journal 等按需资源的可用性。
+
+退出码非 0 时 **STOP**，把 `missingRequired` 原样列给用户，不要继续执行外部脚本。脚本只读，不安装、不修复、不执行技能包。
+
+人工参考的必需文件为：
 
 - `<SKILL_ROOT>\RULES_zh.md` 或 `<SKILL_ROOT>\RULES.md`
 - `<SKILL_ROOT>\skills\MASTER-ROUTING.md`
 - `<SKILL_ROOT>\skills\scripts\master-route.ps1`
 - `<SKILL_ROOT>\skills\scripts\case-init.ps1`
+- `<SKILL_ROOT>\skills\case-review\scripts\review_case.py`
 
 若其中任意一项缺失：
 
@@ -58,7 +75,7 @@ description: 逆向工程 / 渗透测试 / 安全研究技能路由包（reverse
 ## 工作流程
 
 1. **确定 `<SKILL_ROOT>`**：按上文解析顺序定位，缺失则 STOP（见「`<SKILL_ROOT>` 解析顺序」）。
-2. **预检**：确认必要文件/脚本存在（见「预检」）。
+2. **预检**：运行 `python scripts/preflight.py`，以其 JSON 与退出码为准。
 3. **读全局规则**：`<SKILL_ROOT>\RULES_zh.md`（中文）或 `RULES.md`（权威英文原文）。其中定义了 scope 授权门禁、证据链、时间线等强制环节。
 4. **路由**：读 `<SKILL_ROOT>\skills\MASTER-ROUTING.md`，或直接让脚本给出 PRIMARY 结论：
 

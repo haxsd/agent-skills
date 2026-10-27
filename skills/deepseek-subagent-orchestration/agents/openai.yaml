@@ -1,4 +1,4 @@
 interface:
   display_name: "DeepSeek Subagent Orchestration"
-  short_description: "GPT leads; DeepSeek implements, tests, and reviews"
-  default_prompt: "Use $deepseek-subagent-orchestration to keep my current GPT primary and delegate independent work blocks to my DeepSeek Flash API with scoped file tools and named checks."
+  short_description: "Preferred DeepSeek API route for authorized bounded work with scoped tools and checks"
+  default_prompt: "Use $deepseek-subagent-orchestration only when I explicitly request DeepSeek delegation; keep the current GPT primary and delegate bounded work blocks through scoped API workers."

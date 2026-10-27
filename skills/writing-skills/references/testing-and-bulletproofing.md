@@ -99,19 +99,17 @@ Don't just state the rule - forbid specific workarounds:
 
 <Bad>
 ```markdown
-Write code before test? Delete it.
+Prefer test-first when a failing check is practical.
 ```
 </Bad>
 
 <Good>
 ```markdown
-Write code before test? Delete it. Start over.
+When behavior is untested: stop adding behavior. Write a check that fails against
+the pre-change code, or label the result test-after.
 
-**No exceptions:**
-- Don't keep it as "reference"
-- Don't "adapt" it while writing tests
-- Don't look at it
-- Delete means delete
+Never delete existing user work to manufacture a test-first story.
+Restore only your own unverified implementation to a safe baseline.
 ```
 </Good>
 
@@ -150,7 +148,9 @@ Make it easy for agents to self-check when rationalizing:
 - "It's about spirit not ritual"
 - "This is different because..."
 
-**All of these mean: Delete code. Start over with TDD.**
+**These are review triggers: stop adding behavior, preserve user work, and either
+demonstrate the test failing against the pre-change code or label the result
+test-after.**
 ```
 
 ### Update SDO for Violation Symptoms
@@ -158,7 +158,7 @@ Make it easy for agents to self-check when rationalizing:
 Add to description: symptoms of when you're ABOUT to violate the rule:
 
 ```yaml
-description: use when implementing any feature or bugfix, before writing implementation code
+description: use when behavior changes or a regression needs a failing check
 ```
 
 ## RED-GREEN-REFACTOR for Skills

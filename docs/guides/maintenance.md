@@ -48,13 +48,17 @@ $python = '<Python 的已验证绝对路径>'
 & $python scripts/audit_skills.py --check
 & $python scripts/check_docs.py
 & $python -m unittest discover -s tests -q
+& $python skills/ui-ux-pro-max/scripts/validate_data.py
+& $python skills/ui-ux-pro-max/scripts/generate-catalog-summary.py --check
+& $python skills/ui-ux-pro-max/scripts/evaluate-relevance.py
+& $python -m unittest discover -s skills/ui-ux-pro-max/scripts/tests -q
 & $python scripts/smoke_skills.py --node '<Node 的已验证绝对路径>'
 ```
 
 audit 生成分类目录、逐项审查和静态 JSON；修改人工源后重新生成，避免手改派生文档。check_docs 检查当前入口和文档的本地链接，不检查历史快照、上游技能参考或远程链接。已有超长入口和引用线索会作为提示保留。
 
-CI 在 Ubuntu 和 Windows 上运行这些离线检查、UI/UX 数据校验，以及 Windows 临时目录里的安装器回归。CI 不需要任何模型密钥，不调用付费 API、不连接数据库、不启动浏览器测试。
+CI 在 Ubuntu 和 Windows 上运行这些离线检查、UI/UX 数据校验、快照与相关性门禁、技能内 unittest，以及 Windows 临时目录里的安装器回归。`prompt-optimizer` 的静态审计测试在根 `tests/` 中执行。CI 不需要任何模型密钥，不调用付费 API、不连接数据库、不启动浏览器测试。
 
-技能里的测试并不全部属于仓库维护测试。UI/UX 的两个维护测试模块仍缺对应脚本；这些已知问题以及逐项审查、验证记录由维护者在内部维护，不随仓库公开。局部数据/工具检查通过不等于所有技能已做生产验证。
+技能里的测试并不全部属于仓库维护测试；能被 CI 收集的只是已提交的离线契约。UI/UX 的字体、图标、快照与相关性测试已经接入维护脚本，但真实上游刷新仍需要显式输入、凭据和人工审查。局部数据/工具检查通过不等于所有技能已做生产验证；逐项审查、验证记录和真实模型结果由维护者在内部保存。
 
 合并或归档技能前，先检查调用者、迁移必要资源与署名、验证验收场景，再更新 manifest/catalog。保留 `skills/<name>/` 稳定路径，分类通过索引完成。归档内容默认不安装。
