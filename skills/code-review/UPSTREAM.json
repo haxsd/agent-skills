@@ -17,6 +17,11 @@
       "repository": "https://github.com/trailofbits/skills",
       "commit": "8e54050ae63c2f62224c35b1616efe71865b4777",
       "what": "differential-review 的 CC-BY-SA-4.0 派生文件 references/differential-review.md（中文改写、只读化、按本仓校准裁剪）；署名与相同方式共享要求见 LICENSE.txt"
+    },
+    {
+      "repository": "https://github.com/openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "what": "gh-address-comments 的 scripts/fetch_comments.py（Apache-2.0）改写为 scripts/fetch_pr_comments.py：--pr/--repo/--unresolved、base 仓库解析、分页去重、UTF-8；上游 SKILL.md 的“编号列出、按用户选择处理”并入处理反馈第 0 步。"
     }
   ],
   "validation": "维护者案例见 EVAL.md 与 evals/cases.json；专项参考是审查方法，不是自动扫描或可达性证明。本机评估结果保留在私有记录。"

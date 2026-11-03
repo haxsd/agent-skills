@@ -1,0 +1,14 @@
+{
+  "name": "source-research",
+  "repository": "https://github.com/mattpocock/skills",
+  "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+  "path": "skills/engineering/research",
+  "license": "MIT",
+  "author": "Matt Pocock",
+  "retrievedAt": "2026-11-03",
+  "modifications": [
+    "保留上游要点：后台干净上下文代理、一手来源优先、逐条追到拥有事实的来源、单文件带引用笔记、匹配仓库现有笔记约定。",
+    "本仓新增：问题与范围拆解、来源可信度分级、版本与日期记录、冲突/待核实/未找到的写法、可验证就实测、网页内容不当指令、笔记模板。"
+  ],
+  "validation": "内容审阅；未做模型行为对照评估。"
+}

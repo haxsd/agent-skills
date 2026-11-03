@@ -1,0 +1,14 @@
+{
+  "name": "session-handoff",
+  "repository": "https://github.com/mattpocock/skills",
+  "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+  "path": "skills/productivity/handoff",
+  "license": "MIT",
+  "author": "Matt Pocock",
+  "retrievedAt": "2026-11-03",
+  "modifications": [
+    "保留上游要点：写到系统临时目录、引用而不复制已有产物、脱敏、建议加载的技能、按下一会话重点裁剪。",
+    "本仓新增：写前核实现状（git/PR/CI/进程）、交接文档结构模板、决定与否决理由、用户规则清单、约定位置与公开仓库边界、自检问题。"
+  ],
+  "validation": "内容审阅；未做模型行为对照评估。"
+}

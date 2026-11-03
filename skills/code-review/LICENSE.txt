@@ -22,9 +22,14 @@ code-review：许可范围（按文件界定）
      法律文本：https://creativecommons.org/licenses/by-sa/4.0/legalcode
      复用需保留署名、许可链接并标明修改；改编作品需以 CC-BY-SA-4.0 或兼容许可共享。无 Trail of Bits 背书。
 
+   - scripts/fetch_pr_comments.py：
+     基于 OpenAI skills（固定版本 49f948faa9258a0c61caceaf225e179651397431）的
+     skills/.curated/gh-address-comments/scripts/fetch_comments.py 改写，按 Apache License 2.0 提供。
+     Copyright OpenAI；修改说明见文件头与 NOTICE.txt；完整许可文本：LICENSES/Apache-2.0.txt。
+
 3. 本仓原创新增
    - EVAL.md、evals/cases.json、UPSTREAM.json、NOTICE.txt、LICENSE.txt 由本仓维护者编写；
      本轮原创部分按 Apache-2.0 提供（完整许可文本见 LICENSES/Apache-2.0.txt）。
    Copyright 2026 agent-skills contributors。它们不改变上述各文件各自的许可。
 
-与 Sentry、Trail of Bits 及其他上游作者均无隶属、背书或认证关系。来源与固定版本记录见 UPSTREAM.json。
+与 Sentry、Trail of Bits、OpenAI 及其他上游作者均无隶属、背书或认证关系。来源与固定版本记录见 UPSTREAM.json。

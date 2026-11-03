@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-27",
+  "updatedAt": "2026-11-03",
   "note": "创作归属与许可核验分别记录。原创改进仅指本仓贡献，不抹去上游署名。未找回确切收录提交时明确待核验，不以当前上游 HEAD 冒充原收录版本。manifest.origin 仍仅表示安装来源目录。",
   "skills": [
     {
@@ -8,9 +8,10 @@
       "kind": "derived",
       "sources": [
         {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/brainstorming", "license": "MIT（上游已核验；收录版本待核验）"},
-        {"author": "Trail of Bits", "url": "https://github.com/trailofbits/skills", "license": "待核验"}
+        {"author": "Trail of Bits", "url": "https://github.com/trailofbits/skills", "license": "待核验"},
+        {"author": "Matt Pocock", "url": "https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d/skills/productivity/grilling", "license": "MIT（仅拷问模式的思路参考）", "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"}
       ],
-      "contributions": ["本仓编写中文需求入口，合并复杂度分流、最少关键问题、方案权衡和规格审查参考。", "已迁入 spike 可行性验证路径和“只有图形比文字更清楚时才提供视觉选项”的按需判断。"],
+      "contributions": ["本仓编写中文需求入口，合并复杂度分流、最少关键问题、方案权衡和规格审查参考。", "已迁入 spike 可行性验证路径和“只有图形比文字更清楚时才提供视觉选项”的按需判断。", "2026-11-03 新增拷问模式：参考 grilling 的决策树前沿逐轮追问，中文独立改写并与既有追问规则衔接。"],
       "note": "原入口为本地编写；当前目录已吸收归档技能的流程与资源，因此按原创改进标注。"
     },
     {
@@ -272,9 +273,10 @@
       "sources": [
         {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/requesting-code-review", "license": "MIT（上游已核验；收录版本待核验）"},
         {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/receiving-code-review", "license": "MIT（上游已核验；收录版本待核验）"},
-        {"author": "Trail of Bits", "url": "https://github.com/trailofbits/skills/tree/8e54050ae63c2f62224c35b1616efe71865b4777/plugins/differential-review/skills/differential-review", "license": "CC-BY-SA-4.0（仅独立差异审查参考）", "revision": "8e54050ae63c2f62224c35b1616efe71865b4777"}
+        {"author": "Trail of Bits", "url": "https://github.com/trailofbits/skills/tree/8e54050ae63c2f62224c35b1616efe71865b4777/plugins/differential-review/skills/differential-review", "license": "CC-BY-SA-4.0（仅独立差异审查参考）", "revision": "8e54050ae63c2f62224c35b1616efe71865b4777"},
+        {"author": "OpenAI", "url": "https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/gh-address-comments", "license": "Apache-2.0（仅 scripts/fetch_pr_comments.py）", "revision": "49f948faa9258a0c61caceaf225e179651397431"}
       ],
-      "contributions": ["保留只读审查与反馈入口，按差异语义选择差异影响、凭据序列化和 GitHub Actions 专项参考，不把小改动扩大为全仓审计。", "补充实际权限、数据流与有效防护证据，分开严重程度、置信度和待确认项，新增正反例评估。"],
+      "contributions": ["保留只读审查与反馈入口，按差异语义选择差异影响、凭据序列化和 GitHub Actions 专项参考，不把小改动扩大为全仓审计。", "补充实际权限、数据流与有效防护证据，分开严重程度、置信度和待确认项，新增正反例评估。", "2026-11-03 并入 gh-address-comments：改写 PR 评论拉取脚本（--pr/--repo/--unresolved、base 仓库解析、分页去重、UTF-8），处理反馈增加拉全与编号步骤。"],
       "note": "通用入口、历史 obra MIT 模板、Sentry Apache-2.0 参考与 Trail of Bits CC-BY-SA-4.0 参考按文件界定许可；原创改进不把整个目录重授单一许可。"
     },
     {
@@ -370,6 +372,50 @@
         {"author": "Poppler contributors", "url": "https://poppler.freedesktop.org/", "license": "GPL-2.0-or-later"}
       ],
       "note": "能力需求参考公开 PDF 工作流，但未复制受限技能的文本或代码；这里只登记未打包的外部运行时依赖。"
+    },
+    {
+      "name": "gh-fix-ci",
+      "kind": "derived",
+      "upstreamFiles": [
+        "skills/gh-fix-ci/UPSTREAM.json"
+      ],
+      "contributions": [
+        "中文重写流程与根因分类表；脚本新增 --branch/--run、按 job 的 --log-failed、UTF-8 解码与片段窗口调整，并补离线单元测试。"
+      ],
+      "note": "基于 OpenAI gh-fix-ci（Apache-2.0）的原创改进；保留上游版权与许可。"
+    },
+    {
+      "name": "codebase-architecture",
+      "kind": "derived",
+      "upstreamFiles": [
+        "skills/codebase-architecture/UPSTREAM.json"
+      ],
+      "contributions": [
+        "合并 improve-codebase-architecture 与 codebase-design 为中文入口和单份参考；新增瘦身场景能力账本，路由到本仓技能。"
+      ],
+      "note": "基于 Matt Pocock skills（MIT）的原创改进。"
+    },
+    {
+      "name": "session-handoff",
+      "kind": "derived",
+      "upstreamFiles": [
+        "skills/session-handoff/UPSTREAM.json"
+      ],
+      "contributions": [
+        "新增写前核实、结构模板、决定与否决理由、用户规则、存放位置边界与自检。"
+      ],
+      "note": "基于 Matt Pocock handoff（MIT）的原创改进。"
+    },
+    {
+      "name": "source-research",
+      "kind": "derived",
+      "upstreamFiles": [
+        "skills/source-research/UPSTREAM.json"
+      ],
+      "contributions": [
+        "新增来源分级、版本日期记录、冲突与待核实写法、实测验证、网页内容不当指令和笔记模板。"
+      ],
+      "note": "基于 Matt Pocock research（MIT）的原创改进。"
     }
   ]
 }

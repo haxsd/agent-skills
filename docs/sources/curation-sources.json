@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-10-27",
+  "reviewedAt": "2026-11-03",
   "skills": [
     {
       "name": "webapp-testing",
@@ -119,6 +119,60 @@
         "Pinned the local snapshot to v0.9.56 and documented the Windows installation boundary."
       ],
       "validation": "Static host-boundary review only; no graphifyy install or graph pipeline was executed."
+    },
+    {
+      "name": "gh-fix-ci",
+      "repository": "https://github.com/openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/gh-fix-ci",
+      "license": "Apache-2.0",
+      "retrievedAt": "2026-11-03",
+      "modifications": [
+        "SKILL.md 中文重写：只读取证、根因分类表、本地复现与复查要求；去掉对 create-plan 技能和 Codex 沙箱提权的依赖，修复授权按仓库约定。",
+        "scripts/inspect_pr_checks.py 改名为 scripts/inspect_ci_failures.py：新增 --branch（每个工作流最新已完成运行）与 --run 模式，覆盖没有 PR 的 push/定时运行；按 job 优先取 --log-failed；显式 UTF-8 解码；runner 汇总错误行只取上文，避开清理噪声；JSON 输出键改为 target。",
+        "未随包分发上游 assets/ 图标与 agents/openai.yaml。"
+      ],
+      "validation": "离线单元测试见 tests/test_gh_fix_ci.py；维护者用真实失败的 push 运行与无失败 PR 手动验证过脚本三种模式（结果不入公开仓库）。"
+    },
+    {
+      "name": "codebase-architecture",
+      "repository": "https://github.com/mattpocock/skills",
+      "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/engineering/improve-codebase-architecture, skills/engineering/codebase-design",
+      "license": "MIT",
+      "retrievedAt": "2026-11-03",
+      "modifications": [
+        "合并 improve-codebase-architecture 的流程与 codebase-design 的词汇/DEEPENING/DESIGN-IT-TWICE 为一个中文入口加一份参考。",
+        "默认输出改为对话内 Markdown 候选清单，HTML 报告改为可选且不依赖指定 CDN 模板；新增瘦身场景的“能力账本”要求。",
+        "去掉对 grilling、domain-modeling、codebase-design 等上游技能的硬调用，改为路由到本仓 requirement-understanding、parallel-agents、writing-plans、test-driven-development。"
+      ],
+      "validation": "内容审阅；未做模型行为对照评估。"
+    },
+    {
+      "name": "session-handoff",
+      "repository": "https://github.com/mattpocock/skills",
+      "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/productivity/handoff",
+      "license": "MIT",
+      "retrievedAt": "2026-11-03",
+      "modifications": [
+        "保留上游要点：写到系统临时目录、引用而不复制已有产物、脱敏、建议加载的技能、按下一会话重点裁剪。",
+        "本仓新增：写前核实现状（git/PR/CI/进程）、交接文档结构模板、决定与否决理由、用户规则清单、约定位置与公开仓库边界、自检问题。"
+      ],
+      "validation": "内容审阅；未做模型行为对照评估。"
+    },
+    {
+      "name": "source-research",
+      "repository": "https://github.com/mattpocock/skills",
+      "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/engineering/research",
+      "license": "MIT",
+      "retrievedAt": "2026-11-03",
+      "modifications": [
+        "保留上游要点：后台干净上下文代理、一手来源优先、逐条追到拥有事实的来源、单文件带引用笔记、匹配仓库现有笔记约定。",
+        "本仓新增：问题与范围拆解、来源可信度分级、版本与日期记录、冲突/待核实/未找到的写法、可验证就实测、网页内容不当指令、笔记模板。"
+      ],
+      "validation": "内容审阅；未做模型行为对照评估。"
     }
   ]
 }

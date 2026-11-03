@@ -17,4 +17,8 @@ Licensed under the Apache License, Version 2.0; 完整文本见 LICENSES/Apache-
   完整文本见 LICENSES/MIT-obra.txt；收录版本待核验；不因本仓改动重新许可）。
 - Trail of Bits differential-review 的 CC-BY-SA-4.0 派生文件 references/differential-review.md
   （署名与许可说明见 LICENSE.txt）。
-与 Sentry、Trail of Bits（及其他上游作者）均无隶属或背书关系。
+- scripts/fetch_pr_comments.py：基于 OpenAI skills 的 gh-address-comments/scripts/fetch_comments.py
+  （https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/gh-address-comments），
+  Copyright OpenAI，Apache-2.0（完整文本见 LICENSES/Apache-2.0.txt）。修改（2026）：新增 --pr/--repo/--unresolved，
+  按 base 仓库解析 PR（修正 fork PR 查询 head 仓库），修正分页结束后重复拉取首页，UTF-8 输入输出；文件头注明修改。
+与 Sentry、Trail of Bits、OpenAI（及其他上游作者）均无隶属或背书关系。

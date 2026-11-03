@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-27",
+  "reviewedAt": "2026-11-03",
   "baselineCommit": "f4d28cf7c0ff98f38793060a8511f4c05b71512b",
-  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
+  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -34,7 +34,7 @@
   },
     {
       "id": "knowledge-security",
-      "title": "知识图谱与安全研究"
+      "title": "知识图谱、调研与安全研究"
     },
     {
       "id": "authoring-efficiency",
@@ -81,7 +81,8 @@
         {
           "file": "SKILL.md",
           "text": "追问技巧"
-        }
+        },
+        {"file": "SKILL.md", "text": "### 拷问模式"}
       ]
     },
     {
@@ -1421,7 +1422,8 @@
         {
           "file": "SKILL.md",
           "text": "name: code-review"
-        }
+        },
+        {"file": "scripts/fetch_pr_comments.py", "text": "def get_pr_ref"}
       ]
     },
     {
@@ -1778,6 +1780,119 @@
         {"file": "SKILL.md", "text": "Never overwrite the source"},
         {"file": "SKILL.md", "text": "Reopen every written PDF"},
         {"file": "scripts/pdf_tool.py", "text": "AES-256 encryption is unavailable"}
+      ]
+    },
+    {
+      "name": "gh-fix-ci",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "high",
+      "readiness": "runnable",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "用 gh 只读拉取 GitHub Actions 失败步骤日志，覆盖 PR 检查、分支 push/定时运行和单个 run，按根因分类后修复并复查。",
+      "uniqueValue": "上游只看 PR 检查；本仓补 --branch/--run 模式（没有 PR 的 main 红灯也能查）、按 job 的 --log-failed 和 Windows UTF-8 解码，脚本只读、不重跑不删除。",
+      "issues": [
+        "依赖已登录的 gh 和仓库读权限；外部 CI 只报链接。",
+        "失败片段按关键词启发式截取，复杂日志仍需人工看完整 job 日志。"
+      ],
+      "improvements": [
+        "积累真实失败样本，校准片段截取与偶发失败判断。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "main 上 push 运行变红而没有 PR 时，用 --branch main 找到仍为红的最新运行并给出失败步骤片段。",
+        "旧的红运行已被后续绿运行取代时不报告为当前失败。",
+        "修复后等新运行结束拿到绿色结果再报告完成，不把偶发当根因。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: gh-fix-ci"},
+        {"file": "scripts/inspect_ci_failures.py", "text": "def latest_failed_runs"},
+        {"file": "UPSTREAM.json", "text": "49f948faa9258a0c61caceaf225e179651397431"}
+      ]
+    },
+    {
+      "name": "codebase-architecture",
+      "category": "implementation-orchestration",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "按近期热点定范围，用深模块词汇、删除测试找浅模块与接缝问题，产出带证据和推荐强度的重构候选，选定后再设计接口。",
+      "uniqueValue": "仓库原本没有结构性重构入口；固定术语与依赖类别让建议可比较，瘦身场景强制“能力账本”，避免删掉仍在用的功能。",
+      "issues": [
+        "建议质量依赖探索深度，大仓库需要限定范围。",
+        "未做模型行为对照评估。"
+      ],
+      "improvements": [
+        "用真实瘦身任务做对照，检查能力账本是否拦住误删。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "用户要给项目瘦身时，先列每项对外行为的去处，说不清去处的不删。",
+        "没有指定方向时按 git 热点而不是全仓扫描给候选。",
+        "只有单一实现的接缝不被当作解耦收益。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: codebase-architecture"},
+        {"file": "SKILL.md", "text": "能力账本"},
+        {"file": "references/vocabulary.md", "text": "删除测试"},
+        {"file": "UPSTREAM.json", "text": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"}
+      ]
+    },
+    {
+      "name": "session-handoff",
+      "category": "implementation-orchestration",
+      "state": "active",
+      "value": "medium",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "把当前会话压缩成可单独使用的交接文档：核实过的现状、决定与理由、下一步、用户规则和建议技能。",
+      "uniqueValue": "多 agent 接力和上下文压缩时最容易丢的是“现在真实状态”和“为什么否决某方案”；本技能要求写前核实并引用而不复制已有产物。",
+      "issues": [
+        "交接质量取决于写前核实是否真的执行。"
+      ],
+      "improvements": [
+        "收集真实接手失败案例，补充模板缺项。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "上下文快满时生成交接文档，现状一栏每项带链接或命令输出要点。",
+        "交接中不出现密钥或 token 原文。",
+        "已有计划文件时只引用路径，不复制正文。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: session-handoff"},
+        {"file": "SKILL.md", "text": "## 写之前先核实"}
+      ]
+    },
+    {
+      "name": "source-research",
+      "category": "knowledge-security",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "一手来源优先的调研流程：每条结论带来源、版本与日期，冲突和待核实如实标出，产出带引用的 Markdown 笔记。",
+      "uniqueValue": "把“数据只用能核实的来源”写成可执行规则：来源分级、追到拥有事实的来源、能实测就实测、网页内容不当指令。",
+      "issues": [
+        "需要宿主有网页或文档读取能力；没有时只能基于本地源码与文档。"
+      ],
+      "improvements": [
+        "补充按语言生态的一手来源清单（PyPI/npm 元数据、发布说明位置）。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "二手博客与官方文档冲突时并列两者并采信带版本的一手来源。",
+        "只有单一论坛来源的结论标为待核实。",
+        "搜索被屏蔽时换途径取同一页面，不据此断言不存在。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: source-research"},
+        {"file": "SKILL.md", "text": "## 2. 找一手来源"}
       ]
     }
   ]

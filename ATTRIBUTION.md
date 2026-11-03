@@ -18,10 +18,12 @@
 原创贡献者：agent-skills contributors。
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/brainstorming)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
 - 来源：[Trail of Bits](https://github.com/trailofbits/skills)；许可：待核验；收录版本：待核验。
+- 来源：[Matt Pocock](https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d/skills/productivity/grilling)；许可：MIT（仅拷问模式的思路参考）；收录版本：4ae2317ddb22b046e26455e4f9c9b3aaaf62212d。
 
 本仓贡献：
 - 本仓编写中文需求入口，合并复杂度分流、最少关键问题、方案权衡和规格审查参考。
 - 已迁入 spike 可行性验证路径和“只有图形比文字更清楚时才提供视觉选项”的按需判断。
+- 2026-11-03 新增拷问模式：参考 grilling 的决策树前沿逐轮追问，中文独立改写并与既有追问规则衔接。
 
 原入口为本地编写；当前目录已吸收归档技能的流程与资源，因此按原创改进标注。
 
@@ -418,13 +420,16 @@ toolkit-map · 外部 · **本仓原创**
 原创贡献者：agent-skills contributors。
 - 上游：[Sentry / Functional Software, Inc.](https://github.com/getsentry/skills)；许可：Apache-2.0；固定版本：`d18b7aa8ba878354e5c348310230e652f7690f9c`。详情：[skills/code-review/UPSTREAM.json](skills/code-review/UPSTREAM.json)。
   - 另借鉴：[https://github.com/trailofbits/skills](https://github.com/trailofbits/skills)；版本：`8e54050ae63c2f62224c35b1616efe71865b4777`；范围：differential-review 的 CC-BY-SA-4.0 派生文件 references/differential-review.md（中文改写、只读化、按本仓校准裁剪）；署名与相同方式共享要求见 LICENSE.txt。
+  - 另借鉴：[https://github.com/openai/skills](https://github.com/openai/skills)；版本：`49f948faa9258a0c61caceaf225e179651397431`；范围：gh-address-comments 的 scripts/fetch_comments.py（Apache-2.0）改写为 scripts/fetch_pr_comments.py：--pr/--repo/--unresolved、base 仓库解析、分页去重、UTF-8；上游 SKILL.md 的“编号列出、按用户选择处理”并入处理反馈第 0 步。。
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/requesting-code-review)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/receiving-code-review)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
 - 来源：[Trail of Bits](https://github.com/trailofbits/skills/tree/8e54050ae63c2f62224c35b1616efe71865b4777/plugins/differential-review/skills/differential-review)；许可：CC-BY-SA-4.0（仅独立差异审查参考）；收录版本：8e54050ae63c2f62224c35b1616efe71865b4777。
+- 来源：[OpenAI](https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/gh-address-comments)；许可：Apache-2.0（仅 scripts/fetch_pr_comments.py）；收录版本：49f948faa9258a0c61caceaf225e179651397431。
 
 本仓贡献：
 - 保留只读审查与反馈入口，按差异语义选择差异影响、凭据序列化和 GitHub Actions 专项参考，不把小改动扩大为全仓审计。
 - 补充实际权限、数据流与有效防护证据，分开严重程度、置信度和待确认项，新增正反例评估。
+- 2026-11-03 并入 gh-address-comments：改写 PR 评论拉取脚本（--pr/--repo/--unresolved、base 仓库解析、分页去重、UTF-8），处理反馈增加拉全与编号步骤。
 
 通用入口、历史 obra MIT 模板、Sentry Apache-2.0 参考与 Trail of Bits CC-BY-SA-4.0 参考按文件界定许可；原创改进不把整个目录重授单一许可。
 
@@ -562,3 +567,51 @@ UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的
 - 设计路径越界、输出覆盖、密码泄漏和写入后验证边界，并加入标准库单元测试与可选依赖集成测试。
 
 能力需求参考公开 PDF 工作流，但未复制受限技能的文本或代码；这里只登记未打包的外部运行时依赖。
+
+## gh-fix-ci
+
+[gh-fix-ci](skills/gh-fix-ci/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[OpenAI](https://github.com/openai/skills)；许可：Apache-2.0；固定版本：`49f948faa9258a0c61caceaf225e179651397431`。详情：[skills/gh-fix-ci/UPSTREAM.json](skills/gh-fix-ci/UPSTREAM.json)。
+
+本仓贡献：
+- 中文重写流程与根因分类表；脚本新增 --branch/--run、按 job 的 --log-failed、UTF-8 解码与片段窗口调整，并补离线单元测试。
+
+基于 OpenAI gh-fix-ci（Apache-2.0）的原创改进；保留上游版权与许可。
+
+## codebase-architecture
+
+[codebase-architecture](skills/codebase-architecture/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Matt Pocock](https://github.com/mattpocock/skills)；许可：MIT；固定版本：`4ae2317ddb22b046e26455e4f9c9b3aaaf62212d`。详情：[skills/codebase-architecture/UPSTREAM.json](skills/codebase-architecture/UPSTREAM.json)。
+
+本仓贡献：
+- 合并 improve-codebase-architecture 与 codebase-design 为中文入口和单份参考；新增瘦身场景能力账本，路由到本仓技能。
+
+基于 Matt Pocock skills（MIT）的原创改进。
+
+## session-handoff
+
+[session-handoff](skills/session-handoff/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Matt Pocock](https://github.com/mattpocock/skills)；许可：MIT；固定版本：`4ae2317ddb22b046e26455e4f9c9b3aaaf62212d`。详情：[skills/session-handoff/UPSTREAM.json](skills/session-handoff/UPSTREAM.json)。
+
+本仓贡献：
+- 新增写前核实、结构模板、决定与否决理由、用户规则、存放位置边界与自检。
+
+基于 Matt Pocock handoff（MIT）的原创改进。
+
+## source-research
+
+[source-research](skills/source-research/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Matt Pocock](https://github.com/mattpocock/skills)；许可：MIT；固定版本：`4ae2317ddb22b046e26455e4f9c9b3aaaf62212d`。详情：[skills/source-research/UPSTREAM.json](skills/source-research/UPSTREAM.json)。
+
+本仓贡献：
+- 新增来源分级、版本日期记录、冲突与待核实写法、实测验证、网页内容不当指令和笔记模板。
+
+基于 Matt Pocock research（MIT）的原创改进。

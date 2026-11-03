@@ -1,0 +1,10 @@
+gh-fix-ci 基于 OpenAI skills 仓库的 gh-fix-ci 技能改写：
+https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/gh-fix-ci
+
+Copyright OpenAI. Licensed under the Apache License, Version 2.0；完整文本见 LICENSES/Apache-2.0.txt。
+
+修改（agent-skills contributors，2026）：
+- SKILL.md 中文重写为只读取证 → 根因分类 → 本地复现 → 修复复查的流程。
+- scripts/inspect_ci_failures.py（原 inspect_pr_checks.py）：新增 --branch/--run 模式、按 job 的 --log-failed、
+  UTF-8 解码与片段窗口调整；文件头注明修改。
+与 OpenAI 无隶属、背书或认证关系。

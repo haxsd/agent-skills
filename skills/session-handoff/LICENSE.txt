@@ -1,0 +1,6 @@
+session-handoff：许可范围
+
+SKILL.md 改编自 Matt Pocock 的 skills 仓库 skills/productivity/handoff
+（固定版本 4ae2317ddb22b046e26455e4f9c9b3aaaf62212d），按 MIT 许可提供，Copyright (c) 2026 Matt Pocock。
+完整许可文本：LICENSES/MIT-mattpocock.txt。本仓新增内容同样按 MIT 提供，Copyright 2026 agent-skills contributors。
+与 Matt Pocock 无隶属或背书关系。

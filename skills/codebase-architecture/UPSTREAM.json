@@ -1,0 +1,15 @@
+{
+  "name": "codebase-architecture",
+  "repository": "https://github.com/mattpocock/skills",
+  "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+  "path": "skills/engineering/improve-codebase-architecture, skills/engineering/codebase-design",
+  "license": "MIT",
+  "author": "Matt Pocock",
+  "retrievedAt": "2026-11-03",
+  "modifications": [
+    "合并 improve-codebase-architecture 的流程与 codebase-design 的词汇/DEEPENING/DESIGN-IT-TWICE 为一个中文入口加一份参考。",
+    "默认输出改为对话内 Markdown 候选清单，HTML 报告改为可选且不依赖指定 CDN 模板；新增瘦身场景的“能力账本”要求。",
+    "去掉对 grilling、domain-modeling、codebase-design 等上游技能的硬调用，改为路由到本仓 requirement-understanding、parallel-agents、writing-plans、test-driven-development。"
+  ],
+  "validation": "内容审阅；未做模型行为对照评估。"
+}

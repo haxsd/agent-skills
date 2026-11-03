@@ -28,12 +28,13 @@ description: 审查代码改动或处理审查反馈；检查需求符合性、�
 
 ## 处理反馈
 
+0. 反馈在 GitHub PR 上时先拉全：`python scripts/fetch_pr_comments.py [--pr 123] [--repo owner/name] [--unresolved]`（只读，输出会话评论、review 与行内线程，含 resolved/outdated 状态）。逐条编号并给出每条需要的改动；用户只让处理部分时，按编号确认范围。
 1. 先理解并核对反馈是否适用于当前代码、版本、需求和调用方；不因来源权威而直接照改。
 2. 不清楚的项目提出关键问题，同时处理与其无依赖的明确项目。
 3. 对错误建议提供可验证证据；对有效问题做最小修复，并运行对应验证。
 4. 审查者建议"完善实现"时先 grep 调用方；没有真实使用的功能按 YAGNI 提议删除。
 5. 按结果回应：已修复内容、核验依据、未处理项及原因；避免奉承、重复复述或无证据的成功声明。
-6. 回复 GitHub 行内审查评论时用评论线程回复接口（`gh api repos/{owner}/{repo}/pulls/{pr}/comments/{id}/replies`），不新建顶层评论。
+6. 对外回复（PR/issue 评论）需要用户授权具体文字时，先起草给用户确认再发。回复 GitHub 行内审查评论时用评论线程回复接口（`gh api repos/{owner}/{repo}/pulls/{pr}/comments/{id}/replies`），不新建顶层评论。
 
 专项参考是审查方法，不是自动扫描或可达性证明；其许可按文件划分，见 [LICENSE.txt](LICENSE.txt)、[NOTICE.txt](NOTICE.txt) 与 [UPSTREAM.json](UPSTREAM.json)；既有模板不随本次改动重新许可。
 

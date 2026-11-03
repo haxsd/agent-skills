@@ -267,6 +267,34 @@
       "defaultTargets": [
         "agents"
       ]
+    },
+    {
+      "name": "codebase-architecture",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "gh-fix-ci",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "session-handoff",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "source-research",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
     }
   ]
 }

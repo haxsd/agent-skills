@@ -2,7 +2,7 @@
 
 由 `catalog.json` 和 `scripts/audit_skills.py` 生成。
 
-审查日期：2026-10-27。38 个启用 + 11 个归档 + 1 个外部入口。
+审查日期：2026-11-03。42 个启用 + 11 个归档 + 1 个外部入口。
 
 分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。
 价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。
@@ -35,6 +35,8 @@
 | [mcp-builder](../skills/mcp-builder/SKILL.md) | 启用 | 第三方引入 | 高 | 条件可用 | 保留 | P2 |
 | [development-workflow](../skills/development-workflow/SKILL.md) | 启用 | 本仓原创 | 中 | 条件可用 | 保留 | P1 |
 | [deepseek-subagents](../skills/deepseek-subagents/SKILL.md) | 启用 | 本仓原创 | 高 | 条件可用 | 保留 | P1 |
+| [codebase-architecture](../skills/codebase-architecture/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [session-handoff](../skills/session-handoff/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 条件可用 | 保留 | P2 |
 
 ## 质量、调试与审查
 
@@ -51,6 +53,7 @@
 | [code-review](../skills/code-review/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 条件可用 | 保留 | P1 |
 | [windows-powershell-safe](../skills/windows-powershell-safe/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P2 |
 | [variant-analysis](../skills/variant-analysis/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [gh-fix-ci](../skills/gh-fix-ci/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 局部实测可运行 | 保留 | P1 |
 
 ## Git 隔离与交付
 
@@ -87,12 +90,13 @@
 |---|---|---|---|---|---|---|
 | [pdf-toolkit](../skills/pdf-toolkit/SKILL.md) | 启用 | 本仓原创 | 高 | 条件可用 | 保留 | P1 |
 
-## 知识图谱与安全研究
+## 知识图谱、调研与安全研究
 
 | Skill | 当前状态 | 创作归属 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
 |---|---|---|---|---|---|---|
 | [graphify](../skills/graphify/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 依赖外部环境 | 保留 | P1 |
 | [reverse-skill](../skills/reverse-skill/SKILL.md) | 启用 | 本仓原创 | 中 | 依赖外部环境 | 保留 | P1 |
+| [source-research](../skills/source-research/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 
 ## 技能维护与运行效率
 

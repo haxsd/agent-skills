@@ -1,0 +1,6 @@
+gh-fix-ci：许可范围
+
+本目录（SKILL.md、scripts/inspect_ci_failures.py、UPSTREAM.json、NOTICE.txt）基于 OpenAI skills 的
+gh-fix-ci（固定版本 49f948faa9258a0c61caceaf225e179651397431）改写，整体按 Apache License 2.0 提供。
+完整许可文本：LICENSES/Apache-2.0.txt；版权与修改说明：NOTICE.txt。
+本仓修改部分 Copyright 2026 agent-skills contributors，同样按 Apache-2.0 提供。

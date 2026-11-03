@@ -1,0 +1,15 @@
+{
+  "name": "gh-fix-ci",
+  "repository": "https://github.com/openai/skills",
+  "commit": "49f948faa9258a0c61caceaf225e179651397431",
+  "path": "skills/.curated/gh-fix-ci",
+  "license": "Apache-2.0",
+  "author": "OpenAI",
+  "retrievedAt": "2026-11-03",
+  "modifications": [
+    "SKILL.md 中文重写：只读取证、根因分类表、本地复现与复查要求；去掉对 create-plan 技能和 Codex 沙箱提权的依赖，修复授权按仓库约定。",
+    "scripts/inspect_pr_checks.py 改名为 scripts/inspect_ci_failures.py：新增 --branch（每个工作流最新已完成运行）与 --run 模式，覆盖没有 PR 的 push/定时运行；按 job 优先取 --log-failed；显式 UTF-8 解码；runner 汇总错误行只取上文，避开清理噪声；JSON 输出键改为 target。",
+    "未随包分发上游 assets/ 图标与 agents/openai.yaml。"
+  ],
+  "validation": "离线单元测试见 tests/test_gh_fix_ci.py；维护者用真实失败的 push 运行与无失败 PR 手动验证过脚本三种模式（结果不入公开仓库）。"
+}

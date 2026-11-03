@@ -1,0 +1,7 @@
+codebase-architecture：许可范围
+
+SKILL.md 与 references/vocabulary.md 改编自 Matt Pocock 的 skills 仓库
+（固定版本 4ae2317ddb22b046e26455e4f9c9b3aaaf62212d：skills/engineering/improve-codebase-architecture、
+skills/engineering/codebase-design），按 MIT 许可提供，Copyright (c) 2026 Matt Pocock。
+完整许可文本：LICENSES/MIT-mattpocock.txt。本仓修改（中文改写、合并与路由调整）同样按 MIT 提供，
+Copyright 2026 agent-skills contributors。与 Matt Pocock 无隶属或背书关系。
