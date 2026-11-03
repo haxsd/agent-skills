@@ -1,0 +1,10 @@
+threat-model 基于 OpenAI skills 仓库的 security-threat-model 技能改写：
+https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/security-threat-model
+
+Copyright OpenAI. Licensed under the Apache License, Version 2.0；完整文本见 LICENSES/Apache-2.0.txt。
+
+修改（agent-skills contributors，2026）：
+- SKILL.md 中文重写并压缩为定范围 → 取证 → 系统模型 → 资产与攻击者 → 滥用路径 → 核对假设 → 缓解 → 自检。
+- 输出契约改写为 references/output-contract.md；去掉仓库摘要提示词，合并进取证清单。
+- 新增 references/llm-agent-threats.md（LLM/agent 应用专项）与存放位置边界。
+与 OpenAI 无隶属、背书或认证关系。

@@ -162,8 +162,11 @@
 原创贡献者：agent-skills contributors。
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/finishing-a-development-branch)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
 - 来源：[Jesse Vincent / obra](https://github.com/obra/superpowers/tree/main/skills/verification-before-completion)；许可：MIT（上游已核验；收录版本待核验）；收录版本：待核验。
+- 来源：[Sentry](https://github.com/getsentry/skills/tree/0c464f411bdfb8d4c12314b36264d06cb2f60270/skills/pr-writer)；许可：Apache-2.0（仅 references/pr-and-commit.md）；收录版本：0c464f411bdfb8d4c12314b36264d06cb2f60270。
+- 来源：[Sentry](https://github.com/getsentry/skills/tree/0c464f411bdfb8d4c12314b36264d06cb2f60270/skills/commit)；许可：Apache-2.0（仅 references/pr-and-commit.md）；收录版本：0c464f411bdfb8d4c12314b36264d06cb2f60270。
 
 本仓贡献：
+- 2026-11-03 并入 Sentry commit 与 pr-writer：新增提交信息与 PR 描述参考，改为仓库已有约定优先。
 - 整合验证证据契约与成果保护，区分命名分支、detached HEAD 和外部管理工作区。
 - 改为复用同状态有效证据、只补失效检查；worktree 归属改用宿主记录或明确创建记录；增加 submodule guard、未提交成果检查和清理授权边界。
 
@@ -311,13 +314,16 @@
 
 ## suggesting-rules
 
-[suggesting-rules](skills/suggesting-rules/SKILL.md) · 启用 · **本仓原创**
+[suggesting-rules](skills/suggesting-rules/SKILL.md) · 启用 · **原创改进（基于上游）**
 
 原创贡献者：agent-skills contributors。
-- 原创维护仓库：[https://github.com/haxsd/agent-skills](https://github.com/haxsd/agent-skills)。
+- 来源：[Sentry](https://github.com/getsentry/skills/tree/0c464f411bdfb8d4c12314b36264d06cb2f60270/skills/agents-md)；许可：Apache-2.0（仅 references/agents-md.md）；收录版本：0c464f411bdfb8d4c12314b36264d06cb2f60270。
 
 本仓贡献：
 - 本仓编写重复偏好沉淀流程，按宿主选择规则落点，先检查既有规则避免重复。
+- 2026-11-03 并入 Sentry agents-md：新增整份指令文件的写法参考，加入多宿主单一来源、Windows 符号链接限制与写后核对。
+
+SKILL.md 正文为本仓原创；Apache-2.0 只覆盖 references/agents-md.md。
 
 ## ask-questions-if-underspecified
 
@@ -495,9 +501,11 @@ UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的
 原创贡献者：agent-skills contributors。
 - 上游：[Misaka Mikoto](https://github.com/Misaka-Mikoto-Tech/agent-skills)；许可：MIT；固定版本：`711abaf61e1b8d770d355e05b75e9641afa7b25e`。详情：[skills/windows-powershell-safe/UPSTREAM.json](skills/windows-powershell-safe/UPSTREAM.json)。
   - 另借鉴：[https://github.com/agent-shells/powershell-skills](https://github.com/agent-shells/powershell-skills)；版本：`4f389f0982654b57d04646c19084e40ac7bd2a1a`；范围：Stop rules / failure-retry wording only。
+  - 另借鉴：[https://github.com/github/awesome-copilot](https://github.com/github/awesome-copilot)；版本：`e2306b6922220f28d91ef5f7f2eaeb6de99913a0`；范围：references/pester.md：Pester v5/v6 两阶段模型、Mock 与迁移要点，中文改写并在 Pester 6.2.0 上实跑示例。
 
 本仓贡献：
 - 中文精简改写，加入安全调用决策顺序、宿主版本边界、失败停止规则和经验参考。
+- 2026-11-03 新增 references/pester.md：改编 awesome-copilot pester-migration（MIT），示例在 Pester 6.2.0 上实跑。
 
 ## skill-scanner
 
@@ -610,8 +618,47 @@ UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的
 
 原创贡献者：agent-skills contributors。
 - 上游：[Matt Pocock](https://github.com/mattpocock/skills)；许可：MIT；固定版本：`4ae2317ddb22b046e26455e4f9c9b3aaaf62212d`。详情：[skills/source-research/UPSTREAM.json](skills/source-research/UPSTREAM.json)。
+- 来源：[Hugging Face](https://github.com/huggingface/skills/tree/25910b3d0ba31a2ba102f901cdc9e008c278a69c/skills/huggingface-papers)；许可：Apache-2.0（仅 references/papers.md）；收录版本：25910b3d0ba31a2ba102f901cdc9e008c278a69c。
+- 来源：[GitHub](https://github.com/github/awesome-copilot/tree/e2306b6922220f28d91ef5f7f2eaeb6de99913a0/skills/doublecheck)；许可：MIT（仅 references/claim-check.md）；收录版本：e2306b6922220f28d91ef5f7f2eaeb6de99913a0。
 
 本仓贡献：
 - 新增来源分级、版本日期记录、冲突与待核实写法、实测验证、网页内容不当指令和笔记模板。
+- 2026-11-03 新增论文查询参考（改编 huggingface-papers）与成稿复核参考（参考 doublecheck）。
 
-基于 Matt Pocock research（MIT）的原创改进。
+基于 Matt Pocock research（MIT）的原创改进；参考文件按文件界定许可。
+
+## threat-model
+
+[threat-model](skills/threat-model/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[OpenAI](https://github.com/openai/skills)；许可：Apache-2.0；固定版本：`49f948faa9258a0c61caceaf225e179651397431`。详情：[skills/threat-model/UPSTREAM.json](skills/threat-model/UPSTREAM.json)。
+
+本仓贡献：
+- 中文重写并精简威胁建模流程与输出契约；新增 LLM/agent 应用专项参考与存放位置边界。
+
+基于 OpenAI security-threat-model（Apache-2.0）的原创改进。
+
+## agent-evals
+
+[agent-evals](skills/agent-evals/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 来源：[LangChain](https://github.com/langchain-ai/langchain-skills/tree/126c384d8552dcb476b226c244172186cc3f4328/config/skills/eval-engineering)；许可：MIT（仅思路参考，未复制原文）；收录版本：待核验。
+- 来源：[GitHub](https://github.com/github/awesome-copilot/tree/e2306b6922220f28d91ef5f7f2eaeb6de99913a0/skills/eval-driven-dev)；许可：MIT（仅思路参考，未复制原文）；收录版本：e2306b6922220f28d91ef5f7f2eaeb6de99913a0。
+- 来源：[Seth Hobson](https://github.com/wshobson/agents/tree/7e2fb559cf4b824b27f1fec49fe88f7511066d26/plugins/llm-finetuning/skills/eval-harness-first)；许可：MIT（仅思路参考，未复制原文）；收录版本：待核验。
+
+本仓贡献：
+- 本仓独立编写评估流程：错误分析先于指标、确定性评分优先、评审校准、多次试验与置信区间、基线对比与 CI 门禁。
+- 新增标准库脚本 eval_report.py（汇总、对比、评审校准）与离线单元测试。
+
+## python-uv-workflow
+
+[python-uv-workflow](skills/python-uv-workflow/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 来源：[Trail of Bits](https://github.com/trailofbits/skills/tree/711af095215ad4ecde5b90cd1d0124b3f1c4ca9e/plugins/modern-python/skills/modern-python)；许可：CC-BY-SA-4.0（仅思路参考，未复制原文）；收录版本：711af095215ad4ecde5b90cd1d0124b3f1c4ca9e。
+- 来源：[Seth Hobson](https://github.com/wshobson/agents/tree/7e2fb559cf4b824b27f1fec49fe88f7511066d26/plugins/python-development/skills/uv-package-manager)；许可：MIT（仅思路参考，未复制原文）；收录版本：待核验。
+
+本仓贡献：
+- 本仓独立编写：已有工具链优先、PEP 723 脚本、依赖组与锁文件、CI 用 --locked、ty 仍为 Beta 时不替换现有检查器、Windows 路径与编码注意和分步迁移。

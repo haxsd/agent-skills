@@ -4,3 +4,12 @@ SKILL.md 改编自 Matt Pocock 的 skills 仓库 skills/engineering/research
 （固定版本 4ae2317ddb22b046e26455e4f9c9b3aaaf62212d），按 MIT 许可提供，Copyright (c) 2026 Matt Pocock。
 完整许可文本：LICENSES/MIT-mattpocock.txt。本仓新增内容同样按 MIT 提供，Copyright 2026 agent-skills contributors。
 与 Matt Pocock 无隶属或背书关系。
+
+references/papers.md 改编自 huggingface/skills 的 skills/huggingface-papers
+（固定版本 25910b3d0ba31a2ba102f901cdc9e008c278a69c），按 Apache License 2.0 提供，Copyright Hugging Face；
+完整文本：LICENSES/Apache-2.0.txt。修改：中文改写，只保留只读查询，加入版本与引用规则和 arXiv 限流说明。
+
+references/claim-check.md 思路参考 github/awesome-copilot 的 skills/doublecheck
+（固定版本 e2306b6922220f28d91ef5f7f2eaeb6de99913a0），按 MIT 许可提供，Copyright GitHub, Inc.；
+完整文本：LICENSES/MIT-github-awesome-copilot.txt。修改：中文改写并精简为一次性复核流程。
+与 Hugging Face、GitHub 无隶属或背书关系。

@@ -1,0 +1,7 @@
+threat-model：许可范围
+
+SKILL.md 与 references/output-contract.md 改编自 OpenAI skills 仓库 skills/.curated/security-threat-model
+（固定版本 49f948faa9258a0c61caceaf225e179651397431），按 Apache License 2.0 提供，Copyright OpenAI。
+完整许可文本：LICENSES/Apache-2.0.txt；修改说明见 NOTICE.txt。
+references/llm-agent-threats.md 为本仓编写，按 Apache-2.0 提供，Copyright 2026 agent-skills contributors。
+与 OpenAI 无隶属或背书关系。

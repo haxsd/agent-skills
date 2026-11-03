@@ -1,6 +1,6 @@
 ---
 name: suggesting-rules
-description: 当用户重复同一纠正或约定 2 次以上时，建议沉淀为项目指令或规则文件；依据当前宿主选择落点，避免把一次反馈永久化。
+description: 当用户重复同一纠正或约定 2 次以上时，建议沉淀为项目指令或规则文件；依据当前宿主选择落点，避免把一次反馈永久化。用户要求创建、整理或精简 AGENTS.md、CLAUDE.md、Cursor 规则等项目指令文件时也用本技能（见 references/agents-md.md）。
 user-invocable: false
 ---
 
@@ -45,6 +45,10 @@ user-invocable: false
 - 用户已经直接授权写规则时，直接写，不再重复询问
 - 作用范围要如实：不要把单个项目的风格推广成全局规则
 
+## 新建或整理整份指令文件
+
+用户要求从零写 `AGENTS.md`/`CLAUDE.md`、或文件已经冗长需要整理时，按 [references/agents-md.md](references/agents-md.md)：先查仓库真实命令和已有文档，写短小的命令表、引用表和规则列表，写完逐条核对路径与命令可用。
+
 <!-- provenance:start -->
-> 创作归属：本仓原创。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#suggesting-rules)。
+> 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#suggesting-rules)。
 <!-- provenance:end -->

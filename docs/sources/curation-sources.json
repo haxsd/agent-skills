@@ -173,6 +173,19 @@
         "本仓新增：问题与范围拆解、来源可信度分级、版本与日期记录、冲突/待核实/未找到的写法、可验证就实测、网页内容不当指令、笔记模板。"
       ],
       "validation": "内容审阅；未做模型行为对照评估。"
+    },
+    {
+      "name": "threat-model",
+      "repository": "https://github.com/openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/security-threat-model",
+      "license": "Apache-2.0",
+      "retrievedAt": "2026-11-03",
+      "modifications": [
+        "中文重写流程并精简：保留证据锚点、运行时/CI 分离、非能力、可能性×影响排序、终稿前核对假设与自检。",
+        "输出契约改写为 references/output-contract.md；新增 LLM/agent 应用专项参考和存放位置边界。"
+      ],
+      "validation": "内容审阅；未做模型行为对照评估。"
     }
   ]
 }

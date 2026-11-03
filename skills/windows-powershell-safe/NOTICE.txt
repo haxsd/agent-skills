@@ -1,0 +1,9 @@
+windows-powershell-safe：附加来源
+
+主体改编自 Misaka-Mikoto-Tech/agent-skills（MIT，见 LICENSE.txt），stop rules 措辞借鉴 agent-shells/powershell-skills。
+
+references/pester.md 改编自 github/awesome-copilot 的 skills/pester-migration：
+https://github.com/github/awesome-copilot/tree/e2306b6922220f28d91ef5f7f2eaeb6de99913a0/skills/pester-migration
+MIT License, Copyright GitHub, Inc.；完整文本见 LICENSES/MIT-github-awesome-copilot.txt。
+修改：中文改写，加入 -ForEach 需 hashtable、v6 过滤 mock 不回落等实测结论与 CI 运行配置。
+与 GitHub 无隶属或背书关系。

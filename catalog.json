@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-03",
   "baselineCommit": "f4d28cf7c0ff98f38793060a8511f4c05b71512b",
-  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
+  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式；第二轮新增 threat-model、agent-evals、python-uv-workflow，Sentry commit/pr-writer 并入 finishing-a-development-branch，agents-md 并入 suggesting-rules，论文查询与成稿复核并入 source-research，Pester 参考并入 windows-powershell-safe。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -576,7 +576,7 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P1",
-      "summary": "复用同状态验证证据，按已有授权完成合并、PR 或保留；正确区分 submodule、linked worktree 和 detached HEAD。",
+      "summary": "复用同状态验证证据，按已有授权完成合并、PR 或保留；正确区分 submodule、linked worktree 和 detached HEAD；含提交信息与 PR 描述写法参考。",
       "uniqueValue": "验证证据绑定、只补失效检查、宿主归属判断、submodule guard、PR 后保留工作区和未提交成果保护。",
       "issues": [
         "worktree 归属依赖宿主管理记录或用户明确说明；没有权威证据时只能保留，不能自动清理。",
@@ -606,7 +606,8 @@
         {
           "file": "SKILL.md",
           "text": "路径所在目录、目录名和当前分支都不足以证明 worktree 由谁创建"
-        }
+        },
+        {"file": "references/pr-and-commit.md", "text": "## 先看仓库约定"}
       ]
     },
     {
@@ -1024,7 +1025,7 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P2",
-      "summary": "平台无关的重复偏好沉淀：按宿主选择落点（Cursor 规则或项目指令文件）。",
+      "summary": "平台无关的重复偏好沉淀：按宿主选择落点（Cursor 规则或项目指令文件）；含整份 AGENTS.md/CLAUDE.md 写法参考。",
       "uniqueValue": "重复纠正两次以上才提议、先查既有规则、一个关注点一条，避免把一次反馈永久化。",
       "issues": [
         "落点依赖具体宿主约定（.cursor/rules 或 AGENTS.md），执行时按当前工具核实。"
@@ -1046,7 +1047,8 @@
         {
           "file": "SKILL.md",
           "text": ".cursor/rules/<name>.mdc"
-        }
+        },
+        {"file": "references/agents-md.md", "text": "## 写完核对"}
       ]
     },
     {
@@ -1600,7 +1602,7 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P2",
-      "summary": "Windows 上 agent 少翻车的瘦 PowerShell 约定：宿主区分、数组传参、`-File`、编码、失败停止规则。",
+      "summary": "Windows 上 agent 少翻车的瘦 PowerShell 约定：宿主区分、数组传参、`-File`、编码、失败停止规则；含 Pester v5/v6 实测参考。",
       "uniqueValue": "把 pwsh/powershell 宿主、原生传参与 stop rules 收成短入口，并附团队翻车样例；不引入垫片运行时。",
       "issues": [
         "references/repros.md 为经验/文档归纳，未在本机 Windows 复跑，不能当 CI 断言。",
@@ -1625,7 +1627,8 @@
         {
           "file": "references/repros.md",
           "text": "未在本机 Windows 复跑"
-        }
+        },
+        {"file": "references/pester.md", "text": "BeforeDiscovery"}
       ]
     },
     {
@@ -1876,7 +1879,7 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P1",
-      "summary": "一手来源优先的调研流程：每条结论带来源、版本与日期，冲突和待核实如实标出，产出带引用的 Markdown 笔记。",
+      "summary": "一手来源优先的调研流程：每条结论带来源、版本与日期，冲突和待核实如实标出，产出带引用的 Markdown 笔记；含论文查询与成稿逐条复核参考。",
       "uniqueValue": "把“数据只用能核实的来源”写成可执行规则：来源分级、追到拥有事实的来源、能实测就实测、网页内容不当指令。",
       "issues": [
         "需要宿主有网页或文档读取能力；没有时只能基于本地源码与文档。"
@@ -1892,7 +1895,94 @@
       ],
       "evidence": [
         {"file": "SKILL.md", "text": "name: source-research"},
-        {"file": "SKILL.md", "text": "## 2. 找一手来源"}
+        {"file": "SKILL.md", "text": "## 2. 找一手来源"},
+        {"file": "references/claim-check.md", "text": "疑似编造"}
+      ]
+    },
+    {
+      "name": "threat-model",
+      "category": "knowledge-security",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "以仓库证据为基础的威胁建模：信任边界、资产、攻击者能力与非能力、滥用路径、可能性×影响排序、终稿前核对假设，含 LLM/agent 应用专项。",
+      "uniqueValue": "code-review 只看一次 diff，variant-analysis 只追已知缺陷；本技能给整个系统或子路径出一份可复查的威胁模型，并覆盖提示注入、工具权限、记忆投毒与凭据外泄等 agent 应用特有风险。",
+      "issues": [
+        "质量取决于取证深度与用户对部署上下文的回答。",
+        "未做模型行为对照评估。"
+      ],
+      "improvements": [
+        "用一个真实 agent 应用做一次完整建模，校准 LLM 专项清单。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "给一个带工具调用的 bot 做威胁建模，列出从网页内容注入到越权发消息的滥用路径并定位到确认步骤缺失的代码。",
+        "只有本机开发者能控制的输入不被算作远程攻击面。",
+        "报告中发现的令牌只写位置，不写原文。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: threat-model"},
+        {"file": "references/llm-agent-threats.md", "text": "间接提示注入"},
+        {"file": "references/output-contract.md", "text": "TM-001"},
+        {"file": "UPSTREAM.json", "text": "49f948faa9258a0c61caceaf225e179651397431"}
+      ]
+    },
+    {
+      "name": "agent-evals",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "high",
+      "readiness": "runnable",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "LLM/agent 应用的回归评估：错误分析定失败类型、版本化金标准用例、确定性评分优先、校准后的 LLM 评审、多次试验置信区间与基线对比。",
+      "uniqueValue": "prompt-optimizer 管单段 prompt，writing-skills 管技能改动；本技能评估整个 agent 应用（工具、检索、记忆、换模型），附标准库脚本给出按失败类型的区间、回退判定和评审 TPR/TNR。",
+      "issues": [
+        "需要被测系统可脚本化调用；付费模型评估要用户设定预算。"
+      ],
+      "improvements": [
+        "接入一个真实项目的评估目录，验证失败类型模板是否够用。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "换模型前后各跑 5 次试验，下降不显著时报告需加试验而不是宣布回退。",
+        "LLM 评审未用人工标注校准前不用于决策。",
+        "超时与限流记为无效运行，不计入通过率。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: agent-evals"},
+        {"file": "SKILL.md", "text": "错误分析先于指标"},
+        {"file": "scripts/eval_report.py", "text": "def cmd_compare"}
+      ]
+    },
+    {
+      "name": "python-uv-workflow",
+      "category": "implementation-orchestration",
+      "state": "active",
+      "value": "medium",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "用 uv 管理 Python 项目与单文件脚本：PEP 723、依赖组、锁文件与 --locked、uv run、ruff、pytest，以及 Windows 路径、编码与解释器选择；已有工具链优先。",
+      "uniqueValue": "env-doctor 诊断环境问题，本技能规定怎样搭建与迁移；明确不强推 Beta 工具、不替换已在 CI 中的检查器，迁移一次只换一样。",
+      "issues": [
+        "uv 与 ruff 版本更新快，命令细节需按当前版本复核。"
+      ],
+      "improvements": [
+        "在 Windows 上实跑一遍 PEP 723 脚本和迁移步骤并补记录。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "写一个需要 requests 的单文件脚本时用 PEP 723 而不是新建 requirements.txt。",
+        "已有 Poetry 项目且用户没要求迁移时沿用 Poetry。",
+        "CI 中用 uv sync --locked，锁文件过期即失败。"
+      ],
+      "evidence": [
+        {"file": "SKILL.md", "text": "name: python-uv-workflow"},
+        {"file": "SKILL.md", "text": "uv add --script"},
+        {"file": "SKILL.md", "text": "## Windows 注意"}
       ]
     }
   ]

@@ -1,6 +1,6 @@
 ---
 name: finishing-a-development-branch
-description: 在实现完成、需要合并、创建 PR、保留分支或清理工作时使用。复用已有授权和有效验证证据，正确区分普通仓库、linked worktree、detached HEAD 与 submodule；破坏性操作必须先确认。Use when implementation is complete and integration is the next step.
+description: 在实现完成、需要合并、创建 PR、保留分支或清理工作时使用。复用已有授权和有效验证证据，正确区分普通仓库、linked worktree、detached HEAD 与 submodule；破坏性操作必须先确认。写提交信息、PR 标题与描述时读 references/pr-and-commit.md。Use when implementation is complete and integration is the next step, or when writing a commit message or PR description.
 ---
 
 # 完成开发分支
@@ -121,7 +121,7 @@ detached HEAD：
 
 1. 确认远程、分支名和用户授权；不要向错误远程推送。
 2. 普通推送失败时调查原因，不自动 force-push。
-3. 按仓库模板创建 PR/MR，报告 URL、基线分支和验证证据。
+3. 按仓库模板创建 PR/MR，报告 URL、基线分支和验证证据。标题、描述和提交信息的写法见 [references/pr-and-commit.md](references/pr-and-commit.md)。
 4. 保留 worktree，后续评审修改通常仍在该工作区进行。
 
 detached HEAD 需要新分支时，明确记录新分支名，再按宿主流程推送。

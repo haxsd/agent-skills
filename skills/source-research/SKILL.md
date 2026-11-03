@@ -1,6 +1,6 @@
 ---
 name: source-research
-description: 针对一个具体问题做可核实的资料调查：优先一手来源（官方文档、源码、规范、发布说明、API 实测），每条结论附来源与版本/日期，冲突和不确定如实标出，结果写成一份带引用的 Markdown 笔记。Use when the user asks to 调研、查清楚、核实某个说法、比较库/工具/API 的事实、research a library or API behavior, or delegate reading legwork to a background agent. 选购商品、找技能来源扫描（skill-scanner）不属于本技能。
+description: 针对一个具体问题做可核实的资料调查：优先一手来源（官方文档、源码、规范、发布说明、API 实测），每条结论附来源与版本/日期，冲突和不确定如实标出，结果写成一份带引用的 Markdown 笔记。Use when the user asks to 调研、查清楚、核实某个说法、比较库/工具/API 的事实、research a library or API behavior, delegate reading legwork to a background agent, 读论文/arXiv, or 核查一份已写好的回答或报告里的说法. 选购商品、找技能来源扫描（skill-scanner）不属于本技能。
 ---
 
 # 有来源的调研
@@ -54,6 +54,11 @@ description: 针对一个具体问题做可核实的资料调查：优先一手�
 ```
 
 回答里先给结论，再给关键来源链接；不复述整篇笔记。
+
+## 专项参考
+
+- 论文与 arXiv：[references/papers.md](references/papers.md)
+- 复核一份已写好的文字（逐条抽说法、评级、找编造）：[references/claim-check.md](references/claim-check.md)
 
 <!-- provenance:start -->
 > 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#source-research)。

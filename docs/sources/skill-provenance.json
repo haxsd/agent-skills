@@ -103,9 +103,11 @@
       "kind": "derived",
       "sources": [
         {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/finishing-a-development-branch", "license": "MIT（上游已核验；收录版本待核验）"},
-        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/verification-before-completion", "license": "MIT（上游已核验；收录版本待核验）"}
+        {"author": "Jesse Vincent / obra", "url": "https://github.com/obra/superpowers/tree/main/skills/verification-before-completion", "license": "MIT（上游已核验；收录版本待核验）"},
+        {"author": "Sentry", "url": "https://github.com/getsentry/skills/tree/0c464f411bdfb8d4c12314b36264d06cb2f60270/skills/pr-writer", "license": "Apache-2.0（仅 references/pr-and-commit.md）", "revision": "0c464f411bdfb8d4c12314b36264d06cb2f60270"},
+        {"author": "Sentry", "url": "https://github.com/getsentry/skills/tree/0c464f411bdfb8d4c12314b36264d06cb2f60270/skills/commit", "license": "Apache-2.0（仅 references/pr-and-commit.md）", "revision": "0c464f411bdfb8d4c12314b36264d06cb2f60270"}
       ],
-      "contributions": ["整合验证证据契约与成果保护，区分命名分支、detached HEAD 和外部管理工作区。", "改为复用同状态有效证据、只补失效检查；worktree 归属改用宿主记录或明确创建记录；增加 submodule guard、未提交成果检查和清理授权边界。"]
+      "contributions": ["2026-11-03 并入 Sentry commit 与 pr-writer：新增提交信息与 PR 描述参考，改为仓库已有约定优先。", "整合验证证据契约与成果保护，区分命名分支、detached HEAD 和外部管理工作区。", "改为复用同状态有效证据、只补失效检查；worktree 归属改用宿主记录或明确创建记录；增加 submodule guard、未提交成果检查和清理授权边界。"]
     },
     {
       "name": "ui-ux-pro-max",
@@ -197,8 +199,10 @@
     },
     {
       "name": "suggesting-rules",
-      "kind": "original",
-      "contributions": ["本仓编写重复偏好沉淀流程，按宿主选择规则落点，先检查既有规则避免重复。"]
+      "kind": "derived",
+      "sources": [{"author": "Sentry", "url": "https://github.com/getsentry/skills/tree/0c464f411bdfb8d4c12314b36264d06cb2f60270/skills/agents-md", "license": "Apache-2.0（仅 references/agents-md.md）", "revision": "0c464f411bdfb8d4c12314b36264d06cb2f60270"}],
+      "contributions": ["本仓编写重复偏好沉淀流程，按宿主选择规则落点，先检查既有规则避免重复。", "2026-11-03 并入 Sentry agents-md：新增整份指令文件的写法参考，加入多宿主单一来源、Windows 符号链接限制与写后核对。"],
+      "note": "SKILL.md 正文为本仓原创；Apache-2.0 只覆盖 references/agents-md.md。"
     },
     {
       "name": "ask-questions-if-underspecified",
@@ -317,7 +321,7 @@
       "name": "windows-powershell-safe",
       "kind": "derived",
       "upstreamFiles": ["skills/windows-powershell-safe/UPSTREAM.json"],
-      "contributions": ["中文精简改写，加入安全调用决策顺序、宿主版本边界、失败停止规则和经验参考。"]
+      "contributions": ["中文精简改写，加入安全调用决策顺序、宿主版本边界、失败停止规则和经验参考。", "2026-11-03 新增 references/pester.md：改编 awesome-copilot pester-migration（MIT），示例在 Pester 6.2.0 上实跑。"]
     },
     {
       "name": "waiting-and-async",
@@ -413,9 +417,49 @@
         "skills/source-research/UPSTREAM.json"
       ],
       "contributions": [
-        "新增来源分级、版本日期记录、冲突与待核实写法、实测验证、网页内容不当指令和笔记模板。"
+        "新增来源分级、版本日期记录、冲突与待核实写法、实测验证、网页内容不当指令和笔记模板。",
+        "2026-11-03 新增论文查询参考（改编 huggingface-papers）与成稿复核参考（参考 doublecheck）。"
       ],
-      "note": "基于 Matt Pocock research（MIT）的原创改进。"
+      "sources": [
+        {"author": "Hugging Face", "url": "https://github.com/huggingface/skills/tree/25910b3d0ba31a2ba102f901cdc9e008c278a69c/skills/huggingface-papers", "license": "Apache-2.0（仅 references/papers.md）", "revision": "25910b3d0ba31a2ba102f901cdc9e008c278a69c"},
+        {"author": "GitHub", "url": "https://github.com/github/awesome-copilot/tree/e2306b6922220f28d91ef5f7f2eaeb6de99913a0/skills/doublecheck", "license": "MIT（仅 references/claim-check.md）", "revision": "e2306b6922220f28d91ef5f7f2eaeb6de99913a0"}
+      ],
+      "note": "基于 Matt Pocock research（MIT）的原创改进；参考文件按文件界定许可。"
+    },
+    {
+      "name": "threat-model",
+      "kind": "derived",
+      "upstreamFiles": [
+        "skills/threat-model/UPSTREAM.json"
+      ],
+      "contributions": [
+        "中文重写并精简威胁建模流程与输出契约；新增 LLM/agent 应用专项参考与存放位置边界。"
+      ],
+      "note": "基于 OpenAI security-threat-model（Apache-2.0）的原创改进。"
+    },
+    {
+      "name": "agent-evals",
+      "kind": "derived",
+      "sources": [
+        {"author": "LangChain", "url": "https://github.com/langchain-ai/langchain-skills/tree/126c384d8552dcb476b226c244172186cc3f4328/config/skills/eval-engineering", "license": "MIT（仅思路参考，未复制原文）"},
+        {"author": "GitHub", "url": "https://github.com/github/awesome-copilot/tree/e2306b6922220f28d91ef5f7f2eaeb6de99913a0/skills/eval-driven-dev", "license": "MIT（仅思路参考，未复制原文）", "revision": "e2306b6922220f28d91ef5f7f2eaeb6de99913a0"},
+        {"author": "Seth Hobson", "url": "https://github.com/wshobson/agents/tree/7e2fb559cf4b824b27f1fec49fe88f7511066d26/plugins/llm-finetuning/skills/eval-harness-first", "license": "MIT（仅思路参考，未复制原文）"}
+      ],
+      "contributions": [
+        "本仓独立编写评估流程：错误分析先于指标、确定性评分优先、评审校准、多次试验与置信区间、基线对比与 CI 门禁。",
+        "新增标准库脚本 eval_report.py（汇总、对比、评审校准）与离线单元测试。"
+      ]
+    },
+    {
+      "name": "python-uv-workflow",
+      "kind": "derived",
+      "sources": [
+        {"author": "Trail of Bits", "url": "https://github.com/trailofbits/skills/tree/711af095215ad4ecde5b90cd1d0124b3f1c4ca9e/plugins/modern-python/skills/modern-python", "license": "CC-BY-SA-4.0（仅思路参考，未复制原文）", "revision": "711af095215ad4ecde5b90cd1d0124b3f1c4ca9e"},
+        {"author": "Seth Hobson", "url": "https://github.com/wshobson/agents/tree/7e2fb559cf4b824b27f1fec49fe88f7511066d26/plugins/python-development/skills/uv-package-manager", "license": "MIT（仅思路参考，未复制原文）"}
+      ],
+      "contributions": [
+        "本仓独立编写：已有工具链优先、PEP 723 脚本、依赖组与锁文件、CI 用 --locked、ty 仍为 Beta 时不替换现有检查器、Windows 路径与编码注意和分步迁移。"
+      ]
     }
   ]
 }

@@ -1,0 +1,9 @@
+finishing-a-development-branch：附加来源
+
+references/pr-and-commit.md 改编自 getsentry/skills 的 skills/commit 与 skills/pr-writer：
+https://github.com/getsentry/skills/tree/0c464f411bdfb8d4c12314b36264d06cb2f60270/skills
+Copyright 2025 Functional Software, Inc. dba Sentry. Licensed under the Apache License, Version 2.0；
+完整文本见 LICENSES/Apache-2.0.txt。修改：中文改写，改为仓库已有约定优先，去掉 Sentry 专有格式与默认草稿规则。
+与 Sentry 无隶属或背书关系。
+
+SKILL.md 其余内容的来源（obra/superpowers，MIT）见仓库 ATTRIBUTION.md。

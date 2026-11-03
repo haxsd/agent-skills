@@ -295,6 +295,27 @@
       "defaultTargets": [
         "agents"
       ]
+    },
+    {
+      "name": "agent-evals",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "python-uv-workflow",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "threat-model",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
     }
   ]
 }

@@ -18,6 +18,13 @@
       "repository": "https://github.com/agent-shells/powershell-skills",
       "commit": "4f389f0982654b57d04646c19084e40ac7bd2a1a",
       "what": "Stop rules / failure-retry wording only"
+    },
+    {
+      "repository": "https://github.com/github/awesome-copilot",
+      "commit": "e2306b6922220f28d91ef5f7f2eaeb6de99913a0",
+      "path": "skills/pester-migration",
+      "license": "MIT",
+      "what": "references/pester.md：Pester v5/v6 两阶段模型、Mock 与迁移要点，中文改写并在 Pester 6.2.0 上实跑示例"
     }
   ],
   "validation": "Offline repo audit_skills/check_docs/unittest; samples labeled experience/docs only."

@@ -1,6 +1,6 @@
 ---
 name: windows-powershell-safe
-description: 在 Windows 上写或运行 PowerShell 时使用（含 agent 壳 / pwsh / powershell 会话）；涉及 native program、引号与 escaping、编码、退出码、路径、Start-Process、文件操作或命令失败排查时触发。
+description: 在 Windows 上写或运行 PowerShell 时使用（含 agent 壳 / pwsh / powershell 会话）；涉及 native program、引号与 escaping、编码、退出码、路径、Start-Process、文件操作、Pester 测试或命令失败排查时触发。
 license: Complete terms in LICENSE.txt
 ---
 
@@ -125,6 +125,8 @@ if ($process.ExitCode -ne 0) { throw "exit code $($process.ExitCode)" }
 - 不要把私密的原始失败日志提交进仓库。
 
 常见翻车样例（经验/文档归纳，未在本机 Windows 复跑）见 `references/repros.md`。
+
+写或迁移 Pester 测试（`*.Tests.ps1`、发现/运行两阶段、Mock、CI 退出码）见 `references/pester.md`。
 
 <!-- provenance:start -->
 > 创作归属：原创改进（基于上游）。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#windows-powershell-safe)。
