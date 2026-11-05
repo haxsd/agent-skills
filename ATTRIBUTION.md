@@ -271,13 +271,14 @@
 
 原创贡献者：agent-skills contributors。
 - 原创维护仓库：[https://github.com/haxsd/agent-skills](https://github.com/haxsd/agent-skills)。
-- 外部依赖（非技能文本来源）：[zhaoxuya520](https://github.com/zhaoxuya520/reverse-skill)；许可：MIT（当前外部仓库已核验；未将包体纳入本仓）。
+- 外部依赖（非技能文本来源）：[zhaoxuya520](https://github.com/zhaoxuya520/reverse-skill)；许可：MIT（仅作改写参考，非本收藏库安装目标；参考版本 v1.0.1 已核验；未将包体纳入本仓）。
 
 本仓贡献：
-- 本仓编写外部安全研究技能包的路由入口、定位与预检规则；不打包外部技能包本体。
+- 本仓编写安全研究技能包的路由入口、定位与预检规则；不打包技能包本体。
 - 新增跨平台只读预检脚本与离线回归测试，统一检查规则、路由、建案、复核和可选工具资源。
+- 正文指向筹备中的独立仓 haxsd/reverse-skills（同 toolkit-map 外挂）；上游第三方仓不作安装目标。
 
-原创声明仅覆盖本仓路由文本，不覆盖外部安全研究技能包。
+原创声明仅覆盖本仓路由文本。技能包本体计划放在 haxsd/reverse-skills（筹备中）；上游 zhaoxuya520/reverse-skill 仅作改写参考，不覆盖独立技能包内容。
 
 ## writing-skills
 

@@ -11,33 +11,13 @@ description: 逆向工程技能路由包入口。用于 APK/二进制逆向、�
 
 本仓库内的这个 skill **只是路由入口**。真正的技能包体（`skills/`、`RULES*.md`、各种脚本与参考文档）以**外部安装**的形式存在，路径因机器而异，必须通过下面的解析顺序定位，**不要**在任何文档或命令里写死某一台机器的绝对路径。
 
-## 外部技能包来源
+## 技能包本体与本仓分工
 
-本仓**不**把外部技能包本体 vendor 进仓库。已登记的上游（见 [ATTRIBUTION.md](../../ATTRIBUTION.md#reverse-skill)）：
+本仓**不**把技能包本体 vendor 进仓库（见 [ATTRIBUTION.md](../../ATTRIBUTION.md#reverse-skill)）。分工如下：
 
-- 仓库：<https://github.com/zhaoxuya520/reverse-skill>（MIT）
-- 推荐钉住版本：tag **`v1.0.1`**（上游 `VERSION` 文件内容为 `1.0.1`；约 2026-09-22；体量约 49 个 `skills/` 模块、89 个 `SKILL.md`、仓库约 3.5 MB）
-- 安装后设置 `REVERSE_SKILL_ROOT`，并用 `VERSION` / `git describe` 核对本地版本。
-
-建议安装到默认候选目录（可改路径，但要让预检找得到）：
-
-```powershell
-# PowerShell
-git clone --branch v1.0.1 https://github.com/zhaoxuya520/reverse-skill.git "$env:USERPROFILE\tools\reverse-skill"
-# 核对 VERSION 文件内容为 1.0.1
-$env:REVERSE_SKILL_ROOT = "$env:USERPROFILE\tools\reverse-skill"
-Get-Content "$env:REVERSE_SKILL_ROOT\VERSION"
-```
-
-```bash
-# bash
-git clone --branch v1.0.1 https://github.com/zhaoxuya520/reverse-skill.git "$HOME/tools/reverse-skill"
-# 核对 VERSION 文件内容为 1.0.1
-export REVERSE_SKILL_ROOT="$HOME/tools/reverse-skill"
-cat "$REVERSE_SKILL_ROOT/VERSION"
-```
-
-若找不到 `v1.0.1` tag：clone 默认分支后核对 `VERSION`，或请用户提供已安装路径。若上游地址变更且本仓尚未更新登记：**STOP**，请用户提供安装路径或设置 `REVERSE_SKILL_ROOT`，不要臆造 URL。
+- **技能包本体**将放在独立仓库 `haxsd/reverse-skills`（**筹备中**，同 [toolkit-map](https://github.com/haxsd/toolkit-map) 外挂模式）。该仓可用之前，请用本机已安装路径，或设置 `REVERSE_SKILL_ROOT`。
+- **上游** [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill)（MIT，v1.0.1）**仅作改写参考**，**不是**本收藏库的安装目标；不要 `git clone` 它来充当本 skill 的技能包。
+- 已有本地安装时，可用 `VERSION` / `git describe` 核对版本；路径以解析顺序为准，不要写死某台机器的绝对路径。
 
 ## `<SKILL_ROOT>` 解析顺序
 
@@ -52,7 +32,7 @@ cat "$REVERSE_SKILL_ROOT/VERSION"
    - 其它用户明确告知的路径
 3. **都没找到 → 立即 STOP（外部包工作流）**：
    - 告诉用户：本 skill 只是路由器，外部技能包尚未安装 / 未定位到，因此无法路由、无法读取 `RULES`、无法运行 `case-init` 等脚本。
-   - 请用户按上文安装，或提供路径 / 设置 `REVERSE_SKILL_ROOT`。
+   - 请用户提供已安装路径，或设置 `REVERSE_SKILL_ROOT`；在 `haxsd/reverse-skills` 可用前不要去 clone 上游第三方仓当安装目标。
    - **不要**猜测路径、**不要**凭空执行命令、**不要**编造技能模块或脚本名。
    - 若任务仍需推进，改走下方「未安装技能包时的最小流程」，**不要**假装已进入外部包工作流。
 
@@ -192,19 +172,19 @@ pwsh -NoProfile -ExecutionPolicy Bypass -File "<SKILL_ROOT>/skills/scripts/boots
 
 ## 更新
 
-技能包本体位于 `<SKILL_ROOT>`，更新时针对该目录操作：
+技能包本体位于 `<SKILL_ROOT>`（本机路径或未来的 `haxsd/reverse-skills` 安装目录）。若该目录是 git 仓库，可按需更新后刷新工具索引；没有 git 就跳过 pull：
 
 ```powershell
-git -C "<SKILL_ROOT>" pull
+if (Test-Path "<SKILL_ROOT>\.git") { git -C "<SKILL_ROOT>" pull }
 pwsh -NoProfile -ExecutionPolicy Bypass -File "<SKILL_ROOT>\skills\scripts\refresh-tool-index.ps1"
 ```
 
 ```bash
-git -C "<SKILL_ROOT>" pull
+[ -d "<SKILL_ROOT>/.git" ] && git -C "<SKILL_ROOT>" pull
 pwsh -NoProfile -ExecutionPolicy Bypass -File "<SKILL_ROOT>/skills/scripts/refresh-tool-index.ps1"
 ```
 
-更新后核对 `VERSION`（推荐仍钉在 `v1.0.1`，除非用户明确要跟新）；记下实际 commit/tag。
+更新后记下实际 commit/tag 或 `VERSION`；不要把第三方上游仓当作本收藏库的默认安装源。
 
 <!-- provenance:start -->
 > 创作归属：本仓原创。来源、署名与许可见 [来源说明](../../ATTRIBUTION.md#reverse-skill)。
