@@ -887,27 +887,33 @@
       "readiness": "external",
       "action": "retain",
       "priority": "P1",
-      "summary": "安全研究路由入口已带只读预检脚本，实际价值仍取决于外部技能包与工具链。",
+      "summary": "安全研究路由入口：外部包预检 + 未安装时的最小静态流程；价值仍取决于外部技能包与本机工具。",
       "uniqueValue": "按任务路由到专项方法、案例证据链、授权 scope 和交付自检；无需把大型技能包复制进本仓库。",
       "issues": [
         "预检只检查文件可用性，不能证明外部技能版本兼容、规则内容安全或工具确实可运行。",
-        "49 模块/89 入口与工具具备清单仍是历史快照，不能代表现状；正文已标明需动态检查。",
+        "推荐钉住上游 tag v1.0.1（VERSION=1.0.1），但兼容性仍依赖使用者核对本地 VERSION / commit。",
         "依赖的 RULES、路由、建案、bootstrap 和复核均不在本仓库，需外部版本记录。"
       ],
       "improvements": [
         "新增 scripts/preflight.py：跨平台解析 REVERSE_SKILL_ROOT/默认候选，输出缺失文件 JSON 和非零退出码。",
-        "记录上游仓库、期望版本和本地验证状态；工具状态用 toolkit-map 动态查询。"
+        "正文登记上游仓库、推荐 tag v1.0.1 与安装示例；工具状态改为动态检查。",
+        "删除过时历史工具快照表与重复必需文件清单；补充未安装技能包时的最小静态流程（双 shell 命令）。",
+        "收窄 description / 何时使用触发面，避免笼统「安全审计」误触发。"
       ],
       "mergeWith": [],
       "scenarios": [
-        "外部目录缺失时脚本列出 tested 与 missingRequired，不猜工具可用。",
+        "外部目录缺失时脚本列出 tested 与 missingRequired，不猜工具可用；可改走最小静态流程。",
         "预检通过后再读规则和路由；脚本不安装、不修复、不执行外部包。",
         "离线样本按本地 scope 建案，未授权外部目标不启动网络动作。"
       ],
       "evidence": [
         {
           "file": "SKILL.md",
-          "text": "REVERSE_SKILL_ROOT"
+          "text": "外部技能包来源"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "未安装技能包时的最小流程"
         },
         {
           "file": "scripts/preflight.py",
