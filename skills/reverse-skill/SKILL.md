@@ -1,6 +1,6 @@
 ---
 name: reverse-skill
-description: 逆向工程技能路由包入口。用于 APK/二进制分诊与 Android APK 逆向（第一批）；后续批次再扩 JS/协议等。Use when reverse engineering APKs or triage-ing unknown binaries; not for vague "security audit" alone.
+description: 逆向工程技能路由包入口。用于 APK/Android、文件分诊、JS 解混淆与参数链、ELF/PE/Mach-O 深度逆向（haxsd/reverse-skills v0.2+）。Use when reverse engineering APKs, triage-ing binaries, JS deobfuscation/signing chains, or native ELF/PE/Mach-O analysis; not for vague "security audit" alone.
 ---
 
 # reverse-skill 技能路由包（入口）
@@ -15,7 +15,7 @@ description: 逆向工程技能路由包入口。用于 APK/二进制分诊与 A
 
 本仓**不**把技能包本体 vendor 进仓库（见 [ATTRIBUTION.md](../../ATTRIBUTION.md#reverse-skill)）。分工如下：
 
-- **技能包本体**：[haxsd/reverse-skills](https://github.com/haxsd/reverse-skills)（MIT，v0.1.0 起）。安装见下。
+- **技能包本体**：[haxsd/reverse-skills](https://github.com/haxsd/reverse-skills)（MIT，v0.2.0 起含 JS/二进制）。安装见下。
 - **改写参考**（**不是**安装目标）：[zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill)（MIT）及其他上游，详见独立仓 `ATTRIBUTION.md`。
 - 已安装时可用 `VERSION` / `git rev-parse HEAD` 核对版本。
 
@@ -73,7 +73,9 @@ python scripts/preflight.py --root "<SKILL_ROOT>"
 
 - APK / Android 包逆向（指纹、反编译、API 面、调用链）
 - 未知文件 / 二进制**分诊**（容器、架构、加壳线索）
-- （第二批才会扩展）JS 解混淆、通用二进制深度、协议等——当前若仅这些，说明包体尚未收录对应模块，可走最小静态流程
+- JS 解混淆、签名/加密参数链、webpack/bundle 分析
+- 通用 ELF/PE/Mach-O 深度（表面→工具选择→反汇编/反编译）
+- 协议/CTF/固件专项、渗透 payload、EDR 绕过——**包体不收**；勿假装有模块
 
 ## 工作流程（外部技能包）
 
@@ -103,7 +105,7 @@ python scripts/preflight.py --root "<SKILL_ROOT>"
 
    针对外部目标时必须 `auth.status=granted` 并给出有效网络配置；本地样本用 `offline-sample`。`-Force` 不能越过授权门禁。
 
-6. **进子技能**：打开 PRIMARY 的 `SKILL.md`（第一批：`triage` / `android-apk`）。
+6. **进子技能**：打开 PRIMARY 的 `SKILL.md`（`triage` / `android-apk` / `js-reverse` / `binary-reverse`）。
 7. **交付前自检**：
 
    ```bash
@@ -127,7 +129,7 @@ python scripts/preflight.py --root "<SKILL_ROOT>"
 ## 安全与合规
 
 - 使用前必须确认对目标有明确授权，或处于合法 CTF/教学/自测。未授权扫描、入侵、凭据窃取、持久化、破坏性操作一律拒绝。
-- `haxsd/reverse-skills` **第一批不包含** pentest payload 字典或 EDR 绕过模块。
+- `haxsd/reverse-skills` **不包含** pentest payload 字典或 EDR 绕过模块。
 - 遵守 `<SKILL_ROOT>/RULES_zh.md`（或 `RULES.md`）中的 scope 授权门禁与证据链要求。
 
 ## 更新
