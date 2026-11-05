@@ -35,7 +35,7 @@ scripts/   仓库检查与生成工具
 tests/     离线回归测试
 ```
 
-`catalog.json` 保存人工判断，`manifest.json` 管理安装目标，`external.json` 登记独立维护的 [toolkit-map](https://github.com/haxsd/toolkit-map)。
+`catalog.json` 保存人工判断，`manifest.json` 管理安装目标，`external.json` 登记独立维护的 [toolkit-map](https://github.com/haxsd/toolkit-map) 与 [reverse-skills](https://github.com/haxsd/reverse-skills)。
 
 ## 维护
 

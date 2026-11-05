@@ -35,7 +35,7 @@ scripts/   repository checks and generators
 tests/     offline regression tests
 ```
 
-`catalog.json` holds human judgments, `manifest.json` defines install targets, `external.json` registers the independently maintained [toolkit-map](https://github.com/haxsd/toolkit-map).
+`catalog.json` holds human judgments, `manifest.json` defines install targets, `external.json` registers the independently maintained [toolkit-map](https://github.com/haxsd/toolkit-map) and [reverse-skills](https://github.com/haxsd/reverse-skills).
 
 ## Maintenance
 
