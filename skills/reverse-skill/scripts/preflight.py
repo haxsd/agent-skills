@@ -21,7 +21,10 @@ OPTIONAL_FILES = (
     "skills/tool-index.md",
     "skills/scripts/refresh-tool-index.ps1",
     "skills/scripts/bootstrap-reverse.ps1",
+    "skills/scripts/master-route.sh",
+    "skills/scripts/case-init.sh",
     "skills/field-journal",
+    "VERSION",
 )
 
 
@@ -68,8 +71,14 @@ def candidate_roots(explicit=None):
     elif os.environ.get("REVERSE_SKILL_ROOT"):
         candidates.append(Path(os.environ["REVERSE_SKILL_ROOT"]))
         sources.append("REVERSE_SKILL_ROOT")
-    candidates.append(Path.home() / "tools" / "reverse-skill")
-    sources.append("default")
+    home = Path.home()
+    # Prefer haxsd/reverse-skills install path; keep singular as compat.
+    for label, path in (
+        ("default-reverse-skills", home / "tools" / "reverse-skills"),
+        ("compat-reverse-skill", home / "tools" / "reverse-skill"),
+    ):
+        candidates.append(path)
+        sources.append(label)
     unique = []
     seen = set()
     for source, candidate in zip(sources, candidates):
@@ -102,9 +111,13 @@ def main(argv=None):
         json.dumps(
             {
                 "ok": False,
-                "error": "external reverse-skill package was not found or is incomplete",
+                "error": "external reverse-skills package was not found or is incomplete",
                 "tested": tested,
-                "next": "Set REVERSE_SKILL_ROOT or pass --root with the installed package directory.",
+                "next": (
+                    "git clone https://github.com/haxsd/reverse-skills.git "
+                    "into ~/tools/reverse-skills (or %USERPROFILE%\\tools\\reverse-skills), "
+                    "or set REVERSE_SKILL_ROOT / pass --root."
+                ),
             },
             ensure_ascii=False,
             indent=2,

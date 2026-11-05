@@ -2,7 +2,22 @@
   {
     "name": "toolkit-map",
     "path": "%USERPROFILE%\\Projects\\toolkit-map",
-    "targets": ["agents", "cursor", "devin", "claude"],
+    "targets": [
+      "agents",
+      "cursor",
+      "devin",
+      "claude"
+    ],
     "note": "独立维护的工具地图。path 支持 %ENV% 和仓库相对路径；按实际源目录配置，只挂联接、不复制内容。"
+  },
+  {
+    "name": "reverse-skills",
+    "path": "%USERPROFILE%\\tools\\reverse-skills",
+    "targets": [
+      "agents",
+      "cursor",
+      "claude"
+    ],
+    "note": "独立维护的逆向技能包（精简）。path 支持 %ENV%；默认 clone 到 tools/reverse-skills，只挂联接、不复制内容。也可用 REVERSE_SKILL_ROOT。"
   }
 ]

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-03",
+  "reviewedAt": "2026-11-05",
   "baselineCommit": "f4d28cf7c0ff98f38793060a8511f4c05b71512b",
   "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式；第二轮新增 threat-model、agent-evals、python-uv-workflow，Sentry commit/pr-writer 并入 finishing-a-development-branch，agents-md 并入 suggesting-rules，论文查询与成稿复核并入 source-research，Pester 参考并入 windows-powershell-safe。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
   "categories": [
@@ -28,10 +28,10 @@
       "id": "writing-content",
       "title": "写作与内容"
     },
-  {
-    "id": "documents",
-    "title": "文档与办公"
-  },
+    {
+      "id": "documents",
+      "title": "文档与办公"
+    },
     {
       "id": "knowledge-security",
       "title": "知识图谱、调研与安全研究"
@@ -82,7 +82,10 @@
           "file": "SKILL.md",
           "text": "追问技巧"
         },
-        {"file": "SKILL.md", "text": "### 拷问模式"}
+        {
+          "file": "SKILL.md",
+          "text": "### 拷问模式"
+        }
       ]
     },
     {
@@ -607,7 +610,10 @@
           "file": "SKILL.md",
           "text": "路径所在目录、目录名和当前分支都不足以证明 worktree 由谁创建"
         },
-        {"file": "references/pr-and-commit.md", "text": "## 先看仓库约定"}
+        {
+          "file": "references/pr-and-commit.md",
+          "text": "## 先看仓库约定"
+        }
       ]
     },
     {
@@ -887,18 +893,16 @@
       "readiness": "external",
       "action": "retain",
       "priority": "P1",
-      "summary": "安全研究路由入口：本地/外挂包预检 + 未安装时的最小静态流程；包体将落独立仓 haxsd/reverse-skills（筹备中）。",
+      "summary": "安全研究路由入口：预检并链接独立仓 haxsd/reverse-skills；未安装时可走最小静态流程。",
       "uniqueValue": "按任务路由到专项方法、案例证据链、授权 scope 和交付自检；不把大型技能包复制进本仓库，也不把第三方上游当安装目标。",
       "issues": [
         "预检只检查文件可用性，不能证明外部技能版本兼容、规则内容安全或工具确实可运行。",
-        "haxsd/reverse-skills 尚在筹备；在此之前依赖本机已安装路径或 REVERSE_SKILL_ROOT。",
-        "依赖的 RULES、路由、建案、bootstrap 和复核均不在本仓库，需外部版本记录。"
+        "依赖的 RULES、路由、建案和复核在 haxsd/reverse-skills，需记录安装 commit/VERSION。"
       ],
       "improvements": [
-        "新增 scripts/preflight.py：跨平台解析 REVERSE_SKILL_ROOT/默认候选，输出缺失文件 JSON 和非零退出码。",
-        "正文改为指向筹备中的 haxsd/reverse-skills（同 toolkit-map 外挂）；上游 zhaoxuya520 仅作改写参考，非安装目标。",
-        "删除过时历史工具快照表与重复必需文件清单；补充未安装技能包时的最小静态流程（双 shell 命令）。",
-        "收窄 description / 何时使用触发面，避免笼统「安全审计」误触发。"
+        "安装目标改为 git clone haxsd/reverse-skills → ~/tools/reverse-skills；更新 REVERSE_SKILL_ROOT 候选。",
+        "preflight 默认候选含 reverse-skills（复数），仍兼容旧 reverse-skill 路径。",
+        "external.json 登记 reverse-skills，与 toolkit-map 同为外挂仓。"
       ],
       "mergeWith": [],
       "scenarios": [
@@ -913,11 +917,44 @@
         },
         {
           "file": "SKILL.md",
-          "text": "未安装技能包时的最小流程"
+          "text": "解析顺序"
         },
         {
           "file": "scripts/preflight.py",
           "text": "Read-only preflight"
+        }
+      ]
+    },
+    {
+      "name": "reverse-skills",
+      "category": "knowledge-security",
+      "state": "external",
+      "value": "medium",
+      "readiness": "external",
+      "action": "retain-external",
+      "priority": "P1",
+      "summary": "独立仓精简逆向技能包：授权门禁、路由、分诊、Android/APK；本仓只挂联接。",
+      "uniqueValue": "可执行方法论与硬授权门，不把大型第三方包或 payload 字典塞进收藏库。",
+      "issues": [
+        "第一批仅 triage + android-apk；JS/二进制深度模块第二批。",
+        "外部 path 因机器而异；安装器不下载，需自行 clone 或设 REVERSE_SKILL_ROOT。"
+      ],
+      "improvements": [
+        "external.json 登记默认 tools/reverse-skills；与 reverse-skill 路由入口配合。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "clone 后设 REVERSE_SKILL_ROOT，预检通过再走 case-init。",
+        "offline-sample 预设可对本地 APK 静态分析。"
+      ],
+      "evidence": [
+        {
+          "repoFile": "external.json",
+          "text": "reverse-skills"
+        },
+        {
+          "repoFile": "skills/reverse-skill/SKILL.md",
+          "text": "haxsd/reverse-skills"
         }
       ]
     },
@@ -1054,7 +1091,10 @@
           "file": "SKILL.md",
           "text": ".cursor/rules/<name>.mdc"
         },
-        {"file": "references/agents-md.md", "text": "## 写完核对"}
+        {
+          "file": "references/agents-md.md",
+          "text": "## 写完核对"
+        }
       ]
     },
     {
@@ -1431,7 +1471,10 @@
           "file": "SKILL.md",
           "text": "name: code-review"
         },
-        {"file": "scripts/fetch_pr_comments.py", "text": "def get_pr_ref"}
+        {
+          "file": "scripts/fetch_pr_comments.py",
+          "text": "def get_pr_ref"
+        }
       ]
     },
     {
@@ -1491,9 +1534,18 @@
         "需要实际渲染验证时转 webapp-testing，而不是只读源码下结论。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "Review Contract"},
-        {"file": "SKILL.md", "text": "No violations found in the reviewed files"},
-        {"file": "SKILL.md", "text": "If the guideline fetch fails"}
+        {
+          "file": "SKILL.md",
+          "text": "Review Contract"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "No violations found in the reviewed files"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "If the guideline fetch fails"
+        }
       ]
     },
     {
@@ -1634,7 +1686,10 @@
           "file": "references/repros.md",
           "text": "未在本机 Windows 复跑"
         },
-        {"file": "references/pester.md", "text": "BeforeDiscovery"}
+        {
+          "file": "references/pester.md",
+          "text": "BeforeDiscovery"
+        }
       ]
     },
     {
@@ -1661,8 +1716,14 @@
         "介绍攻击的安全文档作为上下文线索，不直接被判定恶意或安全。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: skill-scanner"},
-        {"file": "UPSTREAM.json", "text": "d18b7aa8ba878354e5c348310230e652f7690f9c"}
+        {
+          "file": "SKILL.md",
+          "text": "name: skill-scanner"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+        }
       ]
     },
     {
@@ -1689,8 +1750,14 @@
         "证据不足的候选标待确认，达到搜索预算后如实报告未覆盖范围。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: variant-analysis"},
-        {"file": "UPSTREAM.json", "text": "8e54050ae63c2f62224c35b1616efe71865b4777"}
+        {
+          "file": "SKILL.md",
+          "text": "name: variant-analysis"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "8e54050ae63c2f62224c35b1616efe71865b4777"
+        }
       ]
     },
     {
@@ -1721,9 +1788,18 @@
         "长命令转到后台后先做别的工作，靠完成通知取回结果；通知未到且无事可做时缩短等待而不是睡满猜测时长。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: waiting-and-async"},
-        {"file": "SKILL.md", "text": "## 本机实测（DSH，2026-10-16）"},
-        {"file": "references/repro.md", "text": "先睡一个猜出来的时长"}
+        {
+          "file": "SKILL.md",
+          "text": "name: waiting-and-async"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "## 本机实测（DSH，2026-10-16）"
+        },
+        {
+          "file": "references/repro.md",
+          "text": "先睡一个猜出来的时长"
+        }
       ]
     },
     {
@@ -1754,10 +1830,22 @@
         "没有运行模型时明确写未运行，不把静态 lint 当行为认证。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: prompt-optimizer"},
-        {"file": "scripts/prompt_audit.py", "text": "def compare_runs"},
-        {"file": "EVAL.md", "text": "尚未在本轮真实模型会话中执行"},
-        {"file": "UPSTREAM.json", "text": "d12f250460ffd961f549dbebf7eeb0cf4afd4c2e"}
+        {
+          "file": "SKILL.md",
+          "text": "name: prompt-optimizer"
+        },
+        {
+          "file": "scripts/prompt_audit.py",
+          "text": "def compare_runs"
+        },
+        {
+          "file": "EVAL.md",
+          "text": "尚未在本轮真实模型会话中执行"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "d12f250460ffd961f549dbebf7eeb0cf4afd4c2e"
+        }
       ]
     },
     {
@@ -1786,9 +1874,18 @@
         "扫描件没有文本层时报告 OCR 不在范围内，不伪造提取结果。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "Never overwrite the source"},
-        {"file": "SKILL.md", "text": "Reopen every written PDF"},
-        {"file": "scripts/pdf_tool.py", "text": "AES-256 encryption is unavailable"}
+        {
+          "file": "SKILL.md",
+          "text": "Never overwrite the source"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "Reopen every written PDF"
+        },
+        {
+          "file": "scripts/pdf_tool.py",
+          "text": "AES-256 encryption is unavailable"
+        }
       ]
     },
     {
@@ -1815,9 +1912,18 @@
         "修复后等新运行结束拿到绿色结果再报告完成，不把偶发当根因。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: gh-fix-ci"},
-        {"file": "scripts/inspect_ci_failures.py", "text": "def latest_failed_runs"},
-        {"file": "UPSTREAM.json", "text": "49f948faa9258a0c61caceaf225e179651397431"}
+        {
+          "file": "SKILL.md",
+          "text": "name: gh-fix-ci"
+        },
+        {
+          "file": "scripts/inspect_ci_failures.py",
+          "text": "def latest_failed_runs"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "49f948faa9258a0c61caceaf225e179651397431"
+        }
       ]
     },
     {
@@ -1844,10 +1950,22 @@
         "只有单一实现的接缝不被当作解耦收益。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: codebase-architecture"},
-        {"file": "SKILL.md", "text": "能力账本"},
-        {"file": "references/vocabulary.md", "text": "删除测试"},
-        {"file": "UPSTREAM.json", "text": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"}
+        {
+          "file": "SKILL.md",
+          "text": "name: codebase-architecture"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "能力账本"
+        },
+        {
+          "file": "references/vocabulary.md",
+          "text": "删除测试"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"
+        }
       ]
     },
     {
@@ -1873,8 +1991,14 @@
         "已有计划文件时只引用路径，不复制正文。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: session-handoff"},
-        {"file": "SKILL.md", "text": "## 写之前先核实"}
+        {
+          "file": "SKILL.md",
+          "text": "name: session-handoff"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "## 写之前先核实"
+        }
       ]
     },
     {
@@ -1900,9 +2024,18 @@
         "搜索被屏蔽时换途径取同一页面，不据此断言不存在。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: source-research"},
-        {"file": "SKILL.md", "text": "## 2. 找一手来源"},
-        {"file": "references/claim-check.md", "text": "疑似编造"}
+        {
+          "file": "SKILL.md",
+          "text": "name: source-research"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "## 2. 找一手来源"
+        },
+        {
+          "file": "references/claim-check.md",
+          "text": "疑似编造"
+        }
       ]
     },
     {
@@ -1929,10 +2062,22 @@
         "报告中发现的令牌只写位置，不写原文。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: threat-model"},
-        {"file": "references/llm-agent-threats.md", "text": "间接提示注入"},
-        {"file": "references/output-contract.md", "text": "TM-001"},
-        {"file": "UPSTREAM.json", "text": "49f948faa9258a0c61caceaf225e179651397431"}
+        {
+          "file": "SKILL.md",
+          "text": "name: threat-model"
+        },
+        {
+          "file": "references/llm-agent-threats.md",
+          "text": "间接提示注入"
+        },
+        {
+          "file": "references/output-contract.md",
+          "text": "TM-001"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "49f948faa9258a0c61caceaf225e179651397431"
+        }
       ]
     },
     {
@@ -1958,9 +2103,18 @@
         "超时与限流记为无效运行，不计入通过率。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: agent-evals"},
-        {"file": "SKILL.md", "text": "错误分析先于指标"},
-        {"file": "scripts/eval_report.py", "text": "def cmd_compare"}
+        {
+          "file": "SKILL.md",
+          "text": "name: agent-evals"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "错误分析先于指标"
+        },
+        {
+          "file": "scripts/eval_report.py",
+          "text": "def cmd_compare"
+        }
       ]
     },
     {
@@ -1986,9 +2140,18 @@
         "CI 中用 uv sync --locked，锁文件过期即失败。"
       ],
       "evidence": [
-        {"file": "SKILL.md", "text": "name: python-uv-workflow"},
-        {"file": "SKILL.md", "text": "uv add --script"},
-        {"file": "SKILL.md", "text": "## Windows 注意"}
+        {
+          "file": "SKILL.md",
+          "text": "name: python-uv-workflow"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "uv add --script"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "## Windows 注意"
+        }
       ]
     }
   ]

@@ -271,14 +271,27 @@
 
 原创贡献者：agent-skills contributors。
 - 原创维护仓库：[https://github.com/haxsd/agent-skills](https://github.com/haxsd/agent-skills)。
-- 外部依赖（非技能文本来源）：[zhaoxuya520](https://github.com/zhaoxuya520/reverse-skill)；许可：MIT（仅作改写参考，非本收藏库安装目标；参考版本 v1.0.1 已核验；未将包体纳入本仓）。
+- 外部依赖（非技能文本来源）：[haxsd](https://github.com/haxsd/reverse-skills)；许可：MIT（技能包本体；独立仓）。
+- 外部依赖（非技能文本来源）：[zhaoxuya520](https://github.com/zhaoxuya520/reverse-skill)；许可：MIT（改写参考，非安装目标；v1.0.1）。
 
 本仓贡献：
 - 本仓编写安全研究技能包的路由入口、定位与预检规则；不打包技能包本体。
 - 新增跨平台只读预检脚本与离线回归测试，统一检查规则、路由、建案、复核和可选工具资源。
-- 正文指向筹备中的独立仓 haxsd/reverse-skills（同 toolkit-map 外挂）；上游第三方仓不作安装目标。
+- 安装目标指向 haxsd/reverse-skills（同 toolkit-map 外挂）；zhaoxuya520 仅作改写参考。
 
-原创声明仅覆盖本仓路由文本。技能包本体计划放在 haxsd/reverse-skills（筹备中）；上游 zhaoxuya520/reverse-skill 仅作改写参考，不覆盖独立技能包内容。
+原创声明仅覆盖本仓路由文本。技能包本体在 haxsd/reverse-skills；上游第三方仓不作安装目标。
+
+## reverse-skills
+
+reverse-skills · 外部 · **本仓原创**
+
+原创贡献者：haxsd / reverse-skills contributors。
+- 原创维护仓库：[https://github.com/haxsd/reverse-skills](https://github.com/haxsd/reverse-skills)。
+
+本仓贡献：
+- 独立仓维护精简逆向方法论（路由/授权/分诊/Android）；本仓只登记外部入口。
+
+原创作品在独立仓库维护；本仓只登记外部入口和安装目标，不复制技能内容。上游改编说明见该仓 ATTRIBUTION.md / NOTICE。
 
 ## writing-skills
 
