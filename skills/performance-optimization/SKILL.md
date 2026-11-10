@@ -12,7 +12,7 @@ license: MIT; see LICENSE.txt
 
 ### 何时用
 
-已有性能预算、用户或监控报慢、Core Web Vitals 不达标、或怀疑引入回归时使用。没有测量证据时不要先改。
+已有性能预算、用户或监控报慢、Core Web Vitals 不达标、或怀疑引入回归时使用。没有测量证据时不要先改。还没有测量证据的功能 bug 先走 [systematic-debugging](../systematic-debugging/SKILL.md)。
 
 ### 依赖（不要假设已预装）
 

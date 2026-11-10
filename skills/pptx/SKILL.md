@@ -28,7 +28,7 @@ license: Apache-2.0; see LICENSE.txt
 
 ### 共用 schema 与脚本
 
-OOXML XSD 已抽到仓库 [`shared/office/schemas/`](../../shared/office/README.md)。`install.ps1` 会把 `shared/` 联接到 `~/tools/shared/`。用绝对路径调用 `scripts/office/validate.py`、`scripts/office/soffice.py`、`scripts/add_slide.py`、`scripts/clean.py` 和 `scripts/thumbnail.py`。
+OOXML XSD 与 Python 实现已抽到仓库 [`shared/office/`](../../shared/office/README.md)；本技能的 `scripts/office/` 只留启动器。`install.ps1` 在全量安装，或 `-Only` 包含 `xlsx`、`docx`、`pptx`、`token-efficient-workflow` 任一，时会把 `shared/` 联接到 `~/tools/shared/`（Windows 上为 `%USERPROFILE%\tools\shared`）；只安装其他技能时不会联接。用绝对路径调用 `scripts/office/validate.py`、`scripts/office/zipio.py`、`scripts/office/soffice.py`、`scripts/add_slide.py`、`scripts/clean.py` 和 `scripts/thumbnail.py`。
 
 # PPTX creation, editing, and analysis
 
@@ -37,7 +37,7 @@ A `.pptx` is a ZIP archive of XML files. Choose your approach by task:
 | Task | Approach |
 |---|---|
 | **Create** a new deck | Write a `pptxgenjs` script — see gotchas below |
-| **Edit** an existing deck, or build from a template | unzip → edit `ppt/slides/slideN.xml` → zip |
+| **Edit** an existing deck, or build from a template | `zipio.py unpack` → edit `ppt/slides/slideN.xml` → `zipio.py pack` |
 | **Read** content | `markitdown deck.pptx` (one block per slide under `<!-- Slide number: N -->` markers); visual grid: `python scripts/thumbnail.py deck.pptx` |
 
 ## Scripts
@@ -79,13 +79,15 @@ Do not assume `pptxgenjs` is preinstalled. `require('pptxgenjs')` only after con
 
 Pick layouts first: `python scripts/thumbnail.py template.pptx template-thumbs` writes a labeled grid of every slide and prints the file(s) it created — `template-thumbs.jpg`, split into `template-thumbs-N.jpg` past 12 slides. **Always pass that second argument, named after the deck.** It defaults to `thumbnails`, so two decks thumbnailed in one directory silently overwrite each other's grids — the first deck's are simply gone (template analysis only — visual QA needs the full-resolution renders from [Converting to Images](#converting-to-images); it only accepts `.pptx`, so copy a `.potx` to a `.pptx` name first). Use it with `markitdown` to map each content section onto a template slide, and vary the layouts — don't put every section on the same title-and-bullets slide.
 
+Prefer the shared Python `zipfile` helpers (Windows and Unix). Do not use `Expand-Archive`: it does not preserve OOXML entry names or compression, and is not sufficient. `zipio.py unpack` refuses symlink entries — decks from external parties are untrusted. Pack from the unpacked directory (equivalent to zipping from *inside* that dir); replace the output file so deleted parts do not survive.
+
 ```bash
-python3 -c "import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extractall('unpacked')" deck.pptx
+python scripts/office/zipio.py unpack deck.pptx unpacked/
 python scripts/add_slide.py unpacked/ slide2.xml --after slide2.xml   # duplicate a slide (or slideLayoutN.xml); prints the new slide's path
 # reorder / delete slides = edit <p:sldIdLst> in ppt/presentation.xml
 python scripts/clean.py unpacked/                                     # after deletions: removes orphaned slides, media, rels
 # edit slide content in ppt/slides/slideN.xml
-(cd unpacked && rm -f ../out.pptx && zip -Xr ../out.pptx .)           # zip from INSIDE the dir; rm first or deleted parts survive
+python scripts/office/zipio.py pack unpacked/ out.pptx
 python scripts/office/validate.py out.pptx --original deck.pptx
 ```
 

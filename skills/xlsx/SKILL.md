@@ -24,7 +24,7 @@ license: Apache-2.0; see LICENSE.txt
 
 ### 共用 schema 与脚本
 
-OOXML XSD 已抽到仓库 [`shared/office/schemas/`](../../shared/office/README.md)（约 1MiB，三份技能共用）。`install.ps1` 会把 `shared/` 联接到 `~/tools/shared/`。`scripts/office/validators` 会自动查找该目录，也可设置 `AGENT_SKILLS_OFFICE_SCHEMAS`。用绝对路径调用 `scripts/recalc.py` 和 `scripts/office/validate.py`。
+OOXML XSD 与 Python 实现已抽到仓库 [`shared/office/`](../../shared/office/README.md)（schema 约 1MiB，三份技能共用；本技能的 `scripts/office/` 只留启动器）。`install.ps1` 在全量安装，或 `-Only` 包含 `xlsx`、`docx`、`pptx`、`token-efficient-workflow` 任一，时会把 `shared/` 联接到 `~/tools/shared/`（Windows 上为 `%USERPROFILE%\tools\shared`）；只安装其他技能时不会联接。`scripts/office/validators` 会自动查找该目录，也可设置 `AGENT_SKILLS_OFFICE_SCHEMAS`。用绝对路径调用 `scripts/recalc.py` 和 `scripts/office/validate.py`。
 
 # XLSX creation, editing, and analysis
 

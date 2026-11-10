@@ -1,12 +1,14 @@
 ---
 name: threat-model
-description: 以仓库证据为基础做威胁建模：画出组件、数据流与信任边界，列资产、攻击者能力与非能力，写成可执行的滥用路径，按可能性×影响排序并给出落到具体位置的缓解建议，产出一份 Markdown 威胁模型。含 LLM/agent 应用专项（提示注入、工具权限、记忆与检索投毒、凭据外泄）。Use only when the user explicitly asks to 威胁建模、threat model a repo or path、列攻击面/滥用路径、做 AppSec 设计评审。审查一次 diff 用 code-review；复核已知缺陷的同类实例用 variant-analysis；普通架构梳理不触发。
+description: 以仓库证据为基础做威胁建模：画出组件、数据流与信任边界，列资产、攻击者能力与非能力，写成可执行的滥用路径，按可能性×影响排序并给出落到具体位置的缓解建议，产出一份 Markdown 威胁模型。含 LLM/agent 应用专项（提示注入、工具权限、记忆与检索投毒、凭据外泄）。Use only when the user explicitly asks to 威胁建模、threat model a repo or path、列攻击面/滥用路径、做 AppSec 设计评审。审查一次 diff 用 code-review；复核已知缺陷的同类实例用 variant-analysis；用户明确要求全面源码安全审计时用 security-audit；普通架构梳理不触发。
 license: Apache-2.0; see LICENSE.txt
 ---
 
 # 威胁建模
 
 目标是“这个仓库在真实用法下最可能怎样被滥用”，不是通用漏洞清单。每条架构判断都要有仓库证据（路径 + 符号/配置键/短引用）；没有证据就写成假设。
+
+用户明确要求对仓库做一次全面源码安全审计时，改走 `security-audit`，不要用本技能代替。
 
 ## 0. 定范围
 

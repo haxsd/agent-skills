@@ -1,6 +1,6 @@
 ---
 name: systematic-debugging
-description: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes
+description: Use when encountering a correctness bug, test failure, or unexpected behavior, before proposing fixes. For observed slowness, a performance budget, or a performance regression, use performance-optimization.
 ---
 
 # Systematic Debugging
@@ -21,13 +21,14 @@ If you haven't completed Phase 1, you cannot propose fixes.
 
 ## When to Use
 
-Use for ANY technical issue:
+Use for correctness defects, test failures, and unexpected behavior:
 - Test failures
 - Bugs in production
 - Unexpected behavior
-- Performance problems
 - Build failures
 - Integration issues
+
+Observed slowness, a performance budget, or a performance regression: use `performance-optimization`, not this skill. Do not treat performance problems as just another kind of "ANY technical issue".
 
 **Use this ESPECIALLY when:**
 - Under time pressure (emergencies make guessing tempting)

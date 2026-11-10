@@ -36,7 +36,7 @@ Automate quality gates so that no change reaches production without passing test
 - Adding or modifying automated checks
 - Configuring deployment pipelines
 - When a change should trigger automated verification
-- Debugging CI failures
+- Failed GitHub Actions runs go to `gh-fix-ci`; use this skill when the root cause is a missing quality gate or a pipeline-design problem
 
 ## The Quality Gate Pipeline
 

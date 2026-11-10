@@ -16,7 +16,7 @@ license: MIT; see LICENSE.txt
 
 ### 产物目录（本仓边界）
 
-审计产物不得落入本公开仓库禁止的内部路径，尤其不要写到或提交 `docs/reviews/`、`docs/validation/`、`docs/history/`、`docs/plans/`。默认写到仓库外的 `~/security-audit-skill/<repo-name>/run-<N>`。只有用户明确指定、并且该目录已被版本控制忽略、且不是上述禁写路径时，才可以写在目标仓库内。报告草稿也不要当作本仓文档提交。
+审计产物不得落入本公开仓库禁止的内部路径，尤其不要写到或提交 `docs/reviews/`、`docs/validation/`、`docs/history/`、`docs/plans/`。默认写到仓库外的 `~/security-audit-skill/<repo-name>/run-<N>`（Windows 上为 `%USERPROFILE%\security-audit-skill\<repo-name>\run-<N>`）。不要把该目录联进或提交到公开仓库。产物可能含敏感发现，用完后按用户意愿保留或删除。只有用户明确指定、并且该目录已被版本控制忽略、且不是上述禁写路径时，才可以写在目标仓库内。报告草稿也不要当作本仓文档提交。
 
 校验脚本（`validate-findings.cjs`、`validate-coverage-ledger.cjs`）只用于核对产物格式；不要对目标项目执行构建或安装依赖。需要 Node 时先按 toolkit-map 查绝对路径，缺失则如实报告。
 
@@ -65,7 +65,7 @@ In full audit mode, resolve these values before reconnaissance:
 - **Skill directory**: the absolute directory containing this `SKILL.md`.
 - **Target**: the absolute repository root under review.
 - **Repo name**: a stable repository identifier from the directory or local Git remote.
-- **Output directory**: a new writable directory outside the target and outside any public repository tree, defaulting to `~/security-audit-skill/<repo-name>/run-<N>`, where `<N>` is the next unused integer. Never write audit artifacts to `docs/reviews/`, `docs/validation/`, `docs/history/`, `docs/plans/`, or other paths this public repository forbids. Use a directory inside the target only when the user explicitly selects it, the parent verifies that version control ignores the whole directory, and the path is not one of those forbidden locations. Otherwise stop and request an external path. Do not commit audit artifacts.
+- **Output directory**: a new writable directory outside the target and outside any public repository tree, defaulting to `~/security-audit-skill/<repo-name>/run-<N>` (on Windows, `%USERPROFILE%\security-audit-skill\<repo-name>\run-<N>`), where `<N>` is the next unused integer. Do not junction, symlink, or otherwise link that directory into a public repository, and do not commit it. Artifacts may contain sensitive findings; when finished, keep or delete them according to the user's wishes. Never write audit artifacts to `docs/reviews/`, `docs/validation/`, `docs/history/`, `docs/plans/`, or other paths this public repository forbids. Use a directory inside the target only when the user explicitly selects it, the parent verifies that version control ignores the whole directory, and the path is not one of those forbidden locations. Otherwise stop and request an external path. Do not commit audit artifacts.
 - **Source ref**: the reviewed commit and whether the worktree is dirty. Do not treat unreviewed generated or modified files as another revision.
 
 ### Write isolation

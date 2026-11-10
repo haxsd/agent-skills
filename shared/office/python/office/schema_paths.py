@@ -29,6 +29,10 @@ def resolve_schemas_dir(start: Path | None = None) -> Path:
             return adj.resolve()
 
     for parent in [here, *here.parents]:
+        # shared/office/python/office -> shared/office/schemas
+        # and leftover skill-local scripts/office/schemas
+        if _is_schemas_dir(parent / "schemas"):
+            return (parent / "schemas").resolve()
         candidate = parent / "shared" / "office" / "schemas"
         if _is_schemas_dir(candidate):
             return candidate.resolve()

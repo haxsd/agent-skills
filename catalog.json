@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-10",
   "baselineCommit": "f4d28cf7c0ff98f38793060a8511f4c05b71512b",
-  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式；第二轮新增 threat-model、agent-evals、python-uv-workflow，Sentry commit/pr-writer 并入 finishing-a-development-branch，agents-md 并入 suggesting-rules，论文查询与成稿复核并入 source-research，Pester 参考并入 windows-powershell-safe。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。 2026-11-10 新增 xlsx、docx、pptx、documentation-and-adrs、performance-optimization、api-and-interface-design、ci-cd-and-automation、code-simplification、security-audit；Office 三项抽出共用 schema，pptx 与 HTML 幻灯片入口切开，未解档 slides。",
+  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式；第二轮新增 threat-model、agent-evals、python-uv-workflow，Sentry commit/pr-writer 并入 finishing-a-development-branch，agents-md 并入 suggesting-rules，论文查询与成稿复核并入 source-research，Pester 参考并入 windows-powershell-safe。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。 2026-11-10 新增 xlsx、docx、pptx、documentation-and-adrs、performance-optimization、api-and-interface-design、ci-cd-and-automation、code-simplification、security-audit；Office 三项抽出共用 schema，pptx 与 HTML 幻灯片入口切开，未解档 slides。baselineCommit（f4d28cf7c0ff98f38793060a8511f4c05b71512b）是早期审查锚点，不是当前 main HEAD。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -701,7 +701,7 @@
       "readiness": "conditional",
       "action": "retain",
       "priority": "P1",
-      "summary": "Token 体系与幻灯片制作的单一归属；design 只负责路由视觉资产请求。",
+      "summary": "Token 体系与 HTML 幻灯片制作的单一归属；design 只负责路由视觉资产请求。PowerPoint / .pptx 走 pptx 技能。",
       "uniqueValue": "primitive→semantic→component 模型、token 生成/校验脚本、starter、组件状态参考，以及 slide 结构化策略数据。",
       "issues": [
         "Token 架构与幻灯片制作仍在同一入口，但已分节管理；深度演示任务仍需项目本地 token 文件。",
@@ -713,9 +713,7 @@
         "幻灯片参考资料已从 design 迁入，形成单一来源。",
         "Token 与 slide 分节维护；后续补充引用循环、缺失 alias 和零值测试。"
       ],
-      "mergeWith": [
-        "slides"
-      ],
+      "mergeWith": [],
       "scenarios": [
         "starter JSON 生成 CSS，校验可发现与 var() 同行的硬编码。",
         "缺失 token 或循环引用产生可定位错误，不无限递归。"
@@ -2183,7 +2181,7 @@
           "text": "name: xlsx"
         },
         {
-          "file": "scripts/office/soffice.py",
+          "repoFile": "shared/office/python/office/soffice.py",
           "text": "def find_soffice"
         },
         {

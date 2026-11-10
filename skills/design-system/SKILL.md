@@ -10,7 +10,7 @@ metadata:
 
 # Design System
 
-Token architecture, component specifications, systematic design, slide generation.
+Token architecture, component specifications, systematic design, HTML slide generation.
 
 ## When to Use
 

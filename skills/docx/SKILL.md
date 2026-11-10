@@ -24,11 +24,11 @@ license: Apache-2.0; see LICENSE.txt
 - 可选页图：Poppler `pdftoppm`
 - 校验脚本：Python 包 `lxml`、`defusedxml`
 
-编辑已有文档时按上游方式解包 XML 再打包；docx-js 打不开已有文件。
+编辑已有文档时用 `scripts/office/zipio.py` 解包 XML 再打包（Windows 与 Unix 都可用，不要用 Expand-Archive）；docx-js 打不开已有文件。
 
 ### 共用 schema 与脚本
 
-OOXML XSD 已抽到仓库 [`shared/office/schemas/`](../../shared/office/README.md)。`install.ps1` 会把 `shared/` 联接到 `~/tools/shared/`。用绝对路径调用 `scripts/office/validate.py`、`scripts/merge_runs.py`、`scripts/accept_changes.py` 和 `scripts/comment.py`。
+OOXML XSD 与 Python 实现已抽到仓库 [`shared/office/`](../../shared/office/README.md)；本技能的 `scripts/office/` 只留启动器。`install.ps1` 在全量安装，或 `-Only` 包含 `xlsx`、`docx`、`pptx`、`token-efficient-workflow` 任一，时会把 `shared/` 联接到 `~/tools/shared/`（Windows 上为 `%USERPROFILE%\tools\shared`）；只安装其他技能时不会联接。用绝对路径调用 `scripts/office/validate.py`、`scripts/office/zipio.py`、`scripts/merge_runs.py`、`scripts/accept_changes.py` 和 `scripts/comment.py`。
 
 # DOCX creation, editing, and analysis
 
@@ -37,7 +37,7 @@ A `.docx` is a ZIP archive of XML files. Choose your approach by task:
 | Task | Approach |
 |---|---|
 | **Create** a new document | Write a `docx` (npm) script — see gotchas below |
-| **Edit** an existing document | `unzip` → edit `word/document.xml` → `zip` (docx-js cannot open existing files) |
+| **Edit** an existing document | `zipio.py unpack` → edit `word/document.xml` → `zipio.py pack` (docx-js cannot open existing files) |
 | **Read** content | `pandoc -t markdown file.docx` |
 
 > Script paths below are relative to this skill's directory.
@@ -74,15 +74,18 @@ ls page-*.jpg   # then Read the images
 
 Legacy `.doc` files must be converted first: `python scripts/office/soffice.py --headless --convert-to docx file.doc`.
 
+Prefer the shared Python `zipfile` helpers (Windows and Unix). Do not use `Expand-Archive`: it does not preserve OOXML entry names or compression, and is not sufficient. `zipio.py unpack` refuses symlink entries — docx from external parties is untrusted.
+
 ```bash
-unzip -q doc.docx -d unpacked/
-find unpacked -type l -delete   # strip symlink entries — docx from external parties is untrusted
+python scripts/office/zipio.py unpack doc.docx unpacked/
 python scripts/merge_runs.py unpacked/   # coalesce fragmented runs so text is findable
 # edit unpacked/word/document.xml in place — do NOT reformat or pretty-print
-(cd unpacked && rm -f ../out.docx && zip -Xr ../out.docx .)
+python scripts/office/zipio.py pack unpacked/ out.docx
 python scripts/office/validate.py out.docx --original doc.docx   # XSD checks; --auto-repair fixes common issues
 # redlining? add --author "<the name you redlined under>" to check every edit is tracked
 ```
+
+On Unix, `unzip` / `find ... -type l -delete` / `zip -Xr` remains an optional equivalent; still delete symlink entries before editing, and do not use `Expand-Archive` as a substitute.
 
 Word splits text across many `<w:r>` runs (revision ids, spell-check markers), so a phrase you can see in the document often doesn't exist as a contiguous string in the XML. `merge_runs.py` merges adjacent identically-formatted runs in `word/document.xml` without changing content or rendering; it also accepts a `.docx` directly (`python scripts/merge_runs.py doc.docx -o merged.docx`).
 

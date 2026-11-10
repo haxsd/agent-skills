@@ -58,6 +58,7 @@ gh run view <run_id> --job <job_id> --log-failed
 - 修复后跑对应本地检查，再推送并用同一脚本或 `gh run watch <run_id> --exit-status` 等新运行结束，拿到绿色结果再报告完成。
 - 汇报：失败检查与根因（附日志关键行）、改动、本地验证、新 run 链接与结论。
 - 修工作流文件本身（`.github/workflows`、权限、secrets、触发器）时按 `code-review` 的 GitHub Actions 参考核对安全影响。
+- 若根因是缺少质量门禁、依赖更新或流水线设计问题，转到 `ci-cd-and-automation`，不要只把这一次运行改绿。
 - 不在这里删除失败运行、取消别人的运行或改仓库设置；那属于仓库管理，需要另行授权。
 
 <!-- provenance:start -->

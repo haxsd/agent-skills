@@ -146,7 +146,10 @@ Write-Host "模式:   $(if ($Uninstall) { '卸载' } elseif ($DryRun) { '演练'
 Write-Host ""
 
 # ---------- 1. shared/ ----------
-if ((Test-Path $SharedSrc) -and (-not $Only -or 'token-efficient-workflow' -in $Only)) {
+# token-efficient-workflow 需要 shared 规则；xlsx/docx/pptx 需要共用 Office 实现与 schema。
+$SharedConsumers = @('token-efficient-workflow', 'xlsx', 'docx', 'pptx')
+$linkShared = -not $Only -or (@($Only | Where-Object { $SharedConsumers -contains $_ }).Count -gt 0)
+if ((Test-Path $SharedSrc) -and $linkShared) {
   Write-Host "[shared]"
   $sameTarget = (Test-IsReparsePoint $SharedDst) -and ((Get-LinkTarget $SharedDst) -eq $SharedSrc)
 

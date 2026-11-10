@@ -11,7 +11,7 @@
 
 安装器使用目录联接，仓库保存内容，平台目录保存联接。现有真实目录会先备份；卸载只删除指向本仓库或已登记外部源的联接，保留真实内容。
 
-`manifest.json` 是安装目标的权威来源。`agents` 通用组展开到 agents/cursor/devin/claude；Codex 专属项默认只到 codex。显式 `-Target` 覆盖默认目标。`-Only` 同时限制库内和外部技能；只在安装 token-efficient-workflow 或未指定 `-Only` 时处理它需要的 shared。未知名称在改动之前报错。
+`manifest.json` 是安装目标的权威来源。`agents` 通用组展开到 agents/cursor/devin/claude；Codex 专属项默认只到 codex。显式 `-Target` 覆盖默认目标。`-Only` 同时限制库内和外部技能；全量安装，或 `-Only` 包含 `xlsx`、`docx`、`pptx`、`token-efficient-workflow` 任一，时才会联接 `shared/`；只安装其他技能时不联接。未知名称在改动之前报错。
 
 ## 外部技能
 

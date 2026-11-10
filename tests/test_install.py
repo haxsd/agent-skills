@@ -22,7 +22,7 @@ class InstallerTests(unittest.TestCase):
         shutil.copyfile(SOURCE, self.repo / "install.ps1")
         (self.repo / "shared").mkdir()
         (self.repo / "shared/rules.md").write_text("shared")
-        names = ["example", "token-efficient-workflow"]
+        names = ["example", "token-efficient-workflow", "xlsx"]
         for name in names:
             (self.repo / "skills" / name).mkdir(parents=True)
             (self.repo / "skills" / name / "SKILL.md").write_text("fixture")
@@ -84,6 +84,15 @@ class InstallerTests(unittest.TestCase):
         self.assertFalse(target.exists())
         self.assertTrue((self.repo / "skills/example/SKILL.md").exists())
         self.assertTrue((backups[0] / "example/user.txt").exists())
+
+    def test_only_office_skill_links_shared(self):
+        self.run_installer("-Only", "xlsx", "-Target", "codex")
+        target = self.profile / ".codex/skills/xlsx"
+        self.assertEqual(target.resolve(), (self.repo / "skills/xlsx").resolve())
+        shared = self.profile / "tools/shared"
+        self.assertTrue(shared.exists())
+        self.assertEqual(shared.resolve(), (self.repo / "shared").resolve())
+        self.assertFalse((self.profile / ".codex/skills/example").exists())
 
     def test_shared_foreign_junction_replaced_without_deleting_source(self):
         shared = self.profile / "tools/shared"

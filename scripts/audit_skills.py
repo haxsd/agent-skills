@@ -280,7 +280,8 @@ def render_catalog(catalog, audit):
     metrics = {row["name"]: row for row in audit["skills"]}
     counts = Counter(entry["state"] for entry in catalog["skills"])
     out = ["# Skills 分类目录", "", "由 `catalog.json` 和 `scripts/audit_skills.py` 生成。", "",
-           f"审查日期：{catalog['reviewedAt']}。{counts['active']} 个启用 + {counts['archived']} 个归档 + {counts['external']} 个外部入口。", "",
+           f"审查日期：{catalog['reviewedAt']}。{counts['active']} 个启用 + {counts['archived']} 个归档 + {counts['external']} 个外部入口。",
+           f"`baselineCommit`（`{catalog['baselineCommit']}`）是早期审查锚点，不是当前 main HEAD。", "",
            "分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。",
            "价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。", "",
            "安装目标仍只由 `manifest.json` / `external.json` 决定；不要从本目录生成第二套目标配置。", "",
