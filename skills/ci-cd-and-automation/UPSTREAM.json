@@ -1,0 +1,14 @@
+{
+  "name": "ci-cd-and-automation",
+  "repository": "https://github.com/addyosmani/agent-skills",
+  "commit": "a4a21f6390a83e62dc3c69a91e25ad7984a7bbd6",
+  "path": "skills/ci-cd-and-automation",
+  "license": "MIT",
+  "author": "Addy Osmani",
+  "retrievedAt": "2026-11-10",
+  "modifications": [
+    "增加中文入口，并与本仓 gh-fix-ci 分工：本技能建设流水线与门禁，已失败的 GitHub Actions 运行先走 gh-fix-ci。",
+    "写明 gh、包管理器和 Action 权限都不是预装或默认授权项。"
+  ],
+  "validation": "内容审阅与 skill-scanner 只读扫描（无命中）；未在本环境改写真实工作流做对照。"
+}

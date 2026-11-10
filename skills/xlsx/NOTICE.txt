@@ -1,0 +1,11 @@
+xlsx 基于 Anthropic skills 仓库的同名 Office 技能改写：
+https://github.com/anthropics/skills/tree/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/xlsx
+
+Copyright Anthropic, PBC. Licensed under the Apache License, Version 2.0；完整文本见 LICENSE.txt。
+共用 OOXML XSD 已抽到仓库 shared/office/schemas/，许可见 shared/office/LICENSE.txt 与 NOTICE.txt。
+
+修改（agent-skills contributors，2026）：
+- 增加中文入口、触发边界、Windows 与依赖说明；不假设上游环境已预装 Python/Node 包或 LibreOffice。
+- 三份 Office 技能抽出共用 schema，校验脚本改为解析 shared/office/schemas 或安装后的 ~/tools/shared/office/schemas。
+- soffice 调用增加 Windows 可执行文件查找，并在无 AF_UNIX 的系统上跳过 Linux shim。
+与 Anthropic 无隶属、背书或认证关系。

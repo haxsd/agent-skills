@@ -2,7 +2,7 @@
 
 由 `catalog.json` 和 `scripts/audit_skills.py` 生成。
 
-审查日期：2026-11-05。45 个启用 + 11 个归档 + 2 个外部入口。
+审查日期：2026-11-10。54 个启用 + 11 个归档 + 2 个外部入口。
 
 分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。
 价值高/中/低来自内容审查，不能解读为实测收益；条件可用也不代表所有流程通过了运行验证。
@@ -38,6 +38,7 @@
 | [codebase-architecture](../skills/codebase-architecture/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 | [session-handoff](../skills/session-handoff/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 条件可用 | 保留 | P2 |
 | [python-uv-workflow](../skills/python-uv-workflow/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 条件可用 | 保留 | P2 |
+| [api-and-interface-design](../skills/api-and-interface-design/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 局部实测可运行 | 保留 | P1 |
 
 ## 质量、调试与审查
 
@@ -56,6 +57,9 @@
 | [variant-analysis](../skills/variant-analysis/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 | [gh-fix-ci](../skills/gh-fix-ci/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 局部实测可运行 | 保留 | P1 |
 | [agent-evals](../skills/agent-evals/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 局部实测可运行 | 保留 | P1 |
+| [performance-optimization](../skills/performance-optimization/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [ci-cd-and-automation](../skills/ci-cd-and-automation/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [code-simplification](../skills/code-simplification/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 局部实测可运行 | 保留 | P1 |
 
 ## Git 隔离与交付
 
@@ -91,6 +95,10 @@
 | Skill | 当前状态 | 创作归属 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
 |---|---|---|---|---|---|---|
 | [pdf-toolkit](../skills/pdf-toolkit/SKILL.md) | 启用 | 本仓原创 | 高 | 条件可用 | 保留 | P1 |
+| [xlsx](../skills/xlsx/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [docx](../skills/docx/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [pptx](../skills/pptx/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [documentation-and-adrs](../skills/documentation-and-adrs/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 局部实测可运行 | 保留 | P1 |
 
 ## 知识图谱、调研与安全研究
 
@@ -101,6 +109,7 @@
 | reverse-skills（外部） | 外部 | 本仓原创 | 中 | 依赖外部环境 | 保持外部 | P1 |
 | [source-research](../skills/source-research/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 | [threat-model](../skills/threat-model/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [security-audit](../skills/security-audit/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 
 ## 技能维护与运行效率
 

@@ -1,0 +1,13 @@
+{
+  "name": "api-and-interface-design",
+  "repository": "https://github.com/addyosmani/agent-skills",
+  "commit": "63128d0d4515cc074f304c3a429343c5afeff978",
+  "path": "skills/api-and-interface-design",
+  "license": "MIT",
+  "author": "Addy Osmani",
+  "retrievedAt": "2026-11-10",
+  "modifications": [
+    "增加中文入口；示例栈按当前仓库惯例替换，不把示例依赖当成必须安装项。"
+  ],
+  "validation": "内容审阅与 skill-scanner 只读扫描（无命中）；未做模型行为对照评估。"
+}

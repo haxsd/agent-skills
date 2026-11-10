@@ -2,11 +2,11 @@
 
 [中文](README.md) · [English](README-EN.md)
 
-> A purpose-categorized skill library for AI agents: 45 active skills, 11 archived skills and 10 categories — browse the catalog, install what you need.
+> A purpose-categorized skill library for AI agents: 54 active skills, 11 archived skills and 10 categories — browse the catalog, install what you need.
 
 ## What's inside
 
-- **45 active skills** across ten categories: requirements & planning, implementation & orchestration, quality & debugging, Git delivery, design & UI, writing, documents & office, knowledge graph, research & security research, skill authoring & prompt optimization, data & backend. Each lives at the stable path `skills/<name>/`.
+- **54 active skills** across ten categories: requirements & planning, implementation & orchestration, quality & debugging, Git delivery, design & UI, writing, documents & office, knowledge graph, research & security research, skill authoring & prompt optimization, data & backend. Each lives at the stable path `skills/<name>/`.
 - **11 archived skills**: historical skills and drafts under `archive/`, not installed by default, kept for reference.
 - **Catalog index**: category, value and upgrade notes live in `catalog.json`; the human-readable version is [docs/catalog.md](docs/catalog.md).
 - **Traceable provenance**: every skill records its source (third-party / original / improved from upstream / unverified) and license in [ATTRIBUTION.md](ATTRIBUTION.md) and [skill-provenance.json](docs/sources/skill-provenance.json).

@@ -1,6 +1,6 @@
 ---
 name: design-system
-description: Token architecture, component specifications, and slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, component specs, strategic slide creation. Use for design tokens, systematic design, brand-compliant presentations.
+description: Token architecture, component specifications, and HTML slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, component specs, strategic HTML slide creation. Use for design tokens, systematic design, and brand-compliant HTML presentations. Do not use for PowerPoint / .pptx files — those go to the pptx skill.
 argument-hint: "[component or token]"
 license: MIT
 metadata:
@@ -20,7 +20,7 @@ Token architecture, component specifications, systematic design, slide generatio
 - Spacing/typography scales
 - Design-to-code handoff
 - Tailwind theme configuration
-- **Slide/presentation generation**
+- **HTML slide/presentation generation** (not PowerPoint / .pptx; use the pptx skill for those files)
 
 ## Token Architecture
 

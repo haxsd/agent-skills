@@ -1,0 +1,26 @@
+{
+  "name": "code-simplification",
+  "repository": "https://github.com/addyosmani/agent-skills",
+  "commit": "f1f6fbf3981076da73455bf3b754f5864208a93d",
+  "path": "skills/code-simplification",
+  "license": "MIT",
+  "author": "Addy Osmani",
+  "retrievedAt": "2026-11-10",
+  "additionalSources": [
+    {
+      "repository": "https://github.com/anthropics/claude-plugins-official",
+      "commit": "aecd4c852f10b466245f18383fa6aad8c0b10d57",
+      "path": "plugins/code-simplifier",
+      "license": "Apache-2.0",
+      "author": "Anthropic, PBC.",
+      "retrievedAt": "2026-11-10",
+      "licenseFile": "LICENSES/Apache-2.0.txt",
+      "usage": "仅作方法启发参考；未搬运或执行上游插件的 agents、脚本或其它文件。"
+    }
+  ],
+  "modifications": [
+    "增加中文入口，并与 codebase-architecture、code-review 分工；将 CLAUDE.md 映射为宿主中立的项目约定。",
+    "同时保留 MIT 与启发源 Apache-2.0 署名。钉死提交中该技能只有 SKILL.md，没有 scripts/quality。"
+  ],
+  "validation": "内容审阅与 skill-scanner 只读扫描（无命中）；未做模型行为对照评估。"
+}

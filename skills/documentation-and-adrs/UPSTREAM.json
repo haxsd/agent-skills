@@ -1,0 +1,13 @@
+{
+  "name": "documentation-and-adrs",
+  "repository": "https://github.com/addyosmani/agent-skills",
+  "commit": "8e6726dc1deab6637dc6c1a7610673bb7024a18c",
+  "path": "skills/documentation-and-adrs",
+  "license": "MIT",
+  "author": "Addy Osmani",
+  "retrievedAt": "2026-11-10",
+  "modifications": [
+    "增加中文入口与存放位置边界：公开仓库不要把内部审查记录写进 docs/reviews、docs/validation 或 docs/history。"
+  ],
+  "validation": "内容审阅与 skill-scanner 只读扫描（无命中）；未做模型行为对照评估。"
+}

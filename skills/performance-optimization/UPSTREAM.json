@@ -1,0 +1,14 @@
+{
+  "name": "performance-optimization",
+  "repository": "https://github.com/addyosmani/agent-skills",
+  "commit": "ee3e8504246bd2ee1be3f3670555e48c9c62212a",
+  "path": "skills/performance-optimization",
+  "license": "MIT",
+  "author": "Addy Osmani",
+  "retrievedAt": "2026-11-10",
+  "modifications": [
+    "增加中文入口与依赖边界：Lighthouse CI 等分析工具不假设已预装。",
+    "将上游仓级 references/performance-checklist.md 纳入本技能 references/，并改写入口与 optimization-patterns.md 中的相对路径。"
+  ],
+  "validation": "内容审阅与 skill-scanner 只读扫描（无命中）；未在本环境运行 Lighthouse 或数据库分析。"
+}

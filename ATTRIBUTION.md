@@ -676,3 +676,129 @@ UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的
 
 本仓贡献：
 - 本仓独立编写：已有工具链优先、PEP 723 脚本、依赖组与锁文件、CI 用 --locked、ty 仍为 Beta 时不替换现有检查器、Windows 路径与编码注意和分步迁移。
+
+## xlsx
+
+[xlsx](skills/xlsx/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Anthropic, PBC.](https://github.com/anthropics/skills)；许可：Apache-2.0；固定版本：`2c5958ecac7cee2b583967a2c4981d0f4a75c579`。详情：[skills/xlsx/UPSTREAM.json](skills/xlsx/UPSTREAM.json)。
+- 来源：[Anthropic, PBC.](https://github.com/anthropics/skills/tree/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/xlsx)；许可：Apache-2.0（上游已核验）；收录版本：2c5958ecac7cee2b583967a2c4981d0f4a75c579。
+
+本仓贡献：
+- 中文入口、触发边界，以及 Windows / toolkit-map / 依赖说明；不假设上游环境已预装。
+- 与另外两份 Office 技能抽出共用 OOXML schema，并改校验脚本路径解析。
+- soffice 增加 Windows 可执行文件查找；xlsx 的公式重算找不到 LibreOffice 时停止并报告。
+
+基于 Anthropic Office 技能（Apache-2.0）的原创改进；schema 只保留一份在 shared/office/schemas/。pptx 与 design-system 的 HTML 幻灯片及归档 slides 切开，未解档 slides。
+
+## docx
+
+[docx](skills/docx/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Anthropic, PBC.](https://github.com/anthropics/skills)；许可：Apache-2.0；固定版本：`2c5958ecac7cee2b583967a2c4981d0f4a75c579`。详情：[skills/docx/UPSTREAM.json](skills/docx/UPSTREAM.json)。
+- 来源：[Anthropic, PBC.](https://github.com/anthropics/skills/tree/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/docx)；许可：Apache-2.0（上游已核验）；收录版本：2c5958ecac7cee2b583967a2c4981d0f4a75c579。
+
+本仓贡献：
+- 中文入口、触发边界，以及 Windows / toolkit-map / 依赖说明；不假设上游环境已预装。
+- 与另外两份 Office 技能抽出共用 OOXML schema，并改校验脚本路径解析。
+- soffice 增加 Windows 可执行文件查找；xlsx 的公式重算找不到 LibreOffice 时停止并报告。
+
+基于 Anthropic Office 技能（Apache-2.0）的原创改进；schema 只保留一份在 shared/office/schemas/。pptx 与 design-system 的 HTML 幻灯片及归档 slides 切开，未解档 slides。
+
+## pptx
+
+[pptx](skills/pptx/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Anthropic, PBC.](https://github.com/anthropics/skills)；许可：Apache-2.0；固定版本：`2c5958ecac7cee2b583967a2c4981d0f4a75c579`。详情：[skills/pptx/UPSTREAM.json](skills/pptx/UPSTREAM.json)。
+- 来源：[Anthropic, PBC.](https://github.com/anthropics/skills/tree/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/pptx)；许可：Apache-2.0（上游已核验）；收录版本：2c5958ecac7cee2b583967a2c4981d0f4a75c579。
+
+本仓贡献：
+- 中文入口、触发边界，以及 Windows / toolkit-map / 依赖说明；不假设上游环境已预装。
+- 与另外两份 Office 技能抽出共用 OOXML schema，并改校验脚本路径解析。
+- soffice 增加 Windows 可执行文件查找；xlsx 的公式重算找不到 LibreOffice 时停止并报告。
+
+基于 Anthropic Office 技能（Apache-2.0）的原创改进；schema 只保留一份在 shared/office/schemas/。pptx 与 design-system 的 HTML 幻灯片及归档 slides 切开，未解档 slides。
+
+## documentation-and-adrs
+
+[documentation-and-adrs](skills/documentation-and-adrs/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Addy Osmani](https://github.com/addyosmani/agent-skills)；许可：MIT；固定版本：`8e6726dc1deab6637dc6c1a7610673bb7024a18c`。详情：[skills/documentation-and-adrs/UPSTREAM.json](skills/documentation-and-adrs/UPSTREAM.json)。
+- 来源：[Addy Osmani](https://github.com/addyosmani/agent-skills/tree/8e6726dc1deab6637dc6c1a7610673bb7024a18c/skills/documentation-and-adrs)；许可：MIT（上游已核验）；收录版本：8e6726dc1deab6637dc6c1a7610673bb7024a18c。
+
+本仓贡献：
+- 中文入口与存放位置边界：公开仓库不要把内部审查记录写进禁写路径。
+
+基于 Addy Osmani documentation-and-adrs（MIT）的原创改进。
+
+## performance-optimization
+
+[performance-optimization](skills/performance-optimization/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Addy Osmani](https://github.com/addyosmani/agent-skills)；许可：MIT；固定版本：`ee3e8504246bd2ee1be3f3670555e48c9c62212a`。详情：[skills/performance-optimization/UPSTREAM.json](skills/performance-optimization/UPSTREAM.json)。
+- 来源：[Addy Osmani](https://github.com/addyosmani/agent-skills/tree/ee3e8504246bd2ee1be3f3670555e48c9c62212a/skills/performance-optimization)；许可：MIT（上游已核验）；收录版本：ee3e8504246bd2ee1be3f3670555e48c9c62212a。
+
+本仓贡献：
+- 中文入口与依赖边界；将上游仓级 performance-checklist.md 纳入本技能并改相对路径。
+
+基于 Addy Osmani performance-optimization（MIT）的原创改进；随附 optimization-patterns.md 与 performance-checklist.md。
+
+## api-and-interface-design
+
+[api-and-interface-design](skills/api-and-interface-design/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Addy Osmani](https://github.com/addyosmani/agent-skills)；许可：MIT；固定版本：`63128d0d4515cc074f304c3a429343c5afeff978`。详情：[skills/api-and-interface-design/UPSTREAM.json](skills/api-and-interface-design/UPSTREAM.json)。
+- 来源：[Addy Osmani](https://github.com/addyosmani/agent-skills/tree/63128d0d4515cc074f304c3a429343c5afeff978/skills/api-and-interface-design)；许可：MIT（上游已核验）；收录版本：63128d0d4515cc074f304c3a429343c5afeff978。
+
+本仓贡献：
+- 中文入口；示例栈按当前仓库惯例替换，不把示例依赖当成必须安装项。
+
+基于 Addy Osmani api-and-interface-design（MIT）的原创改进。
+
+## ci-cd-and-automation
+
+[ci-cd-and-automation](skills/ci-cd-and-automation/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Addy Osmani](https://github.com/addyosmani/agent-skills)；许可：MIT；固定版本：`a4a21f6390a83e62dc3c69a91e25ad7984a7bbd6`。详情：[skills/ci-cd-and-automation/UPSTREAM.json](skills/ci-cd-and-automation/UPSTREAM.json)。
+- 来源：[Addy Osmani](https://github.com/addyosmani/agent-skills/tree/a4a21f6390a83e62dc3c69a91e25ad7984a7bbd6/skills/ci-cd-and-automation)；许可：MIT（上游已核验）；收录版本：a4a21f6390a83e62dc3c69a91e25ad7984a7bbd6。
+
+本仓贡献：
+- 中文入口，并与本仓 gh-fix-ci 分工：本技能建设流水线与门禁，已失败运行先走 gh-fix-ci。
+
+基于 Addy Osmani ci-cd-and-automation（MIT）的原创改进。固定版本为拉取时该路径最近一次变更的完整提交，不登记浮动 main。
+
+## code-simplification
+
+[code-simplification](skills/code-simplification/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Addy Osmani](https://github.com/addyosmani/agent-skills)；许可：MIT；固定版本：`f1f6fbf3981076da73455bf3b754f5864208a93d`。详情：[skills/code-simplification/UPSTREAM.json](skills/code-simplification/UPSTREAM.json)。
+- 来源：[Addy Osmani](https://github.com/addyosmani/agent-skills/tree/f1f6fbf3981076da73455bf3b754f5864208a93d/skills/code-simplification)；许可：MIT（上游已核验）；收录版本：f1f6fbf3981076da73455bf3b754f5864208a93d。
+- 来源：[Anthropic, PBC.](https://github.com/anthropics/claude-plugins-official/tree/aecd4c852f10b466245f18383fa6aad8c0b10d57/plugins/code-simplifier)；许可：Apache-2.0（仅方法启发，未搬运插件文件）；收录版本：aecd4c852f10b466245f18383fa6aad8c0b10d57。
+
+本仓贡献：
+- 中文入口，并与 codebase-architecture、code-review 分工；将 CLAUDE.md 映射为宿主中立的项目约定。
+- 同时保留 MIT 与启发源 Apache-2.0 署名。
+
+基于 Addy Osmani code-simplification（MIT）的原创改进；启发源为 Anthropic Claude Code Simplifier 插件（Apache-2.0）。该提交没有 scripts/quality。
+
+## security-audit
+
+[security-audit](skills/security-audit/SKILL.md) · 启用 · **原创改进（基于上游）**
+
+原创贡献者：agent-skills contributors。
+- 上游：[Cloudflare, Inc.](https://github.com/cloudflare/security-audit-skill)；许可：MIT；固定版本：`c1c8a8c1471069fb0e188eeaff69b8e8db6564a8`。详情：[skills/security-audit/UPSTREAM.json](skills/security-audit/UPSTREAM.json)。
+- 来源：[Cloudflare, Inc.](https://github.com/cloudflare/security-audit-skill/tree/c1c8a8c1471069fb0e188eeaff69b8e8db6564a8/skills/security-audit)；许可：MIT（上游已核验）；收录版本：c1c8a8c1471069fb0e188eeaff69b8e8db6564a8。
+
+本仓贡献：
+- 收紧触发词，避免与 code-review、threat-model 抢日常审查。
+- 按本仓边界改产物目录，禁止写入或提交公开仓库的内部资料路径。
+
+基于 Cloudflare security-audit（MIT）的原创改进。

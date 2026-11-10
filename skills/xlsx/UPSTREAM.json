@@ -1,0 +1,16 @@
+{
+  "name": "xlsx",
+  "repository": "https://github.com/anthropics/skills",
+  "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+  "path": "skills/xlsx",
+  "license": "Apache-2.0",
+  "author": "Anthropic, PBC.",
+  "retrievedAt": "2026-11-10",
+  "modifications": [
+    "增加中文入口、触发边界，以及 Windows / toolkit-map / 依赖说明；正文中「已预装」改为必须先确认再按需安装。",
+    "OOXML XSD 抽到 shared/office/schemas/，validators 通过 schema_paths.py 解析共享目录。",
+    "soffice 增加 Windows 路径查找，并在没有 AF_UNIX 时跳过 Linux shim。",
+    "公式重算脚本改为通过 find_soffice() 调用 LibreOffice，找不到就停止并报告，不把 Python 计算结果写死冒充已重算。"
+  ],
+  "validation": "内容审阅与 skill-scanner 只读扫描（无命中）；公式重算依赖本机 LibreOffice，本环境未做完整文档样本对照。"
+}

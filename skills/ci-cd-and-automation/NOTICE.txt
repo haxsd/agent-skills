@@ -1,0 +1,9 @@
+ci-cd-and-automation 来自 Addy Osmani 的 agent-skills 仓库：
+详见本目录 UPSTREAM.json 中固定的 commit。
+
+Copyright (c) 2025 Addy Osmani. Licensed under the MIT License；完整文本见 LICENSE.txt。
+
+修改（agent-skills contributors，2026）：
+- 增加中文入口，并与本仓 gh-fix-ci 分工：本技能建设流水线与门禁，已失败的 GitHub Actions 运行先走 gh-fix-ci。
+- 写明 gh、包管理器和 Action 权限都不是预装或默认授权项。
+与 Addy Osmani 无隶属、背书或认证关系。

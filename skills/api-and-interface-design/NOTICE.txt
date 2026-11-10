@@ -1,0 +1,8 @@
+api-and-interface-design 来自 Addy Osmani 的 agent-skills 仓库：
+详见本目录 UPSTREAM.json 中固定的 commit。
+
+Copyright (c) 2025 Addy Osmani. Licensed under the MIT License；完整文本见 LICENSE.txt。
+
+修改（agent-skills contributors，2026）：
+- 增加中文入口；示例栈按当前仓库惯例替换，不把示例依赖当成必须安装项。
+与 Addy Osmani 无隶属、背书或认证关系。

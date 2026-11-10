@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-05",
+  "reviewedAt": "2026-11-10",
   "baselineCommit": "f4d28cf7c0ff98f38793060a8511f4c05b71512b",
-  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式；第二轮新增 threat-model、agent-evals、python-uv-workflow，Sentry commit/pr-writer 并入 finishing-a-development-branch，agents-md 并入 suggesting-rules，论文查询与成稿复核并入 source-research，Pester 参考并入 windows-powershell-safe。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。",
+  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式；第二轮新增 threat-model、agent-evals、python-uv-workflow，Sentry commit/pr-writer 并入 finishing-a-development-branch，agents-md 并入 suggesting-rules，论文查询与成稿复核并入 source-research，Pester 参考并入 windows-powershell-safe。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。 2026-11-10 新增 xlsx、docx、pptx、documentation-and-adrs、performance-optimization、api-and-interface-design、ci-cd-and-automation、code-simplification、security-audit；Office 三项抽出共用 schema，pptx 与 HTML 幻灯片入口切开，未解档 slides。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -2151,6 +2151,330 @@
         {
           "file": "SKILL.md",
           "text": "## Windows 注意"
+        }
+      ]
+    },
+    {
+      "name": "xlsx",
+      "category": "documents",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "创建和修改 Excel / 电子表格，公式必须经 LibreOffice 重算，不把 Python 计算结果写死冒充公式。",
+      "uniqueValue": "补上本仓原先没有的真实 Excel 能力，并与 Word、PowerPoint、PDF 入口切开。",
+      "issues": [
+        "公式重算依赖本机 LibreOffice；缺失时不能声称已经重算。",
+        "openpyxl、pandas、markitdown 等包不假设已预装。"
+      ],
+      "improvements": [
+        "用真实财务/多表样本校准 recalc 超时与错误报告。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "新建带 SUM 公式的工作表，重算后缓存值与公式一致，改输入后再重算结果跟着变。",
+        "没有 LibreOffice 时停止并报告，不把 Python 算出的数字写进单元格冒充公式。",
+        "用户要的是 Word 或 PPT 时不启用本技能。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: xlsx"
+        },
+        {
+          "file": "scripts/office/soffice.py",
+          "text": "def find_soffice"
+        },
+        {
+          "file": "scripts/recalc.py",
+          "text": "from office.soffice import find_soffice"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "2c5958ecac7cee2b583967a2c4981d0f4a75c579"
+        }
+      ]
+    },
+    {
+      "name": "docx",
+      "category": "documents",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "创建和修改 Word 文档，覆盖新建、解包编辑、批注和校验。",
+      "uniqueValue": "补上真实 .docx 能力；阅读可走 pandoc，创建走 Node docx，不与 PDF/Excel/PPT 混淆。",
+      "issues": [
+        "创建依赖 Node 包 docx，阅读依赖 pandoc，转 PDF 依赖 LibreOffice，均不假设已预装。"
+      ],
+      "improvements": [
+        "补充带修订和批注的真实文档回归样本。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "按指定标题和页眉生成一份 .docx，并用校验脚本检查 XML。",
+        "缺少 pandoc 或 LibreOffice 时如实报告，不假装已经视觉校对。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: docx"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "2c5958ecac7cee2b583967a2c4981d0f4a75c579"
+        }
+      ]
+    },
+    {
+      "name": "pptx",
+      "category": "documents",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "创建和修改真实的 PowerPoint 文件（.pptx/.potx），不是 HTML 幻灯片。",
+      "uniqueValue": "与归档 slides 和 design-system 的 HTML slide 切开，只处理真实 PPTX。",
+      "issues": [
+        "创建依赖 pptxgenjs，视觉抽查依赖 LibreOffice，均不假设已预装。"
+      ],
+      "improvements": [
+        "用含图表的真实 PPTX 校准校验与 pptxgenjs 的已知陷阱。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "用户说「做一份 PPTX」时走本技能，而不是 design-system 或归档 slides。",
+        "生成的 .pptx 能通过校验脚本，缺 LibreOffice 时不声称已经视觉校对。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: pptx"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "归档的 slides 技能是 HTML 幻灯片"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "2c5958ecac7cee2b583967a2c4981d0f4a75c579"
+        }
+      ]
+    },
+    {
+      "name": "documentation-and-adrs",
+      "category": "documents",
+      "state": "active",
+      "value": "high",
+      "readiness": "runnable",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "写工程文档和架构决策记录，记录为什么以及权衡，而不是复述代码。",
+      "uniqueValue": "补上本仓写作技能覆盖不到的 ADR 与工程决策文档。",
+      "issues": [
+        "文档质量仍取决于是否写清约束、备选方案和被否决的理由。"
+      ],
+      "improvements": [
+        "按本仓现有技能补一份示例 ADR，校准落盘位置规则。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "公开 API 变更时写出上下文、备选方案和决策，而不是只改 README 一句。",
+        "不会把内部审查记录写进本公开仓库禁止的 docs/reviews 路径。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: documentation-and-adrs"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "8e6726dc1deab6637dc6c1a7610673bb7024a18c"
+        }
+      ]
+    },
+    {
+      "name": "performance-optimization",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "先测量再改性能，没有增益就回退，覆盖前后端、查询和缓存等常见瓶颈。",
+      "uniqueValue": "把测量、修改和复测写成可回退的流程，并随附优化模式与检查清单。",
+      "issues": [
+        "Lighthouse CI、数据库分析和 profiler 都不假设已预装。"
+      ],
+      "improvements": [
+        "用一个真实慢查询和一个前端 LCP 案例校准清单。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "先拿到剖面或 EXPLAIN，再改一处瓶颈，复测没有增益就回退。",
+        "没有测量证据时不开始改。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: performance-optimization"
+        },
+        {
+          "file": "references/optimization-patterns.md",
+          "text": "N+1 Queries"
+        },
+        {
+          "file": "references/performance-checklist.md",
+          "text": "Core Web Vitals Targets"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "ee3e8504246bd2ee1be3f3670555e48c9c62212a"
+        }
+      ]
+    },
+    {
+      "name": "api-and-interface-design",
+      "category": "implementation-orchestration",
+      "state": "active",
+      "value": "high",
+      "readiness": "runnable",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "设计稳定、不容易误用的 API 与模块契约，覆盖错误格式、分页、兼容和幂等。",
+      "uniqueValue": "把通用接口契约从具体框架示例里抽出来，强调真正的幂等和兼容。",
+      "issues": [
+        "示例语言或 HTTP 形态需要按当前仓库惯例替换。"
+      ],
+      "improvements": [
+        "用本仓或一个真实服务的接口变更校验幂等与错误格式建议。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "设计列表接口时同时给出分页、错误格式和幂等键，而不是只写 happy path。",
+        "修改已有公共接口时先说明兼容策略。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: api-and-interface-design"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "63128d0d4515cc074f304c3a429343c5afeff978"
+        }
+      ]
+    },
+    {
+      "name": "ci-cd-and-automation",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "设计和维护 CI 流水线、质量门禁和依赖更新，而不只是修好失败的检查。",
+      "uniqueValue": "本仓已有 gh-fix-ci 只会修红灯；这份教怎么把检查建成可重复的门禁。",
+      "issues": [
+        "依赖仓库工作流权限和本机 gh / 包管理器；不假设特定 Action 或 runner 已可用。"
+      ],
+      "improvements": [
+        "用一个真实仓库的门禁缺口校准建议，避免只贴示例工作流。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "给新项目设计包含 lint、测试和构建的门禁，并把依赖更新纳入流水线。",
+        "已有失败的 GitHub Actions 运行先走 gh-fix-ci，而不是直接改工作流模板。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: ci-cd-and-automation"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "修好已失败的 GitHub Actions 运行用 gh-fix-ci"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "a4a21f6390a83e62dc3c69a91e25ad7984a7bbd6"
+        }
+      ]
+    },
+    {
+      "name": "code-simplification",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "medium",
+      "readiness": "runnable",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "在行为不变的前提下，把已能工作的代码改得更清楚。",
+      "uniqueValue": "和模块级架构重构分开：只做局部清晰化，并要求用已有测试证明行为没变。",
+      "issues": [
+        "没有测试时需要先补最小证据，否则容易在「简化」时改掉行为。"
+      ],
+      "improvements": [
+        "积累几个正反例，区分值得简化与过早抽象。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "函数已经通过测试但嵌套过深时，简化后测试仍通过。",
+        "目录级拆分或架构重构改走 codebase-architecture。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: code-simplification"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "Claude Code Simplifier"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "f1f6fbf3981076da73455bf3b754f5864208a93d"
+        }
+      ]
+    },
+    {
+      "name": "security-audit",
+      "category": "knowledge-security",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "对源码做全面安全审计；只在用户明确要求完整审计时启用，产物不写进公开仓库禁写路径。",
+      "uniqueValue": "与 code-review（一次 diff）和 threat-model（威胁建模）分工，提供完整审计流程和产物校验脚本。",
+      "issues": [
+        "完整六阶段审计成本高，且依赖可执行的沙箱边界；很多环境只能先做指导模式。",
+        "未对真实目标跑完整审计对照。"
+      ],
+      "improvements": [
+        "用一个合成小项目跑产物校验脚本，校准报告格式。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "用户明确要求全面源码安全审计时启用完整流程，并把报告写到仓库外目录。",
+        "一次 PR 审查或威胁建模不触发本技能。",
+        "不会把审计产物写进 docs/reviews 或提交到公开仓库。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: security-audit"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "docs/reviews/"
+        },
+        {
+          "file": "UPSTREAM.json",
+          "text": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8"
         }
       ]
     }

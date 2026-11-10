@@ -1,0 +1,14 @@
+{
+  "name": "security-audit",
+  "repository": "https://github.com/cloudflare/security-audit-skill",
+  "commit": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+  "path": "skills/security-audit",
+  "license": "MIT",
+  "author": "Cloudflare, Inc.",
+  "retrievedAt": "2026-11-10",
+  "modifications": [
+    "收紧触发词：只在用户明确要求全面源码安全审计、完整/端到端安全审计或渗透测试式审计时启用完整流程；日常 diff 审查走 code-review，威胁建模走 threat-model。",
+    "按本仓边界改产物目录：默认写到仓库外的 ~/security-audit-skill/<repo-name>/run-<N>；禁止写入或提交 docs/reviews、docs/validation、docs/history、docs/plans 等公开仓库禁写路径。"
+  ],
+  "validation": "内容审阅与 skill-scanner 只读扫描（无命中）；未对真实目标跑完整六阶段审计。"
+}
