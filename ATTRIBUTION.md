@@ -534,6 +534,18 @@ UPSTREAM.json 记录的是 CLI 依赖，不是本技能文本的上游；CLI 的
 
 原创贡献仅覆盖本仓改写和实现；保留 Sentry 上游署名与 Apache-2.0。静态线索和无命中均不是安全认证。
 
+## skill-discovery
+
+[skill-discovery](skills/skill-discovery/SKILL.md) · 启用 · **本仓原创**
+
+原创贡献者：agent-skills contributors。
+- 原创维护仓库：[https://github.com/haxsd/agent-skills](https://github.com/haxsd/agent-skills)。
+
+本仓贡献：
+- 本仓原创的按需技能发现入口：定位收藏仓库、按分类表或关键词检索目录、只加载匹配的 SKILL.md。
+
+只读检索，不复制、不安装；仓库位置按环境变量和常见路径解析，找不到时询问用户。
+
 ## variant-analysis
 
 [variant-analysis](skills/variant-analysis/SKILL.md) · 启用 · **原创改进（基于上游）**

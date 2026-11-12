@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-10",
   "baselineCommit": "f4d28cf7c0ff98f38793060a8511f4c05b71512b",
-  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式；第二轮新增 threat-model、agent-evals、python-uv-workflow，Sentry commit/pr-writer 并入 finishing-a-development-branch，agents-md 并入 suggesting-rules，论文查询与成稿复核并入 source-research，Pester 参考并入 windows-powershell-safe。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。 2026-11-10 新增 xlsx、docx、pptx、documentation-and-adrs、performance-optimization、api-and-interface-design、ci-cd-and-automation、code-simplification、security-audit；Office 三项抽出共用 schema，pptx 与 HTML 幻灯片入口切开，未解档 slides。baselineCommit（f4d28cf7c0ff98f38793060a8511f4c05b71512b）是早期审查锚点，不是当前 main HEAD。",
+  "scope": "38 个启用技能、11 个归档技能逐个阅读；1 个外部技能评估接入方式。原 27 个启用项基于 baselineCommit，其余新增项记录固定上游 commit；DeepSeek 已实质升级并局部实测。价值判断不是生产收益保证。 2026-10-06 增加两个精简流程入口及两个本机技能；此前收藏保留以兼容其他平台，本机采用精选安装集。 2026-10-09 新增 podcast-to-article 与 excalidraw-diagrams；分类增加 writing-content。 2026-10-11 新增 windows-powershell-safe（瘦 PS 安全调用约定 + 翻车样例）。 2026-10-16 新增 waiting-and-async（等待纪律）并做全仓结构审查。 2026-10-27 完成设计组职责切割，新增独立实现的 pdf-toolkit、prompt-optimizer，并补齐 UI/UX 维护脚本。 2026-11-03 新增 gh-fix-ci、codebase-architecture、session-handoff、source-research；gh-address-comments 的评论拉取并入 code-review，grilling 并入 requirement-understanding 拷问模式；第二轮新增 threat-model、agent-evals、python-uv-workflow，Sentry commit/pr-writer 并入 finishing-a-development-branch，agents-md 并入 suggesting-rules，论文查询与成稿复核并入 source-research，Pester 参考并入 windows-powershell-safe。本仓库为收藏集，manifest 只声明可选安装目标，未安装不等于缺陷。 2026-11-10 新增 xlsx、docx、pptx、documentation-and-adrs、performance-optimization、api-and-interface-design、ci-cd-and-automation、code-simplification、security-audit；Office 三项抽出共用 schema，pptx 与 HTML 幻灯片入口切开，未解档 slides。baselineCommit（f4d28cf7c0ff98f38793060a8511f4c05b71512b）是早期审查锚点，不是当前 main HEAD。 2026-11-12 新增 skill-discovery：任务超出常驻技能时按需检索本仓，默认只安装核心集。核心集由 manifest.json 的 presets.core 定义，用 install.ps1 -Preset core 安装。",
   "categories": [
     {
       "id": "requirements-planning",
@@ -1721,6 +1721,40 @@
         {
           "file": "UPSTREAM.json",
           "text": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+        }
+      ]
+    },
+    {
+      "name": "skill-discovery",
+      "category": "authoring-efficiency",
+      "state": "active",
+      "value": "high",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P1",
+      "summary": "常驻的按需发现入口：任务超出已安装技能时，定位本地收藏仓库，按分类表或关键词检索目录，只加载匹配的 SKILL.md。",
+      "uniqueValue": "把「技能多到选不过来」变成「默认只装核心，遇到专门任务再检索」；不复制技能内容，不增加常驻清单长度。",
+      "issues": [
+        "依赖模型在任务偏离常驻能力时主动触发；描述中的领域词覆盖不足会漏触发。",
+        "仓库位置靠环境变量或常见路径推断，换机器时需要确认；找不到时应停下询问。"
+      ],
+      "improvements": [
+        "观察实际漏触发场景，按需补充描述中的领域词，不把全部技能名写进 description。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "用户要求处理 PDF 而本机未安装 pdf-toolkit 时，检索目录并只读该技能的 SKILL.md。",
+        "用户问「有没有做 Office 文档的技能」时，按分类表给出候选而不是猜。",
+        "仓库中确实没有对应技能时明确说明，不编造技能名。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: skill-discovery"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "## 定位仓库"
         }
       ]
     },

@@ -27,8 +27,9 @@ class InstallerTests(unittest.TestCase):
             (self.repo / "skills" / name).mkdir(parents=True)
             (self.repo / "skills" / name / "SKILL.md").write_text("fixture")
         (self.external / "SKILL.md").write_text("external fixture")
-        (self.repo / "manifest.json").write_text(json.dumps({"skills": [
-            {"name": n, "defaultTargets": ["codex"]} for n in names]}))
+        (self.repo / "manifest.json").write_text(json.dumps({
+            "presets": {"core": ["example"]},
+            "skills": [{"name": n, "defaultTargets": ["codex"]} for n in names]}))
         (self.repo / "external.json").write_text(json.dumps([
             {"name": "external-fixture", "path": "%INSTALL_TEST_EXTERNAL%", "targets": ["agents"]}]))
         self.environment = os.environ | {"USERPROFILE": str(self.profile), "INSTALL_TEST_EXTERNAL": str(self.external)}
@@ -102,6 +103,17 @@ class InstallerTests(unittest.TestCase):
         self.run_installer("-Only", "token-efficient-workflow", "-Target", "codex")
         self.assertEqual(shared.resolve(), (self.repo / "shared").resolve())
         self.assertTrue((self.external / "SKILL.md").exists())
+
+    def test_preset_installs_members_only(self):
+        self.run_installer("-Preset", "core", "-Target", "codex")
+        target = self.profile / ".codex/skills/example"
+        self.assertEqual(target.resolve(), (self.repo / "skills/example").resolve())
+        self.assertFalse((self.profile / ".codex/skills/xlsx").exists())
+
+    def test_preset_rejects_unknown_and_only(self):
+        self.run_installer("-Preset", "typo", expected=1)
+        self.run_installer("-Preset", "core", "-Only", "example", expected=1)
+        self.assertTrue(all(not (self.profile / p).exists() for p in (".codex", ".agents", "tools")))
 
     def test_external_source_equal_destination_is_preserved(self):
         target = self.profile / ".codex/skills/external-fixture"

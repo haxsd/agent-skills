@@ -25,6 +25,10 @@
 .PARAMETER Only
   只处理指定名字的 skill，便于灰度。
 
+.PARAMETER Preset
+  安装 manifest.json 里 presets 定义的推荐组合（例如 core = 常驻核心集）。
+  与 -Only 互斥。
+
 .PARAMETER DryRun
   只打印将要做什么，不落盘。
 
@@ -33,6 +37,8 @@
 
 .EXAMPLE
   .\install.ps1 -DryRun
+.EXAMPLE
+  .\install.ps1 -Preset core
 .EXAMPLE
   .\install.ps1 -Only systematic-debugging,writing-plans
 .EXAMPLE
@@ -44,6 +50,8 @@ param(
   [string]$Target = 'all',
 
   [string[]]$Only,
+
+  [string]$Preset,
 
   [switch]$DryRun,
 
@@ -106,6 +114,12 @@ if (Test-Path -LiteralPath $ExternalPath) {
   foreach ($entry in $parsedExternals) {
     if ($entry.name -and $entry.path) { $externals += $entry }
   }
+}
+if ($Preset) {
+  if ($Only) { throw "-Preset 与 -Only 不能同时使用" }
+  $presetProperty = if ($Manifest.presets) { $Manifest.presets.PSObject.Properties[$Preset] } else { $null }
+  if (-not $presetProperty) { throw "未知 preset：$Preset" }
+  $Only = @($presetProperty.Value)
 }
 if ($Only) {
   $known = @($names) + @($externals | Select-Object -ExpandProperty name)

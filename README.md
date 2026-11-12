@@ -2,11 +2,11 @@
 
 [中文](README.md) · [English](README-EN.md)
 
-> 按用途分类的 agent 技能库：54 个启用技能、11 个归档技能、10 个用途分类，按目录索引查、按需安装。
+> 按用途分类的 agent 技能库：55 个启用技能、11 个归档技能、10 个用途分类，按目录索引查、按需安装。
 
 ## 核心能力
 
-- **54 个启用技能**：覆盖十类：需求与规划；实现与代理编排；质量、调试与审查；Git 隔离与交付；品牌、设计与 UI；写作与内容；文档与办公；知识图谱、调研与安全研究；技能维护与运行效率；数据库与后端。全部在 `skills/<name>/` 保持稳定路径。
+- **55 个启用技能**：覆盖十类：需求与规划；实现与代理编排；质量、调试与审查；Git 隔离与交付；品牌、设计与 UI；写作与内容；文档与办公；知识图谱、调研与安全研究；技能维护与运行效率；数据库与后端。全部在 `skills/<name>/` 保持稳定路径。
 - **11 个归档技能**：历史技能与草稿放在 `archive/`，默认不安装，可作维护参考。
 - **目录索引**：分类、价值判断与升级建议写入 `catalog.json`，人读版本见[分类目录](docs/catalog.md)。
 - **来源可溯**：每项技能登记来源（第三方引入 / 原创 / 原创改进 / 待核验）与许可证，见[署名说明](ATTRIBUTION.md)与[逐项来源登记](docs/sources/skill-provenance.json)。
@@ -14,12 +14,18 @@
 
 ## 安装
 
-在仓库根目录用 Windows PowerShell 先演练：
+仓库是收藏集，不要求全部安装。推荐本地只常驻核心集，其余交给 `skill-discovery` 按需检索：
 
 ```powershell
-.\install.ps1 -DryRun
-.\install.ps1 -Only deepseek-subagent-orchestration -Target codex -DryRun
-.\install.ps1 -Only deepseek-subagent-orchestration -Target codex
+.\install.ps1 -Preset core -DryRun
+.\install.ps1 -Preset core
+```
+
+核心集（`manifest.json` 的 `presets.core`）包含需求分流、调试、测试、计划、审查与交付等常驻流程，以及 `skill-discovery`。它在任务超出常驻能力时检索本仓目录，只加载匹配的 `SKILL.md`，不复制、不安装。单个技能按需加装：
+
+```powershell
+.\install.ps1 -Only pdf-toolkit -DryRun
+.\install.ps1 -Only pdf-toolkit
 ```
 
 完整安装、卸载与外部源配置见[安装指南](docs/guides/installation.md)。[DeepSeek API 助手](skills/deepseek-subagent-orchestration/SKILL.md)保留当前 GPT 主代理，在用户明确要求 DeepSeek 委派时把独立工作块交给自己的 `deepseek-flash` API；需要 Codex CLI 进程和完整本机工具链时改用 `deepseek-subagents`，两条路线互斥。

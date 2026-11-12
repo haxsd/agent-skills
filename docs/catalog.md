@@ -2,7 +2,7 @@
 
 由 `catalog.json` 和 `scripts/audit_skills.py` 生成。
 
-审查日期：2026-11-10。54 个启用 + 11 个归档 + 2 个外部入口。
+审查日期：2026-11-10。55 个启用 + 11 个归档 + 2 个外部入口。
 `baselineCommit`（`f4d28cf7c0ff98f38793060a8511f4c05b71512b`）是早期审查锚点，不是当前 main HEAD。
 
 分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。
@@ -122,6 +122,7 @@
 | [suggesting-rules](../skills/suggesting-rules/SKILL.md) | 启用 | 原创改进（基于上游） | 低 | 条件可用 | 保留 | P2 |
 | toolkit-map（外部） | 外部 | 本仓原创 | 高 | 依赖外部环境 | 保持外部 | P0 |
 | [skill-scanner](../skills/skill-scanner/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
+| [skill-discovery](../skills/skill-discovery/SKILL.md) | 启用 | 本仓原创 | 高 | 条件可用 | 保留 | P1 |
 | [waiting-and-async](../skills/waiting-and-async/SKILL.md) | 启用 | 本仓原创 | 高 | 条件可用 | 保留 | P2 |
 | [prompt-optimizer](../skills/prompt-optimizer/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 

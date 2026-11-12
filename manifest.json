@@ -1,6 +1,24 @@
 {
   "version": 2,
-  "note": "只记录安装目标与原始归属；描述从 SKILL.md 读取，文件数和字节数由 audit 生成，避免历史缓存漂移。",
+  "note": "只记录安装目标与原始归属；描述从 SKILL.md 读取，文件数和字节数由 audit 生成，避免历史缓存漂移。presets 是推荐安装组合，不替代 skills 里的默认目标。",
+  "presets": {
+    "core": [
+      "requirement-understanding",
+      "systematic-debugging",
+      "test-driven-development",
+      "writing-plans",
+      "execute-plan",
+      "code-review",
+      "finishing-a-development-branch",
+      "windows-powershell-safe",
+      "env-doctor",
+      "toolkit-map",
+      "reverse-skill",
+      "reverse-skills",
+      "skill-scanner",
+      "skill-discovery"
+    ]
+  },
   "skills": [
     {
       "name": "brand",
@@ -18,9 +36,9 @@
     },
     {
       "name": "code-review",
-      "origin": "codex",
+      "origin": "agents",
       "defaultTargets": [
-        "codex"
+        "agents"
       ]
     },
     {
@@ -375,6 +393,13 @@
     },
     {
       "name": "security-audit",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
+      "name": "skill-discovery",
       "origin": "agents",
       "defaultTargets": [
         "agents"

@@ -2,11 +2,11 @@
 
 [中文](README.md) · [English](README-EN.md)
 
-> A purpose-categorized skill library for AI agents: 54 active skills, 11 archived skills and 10 categories — browse the catalog, install what you need.
+> A purpose-categorized skill library for AI agents: 55 active skills, 11 archived skills and 10 categories — browse the catalog, install what you need.
 
 ## What's inside
 
-- **54 active skills** across ten categories: requirements & planning; implementation & orchestration; quality, debugging & review; Git isolation & delivery; brand, design & UI; writing & content; documents & office; knowledge graphs, research & security research; skill authoring & runtime efficiency; data & backend. Each lives at the stable path `skills/<name>/`.
+- **55 active skills** across ten categories: requirements & planning; implementation & orchestration; quality, debugging & review; Git isolation & delivery; brand, design & UI; writing & content; documents & office; knowledge graphs, research & security research; skill authoring & runtime efficiency; data & backend. Each lives at the stable path `skills/<name>/`.
 - **11 archived skills**: historical skills and drafts under `archive/`, not installed by default, kept for reference.
 - **Catalog index**: category, value and upgrade notes live in `catalog.json`; the human-readable version is [docs/catalog.md](docs/catalog.md).
 - **Traceable provenance**: every skill records its source (third-party / original / improved from upstream / unverified) and license in [ATTRIBUTION.md](ATTRIBUTION.md) and [skill-provenance.json](docs/sources/skill-provenance.json).
@@ -14,12 +14,18 @@
 
 ## Install
 
-From the repo root in Windows PowerShell, dry-run first:
+This repo is a collection, not an install-everything bundle. The recommended setup keeps only the core preset and lets `skill-discovery` retrieve the rest on demand:
 
 ```powershell
-.\install.ps1 -DryRun
-.\install.ps1 -Only deepseek-subagent-orchestration -Target codex -DryRun
-.\install.ps1 -Only deepseek-subagent-orchestration -Target codex
+.\install.ps1 -Preset core -DryRun
+.\install.ps1 -Preset core
+```
+
+The core preset (`manifest.json` → `presets.core`) contains the always-on workflow skills — requirements, debugging, testing, planning, review and delivery — plus `skill-discovery`. When a task needs a capability outside those, it searches the catalog and loads only the matching `SKILL.md`; it does not copy or install anything. Add a single skill when needed:
+
+```powershell
+.\install.ps1 -Only pdf-toolkit -DryRun
+.\install.ps1 -Only pdf-toolkit
 ```
 
 Full install, uninstall and external-source setup: [installation guide](docs/guides/installation.md). The [DeepSeek API helper](skills/deepseek-subagent-orchestration/SKILL.md) keeps the current GPT lead and, when the user explicitly requests DeepSeek delegation, hands bounded work to your own `deepseek-flash` API. Use `deepseek-subagents` only when full Codex CLI worker processes and local toolchains are required; the two routes are mutually exclusive.

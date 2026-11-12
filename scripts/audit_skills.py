@@ -172,6 +172,10 @@ def inspect(root, catalog):
     if {entry["name"] for entry in externals} != {
             entry["name"] for entry in entries if entry["state"] == "external"}:
         add("error", "external-coverage", "external.json", "External registrations and catalog differ")
+    allowed_preset_names = active_names | {entry["name"] for entry in externals}
+    for preset, members in manifest.get("presets", {}).items():
+        for name in sorted(set(members) - allowed_preset_names):
+            add("error", "preset-unknown-skill", "manifest.json", f"{preset}: {name}")
     manifest_map = {entry["name"]: entry for entry in manifest["skills"]}
     metrics = []
     duplicate_map = defaultdict(list)
