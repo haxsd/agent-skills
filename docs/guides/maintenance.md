@@ -55,7 +55,7 @@ $python = '<Python 的已验证绝对路径>'
 & $python scripts/smoke_skills.py --node '<Node 的已验证绝对路径>'
 ```
 
-audit 生成分类目录、逐项审查和静态 JSON；修改人工源后重新生成，避免手改派生文档。check_docs 检查当前入口和文档的本地链接，不检查历史快照、上游技能参考或远程链接。已有超长入口和引用线索会作为提示保留。
+audit 生成分类目录、逐项审查和静态 JSON；修改人工源后重新生成，避免手改派生文档。check_docs 检查当前入口和文档的本地链接，并核对 README、README-EN 里手写的技能数量是否与 `catalog.json` 一致——这两处是手写的，改数量忘了同步就会 stale。它不检查历史快照、上游技能参考或远程链接。已有超长入口和引用线索会作为提示保留。
 
 CI 在 Ubuntu 和 Windows 上运行这些离线检查、UI/UX 数据校验、快照与相关性门禁、技能内 unittest，以及 Windows 临时目录里的安装器回归。`prompt-optimizer` 的静态审计测试在根 `tests/` 中执行。CI 不需要任何模型密钥，不调用付费 API、不连接数据库、不启动浏览器测试。
 
