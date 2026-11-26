@@ -1058,6 +1058,14 @@
         "按本仓边界改产物目录，禁止写入或提交公开仓库的内部资料路径。"
       ],
       "note": "基于 Cloudflare security-audit（MIT）的原创改进。"
+    },
+    {
+      "name": "project-verification",
+      "kind": "original",
+      "contributions": [
+        "本仓原创的项目验证资产生成流程：宿主能力探测、launch/doctor/drive/evidence 四段结构、功能清单与生成后自跑一次；与 webapp-testing、env-doctor、agent-evals 的分工单独写明。"
+      ],
+      "note": "生成物落在目标项目的 .verify/<app>/，不进本仓；本仓只保留生成方法。"
     }
   ]
 }

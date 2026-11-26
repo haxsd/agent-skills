@@ -41,6 +41,21 @@ Keep credentials, unrelated private data, production operations, publishing,
 and final merge decisions with the primary. Delegation inherits the user's
 existing authorization; it never creates permission for additional actions.
 
+## Worker contract
+
+The objective and the named checks you pass in are the whole bar. State that
+explicitly in every job, because an external worker has no way to ask and will
+otherwise invent its own gate or quietly relax yours:
+
+- Add no check, review round or sign-off above the bar, and skip none of it.
+- With no bar stated, the floor is: no worse than the starting copy, and its own
+  tests pass.
+- A check that fails for a reason outside the owned paths is reported once;
+  never widen the write set to make it green.
+- Never restate the acceptance criteria to match what the code turned out to do.
+- Report each check as command, exit status and the output that decides it.
+  Checks not run are listed as not run, not implied by a green neighbour.
+
 ## Choose a mode and dispatch
 
 Read [references/api-workers.md](references/api-workers.md) for setup, schemas,

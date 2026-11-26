@@ -1,0 +1,2 @@
+ts	phase	decision	why	evidence	result
+<ISO 时间>	<pre-flight | task N | final-review | close-out>	<做了什么决定；一句话可判真假>	<理由；被否决的方案写在这里>	<指针：commit SHA、file:line、artifact 路径；不写段落>	<confirmed | reverted | failure + 一条证据>

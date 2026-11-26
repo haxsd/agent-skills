@@ -34,6 +34,15 @@ a ledger file, not only in todos.
 - The ledger is your recovery map: the commits it names exist in git even
   when your context no longer remembers creating them. After compaction,
   trust the ledger and `git log` over your own recollection.
+- Rulings get a structured log beside the ledger: `<workspace>/decisions.tsv`,
+  one row per decision, columns `ts  phase  decision  why  evidence  result`
+  (header row: [shared/templates/decision-log.tsv](../../../shared/templates/decision-log.tsv)).
+  `evidence` must be a pointer — commit SHA, `file:line`, artifact path — never
+  a paragraph: a decision with no pointer is a decision you cannot defend
+  later, and this file is what the final review and the user actually read.
+  Write the row when you rule, backfill `result` when the outcome is known
+  (`confirmed` / `reverted` / `failure` plus one pointer). The ledger keeps
+  task state; this file keeps why the task state is what it is.
 - `git clean -fdx` will destroy the workspace (it's git-ignored scratch); if
   that happens, recover from `git log`.
 

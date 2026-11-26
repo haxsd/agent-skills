@@ -2,7 +2,7 @@
 
 由 `catalog.json` 和 `scripts/audit_skills.py` 生成。
 
-审查日期：2026-11-10。55 个启用 + 11 个归档 + 2 个外部入口。
+审查日期：2026-11-10。56 个启用 + 11 个归档 + 2 个外部入口。
 `baselineCommit`（`f4d28cf7c0ff98f38793060a8511f4c05b71512b`）是早期审查锚点，不是当前 main HEAD。
 
 分类是逻辑索引，保留平铺目录，兼容现有安装器。状态描述仓库当前布局，动作是审查建议，不会自动移动/卸载。
@@ -46,6 +46,7 @@
 | Skill | 当前状态 | 创作归属 | 内容价值 | 当前就绪程度 | 建议 | 优先级 |
 |---|---|---|---|---|---|---|
 | [env-doctor](../skills/env-doctor/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P2 |
+| [project-verification](../skills/project-verification/SKILL.md) | 启用 | 本仓原创 | 中 | 条件可用 | 保留 | P2 |
 | [systematic-debugging](../skills/systematic-debugging/SKILL.md) | 启用 | 原创改进（基于上游） | 高 | 条件可用 | 保留 | P1 |
 | [test-driven-development](../skills/test-driven-development/SKILL.md) | 启用 | 原创改进（基于上游） | 中 | 条件可用 | 保留 | P1 |
 | [verification-before-completion](../archive/skills/verification-before-completion/SKILL.md) | 归档 | 第三方引入 | 中 | 规则需改造 | 维持归档 | P1 |

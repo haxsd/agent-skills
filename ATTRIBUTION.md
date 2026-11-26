@@ -100,6 +100,18 @@
 
 当前正文和工具为本仓独立重写，历史署名及未核验来源事实保留在 skills/env-doctor/NOTICE.txt 与 SOURCE-NOTES.md；本轮原创声明不代替历史来源核验或授权。
 
+## project-verification
+
+[project-verification](skills/project-verification/SKILL.md) · 启用 · **本仓原创**
+
+原创贡献者：agent-skills contributors。
+- 原创维护仓库：[https://github.com/haxsd/agent-skills](https://github.com/haxsd/agent-skills)。
+
+本仓贡献：
+- 本仓原创的项目验证资产生成流程：宿主能力探测、launch/doctor/drive/evidence 四段结构、功能清单与生成后自跑一次；与 webapp-testing、env-doctor、agent-evals 的分工单独写明。
+
+生成物落在目标项目的 .verify/<app>/，不进本仓；本仓只保留生成方法。
+
 ## systematic-debugging
 
 [systematic-debugging](skills/systematic-debugging/SKILL.md) · 启用 · **原创改进（基于上游）**

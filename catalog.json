@@ -360,6 +360,45 @@
       ]
     },
     {
+      "name": "project-verification",
+      "category": "quality-debugging",
+      "state": "active",
+      "value": "medium",
+      "readiness": "conditional",
+      "action": "retain",
+      "priority": "P2",
+      "summary": "为项目生成可复用的验证资产（launch/doctor/drive/evidence 加功能清单），让后续改动跑同一套命令证明真实可用，而不是每次靠人手动点。",
+      "uniqueValue": "产物落在目标项目而不是本仓：先探测宿主能力再生成，要求生成后自跑一次并贴输出；把一次性 Playwright 脚本与可长期复用的验证资产分开。",
+      "issues": [
+        "本仓尚未对真实项目端到端跑通过一次生成流程；能力探测表未在缺少浏览器的宿主上实测。",
+        "生成的资产由各项目自行维护，本仓无法检查其是否随功能变更同步。"
+      ],
+      "improvements": [
+        "把宿主能力探测写成前置步骤，缺浏览器时要求退化为 HTTP 断言并注明缺少视觉证据。",
+        "把“生成后自己跑一次”写成交付条件，禁止把文件已生成当成验证完成。"
+      ],
+      "mergeWith": [],
+      "scenarios": [
+        "新接手的项目只能靠人工点页面确认功能，要求 agent 产出一套可复用验证资产。",
+        "改动前后对比：先跑基线存证，再跑同一组命令给出旧值与新值。",
+        "宿主没有浏览器自动化时，明确退化为 HTTP 探测并标注没有截图证据。"
+      ],
+      "evidence": [
+        {
+          "file": "SKILL.md",
+          "text": "name: project-verification"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "生成后必须自己跑一次"
+        },
+        {
+          "file": "SKILL.md",
+          "text": "features.md"
+        }
+      ]
+    },
+    {
       "name": "systematic-debugging",
       "category": "quality-debugging",
       "state": "active",

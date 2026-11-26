@@ -133,6 +133,13 @@
       ]
     },
     {
+      "name": "project-verification",
+      "origin": "agents",
+      "defaultTargets": [
+        "agents"
+      ]
+    },
+    {
       "name": "property-based-testing",
       "origin": "agents",
       "defaultTargets": [
