@@ -62,3 +62,29 @@ CI 在 Ubuntu 和 Windows 上运行这些离线检查、UI/UX 数据校验、快
 技能里的测试并不全部属于仓库维护测试；能被 CI 收集的只是已提交的离线契约。UI/UX 的字体、图标、快照与相关性测试已经接入维护脚本，但真实上游刷新仍需要显式输入、凭据和人工审查。局部数据/工具检查通过不等于所有技能已做生产验证；逐项审查、验证记录和真实模型结果由维护者在内部保存。
 
 合并或归档技能前，先检查调用者、迁移必要资源与署名、验证验收场景，再更新 manifest/catalog。保留 `skills/<name>/` 稳定路径，分类通过索引完成。归档内容默认不安装。
+
+## 规则由谁保证
+
+文字规则只有绑到执行器才算数。下表是每条规则的实际守卫；「仅靠人」那几行就是当前的缺口，不必假装有检查。
+
+| 规则 | 执行器 | 失败表现 |
+|---|---|---|
+| 新技能必须登记来源，`derived` 必须写贡献 | `audit_skills.py --check`（`provenance-*`） | error |
+| 每项技能都要有人工审查条目、名称唯一 | `audit_skills.py --check`（`uncatalogued-skill`、`duplicate-catalog-name`） | error |
+| `manifest.json` 与 `skills/` 目录一一对应，预设成员必须存在 | `audit_skills.py --check`（`manifest-coverage`、`preset-unknown-skill`） | error |
+| 分类、枚举字段、合并目标必须合法 | `audit_skills.py --check`（`unknown-category`、`invalid-enum`、`unknown-merge-target`） | error |
+| `catalog.json` 的证据引文仍能在源文件里找到 | `audit_skills.py --check`（`stale-evidence`） | error |
+| 派生文档不手改：`ATTRIBUTION.md`、`docs/catalog.md`、`SKILL.md` 来源区块 | `audit_skills.py --check`（生成内容漂移） | 报 stale，需 `--write` 重生成 |
+| 文档本地链接不断，README 手写技能数不过期 | `check_docs.py` | error |
+| 文档检查脚本自身的行为 | `tests/test_check_docs.py` | CI 失败 |
+| 安装器与 preset 行为 | `tests/test_install.py`（Windows PowerShell 5.1 单独跑一次） | CI 失败 |
+| `.sh` 语法、可执行位，CRLF 敏感文件保持 LF | `.gitattributes` + CI 的 Linux 任务（`bash -n`、`git ls-files`） | CI 失败 |
+| UI/UX 数据、快照、相关性 | `validate_data.py`、`generate-catalog-summary.py --check`、`evaluate-relevance.py` | CI 失败 |
+| 技能内离线契约 | `unittest discover -s skills/ui-ux-pro-max/scripts/tests`、`smoke_skills.py` | CI 失败 |
+| 内部资料不进公开仓库 | CI `records-guard`（当前树 + 全部历史）、记录仓库 `sync-records.ps1` | CI 失败 |
+| 技能正文长度可控 | `audit_skills.py --check`（`large-entrypoint`） | warning，不阻塞 |
+| 提交信息不写账号、机器路径、真实用量 | 无执行器 | 仅靠人 |
+| 收尾在记录仓库跑 `sync-records.ps1` | 无执行器 | 仅靠人 |
+| 技能是否真的对任务有效 | 无执行器；`catalog.json` 的价值判断来自内容审查 | 仅靠人 |
+
+新增一条规则时先想清楚它落在哪一行。落不进任何执行器的，就写进这张表并标「仅靠人」，别让它看起来像已经有人守。
